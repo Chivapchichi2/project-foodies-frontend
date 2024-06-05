@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = { token: "" };
 
@@ -12,5 +14,5 @@ const loginSlice = createSlice({
   },
 });
 
-export const loginReducer = loginSlice.reducer;
+export const persistedLoginReducer = persistReducer({ key: "login", storage }, loginSlice.reducer);
 export const { setToken } = loginSlice.actions;

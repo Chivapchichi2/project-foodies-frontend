@@ -1,19 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {
-  persistStore,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 
-import { loginReducer } from "./login/loginSlice";
+import { persistedLoginReducer } from "./login/loginSlice";
 
 export const store = configureStore({
   reducer: {
-    loginReducer,
+    login: persistedLoginReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
