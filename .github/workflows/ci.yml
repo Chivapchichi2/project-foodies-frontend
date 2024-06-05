@@ -26,4 +26,4 @@
          run: npm run lint
 
        - name: build production project
-         run: npm run deploy
+         run: npm run build
