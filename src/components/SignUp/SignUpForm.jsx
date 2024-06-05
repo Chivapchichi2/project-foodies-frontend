@@ -11,8 +11,15 @@ import {sinUpSchema} from "./SignUpSchema.js";
 
 
 export const SignUpForm = () => {
-    const { register, handleSubmit, watch, formState: { errors }  } = useForm({
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors }  ,
+        reset
+    } = useForm({
         resolver: yupResolver(sinUpSchema),
+        mode: "onChange"
     });
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
@@ -28,7 +35,10 @@ export const SignUpForm = () => {
         return () => subscription.unsubscribe()
     }, [watch])
 
-    const onSubmit= (data) => console.log('value SignUp-->', data);
+    const onSubmit= (data) => {
+        alert( `Дані з форми відправлено: ${JSON.stringify(data)}`);
+        reset();
+    };
 
     return (
         <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
@@ -68,7 +78,7 @@ export const SignUpForm = () => {
                 </li>
             </ul>
             <button type="submit" className={styles.btn}>
-            CREATE
+                CREATE
             </button>
             <p className={styles.text}>
                 I already have an account? <span className={styles.link}>Sign in</span>

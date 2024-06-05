@@ -10,7 +10,7 @@ export const CustomModal = ({ isOpen, onClose, children }) => {
       className={styles.content}
       overlayClassName={styles.overlay}
       ariaHideApp={false}
-      closeTimeoutMS={300}
+      closeTimeoutMS={250}
       onRequestClose={() => onClose()}
     >
       <button className={styles.btn} type="button" onClick={() => onClose()}>
