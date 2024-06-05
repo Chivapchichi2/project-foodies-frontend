@@ -15,16 +15,6 @@
   justify-content: center;
 }
 
-.button__icon {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 16px;
-  height: 16px;
-  stroke: #000;
-}
-
 .button:hover {
   background-color: rgba(5, 5, 5, 1);
 }

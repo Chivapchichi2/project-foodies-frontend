@@ -1,0 +1,36 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  overflow-y: auto;
+  z-index: var(--z-index-modal);
+}
+
+
+.content {
+  position: relative;
+  max-width: 343px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 30px;
+  border-radius: 20px;
+  background-color: var(--white);
+  transform: translateY(50px);
+}
+
+.btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
