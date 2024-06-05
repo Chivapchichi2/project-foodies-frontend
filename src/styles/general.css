@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -33,7 +35,11 @@ address {
 }
 
 button {
-  font-family: "Mulish", sans-serif;
+  border: none;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
   cursor: pointer;
   padding: 0;
 }
