@@ -9,7 +9,7 @@ const User = lazy(() => import("src/pages/User/User"));
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/project-foodies-frontend">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Layout />}>

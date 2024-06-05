@@ -2,7 +2,7 @@
   "name": "foodies",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Chivapchichi2.github.io/project-foodies-frontend/",
+  "homepage": "https://Chivapchichi2.github.io/project-foodies-frontend",
   "type": "module",
   "scripts": {
     "dev": "vite",
