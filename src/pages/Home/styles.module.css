@@ -1,3 +1,12 @@
 .test {
   color: var(--black-90);
 }
+
+.btn {
+  width: 100px;
+  height: 30px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+}
