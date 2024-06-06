@@ -5,6 +5,7 @@ import { SignUpForm } from "../../components/SignUp/SignUpForm.jsx";
 import { useState } from "react";
 import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
+import AuthToggle from "../../components/shared/AuthToggle/AuthToggle.jsx";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,11 +32,15 @@ const Home = () => {
       <div style={{ padding: "10px", width: "450px" }}>
         <Button text="log out" variant="log_follow" />
       </div>
+      <div style={{ backgroundColor: "#000000", padding: "10px" }}>
+        <AuthToggle />
+      </div>
       <Button text="follow" variant="follow_user" />
       <IconButton iconId="icon-capture-photo-camera" />
       <IconButton iconId="icon-checkbox-active" />
       <IconButton iconId="icon-checkbox-default" />
       <IconButton iconId="icon-eye" />
+
       {/* DELETE ABOVE DEMO CODE*/}
     </>
   );
