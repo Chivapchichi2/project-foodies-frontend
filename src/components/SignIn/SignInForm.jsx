@@ -2,18 +2,15 @@ import {useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 
-import styles from './SignUpForm.module.css';
+import styles from './SignInForm.module.css';
 
 import {Input} from "../shared/Input/Input.jsx";
 import IconEyeClose from './eyeClose.svg';
 import IconEyeOpen from './eyeOpen.svg';
-import {sinUpSchema} from "./SignUpSchema.js";
-import {CustomModal} from "../shared/CustomModal/CustomModal.jsx";
-import {SignInForm} from "../SignIn/SignInForm.jsx";
+import {sinInSchema} from "./SignInSchema.js";
 
 
-export const SignUpForm = () => {
-
+export const SignInForm = () => {
     const {
         register,
         handleSubmit,
@@ -21,12 +18,12 @@ export const SignUpForm = () => {
         formState: { errors }  ,
         reset
     } = useForm({
-        resolver: yupResolver(sinUpSchema),
+        resolver: yupResolver(sinInSchema),
         mode: "onChange"
     });
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
-    const [openSingIn, setOpenSingIn] = useState(false);
+    const [openSingUp, setOpenSingUp] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -39,8 +36,8 @@ export const SignUpForm = () => {
         return () => subscription.unsubscribe()
     }, [watch])
 
-    const handleClickSingIn = () => {
-        setOpenSingIn(true);
+    const handleClickSingUp = () => {
+        setOpenSingUp(true);
     }
 
     const onSubmit= (data) => {
@@ -49,20 +46,9 @@ export const SignUpForm = () => {
     };
 
     return (
-        <>
         <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className={styles.title}>SIGN UP</h2>
+            <h2 className={styles.title}>SIGN IN</h2>
             <ul className={styles.list}>
-                <li className={styles.item}>
-                    <Input
-                        placeholder={'Name*'}
-                        type={'text'}
-                        register={register}
-                        name="name"
-                        hasText={valueInput.name?.length > 0}
-                    />
-                    {errors.name && <span className={styles.error}>{errors.name.message}</span>}
-                </li>
                 <li className={styles.item}>
                     <Input
                         placeholder={'Email*'}
@@ -87,16 +73,12 @@ export const SignUpForm = () => {
                 </li>
             </ul>
             <button type="submit" className={styles.btn}>
-                CREATE
+                SIGN IN
             </button>
             <p className={styles.text}>
-                I already have an account? <button className={styles.link} onClick={handleClickSingIn}>Sign in</button>
+                Don't have an account? <button className={styles.link} onClick={handleClickSingUp}>Create an account</button>
             </p>
         </form>
-            {openSingIn && (<CustomModal isOpen={openSingIn} onClose={() => setOpenSingIn(false)}>
-                <SignInForm/>
-            </CustomModal>)}
-        </>
     );
 
 }
