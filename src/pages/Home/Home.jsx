@@ -2,16 +2,13 @@ import styles from "./styles.module.css";
 import cx from "classnames";
 import { CustomModal } from "../../components/shared/CustomModal/CustomModal.jsx";
 import { SignUpForm } from "../../components/SignUp/SignUpForm.jsx";
-import { useState, useEffect } from "react";
-import { loadSvgSprite } from "../../utilities/loadSvgSprite";
+import { useState } from "react";
 import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  useEffect(() => {
-    loadSvgSprite("symbol-defs.svg");
-  }, []);
+
   return (
     <>
       <div className={cx(styles.test)}>Home</div>
