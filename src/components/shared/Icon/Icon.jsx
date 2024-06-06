@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import styles from "./Icon.module.css";
 import cx from "classnames";
 
@@ -12,12 +11,6 @@ const Icon = ({ iconId, width, height }) => {
       )}
     </>
   );
-};
-
-Icon.propTypes = {
-  iconId: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
 };
 
 export default Icon;
