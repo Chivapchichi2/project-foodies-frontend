@@ -1,4 +1,3 @@
-
 import styles from "./Button.module.css";
 import cx from "classnames";
 
@@ -9,6 +8,5 @@ const Button = ({ text = "Button", onClick = () => {}, variant = "button", type 
     </button>
   );
 };
-
 
 export default Button;

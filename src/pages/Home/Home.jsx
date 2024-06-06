@@ -4,7 +4,7 @@ import { CustomModal } from "../../components/shared/CustomModal/CustomModal.jsx
 import { SignUpForm } from "../../components/SignUp/SignUpForm.jsx";
 import { useState, useEffect } from "react";
 import { loadSvgSprite } from "../../utilities/loadSvgSprite";
-
+import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
 
 const Home = () => {
@@ -35,7 +35,10 @@ const Home = () => {
         <Button text="log out" variant="log_follow" />
       </div>
       <Button text="follow" variant="follow_user" />
-
+      <IconButton iconId="icon-capture-photo-camera" />
+      <IconButton iconId="icon-checkbox-active" />
+      <IconButton iconId="icon-checkbox-default" />
+      <IconButton iconId="icon-eye" />
       {/* DELETE ABOVE DEMO CODE*/}
     </>
   );

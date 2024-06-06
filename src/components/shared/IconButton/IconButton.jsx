@@ -6,7 +6,7 @@ import Icon from "../Icon/Icon";
 const IconButton = ({ onClick = () => {}, iconId, width = "16", height = "16" }) => {
   return (
     <button className={cx(styles.button)} onClick={onClick}>
-      <Icon iconId={iconId} width={width} height={height} />
+      <Icon iconId={iconId} width={width} height={height} style={cx(styles.icon)} />
     </button>
   );
 };
