@@ -2,9 +2,15 @@
   /* Colors */
   --black: #050505;
   --black-90: rgba(5, 5, 5, 0.9);
+  --black-85: rgba(5, 5, 5, 0.85);
   --black-60: rgba(5, 5, 5, 0.6);
   --black-20: rgba(5, 5, 5, 0.2);
+  --black-12: rgba(5, 5, 5, 0.12);
+
   --white: #ffffff;
+  --white-90: rgba(255, 255, 255, 0.9);
+  --white-40: rgba(255, 255, 255, 0.4);
+  --white-30: rgba(255, 255, 255, 0.3);
   --light-gray: #e8e8e8;
 
   /* transition */
@@ -18,7 +24,5 @@
   --tablet: 768px;
   --desktop: 1440px;
 
-/*  flex */
-
-
+  /*  flex */
 }
