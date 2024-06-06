@@ -8,8 +8,12 @@ import {Input} from "../shared/Input/Input.jsx";
 import IconEyeClose from './eyeClose.svg';
 import IconEyeOpen from './eyeOpen.svg';
 import {sinUpSchema} from "./SignUpSchema.js";
+<<<<<<< Updated upstream
 import {CustomModal} from "../shared/CustomModal/CustomModal.jsx";
 import {SignInForm} from "../SignIn/SignInForm.jsx";
+=======
+import Button from "../shared/Button/Button.jsx";
+>>>>>>> Stashed changes
 
 
 export const SignUpForm = () => {
@@ -86,9 +90,10 @@ export const SignUpForm = () => {
                     {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                 </li>
             </ul>
-            <button type="submit" className={styles.btn}>
-                CREATE
-            </button>
+            {/*<button type="submit" className={styles.btn}>*/}
+            {/*    CREATE*/}
+            {/*</button>*/}
+            <Button type="submit"  text="CREATE" variant={'auth'} />
             <p className={styles.text}>
                 I already have an account? <button className={styles.link} onClick={handleClickSingIn}>Sign in</button>
             </p>
