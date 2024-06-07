@@ -1,0 +1,26 @@
+.button {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  background-color: transparent;
+  border-radius: 50%;
+
+  border: 1px solid rgba(05, 05, 05, 0.1);
+
+  outline: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+  background-color: rgba(5, 5, 5, 1);
+}
+.icon {
+  stroke: none;
+}
+.button:hover .icon {
+  stroke: var(--white);
+}
