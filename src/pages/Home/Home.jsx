@@ -6,11 +6,12 @@ import { useState, useEffect } from "react";
 import { loadSvgSprite } from "../../utilities/loadSvgSprite";
 import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
+import {LogOut} from "../../components/LogOut/LogOut.jsx";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
   useEffect(() => {
-    loadSvgSprite("symbol-defs.svg");
+    loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
   }, []);
   return (
     <>
@@ -40,6 +41,7 @@ const Home = () => {
       <IconButton iconId="icon-checkbox-default" />
       <IconButton iconId="icon-eye" />
       {/* DELETE ABOVE DEMO CODE*/}
+            <LogOut />
     </>
   );
 };

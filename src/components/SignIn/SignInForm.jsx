@@ -5,9 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import styles from './SignInForm.module.css';
 
 import {Input} from "../shared/Input/Input.jsx";
-import IconEyeClose from './eyeClose.svg';
-import IconEyeOpen from './eyeOpen.svg';
 import {sinInSchema} from "./SignInSchema.js";
+import Button from "../shared/Button/Button.jsx";
+import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
 
 
 export const SignInForm = () => {
@@ -47,7 +47,7 @@ export const SignInForm = () => {
 
     return (
         <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className={styles.title}>SIGN IN</h2>
+            <ModalTitle text={'SIGN IN'} />
             <ul className={styles.list}>
                 <li className={styles.item}>
                     <Input
@@ -63,7 +63,7 @@ export const SignInForm = () => {
                     <Input
                         placeholder={'Password'}
                         type={showPassword ? 'text' : 'password'}
-                        svg={showPassword ? IconEyeOpen : IconEyeClose}
+                        iconId={showPassword ? "icon-eye" : "icon-eye-off"}
                         togglePasswordVisibility={togglePasswordVisibility}
                         register={register}
                         name="password"
@@ -72,9 +72,7 @@ export const SignInForm = () => {
                     {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                 </li>
             </ul>
-            <button type="submit" className={styles.btn}>
-                SIGN IN
-            </button>
+            <Button type="submit"  text="SIGN IN" variant={'auth'} />
             <p className={styles.text}>
                 Don't have an account? <button className={styles.link} onClick={handleClickSingUp}>Create an account</button>
             </p>
