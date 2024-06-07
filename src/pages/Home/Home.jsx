@@ -36,10 +36,8 @@ const Home = () => {
         <AuthToggle />
       </div>
       <Button text="follow" variant="follow_user" />
-      <IconButton iconId="icon-capture-photo-camera" />
-      <IconButton iconId="icon-checkbox-active" />
-      <IconButton iconId="icon-checkbox-default" />
-      <IconButton iconId="icon-eye" />
+      <IconButton iconId="icon-minus" />
+      <IconButton iconId="icon-plus" />
 
       {/* DELETE ABOVE DEMO CODE*/}
     </>
