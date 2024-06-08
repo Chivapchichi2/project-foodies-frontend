@@ -8,10 +8,19 @@ import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
 import {LogOut} from "../../components/LogOut/LogOut.jsx";
 import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
+import {useGetTestimonialsQuery} from "../../store/services/testimonialService.js";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
+  const [getTestimanials, setGetTestimanials] = useState([]);
+  const { data: testimonials, isLoading } = useGetTestimonialsQuery();
+
+    useEffect(() => {
+        if(testimonials && testimonials.length > 0) {
+            setGetTestimanials(testimonials)
+        }
+    }, [testimonials]);
 
   useEffect(() => {
     loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
@@ -51,7 +60,8 @@ const Home = () => {
           <IconButton iconId="icon-checkbox-default"/>
           <IconButton iconId="icon-eye"/>
           {/* DELETE ABOVE DEMO CODE*/}
-<TestimonialsSwiper/>
+          {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials}/>}
+
       </>
   );
 };
