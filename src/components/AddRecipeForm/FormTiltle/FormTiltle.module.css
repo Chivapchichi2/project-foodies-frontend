@@ -1,0 +1,13 @@
+.formTitleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.formTitle {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: calc(32 / 28);
+  letter-spacing: -0.56px;
+  text-transform: uppercase;
+}
