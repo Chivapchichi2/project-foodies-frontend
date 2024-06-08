@@ -7,6 +7,7 @@ import { loadSvgSprite } from "../../utilities/loadSvgSprite";
 import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
 import {LogOut} from "../../components/LogOut/LogOut.jsx";
+import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -50,7 +51,7 @@ const Home = () => {
           <IconButton iconId="icon-checkbox-default"/>
           <IconButton iconId="icon-eye"/>
           {/* DELETE ABOVE DEMO CODE*/}
-
+<TestimonialsSwiper/>
       </>
   );
 };
