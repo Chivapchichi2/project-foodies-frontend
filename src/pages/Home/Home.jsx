@@ -3,9 +3,8 @@ import cx from "classnames";
 import { CustomModal } from "../../components/shared/CustomModal/CustomModal.jsx";
 import { SignUpForm } from "../../components/SignUp/SignUpForm.jsx";
 import { useState } from "react";
-import Icon from "../../components/shared/Icon/Icon.jsx";
-import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import { LogOut } from "../../components/LogOut/LogOut.jsx";
+import SelectDropDown from "../../components/shared/SelectDropDown/SelectDropDown.jsx";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -27,12 +26,9 @@ const Home = () => {
         <LogOut setModalLogOutOpen={setModalLogOutOpen} />
       </CustomModal>
 
-      <div>
-        <Icon iconId="icon-trash" width="20" height="20" stroke="#ac1d1d" />
-      </div>
-
-      <IconButton iconId="icon-trash" />
-      <IconButton iconId="icon-arrow-back" />
+      <SelectDropDown placeholder="Select a category" variant="categories" />
+      <SelectDropDown placeholder="Add the ingredient" variant="ingredients" />
+      <SelectDropDown placeholder="Area" variant="area" />
     </>
   );
 };
