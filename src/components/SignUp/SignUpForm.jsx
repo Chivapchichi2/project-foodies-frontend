@@ -10,9 +10,9 @@ import {CustomModal} from "../shared/CustomModal/CustomModal.jsx";
 import {SignInForm} from "../SignIn/SignInForm.jsx";
 import Button from "../shared/Button/Button.jsx";
 import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
+import {useRegisterMutation} from "../../store/services/authService.js";
 
 export const SignUpForm = () => {
-
     const {
         register,
         handleSubmit,
@@ -26,6 +26,7 @@ export const SignUpForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
     const [openSingIn, setOpenSingIn] = useState(false);
+    const [data, {isLoading}] = useRegisterMutation();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -42,9 +43,19 @@ export const SignUpForm = () => {
         setOpenSingIn(true);
     }
 
-    const onSubmit= (data) => {
-        alert( `Дані з форми відправлено: ${JSON.stringify(data)}`);
-        reset();
+    const onSubmit= async (user) => {
+        try {
+            const result = await data(user);
+            if (result.error) {
+                console.log("result-->", result.error)
+            } else {
+                console.log("result-->", result.data)
+                reset();
+            }
+        } catch (error) {
+            console.log("error-->", error)
+        }
+
     };
 
     return (
