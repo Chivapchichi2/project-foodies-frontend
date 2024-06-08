@@ -5,7 +5,7 @@ import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
 // import axios from "axios";
 import styles from "./AddRecipe.module.css";
 
-import FormTitle from "../../components/AddRecipeForm/FormTiltle/FormTiltle";
+import FormTitle from "../../components/AddRecipeForm/FormTiltle/FormTiltleText";
 import CookingTimeCounter from "../../components/AddRecipeForm/CookingTimeCounter/CookingTimeCounter";
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
 import IngredientSelector from "../../components/AddRecipeForm/IngredientSelector/IngredientSelector";
@@ -13,6 +13,8 @@ import SelectShared from "../../components/shared/SelectShared/SelectShared";
 import { Input } from "../../components/shared/Input/Input";
 import Button from "../../components/shared/Button/Button";
 import IconButton from "../../components/shared/IconButton/IconButton";
+import Title from "../../components/shared/Title/Title";
+import FormTitleText from "../../components/AddRecipeForm/FormTiltle/FormTiltleText";
 
 const AddRecipe = () => {
   const {
@@ -88,7 +90,8 @@ const AddRecipe = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <FormTitle />
+      <Title text="add recipe" />
+      <FormTitleText />
       {/* <div className={styles.formWraper}> */}
       {/* <div className={styles.uploadBox}> */}
       <ImageUploader
