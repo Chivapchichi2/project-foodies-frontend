@@ -14,5 +14,4 @@ export const TestimonialCard = ({text, name}) => {
             <p className={styles.name}>{name}</p>
         </div>
     )
-    return
 }
