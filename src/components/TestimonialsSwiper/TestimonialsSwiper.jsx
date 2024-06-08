@@ -1,4 +1,3 @@
-import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -20,7 +19,7 @@ export default function TestimonialsSwiper() {
                 }}
                 navigation={true}
                 modules={[Pagination ]}
-                // className={styles.container}
+                className={styles.container}
             >
                 <SwiperSlide>
                     <TestimonialCard
@@ -38,6 +37,18 @@ export default function TestimonialsSwiper() {
                     <TestimonialCard
                         text={'Thank you for the wonderful recipe for feta pasta with tomatoes and basil. It turned out to be not only tasty, but also incredibly colorful. This has become a favorite family meal!'}
                         name={"Larry Pageim"}
+                    />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <TestimonialCard
+                        text={'Thank you for the wonderful recipe for feta pasta with tomatoes and basil. It turned out to be not only tasty, but also incredibly colorful. This has become a favorite family meal!'}
+                        name={"Card 4"}
+                    />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <TestimonialCard
+                        text={'Thank you for the wonderful recipe for feta pasta with tomatoes and basil. It turned out to be not only tasty, but also incredibly colorful. This has become a favorite family meal!'}
+                        name={"Card 5"}
                     />
                 </SwiperSlide>
             </Swiper>

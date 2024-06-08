@@ -2,8 +2,7 @@
     width: 343px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 0 auto 40px;
+    margin: 0 auto 60px;
 }
 
 .text_first {
@@ -16,13 +15,16 @@
 }
 
 .section_title {
+    text-align: center;
     margin-bottom: 12px;
 }
 
 .container_svg {
+    position: relative;
     width: 40px;
     height: 32px;
     margin-bottom: 20px;
+    margin-left: 40px;
 }
 
 .tastimonial {
@@ -43,6 +45,7 @@
     line-height: 24px;
     letter-spacing: -0.32px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 @media (min-width: 768px) {
