@@ -11,6 +11,9 @@ import {SignInForm} from "../SignIn/SignInForm.jsx";
 import Button from "../shared/Button/Button.jsx";
 import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
 import {useRegisterMutation} from "../../store/services/authService.js";
+import {toast} from "react-toastify";
+
+const customId = 'toastId';
 
 export const SignUpForm = () => {
     const {
@@ -47,60 +50,71 @@ export const SignUpForm = () => {
         try {
             const result = await data(user);
             if (result.error) {
-                console.log("result-->", result.error)
+                toast.error(result.error.data.message, {
+                    toastId: customId,
+                });
             } else {
-                console.log("result-->", result.data)
+                console.log("result.data-->", result.data)
+                toast.success('Sign Up successful', {
+                    toastId: customId,
+                })
                 reset();
             }
         } catch (error) {
-            console.log("error-->", error)
+            toast.error(error.message, {
+                toastId: customId,
+            });
         }
 
     };
 
     return (
         <>
-        <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-            <ModalTitle text={'Sign Up'} />
-            <ul className={styles.list}>
-                <li className={styles.item}>
-                    <Input
-                        placeholder={'Name*'}
-                        type={'text'}
-                        register={register}
-                        name="name"
-                        hasText={valueInput.name?.length > 0}
-                    />
-                    {errors.name && <span className={styles.error}>{errors.name.message}</span>}
-                </li>
-                <li className={styles.item}>
-                    <Input
-                        placeholder={'Email*'}
-                        type={'email'}
-                        register={register}
-                        name="email"
-                        hasText={valueInput.email?.length > 0}
-                    />
-                    {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-                </li>
-                <li className={styles.item}>
-                    <Input
-                        placeholder={'Password'}
-                        type={showPassword ? 'text' : 'password'}
-                        iconId={showPassword ? "icon-eye" : "icon-eye-off"}
-                        togglePasswordVisibility={togglePasswordVisibility}
-                        register={register}
-                        name="password"
-                        hasText={valueInput.password?.length > 0}
-                    />
-                    {errors.password && <span className={styles.error}>{errors.password.message}</span>}
-                </li>
-            </ul>
-            <Button type="submit"  text="CREATE" variant={'auth'} />
-            <p className={styles.text}>
-                I already have an account? <button className={styles.link} onClick={handleClickSingIn}>Sign in</button>
-            </p>
-        </form>
+            {isLoading
+                ? <div>Loading...</div>
+                : <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
+                <ModalTitle text={'Sign Up'}/>
+                <ul className={styles.list}>
+                    <li className={styles.item}>
+                        <Input
+                            placeholder={'Name*'}
+                            type={'text'}
+                            register={register}
+                            name="name"
+                            hasText={valueInput.name?.length > 0}
+                        />
+                        {errors.name && <span className={styles.error}>{errors.name.message}</span>}
+                    </li>
+                    <li className={styles.item}>
+                        <Input
+                            placeholder={'Email*'}
+                            type={'email'}
+                            register={register}
+                            name="email"
+                            hasText={valueInput.email?.length > 0}
+                        />
+                        {errors.email && <span className={styles.error}>{errors.email.message}</span>}
+                    </li>
+                    <li className={styles.item}>
+                        <Input
+                            placeholder={'Password'}
+                            type={showPassword ? 'text' : 'password'}
+                            iconId={showPassword ? "icon-eye" : "icon-eye-off"}
+                            togglePasswordVisibility={togglePasswordVisibility}
+                            register={register}
+                            name="password"
+                            hasText={valueInput.password?.length > 0}
+                        />
+                        {errors.password && <span className={styles.error}>{errors.password.message}</span>}
+                    </li>
+                </ul>
+                <Button type="submit" text="CREATE" variant={'auth'}/>
+                <p className={styles.text}>
+                    I already have an account? <button className={styles.link} onClick={handleClickSingIn}>Sign
+                    in</button>
+                </p>
+            </form>}
+
             {openSingIn && (<CustomModal isOpen={openSingIn} onClose={() => setOpenSingIn(false)}>
                 <SignInForm/>
             </CustomModal>)}
