@@ -59,7 +59,7 @@ const AddRecipe = () => {
     formData.append("description", data.description);
     formData.append("category", data.category);
     formData.append("cookingTime", cookingTime);
-    formData.append("preparations", data.instructions);
+    formData.append("instructions", data.instructions);
     selectedIngredients.forEach((ingredient, index) => {
       formData.append(`ingredients[${index}][name]`, ingredient.name);
       formData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
@@ -129,7 +129,7 @@ const AddRecipe = () => {
           />
           {errors.category && <p>{errors.category.message}</p>}
         </div>
-        (
+
         <CookingTimeCounter cookingTime={cookingTime} setCookingTime={setCookingTime} />
         {errors.cookingTime && <p>{errors.cookingTime.message}</p>}
         <IngredientSelector
@@ -144,16 +144,16 @@ const AddRecipe = () => {
         />
       </div>
 
-      <div className={styles.recipePreparation}>
+      <div className={styles.recipeIncstructions}>
         <label>Recipe preparation</label>
         <div className={styles.textareaWrapper}>
           <textarea
-            {...register("preparations")}
-            maxLength="200"
+            {...register("instructions")}
             placeholder="Enter recipe"
+            maxLength="200"
             className={styles.textarea}
           />
-          <span className={styles.symbolCounter}>{watch("preparations")?.length || 0}/200</span>
+          <span className={styles.symbolCounter}>{watch("instructions")?.length || 0}/200</span>
           {errors.instructions && <p>{errors.instructions.message}</p>}
         </div>
       </div>

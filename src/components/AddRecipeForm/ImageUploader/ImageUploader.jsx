@@ -4,10 +4,11 @@ import css from "./ImageUploader.module.css";
 
 const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, errors }) => {
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const files = Array.from(e.target.files);
+    const file = files[0];
     if (file) {
       setImagePreview(URL.createObjectURL(file));
-      setValue("image", e.target.files);
+      setValue("image", files);
     }
   };
 
