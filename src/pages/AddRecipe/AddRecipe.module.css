@@ -26,11 +26,12 @@ input[type="text"] {
   border: none;
 }
 
-.descriptionWrapper {
+.textareaWrapper {
   position: relative;
 }
 
-.decriptioArea {
+.textarea {
+  width: 100%;
   height: 36px;
   padding: 16px 0;
   border: none;
@@ -42,14 +43,14 @@ input[type="text"] {
   overflow: hidden;
 }
 
-.decriptioArea::placeholder {
+.textarea::placeholder {
   position: absolute;
   top: 0;
   left: 0;
   font-size: 14px;
 }
 
-.decrCounter {
+.symbolCounter {
   position: absolute;
   top: 0;
   right: 0;
@@ -62,6 +63,9 @@ input[type="text"] {
   gap: 20px;
 }
 
-.iconTrash {
-  fill: var(--black-12);
+.buttonWrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
 }

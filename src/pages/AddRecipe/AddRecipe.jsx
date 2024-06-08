@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
 // import axios from "axios";
-import css from "./AddRecipe.module.css";
+import styles from "./AddRecipe.module.css";
 
 import FormTitle from "../../components/AddRecipeForm/FormTiltle/FormTiltle";
 import CookingTimeCounter from "../../components/AddRecipeForm/CookingTimeCounter/CookingTimeCounter";
@@ -87,10 +87,10 @@ const AddRecipe = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <FormTitle />
-      {/* <div className={css.formWraper}> */}
-      {/* <div className={css.uploadBox}> */}
+      {/* <div className={styles.formWraper}> */}
+      {/* <div className={styles.uploadBox}> */}
       <ImageUploader
         register={register}
         setValue={setValue}
@@ -101,24 +101,24 @@ const AddRecipe = () => {
       {/* </div> */}
 
       {/* Recipe title */}
-      {/* <div className={css.formElements}> */}
+      {/* <div className={styles.formElements}> */}
       <div>
         <Input type="text" name="title" register={register} placeholder="The name of the recipe" />
         {errors.title && <p>{errors.title.message}</p>}
       </div>
 
-      <div className={css.descriptionWrapper}>
+      <div className={styles.textareaWrapper}>
         <textarea
           {...register("description")}
           maxLength="200"
           placeholder="Enter the description of the dish"
-          className={css.descriptioArea}
+          className={styles.textarea}
         />
-        <span className={css.decrCounter}>{watch("description")?.length || 0}/200</span>
+        <span className={styles.symbolCounter}>{watch("description")?.length || 0}/200</span>
         {errors.description && <p>{errors.description.message}</p>}
       </div>
       {/* {Category} */}
-      <div className={css.recipeData}>
+      <div className={styles.recipeData}>
         <div>
           <label>Category</label>
           <SelectShared
@@ -129,13 +129,8 @@ const AddRecipe = () => {
           />
           {errors.category && <p>{errors.category.message}</p>}
         </div>
-        <Controller
-          name="cookingTime"
-          control={control}
-          render={({ field }) => (
-            <CookingTimeCounter cookingTime={field.value} setCookingTime={field.onChange} />
-          )}
-        />
+        (
+        <CookingTimeCounter cookingTime={cookingTime} setCookingTime={setCookingTime} />
         {errors.cookingTime && <p>{errors.cookingTime.message}</p>}
         <IngredientSelector
           control={control}
@@ -149,23 +144,25 @@ const AddRecipe = () => {
         />
       </div>
 
-      <div className={css.recipePreparation}>
+      <div className={styles.recipePreparation}>
         <label>Recipe preparation</label>
-        <div>
-          <textarea {...register("preparations")} maxLength="200" placeholder="Enter recipe" />
-          <span>{watch("preparations")?.length || 0}/200</span>
+        <div className={styles.textareaWrapper}>
+          <textarea
+            {...register("preparations")}
+            maxLength="200"
+            placeholder="Enter recipe"
+            className={styles.textarea}
+          />
+          <span className={styles.symbolCounter}>{watch("preparations")?.length || 0}/200</span>
           {errors.instructions && <p>{errors.instructions.message}</p>}
         </div>
       </div>
+      <div className={styles.buttonWrapper}>
+        <IconButton iconId="icon-trash" type="button" onClick={handleReset} />
 
-      <IconButton
-        iconId="icon-trash"
-        type="button"
-        onClick={handleReset}
-        className={css.iconTrash}
-      />
+        <Button text="Publish" type="submit" />
+      </div>
 
-      <Button text="Publish" type="submit" />
       {/* </div> */}
       {/* </div> */}
     </form>

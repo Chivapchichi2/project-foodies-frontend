@@ -29,7 +29,7 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
           <img src={imagePreview} alt="Recipe Preview" className={css.imagePreview} />
         )}
         <div>
-          <Icon iconId="icon-photo-camera" width="50" height="50" style={{ fill: "red" }} />
+          <Icon iconId="icon-photo-camera" width="50px" height="50" />
           <span>Upload a photo</span>
         </div>
       </label>

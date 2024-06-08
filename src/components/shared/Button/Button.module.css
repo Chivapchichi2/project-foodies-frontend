@@ -115,8 +115,41 @@
     line-height: 1.5;
   }
 }
+
+/* --------------LOG OUT / CANCEL---------------- */
+.log_cancel {
+  width: 100%;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid var(--black-90);
+  background-color: transparent;
+  color: var(--black);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.28px;
+}
+
+.log_cancel:hover,
+.log_cancel:focus {
+  background-color: var(--black);
+  color: var(--white);
+  transition: color var(--transition), background-color var(--transition);
+}
+@media screen and (min-width: 768px) {
+  .log_cancel {
+    width: 394px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.32px;
+  }
+}
 /* ----------------------FOLLOW USER ---------------- */
-.follow_user {
+.follow_user  {
   padding: 8px 16px;
   color: var(--black-90);
   font-size: 14px;

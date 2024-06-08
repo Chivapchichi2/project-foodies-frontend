@@ -8,6 +8,8 @@
 .input::placeholder {
     color: var(--black-60);
     font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.28px;
 }
 
 .container {
@@ -15,6 +17,8 @@
 }
 
 .btn {
+    width: 24px;
+    height: 24px;
     position: absolute;
     top: 14px;
     right: 14px;
