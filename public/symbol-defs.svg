@@ -52,7 +52,7 @@
 <symbol id="icon-photo-camera" viewBox="0 0 32 32" width="32" height="32">
 <path d="M16 23.040c1.6 0 2.96-0.56 4.081-1.679s1.679-2.481 1.679-4.081-0.56-2.96-1.679-4.081c-1.12-1.12-2.481-1.679-4.081-1.679s-2.96 0.56-4.081 1.679c-1.12 1.12-1.679 2.481-1.679 4.081s0.56 2.96 1.679 4.081c1.12 1.12 2.481 1.679 4.081 1.679zM5.76 27.52c-0.704 0-1.306-0.25-1.807-0.751s-0.753-1.105-0.753-1.809v-15.36c0-0.704 0.251-1.306 0.753-1.807s1.103-0.753 1.807-0.753h4.032l2.368-2.56h7.68l2.368 2.56h4.032c0.704 0 1.307 0.251 1.809 0.753s0.751 1.103 0.751 1.807v15.36c0 0.704-0.25 1.307-0.751 1.809s-1.105 0.751-1.809 0.751h-20.48z"></path>
 </symbol>
-<symbol id="icon-trash" viewBox="0 0 32 32" width="32" height="32">
+<symbol id="icon-trash" viewBox="0 0 32 32" >
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" stroke="" d="M12 4h8"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" stroke="" d="M4 8h24M25.333 8l-0.935 14.026c-0.14 2.104-0.21 3.156-0.665 3.954-0.4 0.702-1.004 1.267-1.731 1.62-0.826 0.4-1.881 0.4-3.99 0.4h-4.025c-2.109 0-3.163 0-3.99-0.4-0.727-0.353-1.331-0.917-1.731-1.62-0.455-0.798-0.525-1.85-0.665-3.954l-0.935-14.026"></path>
 </symbol>
@@ -65,6 +65,13 @@
 <symbol id="icon-plus" viewBox="0 0 32 32" width="32" height="32">
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" stroke="" d="M16 6.667v18.667"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" stroke="" d="M6.667 16h18.667"></path>
+</symbol>
+<symbol id="icon-quote" viewBox="0 0 40 32" >
+<path fill="#e9e9e9" stroke="none" d="M0 32v-10.706c0-4 0.704-7.686 2.113-11.059s3.796-6.784 7.162-10.235l6.105 4.824c-1.957 1.961-3.444 3.804-4.462 5.529s-1.683 3.49-1.996 5.294h7.514v16.353h-16.438zM22.896 32v-10.706c0-4 0.704-7.686 2.113-11.059s3.796-6.784 7.162-10.235l6.105 4.824c-1.957 1.961-3.444 3.804-4.462 5.529s-1.683 3.49-1.996 5.294h7.514v16.353h-16.438z"></path>
+</symbol>
+<symbol id="icon-arrow-back" viewBox="0 0 32 32" >
+<path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" stroke="" d="M25.427 16.001l-18.856-0.002"></path>
+<path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" stroke="" d="M15.998 25.428l-9.427-9.429 9.429-9.427"></path>
 </symbol>
 </defs>
 </svg>
