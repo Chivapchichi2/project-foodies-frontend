@@ -1,6 +1,8 @@
 import css from "./IngredientSelector.module.css";
 import SelectShared from "../../shared/SelectShared/SelectShared";
 import { Input } from "../../shared/Input/Input";
+import Button from "../../shared/Button/Button";
+import Icon from "../../shared/Icon/Icon";
 
 const IngredientSelector = ({
   register,
@@ -44,9 +46,12 @@ const IngredientSelector = ({
         {errors.quantity && <p>{errors.quantity.message}</p>}
       </div>
 
-      <button type="button" onClick={addIngredient}>
-        Add ingredient+
-      </button>
+      <Button
+        text="Add ingridient"
+        type="button"
+        onClick={addIngredient}
+        iconId="icon-plus"
+      ></Button>
 
       <div>
         {selectedIngredients.map((ingredient, index) => (
