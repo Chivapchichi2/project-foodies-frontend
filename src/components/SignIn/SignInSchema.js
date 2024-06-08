@@ -5,7 +5,7 @@ export const sinInSchema = Yup.object().shape({
         .min(3, 'more than 3 characters')
         .max(150, 'less than 150 characters')
         .email('wrong email format')
-        .matches(/^[A-Z0-9._%+-]+@(?!.*\.ru)[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 'wrong email format')
+        .matches(/^[A-Z0-9._%+-]+@(?!.*\.ru)[A-Z0-9.-]+\.[A-Z0-9]{2,4}$/i, 'wrong email format')
         .trim()
         .required('required field'),
     password: Yup.string()
