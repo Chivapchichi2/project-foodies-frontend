@@ -1,12 +1,13 @@
 import styles from './Input.module.css';
+import Icon from "../Icon/Icon.jsx";
 
-export const Input = ({placeholder, svg, type, togglePasswordVisibility, register, name, hasText}) => {
+export const Input = ({placeholder, iconId, type, togglePasswordVisibility, register, name, hasText}) => {
 
     const handleClickEye = () => {
         togglePasswordVisibility()
     };
 
-    if (!svg) return <input
+    if (!iconId) return <input
         className={`${styles.input} ${hasText ? styles.hasText : ''}`}
         placeholder = {placeholder}
         type={type}
@@ -22,7 +23,7 @@ export const Input = ({placeholder, svg, type, togglePasswordVisibility, registe
                 {...register(name)}
             />
             <button className={styles.btn} onClick={handleClickEye} type="button">
-                <img src={svg} alt={placeholder} width={18} height={18}/>
+                <Icon iconId={iconId} width={16} height={16}/>
             </button>
         </div>
     );

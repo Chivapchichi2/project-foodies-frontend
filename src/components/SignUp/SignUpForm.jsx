@@ -5,12 +5,14 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import styles from './SignUpForm.module.css';
 
 import {Input} from "../shared/Input/Input.jsx";
-import IconEyeClose from './eyeClose.svg';
-import IconEyeOpen from './eyeOpen.svg';
 import {sinUpSchema} from "./SignUpSchema.js";
-
+import {CustomModal} from "../shared/CustomModal/CustomModal.jsx";
+import {SignInForm} from "../SignIn/SignInForm.jsx";
+import Button from "../shared/Button/Button.jsx";
+import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
 
 export const SignUpForm = () => {
+
     const {
         register,
         handleSubmit,
@@ -23,6 +25,7 @@ export const SignUpForm = () => {
     });
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
+    const [openSingIn, setOpenSingIn] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -35,14 +38,19 @@ export const SignUpForm = () => {
         return () => subscription.unsubscribe()
     }, [watch])
 
+    const handleClickSingIn = () => {
+        setOpenSingIn(true);
+    }
+
     const onSubmit= (data) => {
         alert( `Дані з форми відправлено: ${JSON.stringify(data)}`);
         reset();
     };
 
     return (
+        <>
         <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className={styles.title}>SIGN UP</h2>
+            <ModalTitle text={'Sign Up'} />
             <ul className={styles.list}>
                 <li className={styles.item}>
                     <Input
@@ -68,7 +76,7 @@ export const SignUpForm = () => {
                     <Input
                         placeholder={'Password'}
                         type={showPassword ? 'text' : 'password'}
-                        svg={showPassword ? IconEyeOpen : IconEyeClose}
+                        iconId={showPassword ? "icon-eye" : "icon-eye-off"}
                         togglePasswordVisibility={togglePasswordVisibility}
                         register={register}
                         name="password"
@@ -77,13 +85,15 @@ export const SignUpForm = () => {
                     {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                 </li>
             </ul>
-            <button type="submit" className={styles.btn}>
-                CREATE
-            </button>
+            <Button type="submit"  text="CREATE" variant={'auth'} />
             <p className={styles.text}>
-                I already have an account? <span className={styles.link}>Sign in</span>
+                I already have an account? <button className={styles.link} onClick={handleClickSingIn}>Sign in</button>
             </p>
         </form>
+            {openSingIn && (<CustomModal isOpen={openSingIn} onClose={() => setOpenSingIn(false)}>
+                <SignInForm/>
+            </CustomModal>)}
+        </>
     );
 
 }

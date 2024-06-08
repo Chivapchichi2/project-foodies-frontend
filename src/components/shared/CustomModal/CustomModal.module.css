@@ -13,7 +13,6 @@
   z-index: var(--z-index-modal);
 }
 
-
 .content {
   position: relative;
   max-width: 343px;
@@ -28,9 +27,34 @@
 
 .btn {
     position: absolute;
+    width: 24px;
+    height: 24px;
     top: 16px;
     right: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}
+
+@media (min-width: 768px) {
+    .content {
+        max-width: 561px;
+        padding: 80px;
+        border-radius: 30px;
+    }
+
+    .btn {
+        width: 24px;
+        height: 24px;
+        top: 20px;
+        right: 20px;
+    }
 }

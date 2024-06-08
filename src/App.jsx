@@ -9,6 +9,7 @@ const Recipe = lazy(() => import("src/pages/Recipe/Recipe"));
 const AddRecipe = lazy(() => import("src/pages/AddRecipe/AddRecipe"));
 const User = lazy(() => import("src/pages/User/User"));
 
+
 export const App = () => {
   useEffect(() => {
     loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
