@@ -23,11 +23,6 @@
   transition: fill var(--transition);
 }
 
-.item_social:hover .icon,
-.item_social:focus .icon {
-  fill: var(--white);
-}
-
 .list {
   display: flex;
   flex-wrap: wrap;
@@ -38,6 +33,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  position: relative;
 }
 
 .imageWrapper {
@@ -47,4 +43,23 @@
 .image {
   display: block;
   padding: 10px;
+}
+.iconBtn {
+  border: none;
+  box-shadow: none;
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.iconBtn:hover {
+  background-color: var(--white);
+  scale: 1.1;
+}
+.textWrapper {
+  flex-grow: 1;
+  margin-right: 22px;
 }

@@ -14,7 +14,7 @@ label {
   text-transform: uppercase;
   margin-bottom: 8px;
 }
-input[type="text"]::placeholder {
+.nameInput::placeholder {
   font-weight: 800;
   font-size: 18px;
   line-height: calc(24 / 18);
@@ -22,7 +22,7 @@ input[type="text"]::placeholder {
   text-transform: uppercase;
 }
 
-input[type="text"] {
+.nameInput {
   border: none;
 }
 
@@ -72,4 +72,18 @@ input[type="text"] {
 
 .button {
   padding: 14px 32px;
+}
+
+.trashBtn {
+  width: 48px;
+  height: 48px;
+  box-shadow: none;
+  border: 1px solid var(--black-12);
+}
+.icon {
+  padding: 14px;
+}
+
+icon:hover {
+  stroke: var(--white);
 }

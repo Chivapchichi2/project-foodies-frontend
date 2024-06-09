@@ -3,6 +3,7 @@ import SelectShared from "../../shared/SelectShared/SelectShared";
 import { Input } from "../../shared/Input/Input";
 import Button from "../../shared/Button/Button";
 import cx from "classnames";
+import IconButton from "../../shared/IconButton/IconButton";
 
 const IngredientSelector = ({
   register,
@@ -60,11 +61,16 @@ const IngredientSelector = ({
             <div className={styles.imageWrapper}>
               <img href="" alt="" width="55px" height="55px" className={cx(styles.image)} />
             </div>
-            <div>
+            <div className={cx(styles.textWrapper)}>
               <p>{ingredient.name}</p>
               <p>{ingredient.quantity}</p>
             </div>
-            <Button text="remove" type="button" onClick={() => removeIngredient(index)} />
+            <IconButton
+              iconId="icon-close-btn"
+              type="button"
+              onClick={() => removeIngredient(index)}
+              style={cx(styles.iconBtn)}
+            />
           </li>
         ))}
       </ul>

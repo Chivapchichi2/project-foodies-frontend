@@ -44,6 +44,7 @@ const AddRecipe = () => {
     { value: "ingredient2", label: "Ingredient 2" },
     { value: "ingredient3", label: "Ingredient 3" },
     { value: "ingredient4", label: "Ingredient 4" },
+    { value: "ingreddsfdsfsdfsdfsdient4", label: "Ingredsfdient 4" },
   ];
 
   const categories = [
@@ -106,7 +107,13 @@ const AddRecipe = () => {
       {/* Recipe title */}
       {/* <div className={styles.formElements}> */}
       <div>
-        <Input type="text" name="title" register={register} placeholder="The name of the recipe" />
+        <Input
+          type="text"
+          name="title"
+          register={register}
+          placeholder="The name of the recipe"
+          className={cx(styles.nameInput)}
+        />
         {errors.title && <p>{errors.title.message}</p>}
       </div>
 
@@ -167,7 +174,7 @@ const AddRecipe = () => {
           onClick={handleReset}
           width="20"
           height="20"
-          classname={cx(styles.iconButton)}
+          style={cx(styles.trashBtn)}
         />
 
         <Button text="Publish" type="submit" classname={cx(styles.button)} />

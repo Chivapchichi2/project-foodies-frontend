@@ -10,6 +10,7 @@ export const Input = ({
   name,
   hasText,
   onChange,
+  className,
 }) => {
   const handleClickEye = () => {
     togglePasswordVisibility();
@@ -29,7 +30,7 @@ export const Input = ({
   return (
     <div className={styles.container}>
       <input
-        className={`${styles.input} ${hasText ? styles.hasText : ""}`}
+        className={`${styles.input} ${(hasText ? styles.hasText : "", className)}`}
         placeholder={placeholder}
         type={type}
         {...register(name)}
