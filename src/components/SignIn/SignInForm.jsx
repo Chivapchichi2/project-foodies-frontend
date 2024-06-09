@@ -31,6 +31,7 @@ export const SignInForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
     const [openSingUp, setOpenSingUp] = useState(false);
+    const [width, setWidth] = useState('18');
     const [data, {isLoading}] = useLoginMutation();
     const dispatch = useDispatch();
 
@@ -42,6 +43,21 @@ export const SignInForm = () => {
         )
         return () => subscription.unsubscribe()
     }, [watch])
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setWidth('20');
+            } else {
+                setWidth('18');
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const handleClickSingUp = () => setOpenSingUp(true);
 
@@ -92,6 +108,7 @@ export const SignInForm = () => {
                         register={register}
                         name="password"
                         hasText={valueInput.password?.length > 0}
+                        width={width}
                     />
                     {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                 </li>

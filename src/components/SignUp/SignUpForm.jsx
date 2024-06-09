@@ -29,16 +29,32 @@ export const SignUpForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
     const [openSingIn, setOpenSingIn] = useState(false);
+    const [width, setWidth] = useState('18');
     const [data, {isLoading}] = useRegisterMutation();
 
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
     useEffect(() => {
-        const subscription = watch((value) =>
-            setValueInput(value)
-        )
-        return () => subscription.unsubscribe()
-    }, [watch])
+        const subscription = watch((value) => {
+            setValueInput(value);
+        });
+        return () => subscription.unsubscribe();
+    }, [watch]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setWidth('20');
+            } else {
+                setWidth('18');
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const handleClickSingIn = () => setOpenSingIn(true)
 
@@ -50,7 +66,6 @@ export const SignUpForm = () => {
                     toastId: customId,
                 });
             } else {
-                console.log("result.data-->", result.data)
                 toast.success('Sign Up successful', {
                     toastId: customId,
                 })
@@ -77,6 +92,7 @@ export const SignUpForm = () => {
                                 register={register}
                                 name="name"
                                 hasText={valueInput.name?.length > 0}
+                                watch={watch}
                             />
                             {errors.name && <span className={styles.error}>{errors.name.message}</span>}
                         </li>
@@ -99,6 +115,7 @@ export const SignUpForm = () => {
                                 register={register}
                                 name="password"
                                 hasText={valueInput.password?.length > 0}
+                                width={width}
                             />
                             {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                         </li>
