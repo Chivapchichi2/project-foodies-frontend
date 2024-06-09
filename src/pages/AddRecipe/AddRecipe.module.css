@@ -80,3 +80,7 @@ label {
   box-shadow: none;
   border: 1px solid var(--black-12);
 }
+
+.trashBtn:hover .icon {
+  stroke: var(--white);
+}

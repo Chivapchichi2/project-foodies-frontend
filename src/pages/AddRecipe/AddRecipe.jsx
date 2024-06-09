@@ -100,6 +100,7 @@ const AddRecipe = () => {
         setValue={setValue}
         imagePreview={imagePreview}
         setImagePreview={setImagePreview}
+        watch={watch}
         errors={errors}
       />
       {/* </div> */}

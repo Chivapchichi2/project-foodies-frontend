@@ -9,23 +9,12 @@ export const Input = ({
   register,
   name,
   hasText,
-  onChange,
+
   className,
 }) => {
   const handleClickEye = () => {
     togglePasswordVisibility();
   };
-
-  //   if (!iconId)
-  //     return (
-  //       <input
-  //         className={`${styles.input} ${hasText ? styles.hasText : ""}`}
-  //         placeholder={placeholder}
-  //         type={type}
-  //         {...register(name, { required: true })}
-  //         onChange={onChange}
-  //       />
-  //     );
 
   return (
     <div className={styles.container}>
@@ -34,7 +23,6 @@ export const Input = ({
         placeholder={placeholder}
         type={type}
         {...register(name)}
-        onChange={onChange}
       />
       {iconId && (
         <button className={styles.btn} onClick={handleClickEye} type="button">

@@ -13,7 +13,7 @@ const IconButton = ({
 }) => {
   return (
     <button className={cx(styles.button, style)} onClick={onClick}>
-      <Icon iconId={iconId} width={width} height={height} style={cx(styles.icon, styleSVG)} />
+      <Icon iconId={iconId} width={width} height={height} customStyle={styleSVG} />
     </button>
   );
 };

@@ -21,6 +21,7 @@ const CookingTimeCounter = ({ cookingTime, setCookingTime }) => {
           height="16"
           type="button"
           style={cx(styles.iconBtn)}
+          styleSVG={cx(styles.icon)}
           onClick={decrementCookingTime}
         />
 
