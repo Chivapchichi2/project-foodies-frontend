@@ -15,7 +15,7 @@ const userProfileTabs = [
 ];
 
 const TabContent = () => {
-  const [isMyProfile, _] = useState(true);
+  const [isMyProfile] = useState(true);
   const [activeTab, setActiveTab] = useState(
     isMyProfile ? myProfileTabs[0].id : userProfileTabs[0].id
   );
