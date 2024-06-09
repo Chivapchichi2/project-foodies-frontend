@@ -1,12 +1,19 @@
 import styles from "./IconButton.module.css";
 import cx from "classnames";
 
-const IconButton = ({ onClick = () => {}, iconId, style = {} }) => {
+import Icon from "../Icon/Icon";
+
+const IconButton = ({
+  onClick = () => {},
+  style,
+  styleSVG,
+  iconId,
+  width = "16",
+  height = "16",
+}) => {
   return (
-    <button className={cx(styles.button)} onClick={onClick}>
-      <svg className={cx(styles.icon)} aria-hidden="true" style={{ ...style }}>
-        <use href={`#${iconId}`} />
-      </svg>
+    <button className={cx(styles.button, style)} onClick={onClick}>
+      <Icon iconId={iconId} width={width} height={height} style={cx(styles.icon, styleSVG)} />
     </button>
   );
 };
