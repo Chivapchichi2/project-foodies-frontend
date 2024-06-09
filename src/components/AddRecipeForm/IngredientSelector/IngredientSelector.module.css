@@ -4,6 +4,11 @@
   gap: 20px;
 }
 
+.button {
+  width: 540px;
+  padding: 14px 20px;
+  border: 1px solid var(--black-90);
+}
 .icon {
   fill: var(--black);
   position: relative;

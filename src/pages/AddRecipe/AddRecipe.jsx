@@ -5,7 +5,6 @@ import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
 // import axios from "axios";
 import styles from "./AddRecipe.module.css";
 
-import FormTitle from "../../components/AddRecipeForm/FormTiltle/FormTiltleText";
 import CookingTimeCounter from "../../components/AddRecipeForm/CookingTimeCounter/CookingTimeCounter";
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
 import IngredientSelector from "../../components/AddRecipeForm/IngredientSelector/IngredientSelector";

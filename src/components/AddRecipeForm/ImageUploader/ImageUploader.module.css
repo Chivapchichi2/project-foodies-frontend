@@ -1,17 +1,25 @@
 input[type="file"] {
   display: none;
 }
-
-.uploadBox {
+.wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.uploadBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 343px;
+  height: 318px;
+  position: relative;
+  border: 1px dashed rgba(5, 5, 5, 0.2);
+  border-radius: 30px;
+}
 .customUploadBtn {
   display: inline-block;
-  padding: 120px 122px;
-  border-radius: 30px;
-  border: 1px dashed rgba(5, 5, 5, 0.2);
+  /* padding: 120px 122px; */
+
   cursor: pointer;
   align-items: center;
   text-transform: none;
@@ -19,7 +27,7 @@ input[type="file"] {
   font-weight: 500;
   line-height: calc(20 / 14);
   letter-spacing: -0.28px;
-  text-decoration-line: underline;
+  text-decoration: underline;
 }
 
 .imagePreview {
@@ -30,4 +38,12 @@ input[type="file"] {
   object-fit: cover;
   border: 1px solid #ccc;
   margin-top: 10px;
+}
+
+.btnWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
 }

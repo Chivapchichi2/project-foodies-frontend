@@ -1,6 +1,7 @@
 import Icon from "../../shared/Icon/Icon";
 import { Input } from "../../shared/Input/Input";
-import css from "./ImageUploader.module.css";
+import styles from "./ImageUploader.module.css";
+import cx from "classnames";
 
 const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, errors }) => {
   const handleImageChange = (e) => {
@@ -13,27 +14,29 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
   };
 
   return (
-    <div className={css.uploadBox}>
-      <label className={css.customUploadBtn}>
-        <Input
-          type="file"
-          name="image"
-          register={register}
-          setValue={setValue}
-          hasText={!!imagePreview}
-          setImagePreview={setImagePreview}
-          errors={errors}
-          onChange={handleImageChange}
-        />
-        {errors.image && <p>{errors.image.message}</p>}
-        {imagePreview && (
-          <img src={imagePreview} alt="Recipe Preview" className={css.imagePreview} />
-        )}
-        <div>
-          <Icon iconId="icon-photo-camera" width="50px" height="50" />
-          <span>Upload a photo</span>
-        </div>
-      </label>
+    <div className={cx(styles.wrapper)}>
+      <div className={styles.uploadBox}>
+        <label className={styles.customUploadBtn}>
+          <Input
+            type="file"
+            name="image"
+            register={register}
+            setValue={setValue}
+            errors={errors}
+            onChange={handleImageChange}
+          />
+          {errors.image && <p>{errors.image.message}</p>}
+          {imagePreview && (
+            <img src={imagePreview} alt="Recipe Preview" className={styles.imagePreview} />
+          )}
+          {!imagePreview && (
+            <div className={cx(styles.btnWrapper)}>
+              <Icon iconId="icon-capture-photo-camera" width="50px" height="50" />
+              <span>Upload a photo</span>
+            </div>
+          )}
+        </label>
+      </div>
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import css from "./IngredientSelector.module.css";
+import styles from "./IngredientSelector.module.css";
 import SelectShared from "../../shared/SelectShared/SelectShared";
 import { Input } from "../../shared/Input/Input";
 import Button from "../../shared/Button/Button";
-import Icon from "../../shared/Icon/Icon";
+import cx from "classnames";
 
 const IngredientSelector = ({
   register,
@@ -28,13 +28,13 @@ const IngredientSelector = ({
   };
 
   return (
-    <div className={css.container}>
+    <div className={styles.container}>
       <div>
         <label>Ingredient</label>
         <SelectShared
           options={ingredients}
           placeholder="Select an ingredient"
-          className={css.select}
+          className={styles.select}
           {...register("ingredient")}
           onChange={(selectedOption) => setValue("ingredient", selectedOption)}
         />
@@ -51,7 +51,8 @@ const IngredientSelector = ({
         type="button"
         onClick={addIngredient}
         iconId="icon-plus"
-      ></Button>
+        className={cx(styles.button)}
+      />
 
       <div>
         {selectedIngredients.map((ingredient, index) => (
@@ -59,9 +60,7 @@ const IngredientSelector = ({
             <p>
               {ingredient.name}: {ingredient.quantity}
             </p>
-            <button type="button" onClick={() => removeIngredient(index)}>
-              Remove
-            </button>
+            <Button text="remove" type="button" onClick={() => removeIngredient(index)} />
           </div>
         ))}
       </div>
