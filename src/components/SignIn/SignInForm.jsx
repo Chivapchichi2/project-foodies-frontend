@@ -31,12 +31,11 @@ export const SignInForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
     const [openSingUp, setOpenSingUp] = useState(false);
+    const [width, setWidth] = useState('18');
     const [data, {isLoading}] = useLoginMutation();
     const dispatch = useDispatch();
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+    const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
     useEffect(() => {
         const subscription = watch((value) =>
@@ -45,9 +44,22 @@ export const SignInForm = () => {
         return () => subscription.unsubscribe()
     }, [watch])
 
-    const handleClickSingUp = () => {
-        setOpenSingUp(true);
-    }
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setWidth('20');
+            } else {
+                setWidth('18');
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const handleClickSingUp = () => setOpenSingUp(true);
 
     const onSubmit= async (user) => {
         try {
@@ -96,13 +108,14 @@ export const SignInForm = () => {
                         register={register}
                         name="password"
                         hasText={valueInput.password?.length > 0}
+                        width={width}
                     />
                     {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                 </li>
             </ul>
             <Button type="submit" text="SIGN IN" variant={'auth'}/>
             <p className={styles.text}>
-                {"Don't have an account?"}
+                {"Don't have an account? "}
                 <button className={styles.link} onClick={handleClickSingUp}>Create an account</button>
             </p>
         </form>
