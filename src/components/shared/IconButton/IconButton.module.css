@@ -18,9 +18,11 @@
 .button:hover {
   background-color: rgba(5, 5, 5, 1);
 }
+
 .icon {
   stroke: none;
 }
+
 .button:hover .icon {
   stroke: var(--white);
 }

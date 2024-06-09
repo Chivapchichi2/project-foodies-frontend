@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { loadSvgSprite } from "../../utilities/loadSvgSprite";
 import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
+import FollowerCard from "../../components/FollowerCard/FollowerCard.jsx";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -39,6 +40,8 @@ const Home = () => {
       <IconButton iconId="icon-checkbox-active" />
       <IconButton iconId="icon-checkbox-default" />
       <IconButton iconId="icon-eye" />
+
+      <FollowerCard />
       {/* DELETE ABOVE DEMO CODE*/}
     </>
   );
