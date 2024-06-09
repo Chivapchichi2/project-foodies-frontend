@@ -4,10 +4,12 @@
   gap: 20px;
 }
 
-.button {
+.button1 {
   width: 540px;
   padding: 14px 20px;
   border: 1px solid var(--black-90);
+  background-color: transparent;
+  color: var(--white);
 }
 .icon {
   fill: var(--black);
@@ -24,4 +26,25 @@
 .item_social:hover .icon,
 .item_social:focus .icon {
   fill: var(--white);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.listItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.imageWrapper {
+  border-radius: 15px;
+  border: 1px solid var(--black-10);
+}
+.image {
+  display: block;
+  padding: 10px;
 }

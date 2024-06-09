@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
 // import axios from "axios";
 import styles from "./AddRecipe.module.css";
+import cx from "classnames";
 
 import CookingTimeCounter from "../../components/AddRecipeForm/CookingTimeCounter/CookingTimeCounter";
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
@@ -160,9 +161,16 @@ const AddRecipe = () => {
         </div>
       </div>
       <div className={styles.buttonWrapper}>
-        <IconButton iconId="icon-trash" type="button" onClick={handleReset} />
+        <IconButton
+          iconId="icon-trash"
+          type="button"
+          onClick={handleReset}
+          width="20"
+          height="20"
+          classname={cx(styles.iconButton)}
+        />
 
-        <Button text="Publish" type="submit" />
+        <Button text="Publish" type="submit" classname={cx(styles.button)} />
       </div>
 
       {/* </div> */}

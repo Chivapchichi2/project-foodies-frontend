@@ -69,3 +69,7 @@ input[type="text"] {
   justify-content: center;
   align-items: center;
 }
+
+.button {
+  padding: 14px 32px;
+}

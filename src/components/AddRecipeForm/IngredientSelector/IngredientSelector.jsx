@@ -42,7 +42,7 @@ const IngredientSelector = ({
       </div>
 
       <div>
-        <Input type="number" name="quantity" register={register} placeholder="Enter quantity" />
+        <Input type="text" name="quantity" register={register} placeholder="Enter quantity" />
         {errors.quantity && <p>{errors.quantity.message}</p>}
       </div>
 
@@ -51,19 +51,23 @@ const IngredientSelector = ({
         type="button"
         onClick={addIngredient}
         iconId="icon-plus"
-        className={cx(styles.button)}
+        classname={cx(styles.button1)}
       />
 
-      <div>
+      <ul className={cx(styles.list)}>
         {selectedIngredients.map((ingredient, index) => (
-          <div key={index}>
-            <p>
-              {ingredient.name}: {ingredient.quantity}
-            </p>
+          <li key={index} className={cx(styles.listItem)}>
+            <div className={styles.imageWrapper}>
+              <img href="" alt="" width="55px" height="55px" className={cx(styles.image)} />
+            </div>
+            <div>
+              <p>{ingredient.name}</p>
+              <p>{ingredient.quantity}</p>
+            </div>
             <Button text="remove" type="button" onClick={() => removeIngredient(index)} />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
