@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { LogOut } from "../../components/LogOut/LogOut.jsx";
 import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
 import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
-import RecipeCard from "../../components/RecipeCard/RecipeCard.jsx";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -36,7 +35,6 @@ const Home = () => {
       <CustomModal isOpen={modalLogOutOpen} onClose={() => setModalLogOutOpen(false)}>
         <LogOut setModalLogOutOpen={setModalLogOutOpen} />
       </CustomModal>
-      <RecipeCard />
       {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
     </>
   );
