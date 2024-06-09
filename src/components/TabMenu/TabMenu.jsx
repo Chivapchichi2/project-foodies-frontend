@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styles from "./TabMenu.module.css";
 
 const TabMenu = ({ menuItems, activeTab, setActiveTab }) => {

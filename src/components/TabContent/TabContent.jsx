@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./TabContent.module.css";
 import TabMenu from "../TabMenu/TabMenu";
 
@@ -15,7 +15,7 @@ const userProfileTabs = [
 ];
 
 const TabContent = () => {
-  const [isMyProfile, setIsMyProfile] = useState(true);
+  const [isMyProfile, _] = useState(true);
   const [activeTab, setActiveTab] = useState(
     isMyProfile ? myProfileTabs[0].id : userProfileTabs[0].id
   );
