@@ -34,9 +34,7 @@ export const SignInForm = () => {
     const [data, {isLoading}] = useLoginMutation();
     const dispatch = useDispatch();
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+    const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
     useEffect(() => {
         const subscription = watch((value) =>
@@ -45,9 +43,7 @@ export const SignInForm = () => {
         return () => subscription.unsubscribe()
     }, [watch])
 
-    const handleClickSingUp = () => {
-        setOpenSingUp(true);
-    }
+    const handleClickSingUp = () => setOpenSingUp(true);
 
     const onSubmit= async (user) => {
         try {
@@ -102,7 +98,7 @@ export const SignInForm = () => {
             </ul>
             <Button type="submit" text="SIGN IN" variant={'auth'}/>
             <p className={styles.text}>
-                {"Don't have an account?"}
+                {"Don't have an account? "}
                 <button className={styles.link} onClick={handleClickSingUp}>Create an account</button>
             </p>
         </form>

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup"
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup"
 
 import styles from './SignUpForm.module.css';
 
@@ -20,7 +20,7 @@ export const SignUpForm = () => {
         register,
         handleSubmit,
         watch,
-        formState: { errors }  ,
+        formState: {errors},
         reset
     } = useForm({
         resolver: yupResolver(sinUpSchema),
@@ -31,9 +31,7 @@ export const SignUpForm = () => {
     const [openSingIn, setOpenSingIn] = useState(false);
     const [data, {isLoading}] = useRegisterMutation();
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+    const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
     useEffect(() => {
         const subscription = watch((value) =>
@@ -42,11 +40,9 @@ export const SignUpForm = () => {
         return () => subscription.unsubscribe()
     }, [watch])
 
-    const handleClickSingIn = () => {
-        setOpenSingIn(true);
-    }
+    const handleClickSingIn = () => setOpenSingIn(true)
 
-    const onSubmit= async (user) => {
+    const onSubmit = async (user) => {
         try {
             const result = await data(user);
             if (result.error) {
@@ -65,7 +61,6 @@ export const SignUpForm = () => {
                 toastId: customId,
             });
         }
-
     };
 
     return (
@@ -73,47 +68,47 @@ export const SignUpForm = () => {
             {isLoading
                 ? <div>Loading...</div>
                 : <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-                <ModalTitle text={'Sign Up'}/>
-                <ul className={styles.list}>
-                    <li className={styles.item}>
-                        <Input
-                            placeholder={'Name*'}
-                            type={'text'}
-                            register={register}
-                            name="name"
-                            hasText={valueInput.name?.length > 0}
-                        />
-                        {errors.name && <span className={styles.error}>{errors.name.message}</span>}
-                    </li>
-                    <li className={styles.item}>
-                        <Input
-                            placeholder={'Email*'}
-                            type={'email'}
-                            register={register}
-                            name="email"
-                            hasText={valueInput.email?.length > 0}
-                        />
-                        {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-                    </li>
-                    <li className={styles.item}>
-                        <Input
-                            placeholder={'Password'}
-                            type={showPassword ? 'text' : 'password'}
-                            iconId={showPassword ? "icon-eye" : "icon-eye-off"}
-                            togglePasswordVisibility={togglePasswordVisibility}
-                            register={register}
-                            name="password"
-                            hasText={valueInput.password?.length > 0}
-                        />
-                        {errors.password && <span className={styles.error}>{errors.password.message}</span>}
-                    </li>
-                </ul>
-                <Button type="submit" text="CREATE" variant={'auth'}/>
-                <p className={styles.text}>
-                    I already have an account? <button className={styles.link} onClick={handleClickSingIn}>Sign
-                    in</button>
-                </p>
-            </form>}
+                    <ModalTitle text={'Sign Up'}/>
+                    <ul className={styles.list}>
+                        <li className={styles.item}>
+                            <Input
+                                placeholder={'Name*'}
+                                type={'text'}
+                                register={register}
+                                name="name"
+                                hasText={valueInput.name?.length > 0}
+                            />
+                            {errors.name && <span className={styles.error}>{errors.name.message}</span>}
+                        </li>
+                        <li className={styles.item}>
+                            <Input
+                                placeholder={'Email*'}
+                                type={'email'}
+                                register={register}
+                                name="email"
+                                hasText={valueInput.email?.length > 0}
+                            />
+                            {errors.email && <span className={styles.error}>{errors.email.message}</span>}
+                        </li>
+                        <li className={styles.item}>
+                            <Input
+                                placeholder={'Password'}
+                                type={showPassword ? 'text' : 'password'}
+                                iconId={showPassword ? "icon-eye" : "icon-eye-off"}
+                                togglePasswordVisibility={togglePasswordVisibility}
+                                register={register}
+                                name="password"
+                                hasText={valueInput.password?.length > 0}
+                            />
+                            {errors.password && <span className={styles.error}>{errors.password.message}</span>}
+                        </li>
+                    </ul>
+                    <Button type="submit" text="CREATE" variant={'auth'}/>
+                    <p className={styles.text}>
+                        I already have an account? <button className={styles.link} onClick={handleClickSingIn}>Sign
+                        in</button>
+                    </p>
+                </form>}
 
             {openSingIn && (<CustomModal isOpen={openSingIn} onClose={() => setOpenSingIn(false)}>
                 <SignInForm/>
