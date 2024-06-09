@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { LogOut } from "../../components/LogOut/LogOut.jsx";
 import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
 import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
+import TabContent from "../../components/TabContent/TabContent.jsx";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,7 +22,7 @@ const Home = () => {
 
   return (
     <>
-      <div className={cx(styles.test)}>Home</div>
+      {/* <div className={cx(styles.test)}>Home</div>
       <button className={styles.btn} type="button" onClick={() => setModalOpen(true)}>
         SignUp / SignIn
       </button>
@@ -34,7 +35,9 @@ const Home = () => {
       <CustomModal isOpen={modalLogOutOpen} onClose={() => setModalLogOutOpen(false)}>
         <LogOut setModalLogOutOpen={setModalLogOutOpen} />
       </CustomModal>
-      {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+      {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />} */}
+
+      <TabContent />
     </>
   );
 };
