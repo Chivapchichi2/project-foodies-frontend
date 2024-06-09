@@ -1,9 +1,23 @@
-.counterBtn {
-  border-radius: 30px;
-  border: 1px solid rgba(5, 5, 5, 0.12);
+.iconBtn {
+  width: 48px;
+  height: 48px;
   background-color: white;
-  padding: 16px;
+  box-shadow: none;
+  border: 1px solid var(--black-12);
+  transition: transform var(--transition);
   cursor: pointer;
+}
+
+.iconBtn:hover {
+  background-color: var(--black);
+}
+
+.icon {
+  stroke: var(--black);
+}
+
+.iconBtn:hover .icon {
+  stroke: var(--white);
 }
 
 .counterInput {

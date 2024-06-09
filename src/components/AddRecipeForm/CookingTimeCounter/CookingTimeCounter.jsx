@@ -20,7 +20,7 @@ const CookingTimeCounter = ({ cookingTime, setCookingTime }) => {
           width="16"
           height="16"
           type="button"
-          style={cx(styles.icon)}
+          style={cx(styles.iconBtn)}
           onClick={decrementCookingTime}
         />
 
@@ -33,7 +33,8 @@ const CookingTimeCounter = ({ cookingTime, setCookingTime }) => {
           type="button"
           width="16"
           height="16"
-          style={cx(styles.icon)}
+          style={cx(styles.iconBtn)}
+          styleSVG={cx(styles.icon)}
           onClick={incrementCookingTime}
         />
       </div>

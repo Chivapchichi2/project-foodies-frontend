@@ -175,6 +175,7 @@ const AddRecipe = () => {
           width="20"
           height="20"
           style={cx(styles.trashBtn)}
+          styleSVG={cx(styles.icon)}
         />
 
         <Button text="Publish" type="submit" classname={cx(styles.button)} />

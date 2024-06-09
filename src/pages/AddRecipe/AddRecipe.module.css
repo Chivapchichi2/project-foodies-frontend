@@ -80,10 +80,3 @@ label {
   box-shadow: none;
   border: 1px solid var(--black-12);
 }
-.icon {
-  padding: 14px;
-}
-
-icon:hover {
-  stroke: var(--white);
-}
