@@ -20,11 +20,23 @@ const Home = () => {
   }, []);
 
   return (
-      <>
-          <div className={cx(styles.test)}>Home</div>
-          {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials}/>}
+    <>
+      <div className={cx(styles.test)}>Home</div>
+      <button className={styles.btn} type="button" onClick={() => setModalOpen(true)}>
+        SignUp / SignIn
+      </button>
+      <button className={styles.btn} type="button" onClick={() => setModalLogOutOpen(true)}>
+        Log Out
+      </button>
 
-      </>
+      <CustomModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+        <SignUpForm />
+      </CustomModal>
+      <CustomModal isOpen={modalLogOutOpen} onClose={() => setModalLogOutOpen(false)}>
+        <LogOut setModalLogOutOpen={setModalLogOutOpen} />
+      </CustomModal>
+      {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+    </>
   );
 };
 
