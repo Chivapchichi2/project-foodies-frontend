@@ -6,21 +6,41 @@ import { useState, useEffect } from "react";
 import { loadSvgSprite } from "../../utilities/loadSvgSprite";
 import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
+import { LogOut } from "../../components/LogOut/LogOut.jsx";
+import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
+import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
 import FollowerCard from "../../components/FollowerCard/FollowerCard.jsx";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
+  const [getTestimanials, setGetTestimanials] = useState([]);
+  const { data: testimonials, isLoading } = useGetTestimonialsQuery();
+
   useEffect(() => {
-    loadSvgSprite("symbol-defs.svg");
+    if (testimonials && testimonials.length > 0) {
+      setGetTestimanials(testimonials);
+    }
+  }, [testimonials]);
+
+  useEffect(() => {
+    loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
   }, []);
+
   return (
     <>
       <div className={cx(styles.test)}>Home</div>
       <button className={styles.btn} type="button" onClick={() => setModalOpen(true)}>
-        Open modal
+        SignUp / SignIn
+      </button>
+      <button className={styles.btn} type="button" onClick={() => setModalLogOutOpen(true)}>
+        Log Out
       </button>
       <CustomModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <SignUpForm />
+      </CustomModal>
+      <CustomModal isOpen={modalLogOutOpen} onClose={() => setModalLogOutOpen(false)}>
+        <LogOut setModalLogOutOpen={setModalLogOutOpen} />
       </CustomModal>
       {/* DELETE BELOW DEMO CODE*/}
       <div style={{ backgroundColor: "#f4f2f2", padding: "10px", width: "450px" }}>
@@ -40,9 +60,9 @@ const Home = () => {
       <IconButton iconId="icon-checkbox-active" />
       <IconButton iconId="icon-checkbox-default" />
       <IconButton iconId="icon-eye" />
-
       <FollowerCard />
       {/* DELETE ABOVE DEMO CODE*/}
+      {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
     </>
   );
 };
