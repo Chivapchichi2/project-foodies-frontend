@@ -19,3 +19,5 @@ const IconButton = ({
 };
 
 export default IconButton;
+
+<IconButton iconId="icon-trash" />;
