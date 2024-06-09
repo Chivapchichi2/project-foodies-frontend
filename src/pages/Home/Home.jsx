@@ -1,19 +1,15 @@
 import styles from "./styles.module.css";
 import cx from "classnames";
-import { CustomModal } from "../../components/shared/CustomModal/CustomModal.jsx";
-import { SignUpForm } from "../../components/SignUp/SignUpForm.jsx";
 import { useState, useEffect } from "react";
-import { loadSvgSprite } from "../../utilities/loadSvgSprite";
 import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
 import { LogOut } from "../../components/LogOut/LogOut.jsx";
 import { RecipeNavigation } from "src/components/Recipe";
 import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
 import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
+import {loadSvgSprite} from "../../utilities/loadSvgSprite.js";
 
 const Home = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const [getTestimanials, setGetTestimanials] = useState([]);
   const { data: testimonials, isLoading } = useGetTestimonialsQuery();
 
@@ -22,6 +18,10 @@ const Home = () => {
       setGetTestimanials(testimonials);
     }
   }, [testimonials]);
+
+  useEffect(() => {
+    loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
+  }, []);
 
   return (
     <>
@@ -32,6 +32,7 @@ const Home = () => {
       <button className={styles.btn} type="button" onClick={() => setModalLogOutOpen(true)}>
         Log Out
       </button>
+
       <CustomModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <SignUpForm />
       </CustomModal>
