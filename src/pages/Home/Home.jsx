@@ -3,7 +3,6 @@ import cx from "classnames";
 import { CustomModal } from "../../components/shared/CustomModal/CustomModal.jsx";
 import { SignUpForm } from "../../components/SignUp/SignUpForm.jsx";
 import { useState, useEffect } from "react";
-import { loadSvgSprite } from "../../utilities/loadSvgSprite";
 import { LogOut } from "../../components/LogOut/LogOut.jsx";
 import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
 import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
@@ -19,10 +18,6 @@ const Home = () => {
       setGetTestimanials(testimonials);
     }
   }, [testimonials]);
-
-  useEffect(() => {
-    loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
-  }, []);
 
   return (
     <>
