@@ -8,12 +8,14 @@ const IconButton = ({
   style,
   styleSVG,
   iconId,
+  stroke,
   width = "16",
   height = "16",
   stroke = "#000",
 }) => {
   return (
     <button className={cx(styles.button, style)} onClick={onClick}>
+<<<<<<< Updated upstream
       <Icon
         iconId={iconId}
         width={width}
@@ -21,6 +23,9 @@ const IconButton = ({
         stroke={stroke}
         style={cx(styles.icon, styleSVG)}
       />
+=======
+      <Icon stroke={stroke} iconId={iconId} width={width} height={height} customStyle={styleSVG} />
+>>>>>>> Stashed changes
     </button>
   );
 };
