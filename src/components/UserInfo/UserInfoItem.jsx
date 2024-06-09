@@ -1,7 +1,7 @@
 import { toCapitalize } from "../../helpers/toCapitalize";
-import styles from "./ProfileBigCard.module.css";
+import styles from "./UserInfo.module.css";
 
-export const ProfileInfoItem = ({ name, value }) => {
+export const UserInfoItem = ({ name, value }) => {
   const CONSTATNTS_NAME = {
     email: "email",
     createdRecipesCount: "added recipes",

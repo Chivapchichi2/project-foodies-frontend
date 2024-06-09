@@ -2,15 +2,17 @@ import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "../Footer";
 import Header from "../Header";
+import { UserInfo } from "../UserInfo/UserInfo";
 
 const Layout = () => {
   return (
     <>
-      <Suspense>
+      <UserInfo />
+      {/* <Suspense>
         <Header />
         <Outlet />
         <Footer />
-      </Suspense>
+      </Suspense> */}
     </>
   );
 };

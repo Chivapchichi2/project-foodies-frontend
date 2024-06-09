@@ -63,7 +63,6 @@
   .ingredients_list {
     margin-top: 20px;
     display: flex;
-    width: 704px;
     gap: 20px;
     flex-wrap: wrap;
   }
