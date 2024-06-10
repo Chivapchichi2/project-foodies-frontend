@@ -3,10 +3,17 @@ import cx from "classnames";
 
 import Icon from "../Icon/Icon";
 
-const IconButton = ({ onClick = () => {}, iconId, width = "16", height = "16" }) => {
+const IconButton = ({
+  onClick = () => {},
+  style,
+  styleSVG,
+  iconId,
+  width = "16",
+  height = "16",
+}) => {
   return (
-    <button className={cx(styles.button)} onClick={onClick}>
-      <Icon iconId={iconId} width={width} height={height} style={cx(styles.icon)} />
+    <button className={cx(styles.button, style)} onClick={onClick}>
+      <Icon iconId={iconId} width={width} height={height} style={cx(styles.icon, styleSVG)} />
     </button>
   );
 };

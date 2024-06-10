@@ -1,19 +1,14 @@
 import styles from "./styles.module.css";
 import cx from "classnames";
-import { CustomModal } from "../../components/shared/CustomModal/CustomModal.jsx";
-import { SignUpForm } from "../../components/SignUp/SignUpForm.jsx";
 import { useState, useEffect } from "react";
-import { loadSvgSprite } from "../../utilities/loadSvgSprite";
 import IconButton from "../../components/shared/IconButton/IconButton.jsx";
 import Button from "../../components/shared/Button/Button.jsx";
-import { LogOut } from "../../components/LogOut/LogOut.jsx";
+import { RecipeNavigation } from "src/components/Recipe";
 import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
 import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
-import FollowerCard from "../../components/FollowerCard/FollowerCard.jsx";
+import { loadSvgSprite } from "../../utilities/loadSvgSprite.js";
 
 const Home = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const [getTestimanials, setGetTestimanials] = useState([]);
   const { data: testimonials, isLoading } = useGetTestimonialsQuery();
 
@@ -30,18 +25,6 @@ const Home = () => {
   return (
     <>
       <div className={cx(styles.test)}>Home</div>
-      <button className={styles.btn} type="button" onClick={() => setModalOpen(true)}>
-        SignUp / SignIn
-      </button>
-      <button className={styles.btn} type="button" onClick={() => setModalLogOutOpen(true)}>
-        Log Out
-      </button>
-      <CustomModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <SignUpForm />
-      </CustomModal>
-      <CustomModal isOpen={modalLogOutOpen} onClose={() => setModalLogOutOpen(false)}>
-        <LogOut setModalLogOutOpen={setModalLogOutOpen} />
-      </CustomModal>
       {/* DELETE BELOW DEMO CODE*/}
       <div style={{ backgroundColor: "#f4f2f2", padding: "10px", width: "450px" }}>
         <Button text="sign in" variant="auth" type="submit" />
@@ -60,9 +43,19 @@ const Home = () => {
       <IconButton iconId="icon-checkbox-active" />
       <IconButton iconId="icon-checkbox-default" />
       <IconButton iconId="icon-eye" />
-      <FollowerCard />
       {/* DELETE ABOVE DEMO CODE*/}
+
       {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+
+      <div
+        style={{
+          width: 1440,
+          padding: 80,
+          margin: "0 auto",
+        }}
+      >
+        <RecipeNavigation />
+      </div>
     </>
   );
 };

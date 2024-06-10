@@ -1,12 +1,19 @@
 import styles from "./Icon.module.css";
 import cx from "classnames";
 
-const Icon = ({ iconId, style, width, height }) => {
+const Icon = ({ iconId, width = "16", height = "16", stroke = "#000", customStyle = {} }) => {
   return (
     <>
       {iconId && (
-        <svg className={cx(styles.icon, style)} aria-hidden="true">
-          <use href={`#${iconId}`} width={width} height={height} />
+        <svg
+          className={cx(styles.icon)}
+          width={width}
+          height={height}
+          stroke={stroke}
+          style={{ ...customStyle }}
+          aria-hidden="true"
+        >
+          <use href={`#${iconId}`} />
         </svg>
       )}
     </>
