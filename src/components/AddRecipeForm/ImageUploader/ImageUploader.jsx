@@ -5,10 +5,11 @@ import styles from "./ImageUploader.module.css";
 
 const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, errors, watch }) => {
   useEffect(() => {
-    const subscription = watch(
-      (value) =>
-        setImagePreview(URL.createObjectURL(value.image[0])) && setValue("image", value.image[0])
-    );
+    const subscription = watch((value) => {
+      if (value.image[0]) {
+        setImagePreview(URL.createObjectURL(value.image[0])) && setValue("image", value.image[0]);
+      }
+    });
     return () => subscription.unsubscribe();
   }, [watch, setImagePreview, setValue]);
 

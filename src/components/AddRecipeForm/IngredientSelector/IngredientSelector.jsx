@@ -43,7 +43,13 @@ const IngredientSelector = ({
       </div>
 
       <div>
-        <Input type="text" name="quantity" register={register} placeholder="Enter quantity" />
+        <Input
+          type="text"
+          name="quantity"
+          register={register}
+          placeholder="Enter quantity"
+          classname={styles.inputQuantity}
+        />
         {errors.quantity && <p>{errors.quantity.message}</p>}
       </div>
 

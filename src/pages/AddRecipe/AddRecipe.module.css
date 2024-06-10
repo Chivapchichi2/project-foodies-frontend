@@ -11,8 +11,14 @@
 }
 
 label {
+  display: block;
   text-transform: uppercase;
   margin-bottom: 8px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: calc(24 / 16);
+  letter-spacing: -0.32px;
 }
 .nameInput::placeholder {
   font-weight: 800;
@@ -44,6 +50,14 @@ label {
   overflow: hidden;
 }
 
+/* .recipeIncstructions {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+} */
+.labelPrep {
+  margin-bottom: 32px;
+}
 .textarea::placeholder {
   position: absolute;
   top: 0;

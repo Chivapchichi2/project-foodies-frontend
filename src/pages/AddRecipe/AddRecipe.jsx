@@ -156,7 +156,7 @@ const AddRecipe = () => {
       </div>
 
       <div className={styles.recipeIncstructions}>
-        <label>Recipe preparation</label>
+        <label className={styles.labelPrep}>Recipe preparation</label>
         <div className={styles.textareaWrapper}>
           <textarea
             {...register("instructions")}

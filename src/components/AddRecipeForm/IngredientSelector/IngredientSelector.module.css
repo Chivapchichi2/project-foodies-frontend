@@ -4,6 +4,23 @@
   gap: 20px;
 }
 
+.inputQuantity {
+  border: none;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.12);
+  padding: 16px 0;
+  height: 36px;
+  border-radius: 0;
+}
+
+.inputQuantity::placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: calc(20 / 14);
+  letter-spacing: -0.28px;
+}
 .button1 {
   width: 540px;
   padding: 14px 20px;
