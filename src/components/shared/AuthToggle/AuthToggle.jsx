@@ -1,8 +1,9 @@
 import { useState } from "react";
+
 import styles from "./AuthToggle.module.css";
-import {SignInForm} from "../../SignIn/SignInForm.jsx";
-import {SignUpForm} from "../../SignUp/SignUpForm.jsx";
-import {CustomModal} from "../CustomModal/CustomModal.jsx";
+
+import {CustomModal} from "../index.js";
+import {SignInForm, SignUpForm} from "src/components";
 
 const AuthToggle = () => {
   const [active, setActive] = useState("signIn");
@@ -46,12 +47,12 @@ const AuthToggle = () => {
         {active === "signIn"
             ? (
                 <CustomModal isOpen={modalSignInOpen} onClose={handleCloseSignIn}>
-                  <SignInForm />
+                  <SignInForm handleClickSignUp={handleClickSignUp}/>
                 </CustomModal>
             )
             : (
                 <CustomModal isOpen={modalSignUpOpen} onClose={handleCloseSignUp}>
-                  <SignUpForm />
+                  <SignUpForm handleClickSignIn={handleClickSignIn}/>
                 </CustomModal>
             )
         }

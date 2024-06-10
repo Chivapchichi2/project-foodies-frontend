@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import styles from './CustomModal.module.css';
-import Icon from "../Icon/Icon.jsx";
+import {Icon} from "../index.js";
 
 export const CustomModal = ({ isOpen, onClose, children }) => {
 

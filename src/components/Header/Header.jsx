@@ -1,14 +1,17 @@
+import {useSelector} from "react-redux";
+import cx from "classnames";
+import {useState} from "react";
 import styles from "./Header.module.css";
 import stylesFromFooter from "../Footer/Footer.module.css";
-import cx from "classnames";
-import {useSelector} from "react-redux";
-import {selectToken} from "../../store/features/authSlice.js";
-import {CustomModal} from "../shared/CustomModal/CustomModal.jsx";
-import {LogOut} from "../LogOut/LogOut.jsx";
-import {useState} from "react";
 import AuthToggle from "../shared/AuthToggle/AuthToggle";
+import {selectToken} from "../../store/features/authSlice.js";
+import {CustomModal} from "../shared";
+import {LogOut} from "src/components";
+import {useSelector} from "react-redux";
+import {useState} from "react";
 import HeaderProfile from "./HeaderProfile";
 import { NavLink, useLocation } from "react-router-dom";
+
 const Header = () => {
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const token = useSelector(selectToken)
