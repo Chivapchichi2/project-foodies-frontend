@@ -20,10 +20,3 @@ const Icon = ({ iconId, width = "16", height = "16", stroke = "#000", customStyl
 };
 
 export default Icon;
-
-// Example use
-{
-  /* <div>
-  <Icon iconId="icon-trash" width="20" height="20" stroke="#ac1d1d" />
-</div>; */
-}

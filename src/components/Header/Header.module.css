@@ -18,6 +18,17 @@
 
 .color_white {
   color: var(--white);
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  height: 30px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
