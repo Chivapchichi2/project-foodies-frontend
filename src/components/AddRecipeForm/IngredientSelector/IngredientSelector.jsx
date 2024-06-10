@@ -58,7 +58,7 @@ const IngredientSelector = ({
         type="button"
         onClick={addIngredient}
         iconId="icon-plus"
-        classname={styles.button1}
+        classname={styles.buttonAdd}
       />
 
       <ul className={styles.list}>

@@ -21,7 +21,7 @@
   line-height: calc(20 / 14);
   letter-spacing: -0.28px;
 }
-.button1 {
+.buttonAdd {
   width: 168px;
   padding: 14px 20px;
   border: 1px solid var(--black-90);
@@ -76,7 +76,19 @@
   background-color: var(--white);
   scale: 1.1;
 }
+
 .textWrapper {
   flex-grow: 1;
   margin-right: 22px;
+}
+
+@media (min-width: 375px) {
+  .inputQuantity {
+    width: 343px;
+  }
+}
+@media (min-width: 765px) {
+  .inputQuantity {
+    width: 649px;
+  }
 }
