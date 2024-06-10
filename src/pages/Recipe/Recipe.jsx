@@ -1,5 +1,11 @@
+import { RecipeInfo } from "../../components/RecipeInfo/RecipeInfo";
+
 const Recipe = () => {
-  return <div>Recipe</div>;
+  return (
+    <div>
+      <RecipeInfo />
+    </div>
+  );
 };
 
 export default Recipe;
