@@ -1,16 +1,14 @@
 import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup"
+import {toast} from "react-toastify";
 
 import styles from './SignUpForm.module.css';
 
-import {Input} from "../shared/Input/Input.jsx";
+import {Button, Input, ModalTitle} from "../shared";
 import {sinUpSchema} from "./SignUpSchema.js";
-import Button from "../shared/Button/Button.jsx";
-import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
 import {useRegisterMutation} from "../../store/services/authService.js";
-import {toast} from "react-toastify";
-import useResponsiveValue from "../../utilities/hooks/useResponsiveValue.js";
+import {useResponsiveValue} from "../../utilities/index.js";
 
 const customId = 'toastId';
 

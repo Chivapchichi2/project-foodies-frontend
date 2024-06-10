@@ -1,12 +1,8 @@
-import styles from "./styles.module.css";
-import cx from "classnames";
-import { useState, useEffect } from "react";
-import IconButton from "../../components/shared/IconButton/IconButton.jsx";
-import Button from "../../components/shared/Button/Button.jsx";
-import { RecipeNavigation } from "src/components/Recipe";
-import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
-import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
+import {useEffect, useState} from "react";
+
+import {useGetTestimonialsQuery} from "../../store/services/testimonialService.js";
 import {loadSvgSprite} from "../../utilities/loadSvgSprite.js";
+import {RecipeNavigation, TestimonialsSwiper} from "src/components";
 
 const Home = () => {
   const [getTestimanials, setGetTestimanials] = useState([]);

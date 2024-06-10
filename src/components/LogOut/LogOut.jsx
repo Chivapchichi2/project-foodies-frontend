@@ -1,11 +1,12 @@
-import styles from './LogOut.module.css';
-import Button from "../shared/Button/Button.jsx";
+import {useDispatch} from "react-redux";
 import {useForm} from "react-hook-form";
+
+import styles from './LogOut.module.css';
 import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
 import {useLogoutMutation} from "../../store/services/authService.js";
-import {useDispatch} from "react-redux";
 import {clearToken} from "../../store/features/authSlice.js";
-import useResponsiveValue from "../../utilities/hooks/useResponsiveValue.js";
+import {useResponsiveValue} from "../../utilities/index.js";
+import {Button} from "../shared";
 
 export const LogOut = ({setModalLogOutOpen}) => {
     const {handleSubmit} = useForm();

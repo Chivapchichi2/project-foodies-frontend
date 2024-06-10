@@ -1,18 +1,16 @@
 import {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
+import {toast} from "react-toastify";
 
 import styles from './SignInForm.module.css';
 
-import {Input} from "../shared/Input/Input.jsx";
 import {sinInSchema} from "./SignInSchema.js";
-import Button from "../shared/Button/Button.jsx";
-import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
 import {useLoginMutation} from "../../store/services/authService.js";
-import {toast} from "react-toastify";
-import {useDispatch} from "react-redux";
 import {getToken} from "../../store/features/authSlice.js";
-import useResponsiveValue from "../../utilities/hooks/useResponsiveValue.js";
+import {useResponsiveValue} from "../../utilities/index.js";
+import {Button, Input, ModalTitle} from "../shared";
 
 const customId = 'toastId';
 
