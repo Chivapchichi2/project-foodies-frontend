@@ -4,12 +4,14 @@ import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 
 import { testimonialApi } from "./services/testimonialService.js";
 import { authApi } from "./services/authService.js";
 import { persistedAuthReducer } from "./features/authSlice.js";
+import { recipeApi } from "./services/recipeService.js";
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     [testimonialApi.reducerPath]: testimonialApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [recipeApi.reducerPath]: recipeApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -18,7 +20,8 @@ export const store = configureStore({
       },
     })
       .concat(testimonialApi.middleware)
-      .concat(authApi.middleware),
+      .concat(authApi.middleware)
+      .concat(recipeApi.middleware),
 });
 
 export const persistor = persistStore(store);

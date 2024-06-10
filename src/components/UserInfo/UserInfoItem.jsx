@@ -1,8 +1,8 @@
-import { toCapitalize } from "../../helpers/toCapitalize";
+import { toCapitalize } from "../../utilities/toCapitalize";
 import styles from "./UserInfo.module.css";
 
 export const UserInfoItem = ({ name, value }) => {
-  const CONSTATNTS_NAME = {
+  const CONSTANTS_NAME = {
     email: "email",
     createdRecipesCount: "added recipes",
     favoriteRecipesCount: "favorites",
@@ -12,7 +12,7 @@ export const UserInfoItem = ({ name, value }) => {
 
   return (
     <li className={styles.profile_info_item}>
-      {toCapitalize(CONSTATNTS_NAME[name])}:
+      {toCapitalize(CONSTANTS_NAME[name])}:
       <span className={styles.profile_info_content}>{value}</span>
     </li>
   );
