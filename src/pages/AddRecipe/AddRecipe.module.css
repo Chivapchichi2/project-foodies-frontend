@@ -83,6 +83,11 @@ label {
 
 .button {
   padding: 14px 32px;
+  background-color: var(--black-85);
+  transition: background-color var(--transition);
+}
+.button:hover {
+  background-color: var(--black);
 }
 
 .trashBtn {

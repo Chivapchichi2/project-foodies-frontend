@@ -27,6 +27,12 @@
   border: 1px solid var(--black-90);
   background-color: transparent;
   color: var(--black-90);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.buttonAdd:hover {
+  background-color: var(--black);
+  color: var(--white);
 }
 .icon {
   fill: var(--black);
