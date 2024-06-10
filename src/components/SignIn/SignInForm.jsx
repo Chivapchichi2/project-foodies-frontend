@@ -8,16 +8,15 @@ import {Input} from "../shared/Input/Input.jsx";
 import {sinInSchema} from "./SignInSchema.js";
 import Button from "../shared/Button/Button.jsx";
 import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
-import {CustomModal} from "../shared/CustomModal/CustomModal.jsx";
-import {SignUpForm} from "../SignUp/SignUpForm.jsx";
 import {useLoginMutation} from "../../store/services/authService.js";
 import {toast} from "react-toastify";
 import {useDispatch} from "react-redux";
 import {getToken} from "../../store/features/authSlice.js";
+import useResponsiveValue from "../../utilities/hooks/useResponsiveValue.js";
 
 const customId = 'toastId';
 
-export const SignInForm = () => {
+export const SignInForm = ({handleClickSignUp}) => {
     const {
         register,
         handleSubmit,
@@ -30,8 +29,6 @@ export const SignInForm = () => {
     });
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
-    const [openSingUp, setOpenSingUp] = useState(false);
-    const [width, setWidth] = useState('18');
     const [data, {isLoading}] = useLoginMutation();
     const dispatch = useDispatch();
 
@@ -44,22 +41,7 @@ export const SignInForm = () => {
         return () => subscription.unsubscribe()
     }, [watch])
 
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 768) {
-                setWidth('20');
-            } else {
-                setWidth('18');
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    const handleClickSingUp = () => setOpenSingUp(true);
+    const widthIconEye = useResponsiveValue(768, '20', '18');
 
     const onSubmit= async (user) => {
         try {
@@ -81,7 +63,6 @@ export const SignInForm = () => {
             });
         }
     };
-
     return (
 <>
     {isLoading
@@ -108,7 +89,7 @@ export const SignInForm = () => {
                         register={register}
                         name="password"
                         hasText={valueInput.password?.length > 0}
-                        width={width}
+                        width={widthIconEye}
                     />
                     {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                 </li>
@@ -116,14 +97,10 @@ export const SignInForm = () => {
             <Button type="submit" text="SIGN IN" variant={'auth'}/>
             <p className={styles.text}>
                 {"Don't have an account? "}
-                <button className={styles.link} onClick={handleClickSingUp}>Create an account</button>
+                <button className={styles.link} onClick={handleClickSignUp}>Create an account</button>
             </p>
         </form>
     }
-
-    {openSingUp && (<CustomModal isOpen={openSingUp} onClose={() => setOpenSingUp(false)}>
-        <SignUpForm/>
-    </CustomModal>)}
 </>
     );
 

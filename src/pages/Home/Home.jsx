@@ -24,29 +24,6 @@ const Home = () => {
 
   return (
     <>
-      <div className={cx(styles.test)}>Home</div>
-      {/* DELETE BELOW DEMO CODE*/}
-      <div style={{ backgroundColor: "#f4f2f2", padding: "10px", width: "450px" }}>
-        <Button text="sign in" variant="auth" type="submit" />
-      </div>
-
-      <div style={{ backgroundColor: "#000000", padding: "10px" }}>
-        <Button text="add recipe" variant="recipe" />
-        <Button text="Beef" variant="categoryName" />
-      </div>
-      <Button text="publish" variant="publish" />
-      <div style={{ padding: "10px", width: "450px" }}>
-        <Button text="log out" variant="log_follow" />
-      </div>
-      <Button text="follow" variant="follow_user" />
-      <IconButton iconId="icon-capture-photo-camera" />
-      <IconButton iconId="icon-checkbox-active" />
-      <IconButton iconId="icon-checkbox-default" />
-      <IconButton iconId="icon-eye" />
-      {/* DELETE ABOVE DEMO CODE*/}
-
-      {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
-
       <div
         style={{
           width: 1440,
@@ -56,6 +33,7 @@ const Home = () => {
       >
         <RecipeNavigation />
       </div>
+        {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
     </>
   );
 };

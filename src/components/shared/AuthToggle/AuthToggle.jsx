@@ -46,12 +46,12 @@ const AuthToggle = () => {
         {active === "signIn"
             ? (
                 <CustomModal isOpen={modalSignInOpen} onClose={handleCloseSignIn}>
-                  <SignInForm />
+                  <SignInForm handleClickSignUp={handleClickSignUp}/>
                 </CustomModal>
             )
             : (
                 <CustomModal isOpen={modalSignUpOpen} onClose={handleCloseSignUp}>
-                  <SignUpForm />
+                  <SignUpForm handleClickSignIn={handleClickSignIn}/>
                 </CustomModal>
             )
         }

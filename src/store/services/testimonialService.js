@@ -1,9 +1,10 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {BASE_URL} from "../../utilities/const.js";
 
 export const testimonialApi = createApi({
     reducerPath: "testimonialApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://foodies-ua-1497a9d7b69f.herokuapp.com/',
+        baseUrl: BASE_URL,
     }),
     tagTypes: ['Testimonial'],
     endpoints: (builder) => ({
