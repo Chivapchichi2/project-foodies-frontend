@@ -1,5 +1,5 @@
 import Photo from 'src/assets/categories/categories-beef.jpg';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import styles from './card.module.css';
 
 export const Card = () => {
@@ -7,7 +7,7 @@ export const Card = () => {
         return ((n - a) * (d - c)) / (b - a) + c;
     }
 
-    function initCard(card) {
+    const initCard = useCallback((card) => {
         const cardContent = card.querySelector(`.${styles.card__content}`);
         const gloss = card.querySelector(`.${styles.card__gloss}`);
 
@@ -20,7 +20,7 @@ export const Card = () => {
             gloss.classList.add(styles['card__gloss--animatable']);
         });
 
-        card.addEventListener('mousemove', (e) => {
+        const handleMouseMove = (e) => {
             const pointerX = e.clientX;
             const pointerY = e.clientY;
 
@@ -48,13 +48,21 @@ export const Card = () => {
 
             gloss.style.transform = `translate(${-ry * 100}%, ${-rx * 100}%) scale(2.4)`;
             gloss.style.opacity = `${mapNumberRange(distanceToCenter, 0, maxDistance, 0, 0.6)}`;
-        });
+        };
 
-        card.addEventListener('mouseleave', () => {
+        const handleMouseLeave = () => {
             cardContent.style = null;
             gloss.style.opacity = '0';
-        });
-    }
+        };
+
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+
+        return () => {
+            card.removeEventListener('mousemove', handleMouseMove);
+            card.removeEventListener('mouseleave', handleMouseLeave);
+        };
+    }, []);
 
     useEffect(() => {
         const cards = document.querySelectorAll(`.${styles.card}`);
@@ -62,12 +70,16 @@ export const Card = () => {
             console.error('No cards found');
             return;
         }
-        cards.forEach((card) => initCard(card));
+        const cleanups = [];
+        cards.forEach((card) => cleanups.push(initCard(card)));
+
+        return () => {
+            cleanups.forEach((cleanup) => cleanup && cleanup());
+        };
     }, [initCard]);
 
     return (
         <div className={styles.card}>
-                <h2>Як ам така анімація для карток?</h2>
             <div className={styles.card__content}>
                 <div className={styles.card__gloss}></div>
                 <img className={styles.card__image} src={Photo} alt="Photo" />
