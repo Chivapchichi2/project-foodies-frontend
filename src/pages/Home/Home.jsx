@@ -6,7 +6,11 @@ import Button from "../../components/shared/Button/Button.jsx";
 import { RecipeNavigation } from "src/components/Recipe";
 import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
 import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
+
+import Hero from "../../components/Hero";
+
 import {loadSvgSprite} from "../../utilities/loadSvgSprite.js";
+
 
 const Home = () => {
   const [getTestimanials, setGetTestimanials] = useState([]);
@@ -24,6 +28,7 @@ const Home = () => {
 
   return (
     <>
+      <Hero />
       <div className={cx(styles.test)}>Home</div>
       {/* DELETE BELOW DEMO CODE*/}
       <div style={{ backgroundColor: "#f4f2f2", padding: "10px", width: "450px" }}>
