@@ -10,7 +10,7 @@ export const Input = ({
   register,
   name,
   hasText,
-
+  width,
   classname,
 }) => {
   const handleClickEye = () => {
@@ -20,14 +20,14 @@ export const Input = ({
   return (
     <div className={styles.container}>
       <input
-        className={cx(styles.input, classname, `${hasText ? styles.hasText : ""} `)}
+        className={cx(styles.input, classname`${hasText ? styles.hasText : ""}`)}
         placeholder={placeholder}
         type={type}
         {...register(name)}
       />
       {iconId && (
         <button className={styles.btn} onClick={handleClickEye} type="button">
-          <Icon iconId={iconId} width={16} height={16} />
+          <Icon iconId={iconId} width={width} height={width} />
         </button>
       )}
     </div>
