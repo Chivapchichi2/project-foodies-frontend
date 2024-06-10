@@ -22,11 +22,11 @@
   letter-spacing: -0.28px;
 }
 .button1 {
-  width: 540px;
+  width: 168px;
   padding: 14px 20px;
   border: 1px solid var(--black-90);
   background-color: transparent;
-  color: var(--white);
+  color: var(--black-90);
 }
 .icon {
   fill: var(--black);

@@ -16,6 +16,21 @@ input[type="file"] {
   border: 1px dashed rgba(5, 5, 5, 0.2);
   border-radius: 30px;
 }
+
+@media (min-width: 765px) {
+  .uploadBox {
+    width: 704px;
+    height: 400px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .uploadBox {
+    width: 551px;
+    height: 400px;
+  }
+}
+
 .customUploadBtn {
   display: inline-block;
   /* padding: 120px 122px; */
@@ -28,6 +43,16 @@ input[type="file"] {
   line-height: calc(20 / 14);
   letter-spacing: -0.28px;
   text-decoration: underline;
+}
+
+@media (min-width: 765px) {
+  .customUploadBtn {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: calc(24 / 16);
+    letter-spacing: -0.32px;
+    text-decoration: underline;
+  }
 }
 
 .imagePreview {
@@ -46,4 +71,14 @@ input[type="file"] {
   gap: 8px;
   justify-content: center;
   align-items: center;
+}
+
+@media (min-width: 765px) {
+  .btnWrapper {
+    gap: 16px;
+  }
+  .photoIcon {
+    width: 64px;
+    height: 64px;
+  }
 }

@@ -48,13 +48,9 @@ label {
   outline: none;
   resize: none;
   overflow: hidden;
+  position: relative;
 }
 
-/* .recipeIncstructions {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-} */
 .labelPrep {
   margin-bottom: 32px;
 }
@@ -98,4 +94,13 @@ label {
 
 .trashBtn:hover .icon {
   stroke: var(--white);
+}
+
+@media (min-width: 375px) {
+  .nameInput {
+    width: 343px;
+  }
+  .textarea {
+    width: 343px;
+  }
 }

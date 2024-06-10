@@ -54,7 +54,7 @@ const IngredientSelector = ({
       </div>
 
       <Button
-        text="Add ingridient"
+        text="Add ingridient +"
         type="button"
         onClick={addIngredient}
         iconId="icon-plus"

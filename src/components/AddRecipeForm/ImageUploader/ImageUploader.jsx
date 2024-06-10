@@ -24,7 +24,12 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
           )}
           {!imagePreview && (
             <div className={styles.btnWrapper}>
-              <Icon iconId="icon-capture-photo-camera" width="50px" height="50" />
+              <Icon
+                iconId="icon-capture-photo-camera"
+                width="50px"
+                height="50"
+                customStyle={styles.photoIcon}
+              />
               <span>Upload a photo</span>
             </div>
           )}
