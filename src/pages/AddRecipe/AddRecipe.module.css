@@ -95,14 +95,14 @@ label {
 
 .trashBtn:hover .iconTrash {
   stroke: var(--white);
-  transition: stroke var(--transition);
+  transition: fill var(--transition);
 }
 
 @media (min-width: 375px) {
   .nameInput {
     width: 343px;
   }
-  .textarea {
+  .textareaWrapper {
     width: 343px;
   }
 }
