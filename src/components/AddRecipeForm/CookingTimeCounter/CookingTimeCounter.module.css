@@ -4,16 +4,13 @@
   background-color: white;
   box-shadow: none;
   border: 1px solid var(--black-12);
-  transition: transform var(--transition);
+  transition: background-color var(--transition);
   cursor: pointer;
-}
-
-.iconBtn:hover {
-  background-color: var(--black);
 }
 
 .icon {
   stroke: var(--black);
+  transition: stroke var(--transition);
 }
 
 .iconBtn:hover .icon {

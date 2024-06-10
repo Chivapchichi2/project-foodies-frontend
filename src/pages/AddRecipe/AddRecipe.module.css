@@ -90,10 +90,12 @@ label {
   height: 48px;
   box-shadow: none;
   border: 1px solid var(--black-12);
+  transition: background-color var(--transition);
 }
 
-.trashBtn:hover .icon {
+.trashBtn:hover .iconTrash {
   stroke: var(--white);
+  transition: stroke var(--transition);
 }
 
 @media (min-width: 375px) {
