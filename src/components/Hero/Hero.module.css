@@ -1,0 +1,38 @@
+.wrap_hero {
+  background-color: var(--black);
+  margin: 0 8px;
+}
+
+.title {
+  padding-top: 140px;
+  margin: 0 auto 20px auto;
+  max-width: 327px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.8px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.subtitle {
+  max-width: 327px;
+  margin: 0 auto 20px auto;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.28px;
+}
+
+.btn_hero {
+  display: block;
+  padding: 12px 24px;
+  color: var(--white);
+  font-size: 14px;
+  line-height: 1.43;
+  border-radius: 30px;
+  border: 1px solid var(--white-90);
+  margin: 0 auto;
+}

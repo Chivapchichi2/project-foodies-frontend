@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { LogOut } from "../../components/LogOut/LogOut.jsx";
 import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
 import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
+import Hero from "../../components/Hero";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,6 +22,7 @@ const Home = () => {
 
   return (
     <>
+      <Hero />
       <div className={cx(styles.test)}>Home</div>
       <button className={styles.btn} type="button" onClick={() => setModalOpen(true)}>
         SignUp / SignIn
