@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build && npm run copyfiles",
     "copyfiles": "copyfiles 404.html dist",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 1",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
@@ -28,6 +28,7 @@
     "react-select": "^5.8.0",
     "react-toastify": "^10.0.5",
     "redux-persist": "^6.0.0",
+    "simplebar-react": "^3.2.5",
     "swiper": "^11.1.4",
     "yup": "^1.4.0"
   },

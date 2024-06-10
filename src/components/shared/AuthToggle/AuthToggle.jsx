@@ -1,29 +1,62 @@
 import { useState } from "react";
+
 import styles from "./AuthToggle.module.css";
+
+import {CustomModal} from "../index.js";
+import {SignInForm, SignUpForm} from "src/components";
 
 const AuthToggle = () => {
   const [active, setActive] = useState("signIn");
+  const [modalSignUpOpen, setModalSignUpOpen] = useState(false);
+  const [modalSignInOpen, setModalSignInOpen] = useState(false);
+
+  const handleClickSignUp = () => {
+    setActive("signUp");
+    setModalSignUpOpen(true);
+  };
+
+  const handleClickSignIn = () => {
+    setActive("signIn");
+    setModalSignInOpen(true);
+  };
+
+  const handleCloseSignUp = () =>  setModalSignUpOpen(false);
+  const handleCloseSignIn = () => setModalSignInOpen(false);
 
   return (
-    <div
-      className={`${styles.toggleContainer} ${
-        styles[active === "signIn" ? "signInActive" : "signUpActive"]
-      }`}
-    >
-      <div className={styles.slider}></div>
-      <button
-        className={`${styles.toggleButton} ${styles.signIn}`}
-        onClick={() => setActive("signIn")}
-      >
-        SIGN IN
-      </button>
-      <button
-        className={`${styles.toggleButton} ${styles.signUp}`}
-        onClick={() => setActive("signUp")}
-      >
-        SIGN UP
-      </button>
-    </div>
+      <>
+        <div
+            className={`${styles.toggleContainer} ${
+                styles[active === "signIn" ? "signInActive" : "signUpActive"]
+            }`}
+        >
+          <div className={styles.slider}></div>
+          <button
+              className={`${styles.toggleButton} ${styles.signIn}`}
+              onClick={handleClickSignIn}
+          >
+            SIGN IN
+          </button>
+          <button
+              className={`${styles.toggleButton} ${styles.signUp}`}
+              onClick={handleClickSignUp}
+          >
+            SIGN UP
+          </button>
+        </div>
+        {active === "signIn"
+            ? (
+                <CustomModal isOpen={modalSignInOpen} onClose={handleCloseSignIn}>
+                  <SignInForm handleClickSignUp={handleClickSignUp}/>
+                </CustomModal>
+            )
+            : (
+                <CustomModal isOpen={modalSignUpOpen} onClose={handleCloseSignUp}>
+                  <SignUpForm handleClickSignIn={handleClickSignIn}/>
+                </CustomModal>
+            )
+        }
+      </>
   );
 };
 

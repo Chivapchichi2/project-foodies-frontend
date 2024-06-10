@@ -24,6 +24,6 @@
     right: 14px;
 }
 
-.input.hasText {
+.hasText {
     border: 1px solid var(--black);
 }
