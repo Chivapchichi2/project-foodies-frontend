@@ -9,7 +9,7 @@ import {TestimonialCard} from "../TestimonialCard/TestimonialCard.jsx";
 
 export default function TestimonialsSwiper({getTestimanials}) {
     return (
-        <>
+        <section>
             <Swiper
                 slidesPerView={1}
                 spaceBetween={30}
@@ -32,6 +32,6 @@ export default function TestimonialsSwiper({getTestimanials}) {
                     )
                 })}
             </Swiper>
-        </>
+        </section>
     );
 }

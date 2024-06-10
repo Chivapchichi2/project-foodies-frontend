@@ -1,15 +1,11 @@
-import styles from "./styles.module.css";
-import cx from "classnames";
-import { CustomModal } from "../../components/shared/CustomModal/CustomModal.jsx";
-import { SignUpForm } from "../../components/SignUp/SignUpForm.jsx";
-import { useState, useEffect } from "react";
-import { LogOut } from "../../components/LogOut/LogOut.jsx";
-import TestimonialsSwiper from "../../components/TestimonialsSwiper/TestimonialsSwiper.jsx";
-import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
+import {useEffect, useState} from "react";
+import {useGetTestimonialsQuery} from "../../store/services/testimonialService.js";
+import {loadSvgSprite} from "../../utilities/loadSvgSprite.js";
+import {RecipeNavigation, TestimonialsSwiper} from "src/components";
+import {Card} from "../../components/shared/delete/card.jsx";
+
 
 const Home = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const [getTestimanials, setGetTestimanials] = useState([]);
   const { data: testimonials, isLoading } = useGetTestimonialsQuery();
 
@@ -19,22 +15,23 @@ const Home = () => {
     }
   }, [testimonials]);
 
+  useEffect(() => {
+    loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
+  }, []);
+
   return (
     <>
-      <div className={cx(styles.test)}>Home</div>
-      <button className={styles.btn} type="button" onClick={() => setModalOpen(true)}>
-        SignUp / SignIn
-      </button>
-      <button className={styles.btn} type="button" onClick={() => setModalLogOutOpen(true)}>
-        Log Out
-      </button>
-      <CustomModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <SignUpForm />
-      </CustomModal>
-      <CustomModal isOpen={modalLogOutOpen} onClose={() => setModalLogOutOpen(false)}>
-        <LogOut setModalLogOutOpen={setModalLogOutOpen} />
-      </CustomModal>
-      {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+      <div
+        style={{
+          width: 1440,
+          padding: 80,
+          margin: "0 auto",
+        }}
+      >
+        <RecipeNavigation />
+      </div>
+        {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+        <Card/>
     </>
   );
 };
