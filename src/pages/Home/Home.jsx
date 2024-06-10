@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {useGetTestimonialsQuery} from "../../store/services/testimonialService.js";
 import {loadSvgSprite} from "../../utilities/loadSvgSprite.js";
 import {RecipeNavigation, TestimonialsSwiper} from "src/components";
+import {Card} from "../../components/shared/delete/card.jsx";
 
 const Home = () => {
   const [getTestimanials, setGetTestimanials] = useState([]);
@@ -30,6 +31,7 @@ const Home = () => {
         <RecipeNavigation />
       </div>
         {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+        <Card/>
     </>
   );
 };
