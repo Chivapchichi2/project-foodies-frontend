@@ -1,7 +1,7 @@
 import Button from "../shared/Button/Button";
 import IconButton from "../shared/IconButton/IconButton";
 import styles from "./FollowerCard.module.css";
-import FollowerRecipes from "./FollowerRecipes";
+import RecipePhoto from "../RecipePhoto/RecipePhoto.jsx";
 
 const FollowerCard = () => {
   const clickHandler = () => console.log("CLICKED");
@@ -16,7 +16,11 @@ const FollowerCard = () => {
           <Button text="Follow" variant="follow_user" />
         </div>
       </div>
-      <FollowerRecipes />
+      <div className={styles.recipesWrapper}>
+        <RecipePhoto>1</RecipePhoto>
+        <RecipePhoto>2</RecipePhoto>
+        <RecipePhoto>3</RecipePhoto>
+      </div>
       <IconButton onClick={clickHandler} icon-id="icon-arrow-up-right"></IconButton>
     </div>
   );

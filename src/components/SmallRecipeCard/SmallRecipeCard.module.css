@@ -1,0 +1,12 @@
+.recipeCardWrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.recipeName {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 24px;
+  padding-bottom: 8;
+}
