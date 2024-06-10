@@ -7,8 +7,6 @@ import AuthToggle from "../shared/AuthToggle/AuthToggle";
 import {selectToken} from "../../store/features/authSlice.js";
 import {CustomModal} from "../shared";
 import {LogOut} from "src/components";
-import {useSelector} from "react-redux";
-import {useState} from "react";
 import HeaderProfile from "./HeaderProfile";
 import { NavLink, useLocation } from "react-router-dom";
 
