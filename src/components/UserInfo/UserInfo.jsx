@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Button from "../shared/Button/Button";
 import IconButton from "../shared/IconButton/IconButton";
 import styles from "./UserInfo.module.css";
 import { nanoid } from "@reduxjs/toolkit";
