@@ -20,7 +20,7 @@ export const Input = ({
   return (
     <div className={styles.container}>
       <input
-        className={cx(styles.input, classname`${hasText ? styles.hasText : ""}`)}
+        className={cx(styles.input, classname, `${hasText ? styles.hasText : ""}`)}
         placeholder={placeholder}
         type={type}
         {...register(name)}

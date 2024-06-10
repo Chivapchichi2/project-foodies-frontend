@@ -24,12 +24,6 @@
   right: 14px;
 }
 
-<<<<<<< HEAD
-.input.hasText {
+.hasText {
   border: 1px solid var(--black);
 }
-=======
-.hasText {
-    border: 1px solid var(--black);
-}
->>>>>>> d839ead4b9184eebe3c25e555f50c80cf35e876e
