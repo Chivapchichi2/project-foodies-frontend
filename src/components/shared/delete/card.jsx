@@ -80,6 +80,7 @@ export const Card = () => {
 
     return (
         <div className={styles.card}>
+            <h2>Як вам така анімація картки?</h2>
             <div className={styles.card__content}>
                 <div className={styles.card__gloss}></div>
                 <img className={styles.card__image} src={Photo} alt="Photo" />
