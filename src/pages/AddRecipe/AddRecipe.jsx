@@ -113,7 +113,7 @@ const AddRecipe = () => {
           name="title"
           register={register}
           placeholder="The name of the recipe"
-          className={cx(styles.nameInput)}
+          classname={styles.nameInput}
         />
         {errors.title && <p>{errors.title.message}</p>}
       </div>

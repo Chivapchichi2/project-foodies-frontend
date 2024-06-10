@@ -1,5 +1,6 @@
 import styles from "./Input.module.css";
 import Icon from "../Icon/Icon.jsx";
+import cx from "classnames";
 
 export const Input = ({
   placeholder,
@@ -10,7 +11,7 @@ export const Input = ({
   name,
   hasText,
 
-  className,
+  classname,
 }) => {
   const handleClickEye = () => {
     togglePasswordVisibility();
@@ -19,7 +20,7 @@ export const Input = ({
   return (
     <div className={styles.container}>
       <input
-        className={`${styles.input} ${(hasText ? styles.hasText : "", className)}`}
+        className={cx(styles.input, classname, `${hasText ? styles.hasText : ""} `)}
         placeholder={placeholder}
         type={type}
         {...register(name)}

@@ -1,6 +1,5 @@
 import IconButton from "../../shared/IconButton/IconButton";
 import styles from "./CookingTimeCounter.module.css";
-import cx from "classnames";
 
 const CookingTimeCounter = ({ cookingTime, setCookingTime }) => {
   const incrementCookingTime = () => {
@@ -20,8 +19,8 @@ const CookingTimeCounter = ({ cookingTime, setCookingTime }) => {
           width="16"
           height="16"
           type="button"
-          style={cx(styles.iconBtn)}
-          styleSVG={cx(styles.icon)}
+          style={styles.iconBtn}
+          styleSVG={styles.icon}
           onClick={decrementCookingTime}
         />
 
@@ -34,8 +33,8 @@ const CookingTimeCounter = ({ cookingTime, setCookingTime }) => {
           type="button"
           width="16"
           height="16"
-          style={cx(styles.iconBtn)}
-          styleSVG={cx(styles.icon)}
+          style={styles.iconBtn}
+          styleSVG={styles.icon}
           onClick={incrementCookingTime}
         />
       </div>

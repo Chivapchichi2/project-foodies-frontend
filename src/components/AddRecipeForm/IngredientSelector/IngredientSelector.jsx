@@ -2,7 +2,7 @@ import styles from "./IngredientSelector.module.css";
 import SelectShared from "../../shared/SelectShared/SelectShared";
 import { Input } from "../../shared/Input/Input";
 import Button from "../../shared/Button/Button";
-import cx from "classnames";
+
 import IconButton from "../../shared/IconButton/IconButton";
 
 const IngredientSelector = ({
@@ -52,16 +52,16 @@ const IngredientSelector = ({
         type="button"
         onClick={addIngredient}
         iconId="icon-plus"
-        classname={cx(styles.button1)}
+        classname={styles.button1}
       />
 
-      <ul className={cx(styles.list)}>
+      <ul className={styles.list}>
         {selectedIngredients.map((ingredient, index) => (
-          <li key={index} className={cx(styles.listItem)}>
+          <li key={index} className={styles.listItem}>
             <div className={styles.imageWrapper}>
-              <img href="" alt="" width="55px" height="55px" className={cx(styles.image)} />
+              <img href="" alt="" width="55px" height="55px" className={styles.image} />
             </div>
-            <div className={cx(styles.textWrapper)}>
+            <div className={styles.textWrapper}>
               <p>{ingredient.name}</p>
               <p>{ingredient.quantity}</p>
             </div>
@@ -69,7 +69,7 @@ const IngredientSelector = ({
               iconId="icon-close-btn"
               type="button"
               onClick={() => removeIngredient(index)}
-              style={cx(styles.iconBtn)}
+              style={styles.iconBtn}
             />
           </li>
         ))}
