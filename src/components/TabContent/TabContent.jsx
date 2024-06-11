@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./TabContent.module.css";
 import TabMenu from "../TabMenu/TabMenu";
+import { useSelector } from "react-redux";
+import { selectIsAuthorizedUser } from "../../store/features/profileSlice.js";
 
 const myProfileTabs = [
   { id: "my-recipes", label: "MY RECIPES" },
@@ -15,13 +17,17 @@ const userProfileTabs = [
 ];
 
 const TabContent = () => {
-  const [isMyProfile] = useState(true);
+  const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
   const [activeTab, setActiveTab] = useState(
-    isMyProfile ? myProfileTabs[0].id : userProfileTabs[0].id
+    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id
   );
 
+  useEffect(() => {
+    setActiveTab(isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id);
+  }, [isAuthorizedUser]);
+
   const renderContent = () => {
-    if (isMyProfile) {
+    if (isAuthorizedUser) {
       switch (activeTab) {
         case "my-recipes":
           return <div>MY RECIPES</div>;
@@ -45,7 +51,7 @@ const TabContent = () => {
       }
     }
   };
-  const menuItems = isMyProfile ? myProfileTabs : userProfileTabs;
+  const menuItems = isAuthorizedUser ? myProfileTabs : userProfileTabs;
 
   return (
     <div className={styles.container}>
