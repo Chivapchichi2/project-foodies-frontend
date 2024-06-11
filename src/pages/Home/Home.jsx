@@ -1,19 +1,19 @@
-// import { useEffect, useState } from "react";
-// import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
+import { useEffect, useState } from "react";
+import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
 // import { loadSvgSprite } from "../../utilities/loadSvgSprite.js";
-// import { RecipeNavigation, TestimonialsSwiper } from "src/components";
-// import { Card } from "../../components/shared/delete/card.jsx";
+import { TestimonialsSwiper } from "src/components";
 import Hero from "../../components/Hero";
+import {Loader} from "../../components/shared/Loader/Loader.jsx";
 
 const Home = () => {
-  // const [getTestimanials, setGetTestimanials] = useState([]);
-  // const { data: testimonials, isLoading } = useGetTestimonialsQuery();
+  const [getTestimanials, setGetTestimanials] = useState([]);
+  const { data: testimonials, isLoading } = useGetTestimonialsQuery();
 
-  // useEffect(() => {
-  //   if (testimonials && testimonials.length > 0) {
-  //     setGetTestimanials(testimonials);
-  //   }
-  // }, [testimonials]);
+  useEffect(() => {
+    if (testimonials && testimonials.length > 0) {
+      setGetTestimanials(testimonials);
+    }
+  }, [testimonials]);
 
   // useEffect(() => {
   //   loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
@@ -22,17 +22,17 @@ const Home = () => {
   return (
     <>
       <Hero />
-      {/* <div
-        style={{
-          width: 1440,
-          padding: 80,
-          margin: "0 auto",
-        }}
-      >
-        <RecipeNavigation />
-      </div>
-      {isLoading ? <div>Loading...</div> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
-      <Card /> */}
+      {/*<div*/}
+      {/*  style={{*/}
+      {/*    width: 1440,*/}
+      {/*    padding: 80,*/}
+      {/*    margin: "0 auto",*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <RecipeNavigation />*/}
+      {/*</div>*/}
+      {isLoading ? <Loader/> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+
     </>
   );
 };
