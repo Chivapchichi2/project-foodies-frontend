@@ -1,0 +1,73 @@
+.cardWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--black-10);
+}
+
+.photoWrapper {
+  border-radius: 100px;
+  background-color: #E0E0E0;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  padding: 14px 23px;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.smallProfilePhoto {
+  width: 85px;
+  max-width: inherit;
+}
+
+.followerData {
+  display: flex;
+  gap: 16px;
+}
+
+.name {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 24px;
+  padding-bottom: 4px;
+}
+
+.descr {
+  font-size: 12px;
+  color: var(--black-60);
+  padding-bottom: 8px;
+  line-height: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .photoWrapper {
+    width: 85px;
+    height: 85px;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .descr {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .recipesList {
+    display: flex;
+    gap: 12px;
+  }
+
+  .recipeCard {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+    background-color: #E0E0E0;
+    text-align: center;
+  }
+}

@@ -8,9 +8,10 @@ import styles from './SignInForm.module.css';
 
 import {sinInSchema} from "./SignInSchema.js";
 import {useLoginMutation} from "../../store/services/authService.js";
-import {getToken} from "../../store/features/authSlice.js";
 import {useResponsiveValue} from "../../utilities/index.js";
 import {Button, Input, ModalTitle} from "../shared";
+import {getUser} from "../../store/features/authSlice.js";
+import {Loader} from "../shared/Loader/Loader.jsx";
 
 const customId = 'toastId';
 
@@ -49,7 +50,7 @@ export const SignInForm = ({handleClickSignUp}) => {
                     toastId: customId,
                 });
             } else {
-                dispatch(getToken(result.data.token))
+                dispatch(getUser(result.data))
                 toast.success('Sign In successful', {
                     toastId: customId,
                 })
@@ -64,7 +65,7 @@ export const SignInForm = ({handleClickSignUp}) => {
     return (
 <>
     {isLoading
-        ? <div>Loading...</div>
+        ? <Loader/>
         : <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
             <ModalTitle text={'SIGN IN'}/>
             <ul className={styles.list}>

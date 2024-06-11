@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup"
 import {toast} from "react-toastify";
+import {useDispatch} from "react-redux";
 
 import styles from './SignUpForm.module.css';
 
@@ -9,6 +10,8 @@ import {Button, Input, ModalTitle} from "../shared";
 import {sinUpSchema} from "./SignUpSchema.js";
 import {useRegisterMutation} from "../../store/services/authService.js";
 import {useResponsiveValue} from "../../utilities/index.js";
+import {getUser} from "../../store/features/authSlice.js";
+import {Loader} from "../shared/Loader/Loader.jsx";
 
 const customId = 'toastId';
 
@@ -26,6 +29,7 @@ export const SignUpForm = ({handleClickSignIn}) => {
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
     const [data, {isLoading}] = useRegisterMutation();
+    const dispatch = useDispatch();
 
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
@@ -50,6 +54,7 @@ export const SignUpForm = ({handleClickSignIn}) => {
                     toastId: customId,
                 });
             } else {
+                dispatch(getUser(result.data))
                 toast.success('Sign Up successful', {
                     toastId: customId,
                 })
@@ -65,7 +70,7 @@ export const SignUpForm = ({handleClickSignIn}) => {
     return (
         <>
             {isLoading
-                ? <div>Loading...</div>
+                ? <Loader/>
                 : <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
                     <ModalTitle text={'Sign Up'}/>
                     <ul className={styles.list}>
