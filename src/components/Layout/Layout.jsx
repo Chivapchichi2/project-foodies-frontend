@@ -6,11 +6,11 @@ import Header from "../Header";
 const Layout = () => {
   return (
     <>
-      <Suspense>
-        <Header />
+      <Header />
+      <Suspense fallback={<h1> Loading...</h1>}>
         <Outlet />
-        <Footer />
       </Suspense>
+      <Footer />
     </>
   );
 };

@@ -3,12 +3,12 @@ import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { loadSvgSprite } from "./utilities/loadSvgSprite";
 import Layout from "src/components/Layout/Layout";
+import { PrivateRoute } from "src/components/shared";
 const Login = lazy(() => import("src/pages/Login/Login"));
-const Home = lazy(() => import("src/pages/Home/Home"));  
+const Home = lazy(() => import("src/pages/Home/Home"));
 const Recipe = lazy(() => import("src/pages/Recipe/Recipe"));
 const AddRecipe = lazy(() => import("src/pages/AddRecipe/AddRecipe"));
 const User = lazy(() => import("src/pages/User/User"));
-
 
 export const App = () => {
   useEffect(() => {
@@ -21,8 +21,8 @@ export const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/recipe/:id" element={<Recipe />} />
-          <Route path="/recipe/add" element={<AddRecipe />} />
-          <Route path="/user/:id" element={<User />} />
+          <Route path="/recipe/add" element={<PrivateRoute component={AddRecipe} />} />
+          <Route path="/user/:id" element={<PrivateRoute component={User} />} />
         </Route>
       </Routes>
     </BrowserRouter>
