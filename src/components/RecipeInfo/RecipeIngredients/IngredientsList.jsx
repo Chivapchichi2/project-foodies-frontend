@@ -1,6 +1,5 @@
 import { IngredientsItem } from "./IngredientsItem";
 import styles from "./Ingredients.module.css";
-import { nanoid } from "@reduxjs/toolkit";
 
 export const IngredientsList = ({ ingredients }) => {
   return (

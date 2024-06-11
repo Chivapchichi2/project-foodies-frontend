@@ -7,9 +7,10 @@ import { RecipePreparation } from "./RecipePreparation/RecipePreparation.jsx";
 export const RecipeInfo = ({ recipe }) => {
   const { thumb, title, instructions, ingredients } = recipe;
 
-  const onSubmit = () => {
-    // Додати логіку додавання і видалення фейворіт
-  };
+/**
+ * TODO: Додати логіку додавання і видалення фейворіт
+  const onSubmit = () => {};
+**/
 
   return (
     <section className={style.recipe_info_container}>
