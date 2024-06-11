@@ -1,7 +1,11 @@
 import styles from "./RecipePhoto.module.css";
 
-const SmallRecipePhoto = () => {
-  return <div className={styles.recipeCard}>RecipePhoto</div>;
+const SmallRecipePhoto = ({ imgUrl, title }) => {
+  return (
+    <div className={styles.recipeCard}>
+      <img src={imgUrl} alt={title} />
+    </div>
+  );
 };
 
 export default SmallRecipePhoto;

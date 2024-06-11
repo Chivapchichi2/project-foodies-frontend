@@ -1,12 +1,17 @@
 import Button from "../shared/Button/Button";
 import IconButton from "../shared/IconButton/IconButton";
 import styles from "./FollowerCard.module.css";
-import RecipePhoto from "../SmallRecipePhoto/SmallRecipePhoto.jsx";
+import SmallRecipePhoto from "../SmallRecipePhoto/SmallRecipePhoto.jsx";
+import { useResponsiveValue } from "../../utilities/index.js";
 
 const FollowerCard = () => {
-  const clickHandler = () => console.log("CLICKED");
+  const recipeCardsVisability = useResponsiveValue(768, false, 3);
+  const recipeCardsQuantity = useResponsiveValue(1440, 3, 4);
+
+  const goToProfileDetail = () => console.log(`Go to ${data._id} User Profile`);
 
   const data = {
+    _id: "34567890hg567890",
     avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
     name: "Test Name",
     followers: 10,
@@ -16,38 +21,22 @@ const FollowerCard = () => {
         {
           _id: "66661e67b82345fadcb51e95",
           title: "Beef Brisket Pot Roast",
-          area: "American",
-          instructions: "Prepare the brisket for cooking...",
-          description: "A comforting American dish...",
-          thumb:
-            "http://res.cloudinary.com/dgbwicpza/image/upload/v1717968488/recipes/vjj6yx8zbuczn5xinin0.jpg",
+          thumb: "https://ftp.goit.study/img/so-yummy/preview/Lancashire%20hotpot.jpg",
         },
         {
           _id: "66661e67b82345fadcb51e96",
           title: "Beef Brisket Pot Roast",
-          area: "American",
-          instructions: "Prepare the brisket for cooking...",
-          description: "A comforting American dish...",
-          thumb:
-            "http://res.cloudinary.com/dgbwicpza/image/upload/v1717968488/recipes/vjj6yx8zbuczn5xinin0.jpg",
+          thumb: "https://ftp.goit.study/img/so-yummy/preview/Lancashire%20hotpot.jpg",
         },
         {
           _id: "66661e67b82345fadcb51e97",
           title: "Beef Brisket Pot Roast",
-          area: "American",
-          instructions: "Prepare the brisket for cooking...",
-          description: "A comforting American dish...",
-          thumb:
-            "http://res.cloudinary.com/dgbwicpza/image/upload/v1717968488/recipes/vjj6yx8zbuczn5xinin0.jpg",
+          thumb: "https://ftp.goit.study/img/so-yummy/preview/Lancashire%20hotpot.jpg",
         },
         {
           _id: "66661e67b82345fadcb51e98",
           title: "Beef Brisket Pot Roast",
-          area: "American",
-          instructions: "Prepare the brisket for cooking...",
-          description: "A comforting American dish...",
-          thumb:
-            "http://res.cloudinary.com/dgbwicpza/image/upload/v1717968488/recipes/vjj6yx8zbuczn5xinin0.jpg",
+          thumb: "https://ftp.goit.study/img/so-yummy/preview/Lancashire%20hotpot.jpg",
         },
       ],
     },
@@ -66,16 +55,24 @@ const FollowerCard = () => {
         </div>
         <div>
           <h5 className={styles.name}> {data.name}</h5>
-          <p className={styles.descr}>Own recipes: {data.followers}</p>
+          <p className={styles.descr}>Own recipes: {data.createdRecipesCount.total}</p>
           <Button text="Follow" variant="follow_user" />
         </div>
       </div>
-      <div className={styles.recipesWrapper}>
-        <RecipePhoto>1</RecipePhoto>
-        <RecipePhoto>2</RecipePhoto>
-        <RecipePhoto>3</RecipePhoto>
-      </div>
-      <IconButton onClick={clickHandler} iconId="icon-arrow-up-right"></IconButton>
+      {recipeCardsVisability && (
+        <ul className={styles.recipesList}>
+          {data?.createdRecipesCount?.data.map((recipe, idx) => {
+            if (idx < recipeCardsQuantity) {
+              return (
+                <li key={recipe._id}>
+                  <SmallRecipePhoto imgUrl={recipe.thumb} title={recipe.title} />
+                </li>
+              );
+            }
+          })}
+        </ul>
+      )}
+      <IconButton onClick={goToProfileDetail} iconId="icon-arrow-up-right"></IconButton>
     </div>
   );
 };

@@ -3,7 +3,7 @@
     height: 75px;
     border-radius: 15px;
     background-color: #E0E0E0;
-    text-align: center;
+    overflow: hidden;
   }
 
   @media screen and (min-width: 768px) {

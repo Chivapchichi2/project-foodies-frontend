@@ -43,10 +43,6 @@
   line-height: 18px;
 }
 
-.recipesWrapper {
-  display: none;
-}
-
 @media screen and (min-width: 768px) {
   .photoWrapper {
     width: 85px;
@@ -62,7 +58,7 @@
     line-height: 20px;
   }
 
-  .recipesWrapper {
+  .recipesList {
     display: flex;
     gap: 12px;
   }
