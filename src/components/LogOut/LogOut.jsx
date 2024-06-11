@@ -7,6 +7,7 @@ import {useLogoutMutation} from "../../store/services/authService.js";
 import {clearToken} from "../../store/features/authSlice.js";
 import {useResponsiveValue} from "../../utilities/index.js";
 import {Button} from "../shared";
+import {Loader} from "../shared/Loader/Loader.jsx";
 
 export const LogOut = ({setModalLogOutOpen}) => {
     const {handleSubmit} = useForm();
@@ -23,7 +24,7 @@ export const LogOut = ({setModalLogOutOpen}) => {
     return (
         <>
         {isLoading
-            ? <div>Loading...</div>
+            ? <Loader/>
             : <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
                 <ModalTitle text={modalTitleText}/>
                 <p className={styles.text}>

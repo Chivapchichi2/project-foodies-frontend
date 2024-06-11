@@ -8,7 +8,7 @@ import { selectToken } from "../../store/features/authSlice.js";
 import { CustomModal } from "../shared";
 import { LogOut } from "src/components";
 import HeaderProfile from "./HeaderProfile";
-import { useLocation } from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import { StyledLink } from "./StyledLink.jsx";
 
 const Header = () => {

@@ -4,14 +4,20 @@ import storage from "redux-persist/lib/storage";
 
 const initialState = {
     token: null,
+    name: "",
+    id: "",
+    avatarURL: "",
 };
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        getToken(state, action) {
-            state.token = action.payload;
+        getUser(state, action) {
+            state.token = action.payload.token;
+            state.name = action.payload.user.name;
+            state.id = action.payload.user.id;
+            state.avatarURL = action.payload.user.avatarURL;
         },
         clearToken(state) {
             state.token = null;
@@ -27,6 +33,6 @@ export const persistedAuthReducer = persistReducer(
     authSlice.reducer
     );
 
-export const { getToken, clearToken } = authSlice.actions
+export const { getUser, clearToken } = authSlice.actions
 
 export const selectToken = (state) => state.auth.token;
