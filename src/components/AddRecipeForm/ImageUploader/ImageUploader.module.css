@@ -16,12 +16,13 @@ input[type="file"] {
   position: relative;
   border: 1px dashed rgba(5, 5, 5, 0.2);
   border-radius: 30px;
+  margin-bottom: 32px;
 }
 
 .uplodAnotherSpan {
   position: absolute;
   left: 30%;
-  bottom: -17px;
+  bottom: -32px;
 }
 
 .customUploadBtn {

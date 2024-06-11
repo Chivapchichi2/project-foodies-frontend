@@ -1,5 +1,4 @@
 .container {
-  padding: 0 16px;
   display: flex;
   justify-content: center;
 }
@@ -20,6 +19,7 @@ label {
   line-height: calc(24 / 16);
   letter-spacing: -0.32px;
 }
+
 .nameInput::placeholder {
   font-weight: 800;
   font-size: 18px;
@@ -31,6 +31,7 @@ label {
 .nameInput {
   border: none;
   border-radius: 0;
+  padding: 0;
 }
 
 .textareaWrapper {
