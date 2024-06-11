@@ -29,13 +29,11 @@
 
 .tastimonial {
     height: 120px;
-    overflow: auto;
     color: var(--black);
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.36px;
     text-align: center;
-    margin-bottom: 64px;
 }
 
 .name {
@@ -46,6 +44,7 @@
     letter-spacing: -0.32px;
     text-transform: uppercase;
     text-align: center;
+    margin-top: 64px;
 }
 
 @media (min-width: 768px) {
@@ -74,13 +73,13 @@
         font-size: 24px;
         line-height: 36px;
         letter-spacing: -0.48px;
-        margin-bottom: 80px;
     }
     .name {
         font-size: 20px;
         line-height: 24px;
         letter-spacing: -0.4px;
         text-transform: uppercase;
+        margin-top: 80px;
     }
 
 }

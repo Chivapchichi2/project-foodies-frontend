@@ -1,21 +1,18 @@
 import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup"
+import {toast} from "react-toastify";
 
 import styles from './SignUpForm.module.css';
 
-import {Input} from "../shared/Input/Input.jsx";
+import {Button, Input, ModalTitle} from "../shared";
 import {sinUpSchema} from "./SignUpSchema.js";
-import {CustomModal} from "../shared/CustomModal/CustomModal.jsx";
-import {SignInForm} from "../SignIn/SignInForm.jsx";
-import Button from "../shared/Button/Button.jsx";
-import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
 import {useRegisterMutation} from "../../store/services/authService.js";
-import {toast} from "react-toastify";
+import {useResponsiveValue} from "../../utilities/index.js";
 
 const customId = 'toastId';
 
-export const SignUpForm = () => {
+export const SignUpForm = ({handleClickSignIn}) => {
     const {
         register,
         handleSubmit,
@@ -28,8 +25,6 @@ export const SignUpForm = () => {
     });
     const [showPassword, setShowPassword] = useState(false);
     const [valueInput, setValueInput] = useState('');
-    const [openSingIn, setOpenSingIn] = useState(false);
-    const [width, setWidth] = useState('18');
     const [data, {isLoading}] = useRegisterMutation();
 
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -41,22 +36,11 @@ export const SignUpForm = () => {
         return () => subscription.unsubscribe();
     }, [watch]);
 
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 768) {
-                setWidth('20');
-            } else {
-                setWidth('18');
-            }
-        };
+    const widthIconEye = useResponsiveValue(768, '20', '18');
 
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    const handleClickSingIn = () => setOpenSingIn(true)
+    const handleClickSingIn = () => {
+        handleClickSignIn();
+    }
 
     const onSubmit = async (user) => {
         try {
@@ -115,7 +99,7 @@ export const SignUpForm = () => {
                                 register={register}
                                 name="password"
                                 hasText={valueInput.password?.length > 0}
-                                width={width}
+                                width={widthIconEye}
                             />
                             {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                         </li>
@@ -126,10 +110,6 @@ export const SignUpForm = () => {
                         in</button>
                     </p>
                 </form>}
-
-            {openSingIn && (<CustomModal isOpen={openSingIn} onClose={() => setOpenSingIn(false)}>
-                <SignInForm/>
-            </CustomModal>)}
         </>
     );
 

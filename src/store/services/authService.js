@@ -1,9 +1,10 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {BASE_URL} from "../../utilities/const.js";
 
 export const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://foodies-ua-1497a9d7b69f.herokuapp.com/',
+        baseUrl: BASE_URL,
         prepareHeaders(headers, { getState }) {
             const token = (getState()).auth.token;
             headers.set('Authorization', `Bearer ${token}`);

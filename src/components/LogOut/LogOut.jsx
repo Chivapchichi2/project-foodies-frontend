@@ -1,32 +1,19 @@
-import styles from './LogOut.module.css';
-import Button from "../shared/Button/Button.jsx";
-import {useForm} from "react-hook-form";
-import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
-import {useEffect, useState} from "react";
-import {useLogoutMutation} from "../../store/services/authService.js";
 import {useDispatch} from "react-redux";
+import {useForm} from "react-hook-form";
+
+import styles from './LogOut.module.css';
+import ModalTitle from "../shared/ModalTitle/ModalTitle.jsx";
+import {useLogoutMutation} from "../../store/services/authService.js";
 import {clearToken} from "../../store/features/authSlice.js";
+import {useResponsiveValue} from "../../utilities/index.js";
+import {Button} from "../shared";
 
 export const LogOut = ({setModalLogOutOpen}) => {
-    const [modalTitleText, setModalTitleText] = useState('Log Out');
     const {handleSubmit} = useForm();
     const [data, {isLoading}] = useLogoutMutation();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 768) {
-                setModalTitleText('Are you logging out?');
-            } else {
-                setModalTitleText('Log Out');
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    const modalTitleText = useResponsiveValue(768, 'Log Out', 'Are you logging out?');
 
     const onSubmit = async () => {
         await data();
