@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import styles from './TestimonialsSwiper.module.css';
-import {Pagination} from 'swiper/modules';
+import {Autoplay, Pagination} from 'swiper/modules';
 import {TestimonialCard} from "../TestimonialCard/TestimonialCard.jsx";
 
 export default function TestimonialsSwiper({getTestimanials}) {
@@ -14,11 +14,15 @@ export default function TestimonialsSwiper({getTestimanials}) {
                 slidesPerView={1}
                 spaceBetween={30}
                 loop={true}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: true,
+                }}
                 pagination={{
                     clickable: true,
                 }}
                 navigation={true}
-                modules={[Pagination ]}
+                modules={[Pagination, Autoplay]}
                 className={styles.container}
             >
                 {getTestimanials.map(({owner, testimonial, _id})=>{
