@@ -1,18 +1,20 @@
-import RecipePhoto from "../RecipePhoto/RecipePhoto";
+import RecipePhoto from "../SmallRecipePhoto/SmallRecipePhoto";
 import IconButton from "../shared/IconButton/IconButton";
 import styles from "./SmallRecipeCard.module.css";
 
 const SmallRecipeCard = () => {
   return (
     <div className={styles.recipeCardWrapper}>
-      <RecipePhoto />
-      <div>
-        <h5 className={styles.recipeName}> recipeName</h5>
-        <p> some description</p>
+      <div className={styles.flexPhotoWrapper}>
+        <RecipePhoto />
+        <div className={styles.recipeTextWrapper}>
+          <h5 className={styles.recipeName}> recipeName</h5>
+          <p> some description</p>
+        </div>
       </div>
-      <div>
-        <IconButton icon-id="icon-arrow-up-right" />
-        <IconButton icon-id="con-trash" />
+      <div className={styles.buttonWrapper}>
+        <IconButton iconId="icon-arrow-up-right" styleSVG={styles.smallRecipeIcon} />
+        <IconButton iconId="icon-trash" styleSVG={styles.smallRecipeIcon} />
       </div>
     </div>
   );

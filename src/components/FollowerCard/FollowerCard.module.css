@@ -11,6 +11,16 @@
   width: 60px;
   height: 60px;
   text-align: center;
+  padding: 14px 23px;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.smallProfilePhoto {
+  width: 85px;
+  max-width: inherit;
 }
 
 .followerData {
