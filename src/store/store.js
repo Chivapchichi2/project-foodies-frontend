@@ -4,6 +4,7 @@ import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 
 import { testimonialApi } from "./services/testimonialService.js";
 import { authApi } from "./services/authService.js";
 import { persistedAuthReducer } from "./features/authSlice.js";
+import favoriteRecipesReducer from "./features/favoriteRecipesSlice.js";
 import { recipeApi } from "./services/recipeService.js";
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     [testimonialApi.reducerPath]: testimonialApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [recipeApi.reducerPath]: recipeApi.reducer,
+    favoriteRecipes: favoriteRecipesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
