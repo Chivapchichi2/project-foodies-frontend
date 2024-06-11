@@ -36,3 +36,6 @@ export const persistedAuthReducer = persistReducer(
 export const { getUser, clearToken } = authSlice.actions
 
 export const selectToken = (state) => state.auth.token;
+export const selectName = (state) => state.auth.name;
+export const selectId = (state) => state.auth.id;
+export const selectAvatarURL = (state) => state.auth.avatarURL;
