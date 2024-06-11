@@ -4,7 +4,7 @@ import styles from "./HeaderProfile.module.css";
 import cx from "classnames";
 import HeaderProfileMenu from "./HeaderProfileMenu";
 
-const HeaderProfile = ({ isHome }) => {
+const HeaderProfile = ({ isHome, onClick }) => {
   const [toogleOpen, setToogleOpen] = useState(false);
 
   const handlerOpenProfile = () => {
@@ -28,9 +28,16 @@ const HeaderProfile = ({ isHome }) => {
           onClick={handlerOpenProfile}
         />
       </div>
-      {toogleOpen && <HeaderProfileMenu isHome={isHome} />}
+      {toogleOpen && <HeaderProfileMenu onClick={onClick} isHome={isHome} />}
 
-      <IconButton style={styles.btn_menu} iconId="icon-mobile-menu" width="28" height="28" />
+      <IconButton
+        style={styles.btn_menu}
+        styleSVG={styles.icon_arrow}
+        iconId="icon-mobile-menu"
+        width="28"
+        height="28"
+        stroke={isHome ? "#fff" : "#000"}
+      />
     </div>
   );
 };

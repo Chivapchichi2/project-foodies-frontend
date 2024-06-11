@@ -76,6 +76,7 @@
   line-height: 1.5;
   letter-spacing: -0.24px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .link_log_out {
@@ -90,6 +91,10 @@
 
 .color_white {
   color: var(--white);
+}
+
+.color_black {
+  color: var(--black);
 }
 
 @media screen and (min-width: 768px) {
