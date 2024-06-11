@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputQuantity {
+  border: none;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.12);
+  padding: 16px 0;
+  height: 36px;
+  border-radius: 0;
+}
+
+.inputQuantity::placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: calc(20 / 14);
+  letter-spacing: -0.28px;
+}
+.buttonAdd {
+  width: 168px;
+  padding: 14px 20px;
+  border: 1px solid var(--black-90);
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: calc(20 / 14);
+  letter-spacing: -0.28px;
+
+  color: var(--black-90);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.buttonAdd:hover {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.icon {
+  fill: var(--black);
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  stroke: none;
+  transition: fill var(--transition);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.listItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+
+.imageWrapper {
+  border-radius: 15px;
+  border: 1px solid var(--black-10);
+}
+.image {
+  display: block;
+  padding: 10px;
+}
+.iconBtn {
+  border: none;
+  box-shadow: none;
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.iconBtn:hover {
+  background-color: var(--white);
+  scale: 1.1;
+}
+
+.textWrapper {
+  flex-grow: 1;
+  margin-right: 22px;
+}
+
+@media (min-width: 375px) {
+  .inputQuantity {
+    width: 343px;
+  }
+}
+
+@media (min-width: 765px) {
+  .inputQuantity {
+    width: 315px;
+  }
+  .ingredientAndQuantity {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+  }
+  .buttonAdd {
+    width: 229px;
+    padding: 16px 32px;
+    font-size: 16px;
+    line-height: calc(24 / 16);
+    letter-spacing: -0.32px;
+  }
+}
