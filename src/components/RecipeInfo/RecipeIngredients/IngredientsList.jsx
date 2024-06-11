@@ -5,8 +5,13 @@ import { nanoid } from "@reduxjs/toolkit";
 export const IngredientsList = ({ ingredients }) => {
   return (
     <ul className={styles.ingredients_list}>
-      {ingredients.map(({ name, img, mesure }) => (
-        <IngredientsItem key={nanoid()} pathImg={img} name={name} mesure={mesure} />
+      {ingredients.map(({ ingredient, mesure }) => (
+        <IngredientsItem
+          key={ingredient._id}
+          pathImg={ingredient.img}
+          name={ingredient.name}
+          mesure={mesure}
+        />
       ))}
     </ul>
   );
