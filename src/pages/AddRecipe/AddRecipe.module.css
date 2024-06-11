@@ -111,3 +111,24 @@ label {
     width: 343px;
   }
 }
+
+@media (min-width: 765px) {
+  .nameInput {
+    width: 343px;
+  }
+  .textareaWrapper {
+    width: 649px;
+  }
+  .categoryAndTime {
+    display: flex;
+    gap: 19px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .formWrapper {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+  }
+}

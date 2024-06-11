@@ -17,6 +17,16 @@ export const Input = ({
     togglePasswordVisibility();
   };
 
+  if (!iconId)
+    return (
+      <input
+        className={cx(styles.input, classname, `${hasText ? styles.hasText : ""}`)}
+        placeholder={placeholder}
+        type={type}
+        {...register(name, { required: true })}
+      />
+    );
+
   return (
     <div className={styles.container}>
       <input

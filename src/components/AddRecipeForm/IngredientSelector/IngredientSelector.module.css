@@ -26,6 +26,11 @@
   padding: 14px 20px;
   border: 1px solid var(--black-90);
   background-color: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: calc(20 / 14);
+  letter-spacing: -0.28px;
+
   color: var(--black-90);
   transition: background-color var(--transition), color var(--transition);
 }
@@ -34,6 +39,7 @@
   background-color: var(--black);
   color: var(--white);
 }
+
 .icon {
   fill: var(--black);
   position: relative;
@@ -93,8 +99,21 @@
     width: 343px;
   }
 }
+
 @media (min-width: 765px) {
   .inputQuantity {
-    width: 649px;
+    width: 315px;
+  }
+  .ingredientAndQuantity {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+  }
+  .buttonAdd {
+    width: 229px;
+    padding: 16px 32px;
+    font-size: 16px;
+    line-height: calc(24 / 16);
+    letter-spacing: -0.32px;
   }
 }

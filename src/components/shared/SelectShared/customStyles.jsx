@@ -1,14 +1,26 @@
 const customStyles = {
-  control: (styles) => ({
+  control: (styles, { isFocused, isSelected }) => ({
     ...styles,
-    padding: "14px",
+    display: "flex",
+    alignItems: "center",
     borderRadius: "30px",
-    border: "1px solid rgba(5, 5, 5, 0.12)",
+    border: isFocused || isSelected ? "1px solid var(--black-20)" : "1px solid var(--black-12)",
+    boxShadow: isFocused ? "0 0 0 1px var(--black-20)" : null,
+    ":hover": {
+      border: "1px solid var(--black-20)",
+    },
+    ":active": {
+      border: "1px solid var(--black-20)",
+    },
+
+    padding: "0 14px",
     "@media (min-width: 375px)": {
       width: "343px",
     },
     "@media (min-width: 765px)": {
       width: "315px",
+      height: "56px",
+      padding: "0 18px",
     },
   }),
   menu: (styles) => ({
@@ -27,6 +39,31 @@ const customStyles = {
       width: "315px",
     },
   }),
+  placeholder: (styles) => ({
+    ...styles,
+    fontSize: "14px",
+    fontWeight: "500",
+    lineHeight: "calc(20 / 14)",
+    letterSpacing: "-0.28px",
+    color: "var(--black-60)",
+  }),
+  indicatorSeparator: (styles) => ({
+    ...styles,
+    display: "none",
+  }),
+  dropdownIndicator: (styles) => ({
+    ...styles,
+    color: "var(--black)",
+    paddigRight: "14px",
+    svg: {
+      width: "18px",
+      height: "18px",
+    },
+  }),
+  valueContainer: (styles) => ({
+    ...styles,
+    padding: "10px 0px",
+  }),
 };
-//ed
+
 export default customStyles;

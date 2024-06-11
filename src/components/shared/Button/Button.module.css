@@ -55,6 +55,32 @@
   }
 }
 
+/* --------------ADD RECIPE--------------- */
+.add_favorite {
+  display: flex;
+  padding: 14px 20px;
+  background-color: var(--white);
+  color: var(--black-90);
+  border-radius: 30px;
+  border: 1px solid rgba(5, 5, 5, 0.12);
+  transition: var(--transition);
+  font-size: 14px;
+}
+
+.add_favorite:hover,
+.add_favorite:focus {
+  color: var(--white);
+  background-color: var(--black-90);
+  box-shadow: none;
+}
+@media screen and (min-width: 768px) {
+  .add_favorite {
+    padding: 16px 32px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
 /* -----------------CATEGORY NAME---------- */
 .categoryName {
   padding: 8px 12px;
@@ -149,7 +175,7 @@
   }
 }
 /* ----------------------FOLLOW USER ---------------- */
-.follow_user  {
+.follow_user {
   padding: 8px 16px;
   color: var(--black-90);
   font-size: 14px;

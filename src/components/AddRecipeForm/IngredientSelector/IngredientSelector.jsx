@@ -30,29 +30,30 @@ const IngredientSelector = ({
 
   return (
     <div className={styles.container}>
-      <div>
-        <label>Ingredient</label>
-        <SelectShared
-          options={ingredients}
-          placeholder="Select an ingredient"
-          className={styles.select}
-          {...register("ingredient")}
-          onChange={(selectedOption) => setValue("ingredient", selectedOption)}
-        />
-        {errors.ingredient && <p>{errors.ingredient.message}</p>}
-      </div>
+      <div className={styles.ingredientAndQuantity}>
+        <div>
+          <label>Ingredient</label>
+          <SelectShared
+            options={ingredients}
+            placeholder="Select an ingredient"
+            className={styles.select}
+            {...register("ingredient")}
+            onChange={(selectedOption) => setValue("ingredient", selectedOption)}
+          />
+          {errors.ingredient && <p>{errors.ingredient.message}</p>}
+        </div>
 
-      <div>
-        <Input
-          type="text"
-          name="quantity"
-          register={register}
-          placeholder="Enter quantity"
-          classname={styles.inputQuantity}
-        />
-        {errors.quantity && <p>{errors.quantity.message}</p>}
+        <div>
+          <Input
+            type="text"
+            name="quantity"
+            register={register}
+            placeholder="Enter quantity"
+            classname={styles.inputQuantity}
+          />
+          {errors.quantity && <p>{errors.quantity.message}</p>}
+        </div>
       </div>
-
       <Button
         text="Add ingridient +"
         type="button"
