@@ -29,7 +29,9 @@
 }
 
 .icon-wrap {
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -38,8 +40,6 @@
 
 .icon {
   stroke: var(--white);
-  left: 47%;
-  top: 45%;
 }
 
 @media screen and (min-width: 768px) {

@@ -1,0 +1,135 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+label {
+  display: block;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: calc(24 / 16);
+  letter-spacing: -0.32px;
+}
+
+.nameInput::placeholder {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: calc(24 / 18);
+  letter-spacing: -0.36px;
+  text-transform: uppercase;
+}
+
+.nameInput {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.textareaWrapper {
+  position: relative;
+}
+
+.textarea {
+  width: 100%;
+  height: 36px;
+  padding: 16px 0;
+  border: none;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.12);
+  box-sizing: border-box;
+  font-size: 14px;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.labelPrep {
+  margin-bottom: 32px;
+}
+.textarea::placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+}
+
+.symbolCounter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 14px;
+}
+
+.recipeData {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: start;
+  align-items: center;
+}
+
+.button {
+  padding: 14px 32px;
+  background-color: var(--black-85);
+  transition: background-color var(--transition);
+}
+.button:hover {
+  background-color: var(--black);
+}
+
+.trashBtn {
+  width: 48px;
+  height: 48px;
+  box-shadow: none;
+  border: 1px solid var(--black-12);
+  transition: background-color var(--transition);
+}
+
+.trashBtn:hover .iconTrash {
+  stroke: var(--white);
+  transition: fill var(--transition);
+}
+
+@media (min-width: 375px) {
+  .nameInput {
+    width: 343px;
+  }
+  .textareaWrapper {
+    width: 343px;
+  }
+}
+
+@media (min-width: 765px) {
+  .nameInput {
+    width: 343px;
+  }
+  .textareaWrapper {
+    width: 649px;
+  }
+  .categoryAndTime {
+    display: flex;
+    gap: 19px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .formWrapper {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+  }
+}
