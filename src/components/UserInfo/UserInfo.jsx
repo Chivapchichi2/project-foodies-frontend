@@ -1,34 +1,39 @@
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import IconButton from "../shared/IconButton/IconButton";
 import styles from "./UserInfo.module.css";
 import { nanoid } from "@reduxjs/toolkit";
 import { UserInfoItem } from "./UserInfoItem";
 import withoutAvatar from "../../images/user_without_avatar.jpg";
+import { selectUserProfile } from "../../store/selectors/profileSelectors";
+import { useUpdateUserAvatarMutation } from "../../store/services/profileService";
 
 export const UserInfo = ({ isOwnProfile = true }) => {
-  const data = {
-    _id: {
-      $oid: "64c8d958249fae54bae90bb9",
-    },
-    name: "GoIT",
-    avatar: "https://images.genius.com/20c6c4552548a217189a1e56c6433945.1000x1000x1.png",
-    email: "goit@gmail.com",
-    createdRecipesCount: 10,
-    favoriteRecipesCount: 8,
-    followersCount: 5,
-    followingCount: 9,
+  const [updateUserAvatar] = useUpdateUserAvatarMutation();
+  const data = useSelector(selectUserProfile);
+
+  const dataKeys = data ? Object.keys(data) : [];
+
+  const [avatar, setAvatar] = useState(data?.avatar || withoutAvatar);
+
+  const handleAvatarUpdate = async (file) => {
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    try {
+      const response = await updateUserAvatar(formData).unwrap();
+      setAvatar(response.avatarURL);
+    } catch (error) {
+      console.error("Error updating avatar:", error);
+    }
   };
 
-  const dataKeys = Object.keys(data);
-
-  const [avatar, setAvatar] = useState(data.avatar || withoutAvatar);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setAvatar(e.target.result);
-        // Додати функціонал для завантаження файлу на сервер
+        handleAvatarUpdate(file);
       };
       reader.readAsDataURL(file);
     }
@@ -38,6 +43,10 @@ export const UserInfo = ({ isOwnProfile = true }) => {
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
+
+  useEffect(() => {
+    setAvatar(data?.avatar || withoutAvatar);
+  }, [data?.avatar]);
 
   useEffect(() => {
     const updateIconSize = () => {
@@ -61,8 +70,8 @@ export const UserInfo = ({ isOwnProfile = true }) => {
       <div className={styles.profile_card}>
         <img
           className={styles.profile_photo}
-          src={avatar ? avatar : withoutAvatar}
-          alt={`${data.name} avatar`}
+          src={avatar}
+          alt={`${data?.name || "User Name"} avatar`}
         />
 
         {isOwnProfile && (
@@ -85,12 +94,15 @@ export const UserInfo = ({ isOwnProfile = true }) => {
           </>
         )}
 
-        <h3 className={styles.profile_name}>{data.name}</h3>
+        <h3 className={styles.profile_name}>{data?.name}</h3>
 
         <ul className={styles.profile_info}>
           {dataKeys.map((dataKey) => {
             if (dataKey === "_id" || dataKey === "name" || dataKey === "avatar") {
               return;
+            }
+            if (dataKey === "createdRecipesCount" || dataKey === "favoriteRecipesCount") {
+              return <UserInfoItem key={nanoid()} name={dataKey} value={data[dataKey].total} />;
             }
             return <UserInfoItem key={nanoid()} name={dataKey} value={data[dataKey]} />;
           })}

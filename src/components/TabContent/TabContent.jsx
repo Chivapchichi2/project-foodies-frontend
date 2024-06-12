@@ -3,6 +3,7 @@ import styles from "./TabContent.module.css";
 import TabMenu from "../TabMenu/TabMenu";
 import { useSelector } from "react-redux";
 import { selectIsAuthorizedUser } from "../../store/selectors/profileSelectors.js";
+import { UserInfo } from "../UserInfo/UserInfo.jsx";
 
 const myProfileTabs = [
   { id: "my-recipes", label: "MY RECIPES" },
@@ -55,6 +56,7 @@ const TabContent = () => {
 
   return (
     <div className={styles.container}>
+      <UserInfo isOwnProfil={isAuthorizedUser} />
       <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className={styles.content}>{renderContent()}</div>
     </div>
