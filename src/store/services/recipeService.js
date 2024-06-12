@@ -1,10 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../../utilities/const.js";
+import { removeFavoriteRecipe } from "../features/favoriteRecipesSlice.js";
 
 export const recipeApi = createApi({
   reducerPath: "recipeApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    prepareHeaders(headers, { getState }) {
+      const token = getState().auth.token;
+      headers.set("Authorization", `Bearer ${token}`);
+    },
   }),
   tagTypes: ["Recipe"],
   endpoints: (builder) => ({
@@ -16,16 +21,33 @@ export const recipeApi = createApi({
       query: () => "api/recipes/favorites",
       providesTags: ["Recipe"],
     }),
-    addFavoriteRecipe: builder.mutation({
-      query: (id) => ({
-        url: `api/recipes/favorites`,
-        method: "POST",
-        body: { recipe: id },
-      }),
+    getFavoriteRecipes: builder.query({
+      query: () => "api/recipes/myrecipes/favorites",
       providesTags: ["Recipe"],
+    }),
+    addFavoriteRecipe: builder.mutation({
+      query: (recipeId) => ({
+        url: "api/recipes/favorites",
+        method: "POST",
+        body: { recipe: recipeId },
+      }),
+      invalidatesTags: ["Recipe"],
+    }),
+    removeFavoriteRecipe: builder.mutation({
+      query: (recipeId) => ({
+        url: "api/recipes/favorites",
+        method: "DELETE",
+        body: { recipe: recipeId },
+      }),
+      invalidatesTags: ["Recipe"],
     }),
   }),
 });
 
-export const { useGetRecipyByIdQuery, useGetPopularRecipeQuery, useAddFavoriteRecipeMutation } =
-  recipeApi;
+export const {
+  useGetRecipyByIdQuery,
+  useGetPopularRecipeQuery,
+  useGetFavoriteRecipesQuery,
+  useAddFavoriteRecipeMutation,
+  useRemoveFavoriteRecipeMutation,
+} = recipeApi;
