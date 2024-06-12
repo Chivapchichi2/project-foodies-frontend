@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userProfile: null,
   isAuthorizedUser: false,
+  followers: [],
+  following: [],
 };
 
 const profileSlice = createSlice({
@@ -13,9 +15,15 @@ const profileSlice = createSlice({
       state.userProfile = payload;
       state.isAuthorizedUser = "followingCount" in payload ? true : false;
     },
+    setUserFollowers(state, { payload }) {
+      state.followers = [...state.followers, ...payload];
+    },
+    setUserFollowing(state, { payload }) {
+      state.following = [...state.following, ...payload];
+    },
   },
 });
 
 export default profileSlice.reducer;
 
-export const { getUserProfile } = profileSlice.actions;
+export const { getUserProfile, setUserFollowers, setUserFollowing } = profileSlice.actions;

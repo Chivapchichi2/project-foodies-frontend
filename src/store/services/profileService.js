@@ -16,7 +16,17 @@ export const profileApi = createApi({
       query: (userId) => `api/users/details/${userId}`,
       providesTags: ["Profile"],
     }),
+    fetchUserFollowers: builder.query({
+      query: ({ userId, page = 1, limit = 10 }) =>
+        `api/users/followers/${userId}?page=${page}&limit=${limit}`,
+      providesTags: ["Profile"],
+    }),
+    fetchUserFollowing: builder.query({
+      query: ({ page = 1, limit = 10 }) => `api/users/following?page=${page}&limit=${limit}`,
+      providesTags: ["Profile"],
+    }),
   }),
 });
 
-export const { useFetchUserProfileQuery } = profileApi;
+export const { useFetchUserProfileQuery, useFetchUserFollowersQuery, useFetchUserFollowingQuery } =
+  profileApi;
