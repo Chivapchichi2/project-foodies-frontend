@@ -8,7 +8,7 @@ import withoutAvatar from "../../images/user_without_avatar.jpg";
 import { selectUserProfile } from "../../store/selectors/profileSelectors";
 import { useUpdateUserAvatarMutation } from "../../store/services/profileService";
 
-export const UserInfo = ({ isOwnProfile = true }) => {
+export const UserInfo = ({ isOwnProfile }) => {
   const [updateUserAvatar] = useUpdateUserAvatarMutation();
   const data = useSelector(selectUserProfile);
 
@@ -32,7 +32,7 @@ export const UserInfo = ({ isOwnProfile = true }) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = () => {
         handleAvatarUpdate(file);
       };
       reader.readAsDataURL(file);

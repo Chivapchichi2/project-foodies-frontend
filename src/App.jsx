@@ -19,13 +19,13 @@ export const App = () => {
   const favoritesArray = useSelector(selectFavoriteRecipes);
   console.log(favoritesArray);
 
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (favoritesRes) {
-      dispath(setFavoriteRecipes(favoritesRes.data));
+      dispatch(setFavoriteRecipes(favoritesRes.data));
     }
-  }, [favoritesRes]);
+  }, [favoritesRes, dispatch]);
 
   useEffect(() => {
     loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");

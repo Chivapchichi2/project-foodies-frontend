@@ -56,7 +56,7 @@ const TabContent = () => {
 
   return (
     <div className={styles.container}>
-      <UserInfo isOwnProfil={isAuthorizedUser} />
+      <UserInfo isOwnProfile={isAuthorizedUser} />
       <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className={styles.content}>{renderContent()}</div>
     </div>
