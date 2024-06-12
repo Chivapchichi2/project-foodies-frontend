@@ -4,7 +4,7 @@ import 'simplebar-react/dist/simplebar.min.css';
 import styles from './TestimonialCard.module.css'
 
 import {useResponsiveValue} from "../../utilities/index.js";
-import {Icon, SectionTitle} from "../shared";
+import {Icon } from "../shared";
 
 export const TestimonialCard = ({text, name}) => {
 
@@ -13,8 +13,6 @@ export const TestimonialCard = ({text, name}) => {
 
     return (
         <div className={styles.container}>
-            <p className={styles.text_first}>What our customer say</p>
-            <SectionTitle text={"Testimonials"} addStyle={styles.section_title}/>
             <div className={styles.container_svg} >
                 <Icon iconId={'icon-quote'} width={widthIcon} height={heightIcon}/>
             </div>
