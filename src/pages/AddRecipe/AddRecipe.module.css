@@ -83,6 +83,7 @@ label {
 .recipeIncstructions {
   margin-bottom: 32px;
 }
+
 .buttonWrapper {
   display: flex;
   gap: 8px;
@@ -115,6 +116,7 @@ label {
 @media (min-width: 375px) {
   .nameInput {
     width: 343px;
+    margin: 80px 0 40px 0;
   }
   .textareaWrapper {
     width: 343px;
@@ -122,15 +124,32 @@ label {
 }
 
 @media (min-width: 765px) {
+  label {
+    margin-bottom: 16px;
+  }
   .nameInput {
     width: 343px;
   }
+
   .textareaWrapper {
     width: 649px;
   }
+
   .categoryAndTime {
     display: flex;
     gap: 19px;
+  }
+
+  .form {
+    gap: 40px;
+  }
+
+  .labelPrep {
+    margin-bottom: 40px;
+  }
+
+  .recipeIncstructions {
+    margin-bottom: 80px;
   }
 }
 

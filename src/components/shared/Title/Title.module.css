@@ -9,6 +9,7 @@
 @media screen and (min-width: 768px) {
   .title {
     font-size: 70px;
+    margin: 0 0 20px;
   }
 }
 

@@ -68,9 +68,14 @@ input[type="file"] {
 
   .uploadBox {
     width: 704px;
-    height: 400px;
+    min-height: 400px;
+    margin: 0;
   }
 
+  .uplodAnotherSpan {
+    margin: 20px 0 0 0;
+    left: 37%;
+  }
   .btnWrapper {
     gap: 16px;
   }

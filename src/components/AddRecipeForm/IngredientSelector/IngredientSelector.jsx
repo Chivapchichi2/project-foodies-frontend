@@ -83,26 +83,26 @@ const IngredientSelector = ({
           />
           {errors.quantity && <p>{errors.quantity.message}</p>}
         </div>
+        <ul className={styles.list}>
+          {selectedIngredients.map((ingredient, index) => (
+            <li key={index} className={styles.listItem}>
+              <div className={styles.imageWrapper}>
+                <img href="" alt="" width="55px" height="55px" className={styles.image} />
+              </div>
+              <div className={styles.textWrapper}>
+                <p>{ingredient.name}</p>
+                <p>{ingredient.quantity}</p>
+              </div>
+              <IconButton
+                iconId="icon-close-btn"
+                type="button"
+                onClick={() => removeIngredient(index)}
+                style={styles.iconBtn}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className={styles.list}>
-        {selectedIngredients.map((ingredient, index) => (
-          <li key={index} className={styles.listItem}>
-            <div className={styles.imageWrapper}>
-              <img href="" alt="" width="55px" height="55px" className={styles.image} />
-            </div>
-            <div className={styles.textWrapper}>
-              <p>{ingredient.name}</p>
-              <p>{ingredient.quantity}</p>
-            </div>
-            <IconButton
-              iconId="icon-close-btn"
-              type="button"
-              onClick={() => removeIngredient(index)}
-              style={styles.iconBtn}
-            />
-          </li>
-        ))}
-      </ul>
       <Button
         text="Add ingridient +"
         type="button"

@@ -140,19 +140,26 @@
 }
 
 @media (min-width: 765px) {
+  .container {
+    gap: 60px;
+  }
+
   .inputQuantity {
     width: 315px;
   }
+
   .ingredientAndQuantity {
     flex-direction: row;
     gap: 20px;
     align-items: flex-end;
   }
+
   .buttonAdd {
     width: 229px;
     padding: 16px 32px;
     font-size: 16px;
     line-height: calc(24 / 16);
     letter-spacing: -0.32px;
+    margin: 0 0 80px 0;
   }
 }
