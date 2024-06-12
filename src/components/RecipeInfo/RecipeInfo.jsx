@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   useAddFavoriteRecipeMutation,
-  useGetFavoriteRecipesQuery,
   useRemoveFavoriteRecipeMutation,
 } from "../../store/services/recipeService.js";
 import handleFavorite from "../../utilities/handleFavorite.js";
@@ -20,6 +19,8 @@ export const RecipeInfo = ({ recipe }) => {
 
   const [addFavoriteRecipe, { isLoading: isAdding }] = useAddFavoriteRecipeMutation();
   const [removeFavoriteRecipe, { isLoading: isRemoving }] = useRemoveFavoriteRecipeMutation();
+
+  console.log(isAdding, isRemoving); //TODO: remove
 
   return (
     <section className={style.recipe_info_container}>

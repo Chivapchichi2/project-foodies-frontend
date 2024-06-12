@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../../utilities/const.js";
-import { removeFavoriteRecipe } from "../features/favoriteRecipesSlice.js";
 
 export const recipeApi = createApi({
   reducerPath: "recipeApi",
