@@ -11,16 +11,35 @@ const Button = ({
                   id,
 }) => {
   useEffect(() => {
-    if(id){
+    if (id) {
       const btn = document.querySelector(`#${id}`);
-      if(btn) {
-        btn.onmousemove = (e) => {
+      if (btn) {
+        const updateCoordinates = (x, y) => {
           const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          btn.style.setProperty("--x", x + "px");
-          btn.style.setProperty("--y", y + "px");
-        }
+          const relativeX = x - rect.left;
+          const relativeY = y - rect.top;
+          btn.style.setProperty("--x", `${relativeX}px`);
+          btn.style.setProperty("--y", `${relativeY}px`);
+        };
+
+        const onMouseMove = (e) => {
+          updateCoordinates(e.clientX, e.clientY);
+        };
+
+        const onTouchMove = (e) => {
+          if (e.touches.length > 0) {
+            const touch = e.touches[0];
+            updateCoordinates(touch.clientX, touch.clientY);
+          }
+        };
+
+        btn.addEventListener('mousemove', onMouseMove);
+        btn.addEventListener('touchmove', onTouchMove);
+
+        return () => {
+          btn.removeEventListener('mousemove', onMouseMove);
+          btn.removeEventListener('touchmove', onTouchMove);
+        };
       }
     }
   }, [id]);
