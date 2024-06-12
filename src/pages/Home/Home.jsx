@@ -3,7 +3,7 @@ import { useGetTestimonialsQuery } from "../../store/services/testimonialService
 // import { loadSvgSprite } from "../../utilities/loadSvgSprite.js";
 import { TestimonialsSwiper } from "src/components";
 import Hero from "../../components/Hero";
-import {Loader} from "../../components/shared/Loader/Loader.jsx";
+import { Loader } from "../../components/shared/Loader/Loader.jsx";
 
 const Home = () => {
   const [getTestimanials, setGetTestimanials] = useState([]);
@@ -31,8 +31,7 @@ const Home = () => {
       {/*>*/}
       {/*  <RecipeNavigation />*/}
       {/*</div>*/}
-      {isLoading ? <Loader/> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
-
+      {isLoading ? <Loader /> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
     </>
   );
 };

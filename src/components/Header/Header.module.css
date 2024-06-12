@@ -13,10 +13,6 @@
   margin: 0;
 }
 
-.navigation {
-  display: none;
-}
-
 .header_wrap .color_white {
   color: var(--white);
 }
@@ -41,15 +37,6 @@
     margin: 0;
   }
 
-  .navigation {
-    display: block;
-  }
-
-  .wrap_navigation {
-    display: flex;
-    align-items: center;
-    column-gap: 16px;
-  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -61,7 +48,4 @@
     margin: 0;
   }
 
-  .wrap_navigation {
-    column-gap: 40px;
-  }
 }

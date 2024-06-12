@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./TabContent.module.css";
 import TabMenu from "../TabMenu/TabMenu";
 import { useSelector } from "react-redux";
-import { selectIsAuthorizedUser } from "../../store/features/profileSlice.js";
+import { selectIsAuthorizedUser } from "../../store/selectors/profileSelectors.js";
 
 const myProfileTabs = [
   { id: "my-recipes", label: "MY RECIPES" },

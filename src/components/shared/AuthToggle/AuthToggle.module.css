@@ -10,7 +10,7 @@
   overflow: hidden;
 }
 
-.toggleButton {
+.toggleContainer .toggleButton {
   width: 50%;
   height: 100%;
   padding: 10px 16px;
@@ -25,11 +25,11 @@
   transition: color 0.3s;
 }
 
-.signIn {
+.toggleContainer .signIn {
   background-color: transparent;
 }
 
-.signUp {
+.toggleContainer .signUp {
   background-color: transparent;
 }
 
@@ -63,7 +63,7 @@
   .toggleContainer {
     width: 208px;
   }
-  .toggleButton {
+  .toggleContainer .toggleButton {
     padding: 14px 28px;
   }
 }

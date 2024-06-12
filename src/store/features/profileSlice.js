@@ -19,6 +19,3 @@ const profileSlice = createSlice({
 export default profileSlice.reducer;
 
 export const { getUserProfile } = profileSlice.actions;
-
-export const selectUserProfile = (state) => state.profile.userProfile;
-export const selectIsAuthorizedUser = (state) => state.profile.isAuthorizedUser;

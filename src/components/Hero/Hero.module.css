@@ -44,8 +44,7 @@
   transition: background-color var(--transition), color var(--transition);
 }
 
-.link_btn_hero:hover,
-.link_btn_hero:focus {
+.link_btn_hero:hover {
   color: var(--black);
   background-color: var(--white);
 }

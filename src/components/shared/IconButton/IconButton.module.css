@@ -28,11 +28,13 @@
 .button:hover .icon {
   stroke: var(--white);
 }
+
 @media screen and (min-width: 768px) {
   .button {
     width: 42px;
     height: 42px;
   }
+
   .icon {
     width: 18px;
     height: 18px;
