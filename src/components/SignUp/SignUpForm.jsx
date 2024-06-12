@@ -109,7 +109,7 @@ export const SignUpForm = ({handleClickSignIn}) => {
                             {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                         </li>
                     </ul>
-                    <Button type="submit" text="CREATE" variant={'auth'}/>
+                    <Button type="submit" text="CREATE" variant={'ripple'} id={'signUp'}/>
                     <p className={styles.text}>
                         I already have an account? <button className={styles.link} onClick={handleClickSingIn}>Sign
                         in</button>
