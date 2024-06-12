@@ -2,36 +2,24 @@ import styles from "./Hero.module.css";
 import cx from "classnames";
 import { selectToken } from "../../store/features/authSlice.js";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { CustomModal } from "../shared/index.js";
-import { SignUpForm } from "../SignUp/SignUpForm";
+import { useNavigate } from "react-router-dom";
+import { Button, CustomModal } from "../shared/index.js";
 import { useState } from "react";
-import { SignInForm } from "../SignIn/SignInForm";
+import { SignInForm } from "src/components";
 
 const Hero = () => {
   const token = useSelector(selectToken);
-  const [modalSignUpOpen, setModalSignUpOpen] = useState(false);
+  const navigate = useNavigate();
   const [modalSignInOpen, setModalSignInOpen] = useState(false);
-  const [active, setActive] = useState("signIn");
 
   const handlerClick = () => {
     if (!token) {
-      setModalSignUpOpen(true);
-      handleClickSignUp();
+      setModalSignInOpen(true);
+    } else {
+      navigate("/recipe/add");
     }
   };
 
-  const handleClickSignIn = () => {
-    setActive("signIn");
-    setModalSignInOpen(true);
-  };
-
-  const handleClickSignUp = () => {
-    setActive("signUp");
-    setModalSignUpOpen(true);
-  };
-
-  const handleCloseSignUp = () => setModalSignUpOpen(false);
   const handleCloseSignIn = () => setModalSignInOpen(false);
 
   return (
@@ -41,16 +29,15 @@ const Hero = () => {
         Amazing recipes for beginners in the world of cooking, enveloping you in the aromas and
         tastes of various cuisines.
       </p>
-      <NavLink to={token && "/recipe/add"} className={styles.link_btn_hero} onClick={handlerClick}>
-        Add recipe
-      </NavLink>
-      {modalSignUpOpen && active !== "signIn" ? (
-        <CustomModal isOpen={modalSignUpOpen} onClose={handleCloseSignUp}>
-          <SignUpForm handleClickSignIn={handleClickSignIn} />
-        </CustomModal>
-      ) : (
+      <Button
+        text="Add recipe"
+        type="button"
+        onClick={handlerClick}
+        classname={styles.link_btn_hero}
+      />
+      {modalSignInOpen && (
         <CustomModal isOpen={modalSignInOpen} onClose={handleCloseSignIn}>
-          <SignInForm handleClickSignUp={handleClickSignUp} />
+          <SignInForm />
         </CustomModal>
       )}
 
