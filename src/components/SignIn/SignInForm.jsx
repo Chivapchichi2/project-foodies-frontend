@@ -93,7 +93,7 @@ export const SignInForm = ({handleClickSignUp}) => {
                     {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                 </li>
             </ul>
-            <Button type="submit" text="SIGN IN" variant={'auth'}/>
+            <Button type="submit" text="SIGN IN" variant={'ripple'} id={'signIn'}/>
             <p className={styles.text}>
                 {"Don't have an account? "}
                 <button className={styles.link} onClick={handleClickSignUp}>Create an account</button>
