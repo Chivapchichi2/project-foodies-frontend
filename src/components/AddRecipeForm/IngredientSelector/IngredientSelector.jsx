@@ -4,6 +4,7 @@ import { Input } from "../../shared/Input/Input";
 import Button from "../../shared/Button/Button";
 
 import IconButton from "../../shared/IconButton/IconButton";
+import CookingTimeCounter from "../CookingTimeCounter/CookingTimeCounter";
 
 const IngredientSelector = ({
   register,
@@ -13,6 +14,9 @@ const IngredientSelector = ({
   selectedIngredients,
   setSelectedIngredients,
   errors,
+  categories,
+  cookingTime,
+  setCookingTime,
 }) => {
   const addIngredient = () => {
     const ingredient = watch("ingredient");
@@ -30,6 +34,32 @@ const IngredientSelector = ({
 
   return (
     <div className={styles.container}>
+      <div className={styles.textareaWrapper}>
+        <textarea
+          {...register("description")}
+          maxLength="200"
+          placeholder="Enter the description of the dish"
+          className={styles.textarea}
+        />
+        <span className={styles.symbolCounter}>{watch("description")?.length || 0}/200</span>
+        {errors.description && <p>{errors.description.message}</p>}
+      </div>
+      <div className={styles.categoryAndTime}>
+        <div>
+          <label>Category</label>
+          <SelectShared
+            options={categories}
+            placeholder="Select a category"
+            {...register("category")}
+            onChange={(selectedOption) => setValue("category", selectedOption.value)}
+          />
+          {errors.category && <p>{errors.category.message}</p>}
+        </div>
+      </div>
+      <div>
+        <CookingTimeCounter cookingTime={cookingTime} setCookingTime={setCookingTime} />
+        {errors.cookingTime && <p>{errors.cookingTime.message}</p>}
+      </div>
       <div className={styles.ingredientAndQuantity}>
         <div>
           <label>Ingredient</label>
@@ -54,14 +84,6 @@ const IngredientSelector = ({
           {errors.quantity && <p>{errors.quantity.message}</p>}
         </div>
       </div>
-      <Button
-        text="Add ingridient +"
-        type="button"
-        onClick={addIngredient}
-        iconId="icon-plus"
-        classname={styles.buttonAdd}
-      />
-
       <ul className={styles.list}>
         {selectedIngredients.map((ingredient, index) => (
           <li key={index} className={styles.listItem}>
@@ -81,6 +103,13 @@ const IngredientSelector = ({
           </li>
         ))}
       </ul>
+      <Button
+        text="Add ingridient +"
+        type="button"
+        onClick={addIngredient}
+        iconId="icon-plus"
+        classname={styles.buttonAdd}
+      />
     </div>
   );
 };

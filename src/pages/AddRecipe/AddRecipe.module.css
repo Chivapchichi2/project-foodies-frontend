@@ -3,6 +3,10 @@
   justify-content: center;
 }
 
+.titleWrapper {
+  margin-bottom: 16px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -20,18 +24,19 @@ label {
   letter-spacing: -0.32px;
 }
 
+.nameInput {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 32px;
+}
+
 .nameInput::placeholder {
   font-weight: 800;
   font-size: 18px;
   line-height: calc(24 / 18);
   letter-spacing: -0.36px;
   text-transform: uppercase;
-}
-
-.nameInput {
-  border: none;
-  border-radius: 0;
-  padding: 0;
 }
 
 .textareaWrapper {
@@ -75,6 +80,9 @@ label {
   gap: 20px;
 }
 
+.recipeIncstructions {
+  margin-bottom: 32px;
+}
 .buttonWrapper {
   display: flex;
   gap: 8px;

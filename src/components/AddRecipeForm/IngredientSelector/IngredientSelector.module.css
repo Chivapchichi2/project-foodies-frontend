@@ -4,6 +4,38 @@
   gap: 20px;
 }
 
+.textareaWrapper {
+  position: relative;
+}
+
+.symbolCounter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 14px;
+}
+
+.textarea {
+  width: 100%;
+  height: 36px;
+  padding: 16px 0;
+  border: none;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.12);
+  box-sizing: border-box;
+  font-size: 14px;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.textarea::placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+}
+
 .inputQuantity {
   border: none;
   border-bottom: 1px solid rgba(5, 5, 5, 0.12);
@@ -24,13 +56,13 @@
 .buttonAdd {
   width: 168px;
   padding: 14px 20px;
+  margin-bottom: 64px;
   border: 1px solid var(--black-90);
   background-color: transparent;
   font-size: 14px;
   font-weight: 700;
   line-height: calc(20 / 14);
   letter-spacing: -0.28px;
-
   color: var(--black-90);
   transition: background-color var(--transition), color var(--transition);
 }
@@ -94,6 +126,13 @@
   margin-right: 22px;
 }
 
+.ingredientAndQuantity {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-end;
+}
+
 @media (min-width: 375px) {
   .inputQuantity {
     width: 343px;
@@ -105,7 +144,7 @@
     width: 315px;
   }
   .ingredientAndQuantity {
-    display: flex;
+    flex-direction: row;
     gap: 20px;
     align-items: flex-end;
   }
