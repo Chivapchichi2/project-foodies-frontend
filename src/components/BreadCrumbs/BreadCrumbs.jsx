@@ -2,8 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import styles from "./BreadCrumbs.module.css";
 
 const BreadCrumbs = ({ currentPage }) => {
-  const location = useLocation();
-
   return (
     <div className={styles.breadcrumbs}>
       <Link to="/" className={styles.link_to_home}>

@@ -25,8 +25,8 @@ export const RecipeInfo = ({ recipe }) => {
     setIsFavorite(favoritesRecipe.includes(_id));
   }, [favoritesRecipe, _id]);
 
-  const [addFavoriteRecipe, { isLoading: isAdding }] = useAddFavoriteRecipeMutation();
-  const [removeFavoriteRecipe, { isLoading: isRemoving }] = useRemoveFavoriteRecipeMutation();
+  const [addFavoriteRecipe] = useAddFavoriteRecipeMutation();
+  const [removeFavoriteRecipe] = useRemoveFavoriteRecipeMutation();
 
   return (
     <section className={style.recipe_info_container}>

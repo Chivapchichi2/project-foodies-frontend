@@ -25,7 +25,7 @@ export const App = () => {
       dispatch(setFavoriteRecipes(favoritesRecipes));
       console.log(favoritesRecipes);
     }
-  }, [myFavoritesReciopes]);
+  }, [myFavoritesReciopes, dispatch]);
 
   return (
     <BrowserRouter basename="/project-foodies-frontend">
