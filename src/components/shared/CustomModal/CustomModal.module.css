@@ -44,6 +44,10 @@
     opacity: 0;
 }
 
+.block_scroll {
+    overflow: hidden;
+}
+
 @media (min-width: 768px) {
     .content {
         max-width: 561px;

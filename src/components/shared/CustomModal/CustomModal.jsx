@@ -12,6 +12,7 @@ export const CustomModal = ({ isOpen, onClose, children, customeStyles }) => {
       ariaHideApp={false}
       closeTimeoutMS={250}
       onRequestClose={() => onClose()}
+      bodyOpenClassName={styles.block_scroll}
     >
       <button className={styles.btn} type="button" onClick={() => onClose()}>
         <Icon iconId={"icon-close-btn"} width={"24"} height={"24"} />
