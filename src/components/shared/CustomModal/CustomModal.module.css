@@ -26,39 +26,37 @@
 }
 
 .btn {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    top: 16px;
-    right: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.ReactModal__Overlay--after-open{
-    opacity: 1;
+.ReactModal__Overlay--after-open {
+  opacity: 1;
 }
 
-.ReactModal__Overlay--before-close{
-    opacity: 0;
+.ReactModal__Overlay--before-close {
+  opacity: 0;
 }
 
 .block_scroll {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
-    .content {
-        max-width: 561px;
-        padding: 80px;
-        border-radius: 30px;
-    }
+  .content {
+    max-width: 561px;
+    padding: 80px;
+    border-radius: 30px;
+  }
 
-    .btn {
-        width: 24px;
-        height: 24px;
-        top: 20px;
-        right: 20px;
-    }
+  .btn {
+    width: 24px;
+    height: 24px;
+    top: 20px;
+    right: 20px;
+  }
 }
