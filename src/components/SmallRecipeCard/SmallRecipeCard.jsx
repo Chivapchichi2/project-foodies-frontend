@@ -12,7 +12,7 @@ const SmallRecipeCard = ({ data }) => {
   };
 
   return (
-    <li className={styles.recipeCardWrapper} key={data._id}>
+    <li className={styles.recipeCardWrapper}>
       <div className={styles.flexPhotoWrapper}>
         <SmallRecipePhoto imgUrl={data.thumb} title={data.title} />
         <div className={styles.recipeTextWrapper}>
@@ -22,9 +22,16 @@ const SmallRecipeCard = ({ data }) => {
       </div>
       <div className={styles.buttonWrapper}>
         <NavLink to={`/recipe/${data._id}`}>
-          <IconButton iconId="icon-arrow-up-right" />
+          <IconButton iconId="icon-arrow-up-right" style={styles.iconBtn} styleSVG={styles.icon} />
         </NavLink>
-        {isAuthorizedUser && <IconButton iconId="icon-trash" onClick={deleteRecipe} />}
+        {isAuthorizedUser && (
+          <IconButton
+            iconId="icon-trash"
+            onClick={deleteRecipe}
+            style={styles.iconBtn}
+            styleSVG={styles.icon}
+          />
+        )}
       </div>
     </li>
   );

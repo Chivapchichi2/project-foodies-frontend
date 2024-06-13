@@ -5,7 +5,7 @@ import SmallRecipePhoto from "../SmallRecipePhoto/SmallRecipePhoto.jsx";
 import { useResponsiveValue } from "../../utilities/index.js";
 import { NavLink } from "react-router-dom";
 
-const FollowerCard = ({ data }) => {
+const FollowerCard = ({ data, tab }) => {
   const recipeCardsVisability = useResponsiveValue(768, false, 3);
   const recipeCardsQuantity = useResponsiveValue(1440, 3, 4);
 
@@ -18,7 +18,7 @@ const FollowerCard = ({ data }) => {
         <div>
           <h5 className={styles.name}> {data.name}</h5>
           <p className={styles.descr}>Own recipes: {data.createdRecipesCount.total}</p>
-          <Button text="Follow" variant="follow_user" />
+          <Button text={tab} variant="follow_user" />
         </div>
       </div>
       {recipeCardsVisability && (
@@ -35,7 +35,11 @@ const FollowerCard = ({ data }) => {
         </ul>
       )}
       <NavLink to={`/users//details/${data._id}`}>
-        <IconButton iconId="icon-arrow-up-right"></IconButton>
+        <IconButton
+          iconId="icon-arrow-up-right"
+          style={styles.iconBtn}
+          styleSVG={styles.icon}
+        ></IconButton>
       </NavLink>
     </li>
   );

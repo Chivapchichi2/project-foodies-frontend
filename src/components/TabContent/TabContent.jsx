@@ -79,11 +79,11 @@ const TabContent = () => {
 
         case "followers":
           if (myRecipes.total > 0) {
-            return <FollowerCardList data={myRecipes.data} />;
+            return <FollowerCardList data={myRecipes.data} tab="followers" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
         case "following":
           if (favoriteRecipes.length > 0) {
-            return <FollowerCardList data={favoriteRecipes} />;
+            return <FollowerCardList data={favoriteRecipes} tab="following" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
         default:
           return null;
@@ -96,7 +96,7 @@ const TabContent = () => {
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         case "followers":
           if (favoriteRecipes?.length > 0) {
-            return <FollowerCardList data={myRecipes.data} />;
+            return <FollowerCardList data={myRecipes.data} tab="followers" />;
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         default:
           return null;
