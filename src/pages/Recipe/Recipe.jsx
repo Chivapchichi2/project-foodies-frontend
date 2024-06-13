@@ -4,6 +4,7 @@ import { useGetRecipyByIdQuery } from "../../store/services/recipeService";
 import { PopularRecipes } from "../../components/PopularRecipes/PopularRecipes";
 import styles from "./Recipe.module.css";
 import { useEffect } from "react";
+import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 
 const Recipe = () => {
   const { id } = useParams();
@@ -14,10 +15,13 @@ const Recipe = () => {
   }, [id]);
 
   return (
-    <main className={styles.main_recipe_container}>
-      {isLoading ? <p>Loading...</p> : <RecipeInfo recipe={recipe.data} />}
-      {<PopularRecipes />}
-    </main>
+    <>
+      <main className={styles.main_container}>
+        {recipe && <BreadCrumbs currentPage={recipe.data.title} />}
+        {isLoading ? <p>Loading...</p> : <RecipeInfo recipe={recipe.data} />}
+        <PopularRecipes />
+      </main>
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ import { selectToken } from "../../store/features/authSlice.js";
 import { CustomModal } from "../shared";
 import { LogOut } from "src/components";
 import HeaderProfile from "./HeaderProfile";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import HeaderNav from "./HeaderNav";
 
 const Header = () => {
@@ -19,9 +19,9 @@ const Header = () => {
   const styleWhite = isHome && styles.color_white;
   return (
     <header className={cx(styles.header_wrap, !isHome && styles.header_wrap_bgc)}>
-      <a className={cx(stylesFromFooter.logo, styleWhite)} href="/" aria-label="Logo Foodies">
+      <NavLink className={cx(stylesFromFooter.logo, styleWhite)} to="/" aria-label="Logo Foodies">
         <p>Foodies</p>
-      </a>
+      </NavLink>
       {token && <HeaderNav isHome={isHome} />}
       {token ? (
         <HeaderProfile onClick={() => setModalLogOutOpen(true)} isHome={isHome} />

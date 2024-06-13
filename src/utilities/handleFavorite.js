@@ -1,7 +1,9 @@
+import { toast } from "react-toastify";
+
 const handleFavorite = async (funcName, recipeID, action, setFunc) => {
   try {
     await funcName(recipeID).unwrap();
-    alert(`Recipe ${action === "add" ? "added to" : "deleted from"} favorites!`);
+    toast.success(`Recipe ${action === "add" ? "added to" : "deleted from"} favorites!`);
     action === "add" ? setFunc(true) : setFunc(false);
   } catch (error) {
     console.error("Failed to add recipe to favorites: ", error);

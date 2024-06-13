@@ -1,6 +1,11 @@
 .container {
   display: flex;
   justify-content: center;
+  padding-bottom: 64px;
+}
+
+.titleWrapper {
+  margin-bottom: 16px;
 }
 
 .form {
@@ -20,18 +25,19 @@ label {
   letter-spacing: -0.32px;
 }
 
+.nameInput {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 32px 0 32px;
+}
+
 .nameInput::placeholder {
   font-weight: 800;
   font-size: 18px;
   line-height: calc(24 / 18);
   letter-spacing: -0.36px;
   text-transform: uppercase;
-}
-
-.nameInput {
-  border: none;
-  border-radius: 0;
-  padding: 0;
 }
 
 .textareaWrapper {
@@ -75,6 +81,10 @@ label {
   gap: 20px;
 }
 
+.recipeIncstructions {
+  margin-bottom: 32px;
+}
+
 .buttonWrapper {
   display: flex;
   gap: 8px;
@@ -105,31 +115,56 @@ label {
 }
 
 @media (min-width: 375px) {
-  .nameInput {
-    width: 343px;
-  }
   .textareaWrapper {
     width: 343px;
   }
 }
 
 @media (min-width: 765px) {
+  .container {
+    padding-bottom: 100px;
+  }
+  label {
+    margin-bottom: 16px;
+  }
+
   .nameInput {
     width: 343px;
+    margin: 80px 0 40px 0;
   }
+
   .textareaWrapper {
     width: 649px;
   }
+
   .categoryAndTime {
     display: flex;
     gap: 19px;
   }
+
+  .form {
+    gap: 40px;
+  }
+
+  .labelPrep {
+    margin-bottom: 40px;
+  }
+
+  .recipeIncstructions {
+    margin-bottom: 80px;
+  }
 }
 
 @media (min-width: 1440px) {
+  .container {
+    padding-bottom: 120px;
+  }
   .formWrapper {
     display: flex;
     gap: 80px;
     align-items: flex-start;
+  }
+  .nameInput {
+    margin: 0 0 40px 0;
   }
 }

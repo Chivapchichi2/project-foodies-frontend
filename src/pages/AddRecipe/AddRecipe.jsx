@@ -5,10 +5,9 @@ import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
 import axios from "axios";
 import styles from "./AddRecipe.module.css";
 
-import CookingTimeCounter from "../../components/AddRecipeForm/CookingTimeCounter/CookingTimeCounter";
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
 import IngredientSelector from "../../components/AddRecipeForm/IngredientSelector/IngredientSelector";
-import SelectShared from "../../components/shared/SelectShared/SelectShared";
+
 import { Input } from "../../components/shared/Input/Input";
 import Button from "../../components/shared/Button/Button";
 import IconButton from "../../components/shared/IconButton/IconButton";
@@ -91,8 +90,10 @@ const AddRecipe = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Title text="add recipe" />
-        <FormTitleText />
+        <div className={styles.titleWrapper}>
+          <Title text="add recipe" />
+          <FormTitleText />
+        </div>
         <div className={styles.formWrapper}>
           <ImageUploader
             register={register}
@@ -103,56 +104,34 @@ const AddRecipe = () => {
             errors={errors}
           />
           <div>
-            <div>
-              <Input
-                type="text"
-                name="title"
-                register={register}
-                placeholder="The name of the recipe"
-                classname={styles.nameInput}
-              />
-              {errors.title && <p>{errors.title.message}</p>}
-            </div>
-
-            <div className={styles.textareaWrapper}>
-              <textarea
-                {...register("description")}
-                maxLength="200"
-                placeholder="Enter the description of the dish"
-                className={styles.textarea}
-              />
-              <span className={styles.symbolCounter}>{watch("description")?.length || 0}/200</span>
-              {errors.description && <p>{errors.description.message}</p>}
-            </div>
-            {/* {Category} */}
-            <div className={styles.recipeData}>
-              <div className={styles.categoryAndTime}>
-                <div>
-                  <label>Category</label>
-                  <SelectShared
-                    options={categories}
-                    placeholder="Select a category"
-                    {...register("category")}
-                    onChange={(selectedOption) => setValue("category", selectedOption.value)}
-                  />
-                  {errors.category && <p>{errors.category.message}</p>}
-                </div>
-
-                <CookingTimeCounter cookingTime={cookingTime} setCookingTime={setCookingTime} />
-                {errors.cookingTime && <p>{errors.cookingTime.message}</p>}
+            <div className={styles.ingredientsWrapper}>
+              <div>
+                <Input
+                  type="text"
+                  name="title"
+                  register={register}
+                  placeholder="The name of the recipe"
+                  classname={styles.nameInput}
+                />
+                {errors.title && <p>{errors.title.message}</p>}
               </div>
-              <IngredientSelector
-                control={control}
-                register={register}
-                setValue={setValue}
-                watch={watch}
-                ingredients={ingredients}
-                selectedIngredients={selectedIngredients}
-                setSelectedIngredients={setSelectedIngredients}
-                errors={errors}
-              />
-            </div>
 
+              <div className={styles.recipeData}>
+                <IngredientSelector
+                  control={control}
+                  register={register}
+                  setValue={setValue}
+                  watch={watch}
+                  categories={categories}
+                  cookingTime={cookingTime}
+                  setCookingTime={setCookingTime}
+                  ingredients={ingredients}
+                  selectedIngredients={selectedIngredients}
+                  setSelectedIngredients={setSelectedIngredients}
+                  errors={errors}
+                />
+              </div>
+            </div>
             <div className={styles.recipeIncstructions}>
               <label className={styles.labelPrep}>Recipe preparation</label>
               <div className={styles.textareaWrapper}>

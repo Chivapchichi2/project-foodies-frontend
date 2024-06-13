@@ -58,10 +58,9 @@ a {
 .swiper-pagination-bullet {
   width: 14px !important;
   height: 14px !important;
-  background: #D9D9D9 !important;
+  background: #d9d9d9 !important;
 }
 
 .swiper-pagination-bullet-active {
   background: var(--black, var(--black)) !important;
 }
-

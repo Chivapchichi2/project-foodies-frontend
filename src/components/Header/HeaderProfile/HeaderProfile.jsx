@@ -21,6 +21,12 @@ const HeaderProfile = ({ isHome, onClick }) => {
   const handlerToogleModal = () => {
     setToogleModal(!toogleModal);
   };
+
+  const handlerClickOnLink = (e) => {
+    if (e.target.tagName === "A") {
+      handlerToogleModal();
+    }
+  };
   return (
     <div className={styles.wrap}>
       <div className={styles.wrap_profile} onClick={handlerOpenProfile}>
@@ -52,16 +58,26 @@ const HeaderProfile = ({ isHome, onClick }) => {
           isOpen={toogleModal}
           onClose={handlerToogleModal}
           customeStyles={styles.wrap_modal}
+          btnStyle={styles.btn_close}
+          width="28"
+          height="28"
+          stroke="#fff"
         >
-          <div>
-            <NavLink className={styles.logo_modal} to="/">foodies</NavLink>
-            <nav>
+          <div onClick={handlerClickOnLink}>
+            <NavLink className={styles.logo_modal} to="/">
+              foodies
+            </NavLink>
+            <nav className={styles.wrap_nav_link}>
               <ul>
-                <li>
-                  <NavLink to="/">Home</NavLink>
+                <li className={styles.item_nav_link}>
+                  <NavLink to="/" className={styles.nav_link_modal}>
+                    Home
+                  </NavLink>
                 </li>
-                <li>
-                  <NavLink to="/recipe/add">Add recipe</NavLink>
+                <li className={styles.item_nav_link}>
+                  <NavLink to="/recipe/add" className={styles.nav_link_modal}>
+                    Add recipe
+                  </NavLink>
                 </li>
               </ul>
             </nav>
