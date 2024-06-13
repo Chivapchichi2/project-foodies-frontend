@@ -102,9 +102,6 @@ export const UserInfo = () => {
             if (dataKey === "_id" || dataKey === "name" || dataKey === "avatar") {
               return;
             }
-            if (dataKey === "createdRecipesCount" || dataKey === "favoriteRecipesCount") {
-              return <UserInfoItem key={nanoid()} name={dataKey} value={data[dataKey].total} />;
-            }
             return <UserInfoItem key={nanoid()} name={dataKey} value={data[dataKey]} />;
           })}
         </ul>
