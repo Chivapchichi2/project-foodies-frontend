@@ -5,10 +5,9 @@ import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
 import axios from "axios";
 import styles from "./AddRecipe.module.css";
 
-import CookingTimeCounter from "../../components/AddRecipeForm/CookingTimeCounter/CookingTimeCounter";
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
 import IngredientSelector from "../../components/AddRecipeForm/IngredientSelector/IngredientSelector";
-import SelectShared from "../../components/shared/SelectShared/SelectShared";
+
 import { Input } from "../../components/shared/Input/Input";
 import Button from "../../components/shared/Button/Button";
 import IconButton from "../../components/shared/IconButton/IconButton";
