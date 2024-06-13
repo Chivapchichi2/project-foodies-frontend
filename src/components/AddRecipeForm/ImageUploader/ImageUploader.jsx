@@ -22,7 +22,7 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
           {imagePreview && (
             <img src={imagePreview} alt="Recipe Preview" className={styles.imagePreview} />
           )}
-          {!imagePreview ? (
+          {!imagePreview && (
             <div className={styles.btnWrapper}>
               <Icon
                 iconId="icon-capture-photo-camera"
@@ -32,11 +32,12 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
               />
               <span>Upload a photo</span>
             </div>
-          ) : (
-            <span className={styles.uplodAnotherSpan}>Upload another photo</span>
           )}
+          {/* <span className={styles.uplodAnotherSpan}>Upload another photo</span> */}
         </label>
       </div>
+
+      {imagePreview && <span className={styles.uplodAnotherSpan}>Upload another photo</span>}
     </div>
   );
 };
