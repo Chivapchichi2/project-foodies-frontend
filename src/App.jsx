@@ -3,11 +3,10 @@ import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { loadSvgSprite } from "./utilities/loadSvgSprite";
 import Layout from "src/components/Layout/Layout";
-import { useGetFavoriteRecipesQuery } from "./store/services/recipeService";
-import { useDispatch, useSelector } from "react-redux";
-import { setFavoriteRecipes } from "./store/features/favoriteRecipesSlice";
-import { selectFavoriteRecipes } from "./store/selectors/selectors";
 import { PrivateRoute } from "src/components/shared";
+import { useDispatch } from "react-redux";
+import { useGetFavoriteRecipesQuery } from "./store/services/recipeService";
+import { setFavoriteRecipes } from "./store/features/favoriteRecipesSlice";
 const Login = lazy(() => import("src/pages/Login/Login"));
 const Home = lazy(() => import("src/pages/Home/Home"));
 const Recipe = lazy(() => import("src/pages/Recipe/Recipe"));
@@ -29,7 +28,13 @@ export const App = () => {
 
   useEffect(() => {
     loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
-  }, []);
+
+    if (myFavoritesReciopes) {
+      const favoritesRecipes = myFavoritesReciopes.data.map(({ recipe }) => recipe._id);
+      dispatch(setFavoriteRecipes(favoritesRecipes));
+      console.log(favoritesRecipes);
+    }
+  }, [myFavoritesReciopes, dispatch]);
 
   return (
     <BrowserRouter basename="/project-foodies-frontend">

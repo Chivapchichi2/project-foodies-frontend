@@ -27,6 +27,8 @@ export const UserInfo = ({ isOwnProfile }) => {
       console.error("Error updating avatar:", error);
     }
   };
+  
+  const [avatar, setAvatar] = useState(data.avatar || withoutAvatar);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
