@@ -12,6 +12,22 @@ export const recipeApi = createApi({
   }),
   tagTypes: ["Recipe"],
   endpoints: (builder) => ({
+    getRecipes: builder.query({
+      query: ({ category, ingredients, area } = {}) => {
+        const params = new URLSearchParams();
+        if (category) {
+          params.append("category", category);
+        }
+        if (ingredients) {
+          params.append("ingredients", ingredients);
+        }
+        if (area) {
+          params.append("area", area);
+        }
+        return `api/recipes/?${params.toString()}`;
+      },
+      providesTags: ["Recipe"],
+    }),
     getRecipyById: builder.query({
       query: (id) => `api/recipes/${id}`,
       providesTags: ["Recipe"],
@@ -44,6 +60,7 @@ export const recipeApi = createApi({
 });
 
 export const {
+  useGetRecipesQuery,
   useGetRecipyByIdQuery,
   useGetPopularRecipeQuery,
   useGetFavoriteRecipesQuery,
