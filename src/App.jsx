@@ -7,7 +7,6 @@ import { PrivateRoute } from "src/components/shared";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetFavoriteRecipesQuery } from "./store/services/recipeService";
 import { setFavoriteRecipes } from "./store/features/favoriteRecipesSlice";
-import { selectFavoriteRecipes } from "./store/selectors/selectors.js";
 import { selectToken } from "./store/features/authSlice.js";
 const Login = lazy(() => import("src/pages/Login/Login"));
 const Home = lazy(() => import("src/pages/Home/Home"));
@@ -21,14 +20,10 @@ export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (favoritesRes) {
-      dispatch(setFavoriteRecipes(favoritesRes.data));
-    }
-  }, [favoritesRes, dispatch]);
+    loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
+  }, []);
 
   useEffect(() => {
-    loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
-
     if (favoritesRes) {
       const favoritesRecipes = favoritesRes.data.map(({ recipe }) => recipe._id);
       dispatch(setFavoriteRecipes(favoritesRecipes));
