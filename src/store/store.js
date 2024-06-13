@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 
 import { testimonialApi } from "./services/testimonialService.js";
+import { rtkQueryCatchError } from "src/utilities/rtkQueryCatchError.js";
 import { authApi } from "./services/authService.js";
 import { profileApi } from "./services/profileService.js";
 import profileReducer from "./features/profileSlice.js";
@@ -29,7 +30,8 @@ export const store = configureStore({
       .concat(testimonialApi.middleware)
       .concat(authApi.middleware)
       .concat(profileApi.middleware)
-      .concat(recipeApi.middleware),
+      .concat(recipeApi.middleware)
+      .concat(rtkQueryCatchError),
 });
 
 export const persistor = persistStore(store);
