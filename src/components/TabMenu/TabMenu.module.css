@@ -13,6 +13,7 @@
 }
 
 .menuItem {
+  position: relative;
   display: inline-block;
   padding: 0px 0px 14px 0px;
   cursor: pointer;
@@ -35,8 +36,17 @@
 }
 
 .menuItem.active {
-  border-bottom: 3px solid var(--black);
   color: var(--black);
+}
+
+.menuItem.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background-color: var(--black);
 }
 
 @media (min-width: 768px) {

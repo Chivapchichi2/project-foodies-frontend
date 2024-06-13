@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectIsAuthorizedUser, selectUserProfile } from "../../store/features/profileSlice.js";
 import SmallRecipeCardList from "../SmallRecipeCard/SmallRecipeCardList.jsx";
 import FollowerCardList from "../FollowerCard/FollowerCardList.jsx";
+import { UserInfo } from "../UserInfo/UserInfo.jsx";
 
 const myProfileTabs = [
   {
@@ -107,6 +108,7 @@ const TabContent = () => {
 
   return (
     <div className={styles.container}>
+      <UserInfo isOwnProfile={isAuthorizedUser} />
       <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className={styles.content}>{renderContent()}</div>
     </div>

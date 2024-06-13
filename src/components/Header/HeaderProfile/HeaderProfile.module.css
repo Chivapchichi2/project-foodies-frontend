@@ -122,10 +122,12 @@
 /* Modal window */
 
 .wrap_modal {
+  display: block;
   width: 100%;
   height: 100%;
   max-width: none;
   transform: none;
+  border-radius: 0;
   padding: 24px;
   background-color: var(--black);
 }
@@ -139,12 +141,38 @@
   text-transform: lowercase;
 }
 
+.btn_close {
+  top: 20px;
+  right: 18px;
+}
+
+.wrap_nav_link {
+  text-align: center;
+  max-width: 111px;
+  margin: 218px auto 131px auto;
+}
+
+.item_nav_link {
+  padding: 7px;
+}
+
+.item_nav_link:first-child {
+  margin-bottom: 8px;
+}
+
+.nav_link_modal {
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.43;
+  letter-spacing: -0.28px;
+  text-transform: uppercase;
+}
+
 .wrap_img_modal {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 30px;
-  padding-bottom: 90px;
 }
 
 .img_general {
