@@ -25,6 +25,15 @@ export const profileApi = createApi({
       query: ({ page = 1, limit = 10 }) => `api/users/following?page=${page}&limit=${limit}`,
       providesTags: ["Profile"],
     }),
+    fetchUserRecipes: builder.query({
+      query: ({ page = 1, limit = 10 }) => `api/recipes/myrecipes?page=${page}&limit=${limit}`,
+      providesTags: ["Profile"],
+    }),
+    fetchUserFavoritesRecipes: builder.query({
+      query: ({ page = 1, limit = 10 }) =>
+        `/api/recipes/myrecipes/favorites?page=${page}&limit=${limit}`,
+      providesTags: ["Profile"],
+    }),
     updateUserAvatar: builder.mutation({
       query: (formData) => ({
         url: "api/users/avatars",
@@ -41,4 +50,6 @@ export const {
   useFetchUserFollowersQuery,
   useFetchUserFollowingQuery,
   useUpdateUserAvatarMutation,
+  useFetchUserRecipesQuery,
+  useFetchUserFavoritesRecipesQuery,
 } = profileApi;

@@ -40,6 +40,10 @@
   letter-spacing: -0.24px;
 }
 
+.profile_info_item:not(:last-child) {
+  margin-bottom: 8px;
+}
+
 .profile_info_content {
   color: rgba(5, 5, 5, 0.9);
   font-size: 14px;
@@ -104,6 +108,10 @@
   .profile_info_item {
     font-size: 14px;
     letter-spacing: -0.28px;
+  }
+
+  .profile_info_item:not(:last-child) {
+    margin-bottom: 10px;
   }
 
   .profile_info_content {
