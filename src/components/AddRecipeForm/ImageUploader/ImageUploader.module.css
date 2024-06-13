@@ -3,9 +3,11 @@ input[type="file"] {
 }
 .wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  gap: 16px;
 }
 .uploadBox {
   display: flex;
@@ -16,19 +18,17 @@ input[type="file"] {
   position: relative;
   border: 1px dashed rgba(5, 5, 5, 0.2);
   border-radius: 30px;
-  margin-bottom: 32px;
 }
 
 .uplodAnotherSpan {
-  position: absolute;
-  left: 30%;
-  bottom: -32px;
+  font-size: 14px;
+  line-height: calc(20 / 14);
+  letter-spacing: -0.28px;
+  text-decoration-line: underline;
 }
 
 .customUploadBtn {
   display: inline-block;
-  /* padding: 120px 122px; */
-
   cursor: pointer;
   align-items: center;
   text-transform: none;
@@ -68,14 +68,14 @@ input[type="file"] {
 
   .uploadBox {
     width: 704px;
-    min-height: 400px;
+    height: 400px;
     margin: 0;
   }
 
-  .uplodAnotherSpan {
-    margin: 20px 0 0 0;
-    left: 37%;
+  .wrapper {
+    gap: 20px;
   }
+
   .btnWrapper {
     gap: 16px;
   }
