@@ -4,6 +4,10 @@ import { useDispatch } from "react-redux";
 import { useFetchUserProfileQuery } from "../../store/services/profileService";
 import { getUserProfile } from "../../store/features/profileSlice";
 import TabContent from "../../components/TabContent/TabContent";
+import { Loader } from "../../components/shared/Loader/Loader";
+import styles from "./User.module.css";
+import { toast } from "react-toastify";
+import { UserInfo } from "../../components/UserInfo/UserInfo";
 
 const User = () => {
   const { id } = useParams();
@@ -20,16 +24,16 @@ const User = () => {
     }
   }, [profileData, dispatch]);
 
-  if (profileLoading) {
-    return <div>Loading...</div>;
-  }
-
   if (profileError) {
-    return <div>Error: {profileError.message}</div>;
+    toast.error(profileError.data.message, {
+      position: "top-right",
+    });
+    return;
   }
 
   return (
-    <div>
+    <div className={styles.container}>
+      <UserInfo />
       <TabContent />
     </div>
   );

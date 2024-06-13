@@ -5,10 +5,11 @@ import styles from "./UserInfo.module.css";
 import { nanoid } from "@reduxjs/toolkit";
 import { UserInfoItem } from "./UserInfoItem";
 import withoutAvatar from "../../images/user_without_avatar.jpg";
-import { selectUserProfile } from "../../store/selectors/profileSelectors";
+import { selectIsAuthorizedUser, selectUserProfile } from "../../store/selectors/profileSelectors";
 import { useUpdateUserAvatarMutation } from "../../store/services/profileService";
 
-export const UserInfo = ({ isOwnProfile }) => {
+export const UserInfo = () => {
+  const isOwnProfile = useSelector(selectIsAuthorizedUser);
   const [updateUserAvatar] = useUpdateUserAvatarMutation();
   const data = useSelector(selectUserProfile);
 
