@@ -15,7 +15,7 @@ import {Loader} from "../shared/Loader/Loader.jsx";
 
 const customId = 'toastId';
 
-export const SignInForm = ({handleClickSignUp}) => {
+export const SignInForm = ({handleClickSignUp, handleCloseSignIn}) => {
     const {
         register,
         handleSubmit,
@@ -43,18 +43,20 @@ export const SignInForm = ({handleClickSignUp}) => {
     const widthIconEye = useResponsiveValue(768, '20', '18');
 
     const onSubmit= async (user) => {
-        try {
+        try {  
+            handleCloseSignIn();            
             const result = await data(user);
             if (result.error) {
                 toast.error(result.error.data.message, {
                     toastId: customId,
                 });
-            } else {
+            } else {                
                 dispatch(getUser(result.data))
                 toast.success('Sign In successful', {
                     toastId: customId,
                 })
                 reset();
+                           
             }
         } catch (error) {
             toast.error(error.message, {

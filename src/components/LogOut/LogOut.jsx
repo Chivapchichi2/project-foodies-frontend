@@ -17,9 +17,10 @@ export const LogOut = ({setModalLogOutOpen}) => {
     const modalTitleText = useResponsiveValue(768, 'Log Out', 'Are you logging out?');
 
     const onSubmit = async () => {
+        setModalLogOutOpen(false);
         await data();
         dispatch(clearToken())
-        setModalLogOutOpen(false);
+       
     };
     return (
         <>
