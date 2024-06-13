@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useFetchUserProfileQuery } from "../../store/services/profileService";
 import { getUserProfile } from "../../store/features/profileSlice";
 import TabContent from "../../components/TabContent/TabContent";
-import { Loader } from "../../components/shared/Loader/Loader";
 import styles from "./User.module.css";
 import { toast } from "react-toastify";
 import { UserInfo } from "../../components/UserInfo/UserInfo";
@@ -16,11 +15,7 @@ const User = () => {
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const {
-    data: profileData,
-    error: profileError,
-    isLoading: profileLoading,
-  } = useFetchUserProfileQuery(id);
+  const { data: profileData, error: profileError } = useFetchUserProfileQuery(id);
 
   useEffect(() => {
     if (profileData) {
