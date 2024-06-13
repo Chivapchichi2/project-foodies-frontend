@@ -3,11 +3,11 @@ import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { loadSvgSprite } from "./utilities/loadSvgSprite";
 import Layout from "src/components/Layout/Layout";
-import { useGetFavoriteRecipesQuery } from "./store/services/recipeService";
-import { useDispatch, useSelector } from "react-redux";
-import { setFavoriteRecipes } from "./store/features/favoriteRecipesSlice";
-import { selectFavoriteRecipes } from "./store/selectors/selectors";
 import { PrivateRoute } from "src/components/shared";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetFavoriteRecipesQuery } from "./store/services/recipeService";
+import { setFavoriteRecipes } from "./store/features/favoriteRecipesSlice";
+import { selectFavoriteRecipes } from "./store/selectors/selectors.js";
 const Login = lazy(() => import("src/pages/Login/Login"));
 const Home = lazy(() => import("src/pages/Home/Home"));
 const Recipe = lazy(() => import("src/pages/Recipe/Recipe"));
@@ -19,17 +19,23 @@ export const App = () => {
   const favoritesArray = useSelector(selectFavoriteRecipes);
   console.log(favoritesArray);
 
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (favoritesRes) {
-      dispath(setFavoriteRecipes(favoritesRes.data));
+      dispatch(setFavoriteRecipes(favoritesRes.data));
     }
-  }, [favoritesRes]);
+  }, [favoritesRes, dispatch]);
 
   useEffect(() => {
     loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
-  }, []);
+
+    if (favoritesRes) {
+      const favoritesRecipes = favoritesRes.data.map(({ recipe }) => recipe._id);
+      dispatch(setFavoriteRecipes(favoritesRecipes));
+      console.log(favoritesRecipes);
+    }
+  }, [favoritesRes, dispatch]);
 
   return (
     <BrowserRouter basename="/project-foodies-frontend">

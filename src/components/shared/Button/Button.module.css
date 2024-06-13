@@ -34,6 +34,55 @@
   }
 }
 
+/*--------------------Ripple hover---------------------*/
+.ripple {
+  width: 100%;
+  position: relative;
+  background-color: var(--black-20);
+  display: inline-flex;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--white-40);
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.ripple::before {
+  content: "";
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: var(--black);
+  transition: width 0.5s, height 0.5s;
+  z-index: -1;
+}
+
+.ripple:hover::before {
+  width: 800px;
+  height: 800px;
+}
+
+.ripple_text {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .ripple {
+    width: 400px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
 /* --------------ADD RECIPE--------------- */
 .recipe {
   background-color: transparent;

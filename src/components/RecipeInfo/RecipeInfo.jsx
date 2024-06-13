@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useAddFavoriteRecipeMutation,
   useRemoveFavoriteRecipeMutation,
@@ -9,38 +9,48 @@ import style from "./RecipeInfo.module.css";
 import { RecipeIngredients } from "./RecipeIngredients/RecipeIngredients";
 import { RecipeMainInfo } from "./RecipeMainInfo/RecipeMainInfo.jsx";
 import { RecipePreparation } from "./RecipePreparation/RecipePreparation.jsx";
+import recipe_without_img from "../../images/recipe_without_img.jpg";
 import { useSelector } from "react-redux";
 import { selectFavoriteRecipes } from "../../store/selectors/selectors.js";
+import { selectToken } from "../../store/features/authSlice.js";
 
 export const RecipeInfo = ({ recipe }) => {
   const { thumb, title, instructions, ingredients, _id } = recipe;
-  const favorites = useSelector(selectFavoriteRecipes);
-  const [isFavorite, setIsFavorite] = useState(favorites.some(({ recipe }) => recipe._id === _id));
+  const favoritesRecipe = useSelector(selectFavoriteRecipes);
+  const [isFavorite, setIsFavorite] = useState(favoritesRecipe.includes(_id));
+  const token = useSelector(selectToken);
+  console.log(token);
 
-  const [addFavoriteRecipe, { isLoading: isAdding }] = useAddFavoriteRecipeMutation();
-  const [removeFavoriteRecipe, { isLoading: isRemoving }] = useRemoveFavoriteRecipeMutation();
+  useEffect(() => {
+    setIsFavorite(favoritesRecipe.includes(_id));
+  }, [favoritesRecipe, _id]);
 
-  console.log(isAdding, isRemoving); //TODO: remove
+  const [addFavoriteRecipe] = useAddFavoriteRecipeMutation();
+  const [removeFavoriteRecipe] = useRemoveFavoriteRecipeMutation();
 
   return (
     <section className={style.recipe_info_container}>
-      <img className={style.recipe_img} src={thumb} alt={title} />
+      <img className={style.recipe_img} src={thumb ? thumb : recipe_without_img} alt={title} />
       <div className={style.recipe_info_wrapper}>
         <RecipeMainInfo data={recipe} />
         <RecipeIngredients ingredients={ingredients} />
         <RecipePreparation instruction={instructions} />
-        {!isFavorite ? (
-          <Button
-            text="add to favorite"
-            variant="add_favorite"
-            onClick={() => handleFavorite(addFavoriteRecipe, _id, "add", setIsFavorite)}
-          />
+        {token ? (
+          !isFavorite ? (
+            <Button
+              text="Add to favorites"
+              variant="add_favorite"
+              onClick={() => handleFavorite(addFavoriteRecipe, _id, "add", setIsFavorite)}
+            />
+          ) : (
+            <Button
+              text="Remove from favorites"
+              variant="add_favorite"
+              onClick={() => handleFavorite(removeFavoriteRecipe, _id, "delete", setIsFavorite)}
+            />
+          )
         ) : (
-          <Button
-            text="delete from favorite"
-            variant="add_favorite"
-            onClick={() => handleFavorite(removeFavoriteRecipe, _id, "delete", setIsFavorite)}
-          />
+          ""
         )}
       </div>
     </section>

@@ -33,8 +33,7 @@
   transition: background-color var(--transition);
 }
 
-.item_social:hover,
-.item_social:focus {
+.item_social:hover {
   background-color: var(--black);
   border: none;
 }

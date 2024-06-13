@@ -8,20 +8,24 @@ import TabContent from "../../components/TabContent/TabContent";
 const User = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useFetchUserProfileQuery(id);
+  const {
+    data: profileData,
+    error: profileError,
+    isLoading: profileLoading,
+  } = useFetchUserProfileQuery(id);
 
   useEffect(() => {
-    if (data) {
-      dispatch(getUserProfile(data));
+    if (profileData) {
+      dispatch(getUserProfile(profileData));
     }
-  }, [data, dispatch]);
+  }, [profileData, dispatch]);
 
-  if (isLoading) {
+  if (profileLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
+  if (profileError) {
+    return <div>Error: {profileError.message}</div>;
   }
 
   return (
