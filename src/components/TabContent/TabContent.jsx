@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import styles from "./TabContent.module.css";
 import TabMenu from "../TabMenu/TabMenu";
 import { useSelector } from "react-redux";
-import { selectIsAuthorizedUser, selectUserProfile } from "../../store/features/profileSlice.js";
+import {
+  selectIsAuthorizedUser,
+  selectUserProfile,
+} from "../../store/selectors/profileSelectors.js";
 import SmallRecipeCardList from "../SmallRecipeCard/SmallRecipeCardList.jsx";
 import FollowerCardList from "../FollowerCard/FollowerCardList.jsx";
 import { UserInfo } from "../UserInfo/UserInfo.jsx";
@@ -61,8 +64,8 @@ const TabContent = () => {
   }, [isAuthorizedUser]);
 
   const getMessage = (profile, tab) => {
-    const profileData = profile.find(({ id }) => id === tab);
-    return profileData.message;
+    const profileSetup = profile.find(({ id }) => id === tab);
+    return profileSetup.message;
   };
 
   const renderContent = () => {

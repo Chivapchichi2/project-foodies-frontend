@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import SmallRecipePhoto from "../SmallRecipePhoto/SmallRecipePhoto";
 import IconButton from "../shared/IconButton/IconButton";
 import styles from "./SmallRecipeCard.module.css";
-import { selectIsAuthorizedUser } from "../../store/features/profileSlice";
+import { selectIsAuthorizedUser } from "../../store/selectors/profileSelectors.js";
 import { NavLink } from "react-router-dom";
 
 const SmallRecipeCard = ({ data }) => {
