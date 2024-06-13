@@ -22,6 +22,7 @@ export const UserInfo = ({ isOwnProfile = true }) => {
   const dataKeys = Object.keys(data);
 
   const [avatar, setAvatar] = useState(data.avatar || withoutAvatar);
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
