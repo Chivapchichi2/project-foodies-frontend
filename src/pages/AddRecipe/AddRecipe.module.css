@@ -1,6 +1,7 @@
 .container {
   display: flex;
   justify-content: center;
+  padding-bottom: 64px;
 }
 
 .titleWrapper {
@@ -120,6 +121,9 @@ label {
 }
 
 @media (min-width: 765px) {
+  .container {
+    padding-bottom: 100px;
+  }
   label {
     margin-bottom: 16px;
   }
@@ -152,6 +156,9 @@ label {
 }
 
 @media (min-width: 1440px) {
+  .container {
+    padding-bottom: 120px;
+  }
   .formWrapper {
     display: flex;
     gap: 80px;
