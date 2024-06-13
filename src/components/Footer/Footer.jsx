@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Icon from "../shared/Icon/Icon";
 import styles from "./Footer.module.css";
 
@@ -5,9 +6,9 @@ const Footer = () => {
   return (
     <footer>
       <div className={styles.wrap_footer}>
-        <a className={styles.logo} href="/" aria-label="Logo Foodies">
+        <NavLink className={styles.logo} href="/" aria-label="Logo Foodies">
           <p>Foodies</p>
-        </a>
+        </NavLink>
         <ul className={styles.list_social}>
           <li className={styles.item_social}>
             <a href="https://www.facebook.com/goITclub/" target="_blank">
