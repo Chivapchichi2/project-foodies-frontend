@@ -14,8 +14,17 @@ const AddRecipe = lazy(() => import("src/pages/AddRecipe/AddRecipe"));
 const User = lazy(() => import("src/pages/User/User"));
 
 export const App = () => {
-  const { data: myFavoritesReciopes } = useGetFavoriteRecipesQuery();
+  const { data: favoritesRes } = useGetFavoriteRecipesQuery();
+  const favoritesArray = useSelector(selectFavoriteRecipes);
+  console.log(favoritesArray);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (favoritesRes) {
+      dispatch(setFavoriteRecipes(favoritesRes.data));
+    }
+  }, [favoritesRes, dispatch]);
 
   useEffect(() => {
     loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
