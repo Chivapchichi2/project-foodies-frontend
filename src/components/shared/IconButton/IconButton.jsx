@@ -8,6 +8,7 @@ import Icon from "../Icon/Icon";
 
 const IconButton = ({
   onClick = () => {},
+  type = "button",
   style,
   styleSVG,
   iconId,
@@ -16,7 +17,7 @@ const IconButton = ({
   stroke = "#000",
 }) => {
   return (
-    <button className={cx(styles.button, style)} onClick={onClick}>
+    <button type={type} className={cx(styles.button, style)} onClick={onClick}>
       <Icon iconId={iconId} width={width} height={height} customStyle={styleSVG} stroke={stroke} />
     </button>
   );

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
@@ -16,8 +17,6 @@ import FormTitleText from "../../components/AddRecipeForm/FormTiltle/FormTiltleT
 import { useGetCategoriesQuery } from "../../store/services/categoryService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
 import { useCreateRecipeMutation } from "../../store/services/recipeService";
-import { BASE_URL } from "../../utilities/const";
-import SelectShared from "../../components/shared/SelectShared/SelectShared.jsx";
 
 const AddRecipe = () => {
   const {
@@ -36,7 +35,7 @@ const AddRecipe = () => {
 
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
 
-  const [createRecipe] = useCreateRecipeMutation();
+  const [createRecipe, { isSuccess }] = useCreateRecipeMutation();
 
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
@@ -45,6 +44,12 @@ const AddRecipe = () => {
   const categories = categoriesData;
 
   const ingredients = ingredientsData;
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(`/user/`);
+    }
+  }, [isSuccess, navigate]);
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -64,14 +69,11 @@ const AddRecipe = () => {
       console.log(key, value);
     }
 
-    createRecipe(formData)
-      .then(() => {
-        // Redirect to user page on success
-        window.location.href = `${BASE_URL}api/users/current`;
-      })
-      .catch((error) => {
-        alert("Error: " + error.response.data.message);
-      });
+    try {
+      createRecipe(formData);
+    } catch (error) {
+      alert("Error: " + error.response.data.message);
+    }
   };
 
   const handleReset = () => {
@@ -82,11 +84,11 @@ const AddRecipe = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.titleWrapper}>
+        <Title text="add recipe" />
+        <FormTitleText />
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <div className={styles.titleWrapper}>
-          <Title text="add recipe" />
-          <FormTitleText />
-        </div>
         <div className={styles.formWrapper}>
           <ImageUploader
             register={register}
@@ -96,6 +98,7 @@ const AddRecipe = () => {
             watch={watch}
             errors={errors}
           />
+
           <div>
             <div>
               <Input
@@ -108,34 +111,8 @@ const AddRecipe = () => {
               {errors.title && <p>{errors.title.message}</p>}
             </div>
 
-            <div className={styles.textareaWrapper}>
-              <textarea
-                {...register("description")}
-                maxLength="200"
-                placeholder="Enter the description of the dish"
-                className={styles.textarea}
-              />
-              <span className={styles.symbolCounter}>{watch("description")?.length || 0}/200</span>
-              {errors.description && <p>{errors.description.message}</p>}
-            </div>
-            {/* {Category} */}
             <div className={styles.recipeData}>
               <div className={styles.categoryAndTime}>
-                <div>
-                  <label>Category</label>
-                  {isCategoriesLoading ? (
-                    <p>Loading...</p>
-                  ) : (
-                    <SelectShared
-                      options={categories}
-                      placeholder="Select a category"
-                      {...register("category")}
-                      onChange={(selectedOption) => setValue("category", selectedOption.value)}
-                    />
-                  )}
-                  {errors.category && <p>{errors.category.message}</p>}
-                </div>
-
                 <div className={styles.recipeData}>
                   <IngredientSelector
                     control={control}
@@ -149,22 +126,10 @@ const AddRecipe = () => {
                     selectedIngredients={selectedIngredients}
                     setSelectedIngredients={setSelectedIngredients}
                     errors={errors}
+                    isCategoriesLoading={isCategoriesLoading}
+                    isIngredientsLoading={isIngredientsLoading}
                   />
                 </div>
-                {isIngredientsLoading ? (
-                  <p>Loading...</p>
-                ) : (
-                  <IngredientSelector
-                    control={control}
-                    register={register}
-                    setValue={setValue}
-                    watch={watch}
-                    ingredients={ingredients}
-                    selectedIngredients={selectedIngredients}
-                    setSelectedIngredients={setSelectedIngredients}
-                    errors={errors}
-                  />
-                )}
               </div>
             </div>
             <div className={styles.recipeIncstructions}>
