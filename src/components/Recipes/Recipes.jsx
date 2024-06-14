@@ -13,11 +13,7 @@ export const Recipes = ({ category }) => {
   const { data: areaData, isLoading: isAreaLoading } = useGetAreasQuery();
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
-  const {
-    data: recipes,
-    isLoading,
-    refetch,
-  } = useGetRecipesQuery({
+  const { data: recipes, refetch } = useGetRecipesQuery({
     category,
     ingredient: selectedIngredient,
     area: selectedArea,
