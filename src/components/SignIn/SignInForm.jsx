@@ -42,7 +42,6 @@ export const SignInForm = ({ handleClickSignUp }) => {
 
   const onSubmit = async (user) => {
     try {
-      handleCloseSignIn();
       const result = await data(user);
       if (result.error) {
         toast.error(result.error.data.message, {
@@ -61,86 +60,48 @@ export const SignInForm = ({ handleClickSignUp }) => {
       });
     }
   };
-  //     return (
-  // <>
-  //     {isLoading
-  //         ? <Loader/>
-  //         : <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-  //             <ModalTitle text={'SIGN IN'}/>
-  //             <ul className={styles.list}>
-  //                 <li className={styles.item}>
-  //                     <Input
-  //                         placeholder={'Email*'}
-  //                         type={'email'}
-  //                         register={register}
-  //                         name="email"
-  //                         hasText={valueInput.email?.length > 0}
-  //                     />
-  //                     {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-  //                 </li>
-  //                 <li className={styles.item}>
-  //                     <Input
-  //                         placeholder={'Password'}
-  //                         type={showPassword ? 'text' : 'password'}
-  //                         iconId={showPassword ? "icon-eye" : "icon-eye-off"}
-  //                         togglePasswordVisibility={togglePasswordVisibility}
-  //                         register={register}
-  //                         name="password"
-  //                         hasText={valueInput.password?.length > 0}
-  //                         width={widthIconEye}
-  //                     />
-  //                     {errors.password && <span className={styles.error}>{errors.password.message}</span>}
-  //                 </li>
-  //             </ul>
-  //             <Button type="submit" text="SIGN IN" variant={'ripple'} id={'signIn'}/>
-  //             <p className={styles.text}>
-  //                 {"Don't have an account? "}
-  //                 <button className={styles.link} onClick={handleClickSignUp}>Create an account</button>
-  //             </p>
-  //         </form>
-  //     }
-  //   };
-  //   return (
-  //     <>
-  //       {isLoading ? (
-  //         <Loader />
-  //       ) : (
-  //         <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-  //           <ModalTitle text={"SIGN IN"} />
-  //           <ul className={styles.list}>
-  //             <li className={styles.item}>
-  //               <Input
-  //                 placeholder={"Email*"}
-  //                 type={"email"}
-  //                 register={register}
-  //                 name="email"
-  //                 hasText={valueInput.email?.length > 0}
-  //               />
-  //               {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-  //             </li>
-  //             <li className={styles.item}>
-  //               <Input
-  //                 placeholder={"Password"}
-  //                 type={showPassword ? "text" : "password"}
-  //                 iconId={showPassword ? "icon-eye" : "icon-eye-off"}
-  //                 togglePasswordVisibility={togglePasswordVisibility}
-  //                 register={register}
-  //                 name="password"
-  //                 hasText={valueInput.password?.length > 0}
-  //                 width={widthIconEye}
-  //               />
-  //               {errors.password && <span className={styles.error}>{errors.password.message}</span>}
-  //             </li>
-  //           </ul>
-  //           <Button type="submit" text="SIGN IN" variant={"ripple"} id={"signIn"} />
-  //           <p className={styles.text}>
-  //             {"Don't have an account? "}
-  //             <button type="button" className={styles.link} onClick={handleClickSignUp}>
-  //               Create an account
-  //             </button>
-  //           </p>
-  //         </form>
-  //       )}
-  //     </>
-  //   );
+
+  return (
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
+          <ModalTitle text={"SIGN IN"} />
+          <ul className={styles.list}>
+            <li className={styles.item}>
+              <Input
+                placeholder={"Email*"}
+                type={"email"}
+                register={register}
+                name="email"
+                hasText={valueInput.email?.length > 0}
+              />
+              {errors.email && <span className={styles.error}>{errors.email.message}</span>}
+            </li>
+            <li className={styles.item}>
+              <Input
+                placeholder={"Password"}
+                type={showPassword ? "text" : "password"}
+                iconId={showPassword ? "icon-eye" : "icon-eye-off"}
+                togglePasswordVisibility={togglePasswordVisibility}
+                register={register}
+                name="password"
+                hasText={valueInput.password?.length > 0}
+                width={widthIconEye}
+              />
+              {errors.password && <span className={styles.error}>{errors.password.message}</span>}
+            </li>
+          </ul>
+          <Button type="submit" text="SIGN IN" variant={"ripple"} id={"signIn"} />
+          <p className={styles.text}>
+            {"Don't have an account? "}
+            <button type="button" className={styles.link} onClick={handleClickSignUp}>
+              Create an account
+            </button>
+          </p>
+        </form>
+      )}
+    </>
+  );
 };
