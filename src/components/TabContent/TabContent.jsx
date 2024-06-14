@@ -7,6 +7,7 @@ import {
   selectFollowers,
   selectFollowing,
   selectIsAuthorizedUser,
+  selectRecipes,
 } from "../../store/selectors/profileSelectors.js";
 import SmallRecipeCardList from "../SmallRecipeCard/SmallRecipeCardList.jsx";
 import FollowerCardList from "../FollowerCard/FollowerCardList.jsx";
@@ -77,6 +78,7 @@ const TabContent = () => {
   }, [isAuthorizedUser]);
 
   const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery(id);
+  // add checks for tab, as in the function bellow
 
   const { data: favoriteRecipes, isLoading: loadFavorite } = useFetchUserFavoritesRecipesQuery(
     { userId: id },
@@ -112,6 +114,10 @@ const TabContent = () => {
       dispatch(setUserFavoritesRecipes({ data: favoriteRecipesProccessed }));
     }
   }, [activeTab, dispatch, followersData, followingData, favoriteRecipes]);
+
+  // useEffect(() => {
+  // add logic for update if data in store was changed (added/deleted)
+  // }, [selectRecipes, userFavoriteRecipes, userFollowers, userFollowing]);
 
   const getMessage = (profile, tab) => {
     const profileSetup = profile.find(({ id }) => id === tab);
