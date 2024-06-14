@@ -25,10 +25,10 @@ const profileSlice = createSlice({
     },
 
     setUserFollowers(state, { payload }) {
-      state.followers = [...payload.followers];
+      state.followers = [...payload];
     },
     setUserFollowing(state, { payload }) {
-      state.following = [...payload.following];
+      state.following = [...payload];
     },
   },
 });

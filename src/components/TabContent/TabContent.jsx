@@ -100,9 +100,9 @@ const TabContent = () => {
 
   useEffect(() => {
     if (activeTab === "followers" && followersData) {
-      dispatch(setUserFollowers(followersData));
+      dispatch(setUserFollowers(followersData.followersWithRecipes));
     } else if (activeTab === "following" && followingData) {
-      dispatch(setUserFollowing(followingData));
+      dispatch(setUserFollowing(followingData.followingWithRecipes));
     } else if (activeTab === "my-favorites" && favoriteRecipes) {
       const favoriteRecipesProccessed = favoriteRecipes?.data.map((item) => {
         return item.recipe;
@@ -120,12 +120,12 @@ const TabContent = () => {
     if (isAuthorizedUser) {
       switch (activeTab) {
         case "my-recipes":
-          if (myRecipes.total > 0) {
+          if (myRecipes?.total > 0) {
             return <SmallRecipeCardList data={myRecipes.data} tab="recipe" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
 
         case "my-favorites":
-          if (userFavoriteRecipes.length > 0) {
+          if (userFavoriteRecipes?.length > 0) {
             return <SmallRecipeCardList data={userFavoriteRecipes} tab="favorites" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
 

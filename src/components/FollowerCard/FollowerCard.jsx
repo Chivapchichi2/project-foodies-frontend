@@ -30,7 +30,7 @@ const FollowerCard = ({ data, btnText }) => {
       </div>
       {recipeCardsVisability && (
         <ul className={styles.recipesList}>
-          {data?.createdRecipesCount?.data.map((recipe, idx) => {
+          {data?.recipes?.map((recipe, idx) => {
             if (idx < recipeCardsQuantity) {
               return (
                 <li key={recipe._id}>
