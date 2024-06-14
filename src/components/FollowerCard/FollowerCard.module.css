@@ -43,6 +43,24 @@
   line-height: 18px;
 }
 
+.followerCardList:nth-last-child() {
+  border: none;
+}
+
+.iconBtn {
+  background-color: white;
+  transition: background-color var(--transition);
+}
+
+.icon {
+  stroke: var(--black);
+  transition: stroke var(--transition);
+}
+
+.iconBtn:hover .icon {
+  stroke: var(--white);
+}
+
 @media screen and (min-width: 768px) {
   .photoWrapper {
     width: 85px;
