@@ -27,7 +27,7 @@ const IngredientSelector = ({
     const quantity = watch("quantity");
     if (ingredient && quantity) {
       const selectedIngredient = ingredients.find((item) => item.value === ingredient.value);
-      console.log(selectedIngredient);
+
       setSelectedIngredients([
         ...selectedIngredients,
         { name: ingredient.label, quantity, imageUrl: selectedIngredient.img },
