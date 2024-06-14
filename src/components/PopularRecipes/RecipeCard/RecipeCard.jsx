@@ -71,12 +71,22 @@ const RecipeCard = ({ recipe }) => {
             <li>
               {token ? (
                 !isFavorite ? (
-                  <IconButton iconId="icon-heart" onClick={addToFavorites} />
+                  <IconButton
+                    style={styles.style_button_notFavorit}
+                    iconId="icon-heart"
+                    onClick={addToFavorites}
+                  />
                 ) : (
-                  <IconButton iconId="icon-heart" onClick={addToFavorites} />
+                  <IconButton
+                    style={styles.style_button_favorit}
+                    stroke="#FFF"
+                    iconId="icon-heart"
+                    onClick={addToFavorites}
+                  />
                 )
               ) : (
                 <IconButton
+                  style={styles.style_button_notFavorit}
                   iconId="icon-heart"
                   onClick={() => {
                     setModalIsOpen(!modalIsOpen);
