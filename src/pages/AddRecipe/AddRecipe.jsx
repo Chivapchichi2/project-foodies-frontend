@@ -17,6 +17,7 @@ import { useGetCategoriesQuery } from "../../store/services/categoryService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
 import { useCreateRecipeMutation } from "../../store/services/recipeService";
 import { BASE_URL } from "../../utilities/const";
+import SelectShared from "../../components/shared/SelectShared/SelectShared.jsx";
 
 const AddRecipe = () => {
   const {
@@ -135,36 +136,36 @@ const AddRecipe = () => {
                   {errors.category && <p>{errors.category.message}</p>}
                 </div>
 
-              <div className={styles.recipeData}>
-                <IngredientSelector
-                  control={control}
-                  register={register}
-                  setValue={setValue}
-                  watch={watch}
-                  categories={categories}
-                  cookingTime={cookingTime}
-                  setCookingTime={setCookingTime}
-                  ingredients={ingredients}
-                  selectedIngredients={selectedIngredients}
-                  setSelectedIngredients={setSelectedIngredients}
-                  errors={errors}
-                />
+                <div className={styles.recipeData}>
+                  <IngredientSelector
+                    control={control}
+                    register={register}
+                    setValue={setValue}
+                    watch={watch}
+                    categories={categories}
+                    cookingTime={cookingTime}
+                    setCookingTime={setCookingTime}
+                    ingredients={ingredients}
+                    selectedIngredients={selectedIngredients}
+                    setSelectedIngredients={setSelectedIngredients}
+                    errors={errors}
+                  />
+                </div>
+                {isIngredientsLoading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <IngredientSelector
+                    control={control}
+                    register={register}
+                    setValue={setValue}
+                    watch={watch}
+                    ingredients={ingredients}
+                    selectedIngredients={selectedIngredients}
+                    setSelectedIngredients={setSelectedIngredients}
+                    errors={errors}
+                  />
+                )}
               </div>
-              {isIngredientsLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <IngredientSelector
-                  control={control}
-                  register={register}
-                  setValue={setValue}
-                  watch={watch}
-                  ingredients={ingredients}
-                  selectedIngredients={selectedIngredients}
-                  setSelectedIngredients={setSelectedIngredients}
-                  errors={errors}
-                />
-              )}
-
             </div>
             <div className={styles.recipeIncstructions}>
               <label className={styles.labelPrep}>Recipe preparation</label>

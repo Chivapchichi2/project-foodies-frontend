@@ -35,7 +35,7 @@ export const store = configureStore({
       .concat(authApi.middleware)
       .concat(profileApi.middleware)
       .concat(recipeApi.middleware)
-      .concat(rtkQueryCatchError),
+      .concat(rtkQueryCatchError)
       .concat(ingredientApi.middleware)
       .concat(categoryApi.middleware),
 });
