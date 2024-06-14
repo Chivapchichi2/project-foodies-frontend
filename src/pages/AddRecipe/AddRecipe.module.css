@@ -28,7 +28,11 @@ label {
   border: none;
   border-radius: 0;
   padding: 0;
-  margin: 32px 0 32px;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: calc(24 / 18);
+  letter-spacing: -0.36px;
+  text-transform: uppercase;
 }
 
 .nameInput::placeholder {
@@ -132,7 +136,7 @@ label {
   }
 
   .nameInput {
-    width: 343px;
+    width: 649x;
     margin: 80px 0 40px 0;
   }
 
