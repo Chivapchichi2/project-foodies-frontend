@@ -10,6 +10,7 @@ import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { Button, CustomModal, SectionTitle } from "../../components/shared";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import { LogOut } from "../../components";
+import { Loader } from "../../components/shared/Loader/Loader";
 
 const User = () => {
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
@@ -22,6 +23,11 @@ const User = () => {
       dispatch(getUserProfile(profileData));
     }
   }, [profileData, dispatch]);
+
+
+  if (profileLoading) {
+    return <Loader />;
+  }
 
   if (profileError) {
     toast.error(profileError.data.message, {

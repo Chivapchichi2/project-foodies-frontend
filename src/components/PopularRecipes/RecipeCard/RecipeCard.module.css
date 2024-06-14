@@ -64,6 +64,13 @@
   min-width: 343px;
 }
 
+.header_card {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
 @media screen and (min-width: 768px) {
   .recipeDescription {
     font-size: 16px;
