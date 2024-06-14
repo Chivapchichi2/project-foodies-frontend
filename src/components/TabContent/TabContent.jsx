@@ -14,6 +14,7 @@ import {
   useFetchUserFavoritesRecipesQuery,
   useFetchUserFollowersQuery,
   useFetchUserFollowingQuery,
+  useFetchUserRecipesQuery,
 } from "../../store/services/profileService.js";
 import { useParams } from "react-router-dom";
 import {
@@ -74,9 +75,7 @@ const TabContent = () => {
     setActiveTab(isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id);
   }, [isAuthorizedUser]);
 
-  const myRecipes = [];
-  // uncomment when service will be fixed
-  // const { data: myRecipes } = useFetchUserRecipesQuery(id);
+  const { data: myRecipes } = useFetchUserRecipesQuery(id);
 
   const { data: favoriteRecipes } = useFetchUserFavoritesRecipesQuery(
     { userId: id },
