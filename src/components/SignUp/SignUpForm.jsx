@@ -8,27 +8,26 @@ import styles from "./SignUpForm.module.css";
 
 import { Button, Input, ModalTitle } from "../shared";
 import { sinUpSchema } from "./SignUpSchema.js";
-import { useRegisterMutation } from "../../store/services/authService.js";
 import { useResponsiveValue } from "../../utilities/index.js";
 import { getUser } from "../../store/features/authSlice.js";
 import { Loader } from "../shared/Loader/Loader.jsx";
+import {BASE_URL} from "../../utilities/const.js";
 
 const customId = "toastId";
 
-export const SignUpForm = ({ handleClickSignIn, handleCloseSignUp }) => {
+export const SignUpForm = ({ handleClickSignIn }) => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(sinUpSchema),
     mode: "onChange",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [valueInput, setValueInput] = useState("");
-  const [data, { isLoading }] = useRegisterMutation();
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -44,24 +43,35 @@ export const SignUpForm = ({ handleClickSignIn, handleCloseSignUp }) => {
 
   const onSubmit = async (user) => {
     try {
-      handleCloseSignUp();
+        setIsLoading(true);
+        const response = await fetch(`${BASE_URL}api/users/signup`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        });
 
-      const result = await data(user);
-      if (result.error) {
-        toast.error(result.error.data.message, {
-          toastId: customId,
-        });
-      } else {
-        dispatch(getUser(result.data));
-        toast.success("Sign Up successful", {
-          toastId: customId,
-        });
-        reset();
-      }
+        if (!response.ok) {
+            const errorData = await response.json();
+              toast.error(errorData, {
+                toastId: customId,
+              });
+              return
+        }
+
+        const result = await response.json();
+        dispatch(getUser(result.user))
+          toast.success("Sign Up successful", {
+            toastId: customId,
+          });
+
     } catch (error) {
       toast.error(error.message, {
         toastId: customId,
       });
+    } finally {
+        setIsLoading(false);
     }
   };
 
