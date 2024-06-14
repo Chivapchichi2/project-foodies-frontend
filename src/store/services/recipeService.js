@@ -40,6 +40,13 @@ export const recipeApi = createApi({
       }),
       invalidatesTags: ["Recipe"],
     }),
+    removeRecipe: builder.mutation({
+      query: (id) => ({
+        url: `api/recipes/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Recipe"],
+    }),
   }),
 });
 
@@ -49,4 +56,5 @@ export const {
   useGetFavoriteRecipesQuery,
   useAddFavoriteRecipeMutation,
   useRemoveFavoriteRecipeMutation,
+  useRemoveRecipeMutation,
 } = recipeApi;

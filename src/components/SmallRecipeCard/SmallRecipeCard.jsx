@@ -4,11 +4,23 @@ import IconButton from "../shared/IconButton/IconButton";
 import styles from "./SmallRecipeCard.module.css";
 import { selectIsAuthorizedUser } from "../../store/selectors/profileSelectors.js";
 import { NavLink } from "react-router-dom";
+import handleFavorite from "../../utilities/handleFavorite.js";
+import {
+  useRemoveFavoriteRecipeMutation,
+  useRemoveRecipeMutation,
+} from "../../store/services/recipeService.js";
 
-const SmallRecipeCard = ({ data }) => {
+const SmallRecipeCard = ({ data, tab }) => {
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
+  const [removeFavoriteRecipe] = useRemoveFavoriteRecipeMutation();
+  const [removeRecipe] = useRemoveRecipeMutation();
+
   const deleteRecipe = () => {
-    console.log(`Delete recipe ${data._id} from favorites`);
+    if (tab === "recipe") {
+      removeRecipe(data._id);
+    } else {
+      handleFavorite(removeFavoriteRecipe, data._id, "delete");
+    }
   };
 
   return (
@@ -22,7 +34,11 @@ const SmallRecipeCard = ({ data }) => {
       </div>
       <div className={styles.buttonWrapper}>
         <NavLink to={`/recipe/${data._id}`}>
-          <IconButton iconId="icon-arrow-up-right" style={styles.iconBtn} styleSVG={styles.icon} />
+          <IconButton
+            iconId="icon-arrow-up-right"
+            style={styles.iconBtn}
+            styleSVG={styles.icon}
+          ></IconButton>
         </NavLink>
         {isAuthorizedUser && (
           <IconButton

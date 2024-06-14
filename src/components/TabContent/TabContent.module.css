@@ -32,7 +32,10 @@
 
 @media (min-width: 1440px) {
   .container {
-    padding: 0px 80px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
 
   .message {

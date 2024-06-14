@@ -1,13 +1,26 @@
 import { useEffect, useState } from "react";
 import styles from "./TabContent.module.css";
 import TabMenu from "../TabMenu/TabMenu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  selectFavoritesRecipes,
+  selectFollowers,
+  selectFollowing,
   selectIsAuthorizedUser,
-  selectUserProfile,
 } from "../../store/selectors/profileSelectors.js";
 import SmallRecipeCardList from "../SmallRecipeCard/SmallRecipeCardList.jsx";
 import FollowerCardList from "../FollowerCard/FollowerCardList.jsx";
+import {
+  useFetchUserFavoritesRecipesQuery,
+  useFetchUserFollowersQuery,
+  useFetchUserFollowingQuery,
+} from "../../store/services/profileService.js";
+import { useParams } from "react-router-dom";
+import {
+  setUserFavoritesRecipes,
+  setUserFollowers,
+  setUserFollowing,
+} from "../../store/features/profileSlice.js";
 
 const myProfileTabs = [
   {
@@ -46,13 +59,12 @@ const userProfileTabs = [
 ];
 
 const TabContent = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
-  const userPrifileData = useSelector(selectUserProfile);
-
-  const myRecipes = userPrifileData?.createdRecipesCount;
-  const favoriteRecipes = userPrifileData?.favoriteRecipesCount?.data.map((item) => {
-    return item.recipe;
-  });
+  const userFollowers = useSelector(selectFollowers);
+  const userFollowing = useSelector(selectFollowing);
+  const userFavoriteRecipes = useSelector(selectFavoritesRecipes);
 
   const [activeTab, setActiveTab] = useState(
     isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id
@@ -61,6 +73,44 @@ const TabContent = () => {
   useEffect(() => {
     setActiveTab(isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id);
   }, [isAuthorizedUser]);
+
+  const myRecipes = [];
+  // uncomment when service will be fixed
+  // const { data: myRecipes } = useFetchUserRecipesQuery(id);
+
+  const { data: favoriteRecipes } = useFetchUserFavoritesRecipesQuery(
+    { userId: id },
+    {
+      skip: activeTab !== "my-favorites",
+    }
+  );
+
+  const { data: followersData } = useFetchUserFollowersQuery(
+    { userId: id },
+    {
+      skip: activeTab !== "followers",
+    }
+  );
+
+  const { data: followingData } = useFetchUserFollowingQuery(
+    { userId: id },
+    {
+      skip: activeTab !== "following",
+    }
+  );
+
+  useEffect(() => {
+    if (activeTab === "followers" && followersData) {
+      dispatch(setUserFollowers(followersData));
+    } else if (activeTab === "following" && followingData) {
+      dispatch(setUserFollowing(followingData));
+    } else if (activeTab === "my-favorites" && favoriteRecipes) {
+      const favoriteRecipesProccessed = favoriteRecipes?.data.map((item) => {
+        return item.recipe;
+      });
+      dispatch(setUserFavoritesRecipes({ data: favoriteRecipesProccessed }));
+    }
+  }, [activeTab, dispatch, followersData, followingData, favoriteRecipes]);
 
   const getMessage = (profile, tab) => {
     const profileSetup = profile.find(({ id }) => id === tab);
@@ -72,21 +122,22 @@ const TabContent = () => {
       switch (activeTab) {
         case "my-recipes":
           if (myRecipes.total > 0) {
-            return <SmallRecipeCardList data={myRecipes.data} />;
+            return <SmallRecipeCardList data={myRecipes.data} tab="recipe" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
 
         case "my-favorites":
-          if (favoriteRecipes.length > 0) {
-            return <SmallRecipeCardList data={favoriteRecipes} />;
+          if (userFavoriteRecipes.length > 0) {
+            return <SmallRecipeCardList data={userFavoriteRecipes} tab="favorites" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
 
         case "followers":
-          if (myRecipes.total > 0) {
-            return <FollowerCardList data={myRecipes.data} tab="followers" />;
+          if (userFollowers?.length > 0) {
+            return <FollowerCardList data={userFollowers} btnText="follow" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
+
         case "following":
-          if (favoriteRecipes.length > 0) {
-            return <FollowerCardList data={favoriteRecipes} tab="following" />;
+          if (userFollowing?.length > 0) {
+            return <FollowerCardList data={userFollowing} btnText="following" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
         default:
           return null;
@@ -94,12 +145,12 @@ const TabContent = () => {
     } else {
       switch (activeTab) {
         case "recipes":
-          if (myRecipes?.total > 0) {
-            return <SmallRecipeCardList data={myRecipes.data} />;
+          if (myRecipes?.length > 0) {
+            return <SmallRecipeCardList data={myRecipes} />;
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         case "followers":
-          if (favoriteRecipes?.length > 0) {
-            return <FollowerCardList data={myRecipes.data} tab="followers" />;
+          if (userFollowers?.length > 0) {
+            return <FollowerCardList data={userFollowers} />;
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         default:
           return null;
