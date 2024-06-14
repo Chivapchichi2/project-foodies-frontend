@@ -6,7 +6,7 @@ const SelectShared = React.forwardRef(
   ({ options, placeholder, className, onChange, value }, ref) => (
     <Select
       ref={ref}
-      options={options.map((option) => ({ value: option.id, label: option.name }))}
+      options={options.map((option) => ({ value: option._id, label: option.name }))}
       placeholder={placeholder}
       className={className}
       onChange={onChange}

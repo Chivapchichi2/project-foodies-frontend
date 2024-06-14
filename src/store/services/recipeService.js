@@ -65,7 +65,7 @@ export const recipeApi = createApi({
     }),
     createRecipe: builder.mutation({
       query: (newRecipe) => ({
-        upl: "api/recipe",
+        url: "api/recipes",
         method: "POST",
         body: newRecipe,
         invalidatesTags: ["Recipe"],

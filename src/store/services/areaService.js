@@ -5,6 +5,10 @@ export const areaApi = createApi({
   reducerPath: "areaApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    prepareHeaders(headers, { getState }) {
+      const token = getState().auth.token;
+      headers.set("Authorization", `Bearer ${token}`);
+    },
   }),
   tagTypes: ["Areas"],
   endpoints: (builder) => ({

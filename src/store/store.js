@@ -25,7 +25,6 @@ export const store = configureStore({
     [ingredientApi.reducerPath]: ingredientApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [areaApi.reducerPath]: areaApi.reducer,
-
     favoriteRecipes: persistedFavoritesReducer,
   },
   middleware: (getDefaultMiddleware) =>
