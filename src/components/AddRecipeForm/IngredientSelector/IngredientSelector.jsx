@@ -26,7 +26,7 @@ const IngredientSelector = ({
     const ingredient = watch("ingredient");
     const quantity = watch("quantity");
     if (ingredient && quantity) {
-      const selectedIngredient = ingredients.find((item) => item.value === ingredient.value);
+      const selectedIngredient = ingredients.find((item) => item._id === ingredient.value);
 
       setSelectedIngredients([
         ...selectedIngredients,
