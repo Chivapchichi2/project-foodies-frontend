@@ -42,10 +42,14 @@ export const SignUpForm = ({ handleClickSignIn, handleCloseSignUp }) => {
 
   const widthIconEye = useResponsiveValue(768, "20", "18");
 
+  const handleClickSingIn = () => {
+    handleClickSignIn();
+  };
 
   const onSubmit = async (user) => {
     try {
         handleCloseSignUp();
+
       const result = await data(user);
       if (result.error) {
         toast.error(result.error.data.message, {

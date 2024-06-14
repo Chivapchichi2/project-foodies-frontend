@@ -21,6 +21,7 @@
   justify-content: space-around;
   font-size: 14px;
   letter-spacing: -0.28px;
+  color: var(--black);
 }
 
 .profile_big_card_icon {
