@@ -40,6 +40,14 @@ export const recipeApi = createApi({
       }),
       invalidatesTags: ["Recipe"],
     }),
+    createRecipe: builder.mutation({
+      query: (newRecipe) => ({
+        upl: "api/recipe",
+        method: "POST",
+        body: newRecipe,
+        invalidatesTags: ["Recipe"],
+      }),
+    }),
   }),
 });
 
@@ -49,4 +57,5 @@ export const {
   useGetFavoriteRecipesQuery,
   useAddFavoriteRecipeMutation,
   useRemoveFavoriteRecipeMutation,
+  useCreateRecipeMutation,
 } = recipeApi;

@@ -10,6 +10,8 @@ import { persistedAuthReducer } from "./features/authSlice.js";
 // import favoriteRecipesReducer from "./features/favoriteRecipesSlice.js";
 import { recipeApi } from "./services/recipeService.js";
 import { persistedFavoritesReducer } from "./features/favoriteRecipesSlice.js";
+import { categoryApi } from "./services/categoryService.js";
+import { ingredientApi } from "./services/ingredientService.js";
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +21,8 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
     [recipeApi.reducerPath]: recipeApi.reducer,
+    [ingredientApi.reducerPath]: ingredientApi.reducer,
+    [categoryApi.reducerPath]: categoryApi.reducer,
     favoriteRecipes: persistedFavoritesReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -32,6 +36,8 @@ export const store = configureStore({
       .concat(profileApi.middleware)
       .concat(recipeApi.middleware)
       .concat(rtkQueryCatchError),
+      .concat(ingredientApi.middleware)
+      .concat(categoryApi.middleware),
 });
 
 export const persistor = persistStore(store);
