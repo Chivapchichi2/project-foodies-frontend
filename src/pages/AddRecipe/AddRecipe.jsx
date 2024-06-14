@@ -81,11 +81,11 @@ const AddRecipe = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.titleWrapper}>
+        <Title text="add recipe" />
+        <FormTitleText />
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <div className={styles.titleWrapper}>
-          <Title text="add recipe" />
-          <FormTitleText />
-        </div>
         <div className={styles.formWrapper}>
           <ImageUploader
             register={register}
@@ -95,6 +95,7 @@ const AddRecipe = () => {
             watch={watch}
             errors={errors}
           />
+
           <div>
             <div>
               <Input
@@ -107,64 +108,26 @@ const AddRecipe = () => {
               {errors.title && <p>{errors.title.message}</p>}
             </div>
 
-            <div className={styles.textareaWrapper}>
-              <textarea
-                {...register("description")}
-                maxLength="200"
-                placeholder="Enter the description of the dish"
-                className={styles.textarea}
-              />
-              <span className={styles.symbolCounter}>{watch("description")?.length || 0}/200</span>
-              {errors.description && <p>{errors.description.message}</p>}
-            </div>
-            {/* {Category} */}
             <div className={styles.recipeData}>
               <div className={styles.categoryAndTime}>
-                <div>
-                  <label>Category</label>
-                  {isCategoriesLoading ? (
-                    <p>Loading...</p>
-                  ) : (
-                    <SelectShared
-                      options={categories}
-                      placeholder="Select a category"
-                      {...register("category")}
-                      onChange={(selectedOption) => setValue("category", selectedOption.value)}
-                    />
-                  )}
-                  {errors.category && <p>{errors.category.message}</p>}
+                <div className={styles.recipeData}>
+                  <IngredientSelector
+                    control={control}
+                    register={register}
+                    setValue={setValue}
+                    watch={watch}
+                    categories={categories}
+                    cookingTime={cookingTime}
+                    setCookingTime={setCookingTime}
+                    ingredients={ingredients}
+                    selectedIngredients={selectedIngredients}
+                    setSelectedIngredients={setSelectedIngredients}
+                    errors={errors}
+                    isCategoriesLoading={isCategoriesLoading}
+                    isIngredientsLoading={isIngredientsLoading}
+                  />
                 </div>
-
-              <div className={styles.recipeData}>
-                <IngredientSelector
-                  control={control}
-                  register={register}
-                  setValue={setValue}
-                  watch={watch}
-                  categories={categories}
-                  cookingTime={cookingTime}
-                  setCookingTime={setCookingTime}
-                  ingredients={ingredients}
-                  selectedIngredients={selectedIngredients}
-                  setSelectedIngredients={setSelectedIngredients}
-                  errors={errors}
-                />
               </div>
-              {isIngredientsLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <IngredientSelector
-                  control={control}
-                  register={register}
-                  setValue={setValue}
-                  watch={watch}
-                  ingredients={ingredients}
-                  selectedIngredients={selectedIngredients}
-                  setSelectedIngredients={setSelectedIngredients}
-                  errors={errors}
-                />
-              )}
-
             </div>
             <div className={styles.recipeIncstructions}>
               <label className={styles.labelPrep}>Recipe preparation</label>

@@ -33,7 +33,6 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
               <span>Upload a photo</span>
             </div>
           )}
-          {/* <span className={styles.uplodAnotherSpan}>Upload another photo</span> */}
         </label>
       </div>
 
