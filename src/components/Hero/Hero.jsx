@@ -5,22 +5,35 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, CustomModal } from "../shared/index.js";
 import { useState } from "react";
-import { SignInForm } from "src/components";
+import { SignInForm, SignUpForm } from "src/components";
 
 const Hero = () => {
   const token = useSelector(selectToken);
   const navigate = useNavigate();
+  const [active, setActive] = useState("signIn");
+  const [modalSignUpOpen, setModalSignUpOpen] = useState(false);
   const [modalSignInOpen, setModalSignInOpen] = useState(false);
+
+  const handleClickSignUp = () => {
+    setActive("signUp");
+    setModalSignUpOpen(true);
+  };
+
+  const handleClickSignIn = () => {
+    setActive("signIn");
+    setModalSignInOpen(true);
+  };
+
+  const handleCloseSignUp = () => setModalSignUpOpen(false);
+  const handleCloseSignIn = () => setModalSignInOpen(false);
 
   const handlerClick = () => {
     if (!token) {
-      setModalSignInOpen(true);
+      handleClickSignIn();
     } else {
       navigate("/recipe/add");
     }
   };
-
-  const handleCloseSignIn = () => setModalSignInOpen(false);
 
   return (
     <section className={styles.wrap_hero}>
@@ -35,9 +48,13 @@ const Hero = () => {
         onClick={handlerClick}
         classname={styles.link_btn_hero}
       />
-      {modalSignInOpen && (
+      {active === "signIn" ? (
         <CustomModal isOpen={modalSignInOpen} onClose={handleCloseSignIn}>
-          <SignInForm />
+          <SignInForm handleClickSignUp={handleClickSignUp} handleCloseSignIn={handleCloseSignIn} />
+        </CustomModal>
+      ) : (
+        <CustomModal isOpen={modalSignUpOpen} onClose={handleCloseSignUp}>
+          <SignUpForm handleClickSignIn={handleClickSignIn} handleCloseSignUp={handleCloseSignUp}  />
         </CustomModal>
       )}
 

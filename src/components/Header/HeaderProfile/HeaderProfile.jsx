@@ -1,12 +1,13 @@
 import { useState } from "react";
 import IconButton from "../../shared/IconButton/IconButton";
 import styles from "./HeaderProfile.module.css";
+import styleModal from "../HeaderModal/HeaderModal.module.css";
 import cx from "classnames";
 import HeaderProfileMenu from "./HeaderProfileMenu";
 import { useSelector } from "react-redux";
 import { selectAvatarURL, selectName } from "../../../store/features/authSlice";
 import { CustomModal } from "../../shared";
-import { NavLink } from "react-router-dom";
+import HeaderModal from "../HeaderModal/HeaderModal";
 
 const HeaderProfile = ({ isHome, onClick }) => {
   const [toogleOpen, setToogleOpen] = useState(false);
@@ -22,11 +23,6 @@ const HeaderProfile = ({ isHome, onClick }) => {
     setToogleModal(!toogleModal);
   };
 
-  const handlerClickOnLink = (e) => {
-    if (e.target.tagName === "A") {
-      handlerToogleModal();
-    }
-  };
   return (
     <div className={styles.wrap}>
       <div className={styles.wrap_profile} onClick={handlerOpenProfile}>
@@ -57,35 +53,13 @@ const HeaderProfile = ({ isHome, onClick }) => {
         <CustomModal
           isOpen={toogleModal}
           onClose={handlerToogleModal}
-          customeStyles={styles.wrap_modal}
-          btnStyle={styles.btn_close}
+          customeStyles={styleModal.wrap_modal}
+          btnStyle={styleModal.btn_close}
           width="28"
           height="28"
           stroke="#fff"
         >
-          <div onClick={handlerClickOnLink}>
-            <NavLink className={styles.logo_modal} to="/">
-              foodies
-            </NavLink>
-            <nav className={styles.wrap_nav_link}>
-              <ul>
-                <li className={styles.item_nav_link}>
-                  <NavLink to="/" className={styles.nav_link_modal}>
-                    Home
-                  </NavLink>
-                </li>
-                <li className={styles.item_nav_link}>
-                  <NavLink to="/recipe/add" className={styles.nav_link_modal}>
-                    Add recipe
-                  </NavLink>
-                </li>
-              </ul>
-            </nav>
-            <div className={styles.wrap_img_modal}>
-              <div className={cx(styles.smole_img, styles.img_general)}></div>
-              <div className={cx(styles.big_img, styles.img_general)}></div>
-            </div>
-          </div>
+          <HeaderModal handlerToogleModal={handlerToogleModal} />
         </CustomModal>
       )}
     </div>

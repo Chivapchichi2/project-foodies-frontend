@@ -1,19 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
-import axios from "axios";
+
 import styles from "./AddRecipe.module.css";
 
-import CookingTimeCounter from "../../components/AddRecipeForm/CookingTimeCounter/CookingTimeCounter";
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
 import IngredientSelector from "../../components/AddRecipeForm/IngredientSelector/IngredientSelector";
-import SelectShared from "../../components/shared/SelectShared/SelectShared";
+
 import { Input } from "../../components/shared/Input/Input";
 import Button from "../../components/shared/Button/Button";
 import IconButton from "../../components/shared/IconButton/IconButton";
 import Title from "../../components/shared/Title/Title";
 import FormTitleText from "../../components/AddRecipeForm/FormTiltle/FormTiltleText";
+import { useGetCategoriesQuery } from "../../store/services/categoryService";
+import { useGetIngredientsQuery } from "../../store/services/ingredientService";
+import { useCreateRecipeMutation } from "../../store/services/recipeService";
+import { BASE_URL } from "../../utilities/const";
 
 const AddRecipe = () => {
   const {
@@ -28,30 +31,19 @@ const AddRecipe = () => {
     resolver: yupResolver(yupSchema),
   });
 
-  const [categories, setCategories] = useState([]);
-  const [ingredients, setIngredients] = useState([]);
+  const { data: categoriesData, isLoading: isCategoriesLoading } = useGetCategoriesQuery();
+
+  const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
+
+  const [createRecipe] = useCreateRecipeMutation();
+
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
   const [cookingTime, setCookingTime] = useState(1);
 
-  useEffect(() => {
-    axios.get("/api/categories").then((response) => setCategories(response.data));
-    axios.get("/api/ingredients").then((response) => setIngredients(response.data));
-  }, []);
-  // const ingredients = [
-  //   { value: "ingredient1", label: "Ingredient 1" },
-  //   { value: "ingredient2", label: "Ingredient 2" },
-  //   { value: "ingredient3", label: "Ingredient 3" },
-  //   { value: "ingredient4", label: "Ingredient 4" },
-  //   { value: "ingreddsfdsfsdfsdfsdient4", label: "Ingredsfdient 4" },
-  // ];
+  const categories = categoriesData;
 
-  // const categories = [
-  //   { value: "Category1", label: "Category 1" },
-  //   { value: "Category2", label: "Category 2" },
-  //   { value: "Category3", label: "Category 3" },
-  //   { value: "Category4", label: "Category 4" },
-  // ];
+  const ingredients = ingredientsData;
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -71,11 +63,10 @@ const AddRecipe = () => {
       console.log(key, value);
     }
 
-    axios
-      .post("/api/recipes", formData)
+    createRecipe(formData)
       .then(() => {
         // Redirect to user page on success
-        window.location.href = "/api/users/current";
+        window.location.href = `${BASE_URL}api/users/current`;
       })
       .catch((error) => {
         alert("Error: " + error.response.data.message);
@@ -91,8 +82,10 @@ const AddRecipe = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Title text="add recipe" />
-        <FormTitleText />
+        <div className={styles.titleWrapper}>
+          <Title text="add recipe" />
+          <FormTitleText />
+        </div>
         <div className={styles.formWrapper}>
           <ImageUploader
             register={register}
@@ -129,30 +122,50 @@ const AddRecipe = () => {
               <div className={styles.categoryAndTime}>
                 <div>
                   <label>Category</label>
-                  <SelectShared
-                    options={categories}
-                    placeholder="Select a category"
-                    {...register("category")}
-                    onChange={(selectedOption) => setValue("category", selectedOption.value)}
-                  />
+                  {isCategoriesLoading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <SelectShared
+                      options={categories}
+                      placeholder="Select a category"
+                      {...register("category")}
+                      onChange={(selectedOption) => setValue("category", selectedOption.value)}
+                    />
+                  )}
                   {errors.category && <p>{errors.category.message}</p>}
                 </div>
 
-                <CookingTimeCounter cookingTime={cookingTime} setCookingTime={setCookingTime} />
-                {errors.cookingTime && <p>{errors.cookingTime.message}</p>}
+              <div className={styles.recipeData}>
+                <IngredientSelector
+                  control={control}
+                  register={register}
+                  setValue={setValue}
+                  watch={watch}
+                  categories={categories}
+                  cookingTime={cookingTime}
+                  setCookingTime={setCookingTime}
+                  ingredients={ingredients}
+                  selectedIngredients={selectedIngredients}
+                  setSelectedIngredients={setSelectedIngredients}
+                  errors={errors}
+                />
               </div>
-              <IngredientSelector
-                control={control}
-                register={register}
-                setValue={setValue}
-                watch={watch}
-                ingredients={ingredients}
-                selectedIngredients={selectedIngredients}
-                setSelectedIngredients={setSelectedIngredients}
-                errors={errors}
-              />
-            </div>
+              {isIngredientsLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <IngredientSelector
+                  control={control}
+                  register={register}
+                  setValue={setValue}
+                  watch={watch}
+                  ingredients={ingredients}
+                  selectedIngredients={selectedIngredients}
+                  setSelectedIngredients={setSelectedIngredients}
+                  errors={errors}
+                />
+              )}
 
+            </div>
             <div className={styles.recipeIncstructions}>
               <label className={styles.labelPrep}>Recipe preparation</label>
               <div className={styles.textareaWrapper}>

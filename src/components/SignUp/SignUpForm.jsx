@@ -15,7 +15,7 @@ import { Loader } from "../shared/Loader/Loader.jsx";
 
 const customId = "toastId";
 
-export const SignUpForm = ({ handleClickSignIn }) => {
+export const SignUpForm = ({ handleClickSignIn, handleCloseSignUp }) => {
   const {
     register,
     handleSubmit,
@@ -48,6 +48,8 @@ export const SignUpForm = ({ handleClickSignIn }) => {
 
   const onSubmit = async (user) => {
     try {
+        handleCloseSignUp();
+
       const result = await data(user);
       if (result.error) {
         toast.error(result.error.data.message, {
@@ -113,7 +115,7 @@ export const SignUpForm = ({ handleClickSignIn }) => {
           <Button type="submit" text="CREATE" variant={"ripple"} id={"signUp"} />
           <p className={styles.text}>
             I already have an account?{" "}
-            <button type="button" className={styles.link} onClick={handleClickSingIn}>
+            <button className={styles.link} onClick={handleClickSignIn}>
               Sign in
             </button>
           </p>

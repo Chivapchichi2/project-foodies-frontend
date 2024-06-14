@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 
 import { testimonialApi } from "./services/testimonialService.js";
+import { rtkQueryCatchError } from "src/utilities/rtkQueryCatchError.js";
 import { authApi } from "./services/authService.js";
 import { profileApi } from "./services/profileService.js";
 import profileReducer from "./features/profileSlice.js";
@@ -9,6 +10,8 @@ import { persistedAuthReducer } from "./features/authSlice.js";
 // import favoriteRecipesReducer from "./features/favoriteRecipesSlice.js";
 import { recipeApi } from "./services/recipeService.js";
 import { persistedFavoritesReducer } from "./features/favoriteRecipesSlice.js";
+import { categoryApi } from "./services/categoryService.js";
+import { ingredientApi } from "./services/ingredientService.js";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +21,8 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
     [recipeApi.reducerPath]: recipeApi.reducer,
+    [ingredientApi.reducerPath]: ingredientApi.reducer,
+    [categoryApi.reducerPath]: categoryApi.reducer,
     favoriteRecipes: persistedFavoritesReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -29,7 +34,10 @@ export const store = configureStore({
       .concat(testimonialApi.middleware)
       .concat(authApi.middleware)
       .concat(profileApi.middleware)
-      .concat(recipeApi.middleware),
+      .concat(recipeApi.middleware)
+      .concat(rtkQueryCatchError),
+      .concat(ingredientApi.middleware)
+      .concat(categoryApi.middleware),
 });
 
 export const persistor = persistStore(store);
