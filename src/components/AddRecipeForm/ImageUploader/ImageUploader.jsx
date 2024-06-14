@@ -6,8 +6,10 @@ import styles from "./ImageUploader.module.css";
 const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, errors, watch }) => {
   useEffect(() => {
     const subscription = watch((value) => {
-      if (value.thumb[0]) {
-        setImagePreview(URL.createObjectURL(value.thumb[0])) && setValue("image", value.thumb[0]);
+      if (value.thumb && value.thumb[0]) {
+        const objectUrl = URL.createObjectURL(value.thumb[0]);
+        setImagePreview(objectUrl);
+        setValue("image", value.thumb[0]);
       }
     });
     return () => subscription.unsubscribe();
@@ -22,21 +24,27 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
           {imagePreview && (
             <img src={imagePreview} alt="Recipe Preview" className={styles.imagePreview} />
           )}
-          {!imagePreview && (
-            <div className={styles.btnWrapper}>
-              <Icon
-                iconId="icon-capture-photo-camera"
-                width="50px"
-                height="50"
-                customStyle={styles.photoIcon}
-              />
-              <span>Upload a photo</span>
-            </div>
-          )}
+          <div className={styles.btnWrapper}>
+            {!imagePreview && (
+              <>
+                <Icon
+                  iconId="icon-capture-photo-camera"
+                  width="50px"
+                  height="50"
+                  customStyle={styles.photoIcon}
+                />
+                <span>Upload a photo</span>
+              </>
+            )}
+          </div>
         </label>
       </div>
-
-      {imagePreview && <span className={styles.uplodAnotherSpan}>Upload another photo</span>}
+      {imagePreview && (
+        <label className={styles.uploadAnotherSpan}>
+          <Input type="file" name="thumb" register={register} setValue={setValue} errors={errors} />
+          Upload another photo
+        </label>
+      )}
     </div>
   );
 };
