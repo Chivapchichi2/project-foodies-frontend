@@ -63,6 +63,7 @@ const TabContent = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
+  const favoritesRecipes = useSelector(selectFavoritesRecipes);
   const userFollowers = useSelector(selectFollowers);
   const userFollowing = useSelector(selectFollowing);
   const userFavoriteRecipes = useSelector(selectFavoritesRecipes);
@@ -136,7 +137,7 @@ const TabContent = () => {
 
         case "following":
           if (userFollowing?.length > 0) {
-            return <FollowerCardList data={userFollowing} btnText="following" />;
+            return <FollowerCardList data={userFollowing} btnText="unfollow" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
         default:
           return null;
@@ -144,12 +145,12 @@ const TabContent = () => {
     } else {
       switch (activeTab) {
         case "recipes":
-          if (myRecipes?.length > 0) {
-            return <SmallRecipeCardList data={myRecipes} />;
+          if (myRecipes?.total > 0) {
+            return <SmallRecipeCardList data={myRecipes.data} />;
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         case "followers":
           if (userFollowers?.length > 0) {
-            return <FollowerCardList data={userFollowers} />;
+            return <FollowerCardList data={userFollowers} btnText="follow" />;
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         default:
           return null;
