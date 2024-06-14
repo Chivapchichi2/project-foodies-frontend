@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
@@ -16,7 +17,6 @@ import FormTitleText from "../../components/AddRecipeForm/FormTiltle/FormTiltleT
 import { useGetCategoriesQuery } from "../../store/services/categoryService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
 import { useCreateRecipeMutation } from "../../store/services/recipeService";
-import { BASE_URL } from "../../utilities/const";
 
 const AddRecipe = () => {
   const {
@@ -35,7 +35,7 @@ const AddRecipe = () => {
 
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
 
-  const [createRecipe] = useCreateRecipeMutation();
+  const [createRecipe, { isSuccess }] = useCreateRecipeMutation();
 
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
@@ -44,6 +44,12 @@ const AddRecipe = () => {
   const categories = categoriesData;
 
   const ingredients = ingredientsData;
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(`/user/`);
+    }
+  }, [isSuccess, navigate]);
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -63,14 +69,11 @@ const AddRecipe = () => {
       console.log(key, value);
     }
 
-    createRecipe(formData)
-      .then(() => {
-        // Redirect to user page on success
-        window.location.href = `${BASE_URL}api/users/current`;
-      })
-      .catch((error) => {
-        alert("Error: " + error.response.data.message);
-      });
+    try {
+      createRecipe(formData);
+    } catch (error) {
+      alert("Error: " + error.response.data.message);
+    }
   };
 
   const handleReset = () => {
