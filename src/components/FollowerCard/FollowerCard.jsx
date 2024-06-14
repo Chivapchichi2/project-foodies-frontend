@@ -24,7 +24,7 @@ const FollowerCard = ({ data, btnText }) => {
         </div>
         <div>
           <h5 className={styles.name}> {data.name}</h5>
-          <p className={styles.descr}>Own recipes: {data.length}</p>
+          <p className={styles.descr}>Own recipes: {data.totalRecipes}</p>
           <Button text={btnText} variant="follow_user" />
         </div>
       </div>
