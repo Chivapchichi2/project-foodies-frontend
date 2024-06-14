@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userProfile: null,
   isAuthorizedUser: false,
+  recipes: [],
+  favoritesRecipes: [],
   followers: [],
   following: [],
 };
@@ -15,15 +17,28 @@ const profileSlice = createSlice({
       state.userProfile = payload;
       state.isAuthorizedUser = "followingCount" in payload ? true : false;
     },
+    setUserAddedRecipes(state, { payload }) {
+      state.recipes = [...state.recipes, ...payload.data];
+    },
+    setUserFavoritesRecipes(state, { payload }) {
+      state.favoritesRecipes = [...state.favoritesRecipes, ...payload.data];
+    },
+
     setUserFollowers(state, { payload }) {
-      state.followers = [...state.followers, ...payload];
+      state.followers = [...state.followers, ...payload.followers];
     },
     setUserFollowing(state, { payload }) {
-      state.following = [...state.following, ...payload];
+      state.following = [...state.following, ...payload.following];
     },
   },
 });
 
 export default profileSlice.reducer;
 
-export const { getUserProfile, setUserFollowers, setUserFollowing } = profileSlice.actions;
+export const {
+  getUserProfile,
+  setUserFollowers,
+  setUserFollowing,
+  setUserAddedRecipes,
+  setUserFavoritesRecipes,
+} = profileSlice.actions;
