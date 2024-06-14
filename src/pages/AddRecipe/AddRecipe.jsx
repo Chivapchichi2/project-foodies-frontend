@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,14 +9,17 @@ import styles from "./AddRecipe.module.css";
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
 import IngredientSelector from "../../components/AddRecipeForm/IngredientSelector/IngredientSelector";
 
+import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import { Input } from "../../components/shared/Input/Input";
 import Button from "../../components/shared/Button/Button";
 import IconButton from "../../components/shared/IconButton/IconButton";
-import Title from "../../components/shared/Title/Title";
+import SectionTitle from "../../components/shared/SectionTitle/SectionTitle";
 import FormTitleText from "../../components/AddRecipeForm/FormTiltle/FormTiltleText";
 import { useGetCategoriesQuery } from "../../store/services/categoryService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
+import { useGetAreasQuery } from "../../store/services/areaService";
 import { useCreateRecipeMutation } from "../../store/services/recipeService";
+import { useFetchCurrentUserProfileQuery } from "../../store/services/profileService";
 
 const AddRecipe = () => {
   const {
@@ -29,13 +32,17 @@ const AddRecipe = () => {
     reset,
   } = useForm({
     resolver: yupResolver(yupSchema),
+    defaultValues: {
+      selectedIngredients: [],
+    },
   });
 
   const { data: categoriesData, isLoading: isCategoriesLoading } = useGetCategoriesQuery();
-
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
+  const { data: areasData, isLoading: isAreasLoading } = useGetAreasQuery();
+  const { data: userData } = useFetchCurrentUserProfileQuery();
 
-  const [createRecipe, { isSuccess }] = useCreateRecipeMutation();
+  const [createRecipe] = useCreateRecipeMutation();
 
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
@@ -44,33 +51,30 @@ const AddRecipe = () => {
   const categories = categoriesData;
 
   const ingredients = ingredientsData;
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (isSuccess) {
-      navigate(`/user/`);
-    }
-  }, [isSuccess, navigate]);
 
-  const onSubmit = (data) => {
+  const areas = areasData;
+
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
     const formData = new FormData();
 
-    formData.append("image", data.image[0]);
+    formData.append("thumb", data.thumb[0]);
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("category", data.category);
-    formData.append("cookingTime", cookingTime);
+    formData.append("area", data.area);
+    formData.append("time", cookingTime.toString());
     formData.append("instructions", data.instructions);
-    selectedIngredients.forEach((ingredient, index) => {
-      formData.append(`ingredients[${index}][name]`, ingredient.name);
-      formData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
-    });
-
-    for (const [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
+    const ingredients = selectedIngredients.map((ingredient) => ({
+      id: ingredient.id,
+      measure: ingredient.measure,
+    }));
+    formData.append("ingredients", JSON.stringify(ingredients));
 
     try {
-      createRecipe(formData);
+      await createRecipe(formData);
+      navigate(`/user/${userData.id}`);
     } catch (error) {
       alert("Error: " + error.response.data.message);
     }
@@ -81,11 +85,11 @@ const AddRecipe = () => {
     setImagePreview(null);
     setSelectedIngredients([]);
   };
-
   return (
     <div className={styles.container}>
+      <BreadCrumbs currentPage="Add Recipe" />
       <div className={styles.titleWrapper}>
-        <Title text="add recipe" />
+        <SectionTitle text="add recipe" />
         <FormTitleText />
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -120,6 +124,7 @@ const AddRecipe = () => {
                     setValue={setValue}
                     watch={watch}
                     categories={categories}
+                    areas={areas}
                     cookingTime={cookingTime}
                     setCookingTime={setCookingTime}
                     ingredients={ingredients}
@@ -128,6 +133,7 @@ const AddRecipe = () => {
                     errors={errors}
                     isCategoriesLoading={isCategoriesLoading}
                     isIngredientsLoading={isIngredientsLoading}
+                    isAreasLoading={isAreasLoading}
                   />
                 </div>
               </div>
