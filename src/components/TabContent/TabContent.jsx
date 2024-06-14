@@ -22,6 +22,7 @@ import {
   setUserFollowers,
   setUserFollowing,
 } from "../../store/features/profileSlice.js";
+import { Loader } from "../shared/Loader/Loader.jsx";
 
 const myProfileTabs = [
   {
@@ -63,7 +64,6 @@ const TabContent = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
-  const favoritesRecipes = useSelector(selectFavoritesRecipes);
   const userFollowers = useSelector(selectFollowers);
   const userFollowing = useSelector(selectFollowing);
   const userFavoriteRecipes = useSelector(selectFavoritesRecipes);
@@ -76,28 +76,29 @@ const TabContent = () => {
     setActiveTab(isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id);
   }, [isAuthorizedUser]);
 
-  const { data: myRecipes } = useFetchUserRecipesQuery(id);
+  const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery(id);
 
-  const { data: favoriteRecipes } = useFetchUserFavoritesRecipesQuery(
+  const { data: favoriteRecipes, isLoading: loadFavorite } = useFetchUserFavoritesRecipesQuery(
     { userId: id },
     {
       skip: activeTab !== "my-favorites",
     }
   );
 
-  const { data: followersData } = useFetchUserFollowersQuery(
+  const { data: followersData, isLoading: loadFollowers } = useFetchUserFollowersQuery(
     { userId: id },
     {
       skip: activeTab !== "followers",
     }
   );
 
-  const { data: followingData } = useFetchUserFollowingQuery(
+  const { data: followingData, isLoading: loadFollowing } = useFetchUserFollowingQuery(
     { userId: id },
     {
       skip: activeTab !== "following",
     }
   );
+  const isDataLoading = loadRecipes || loadFavorite || loadFollowers || loadFollowing;
 
   useEffect(() => {
     if (activeTab === "followers" && followersData) {
@@ -162,7 +163,7 @@ const TabContent = () => {
   return (
     <div className={styles.container}>
       <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className={styles.content}>{renderContent()}</div>
+      {isDataLoading ? <Loader /> : <div className={styles.content}>{renderContent()}</div>}
     </div>
   );
 };
