@@ -5,10 +5,9 @@ import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
 
 import styles from "./AddRecipe.module.css";
 
-import CookingTimeCounter from "../../components/AddRecipeForm/CookingTimeCounter/CookingTimeCounter";
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
 import IngredientSelector from "../../components/AddRecipeForm/IngredientSelector/IngredientSelector";
-import SelectShared from "../../components/shared/SelectShared/SelectShared";
+
 import { Input } from "../../components/shared/Input/Input";
 import Button from "../../components/shared/Button/Button";
 import IconButton from "../../components/shared/IconButton/IconButton";
@@ -83,8 +82,10 @@ const AddRecipe = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Title text="add recipe" />
-        <FormTitleText />
+        <div className={styles.titleWrapper}>
+          <Title text="add recipe" />
+          <FormTitleText />
+        </div>
         <div className={styles.formWrapper}>
           <ImageUploader
             register={register}
@@ -134,8 +135,20 @@ const AddRecipe = () => {
                   {errors.category && <p>{errors.category.message}</p>}
                 </div>
 
-                <CookingTimeCounter cookingTime={cookingTime} setCookingTime={setCookingTime} />
-                {errors.cookingTime && <p>{errors.cookingTime.message}</p>}
+              <div className={styles.recipeData}>
+                <IngredientSelector
+                  control={control}
+                  register={register}
+                  setValue={setValue}
+                  watch={watch}
+                  categories={categories}
+                  cookingTime={cookingTime}
+                  setCookingTime={setCookingTime}
+                  ingredients={ingredients}
+                  selectedIngredients={selectedIngredients}
+                  setSelectedIngredients={setSelectedIngredients}
+                  errors={errors}
+                />
               </div>
               {isIngredientsLoading ? (
                 <p>Loading...</p>
@@ -151,8 +164,8 @@ const AddRecipe = () => {
                   errors={errors}
                 />
               )}
-            </div>
 
+            </div>
             <div className={styles.recipeIncstructions}>
               <label className={styles.labelPrep}>Recipe preparation</label>
               <div className={styles.textareaWrapper}>

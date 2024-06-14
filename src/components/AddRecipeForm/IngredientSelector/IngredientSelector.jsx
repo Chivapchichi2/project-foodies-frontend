@@ -4,6 +4,7 @@ import { Input } from "../../shared/Input/Input";
 import Button from "../../shared/Button/Button";
 
 import IconButton from "../../shared/IconButton/IconButton";
+import CookingTimeCounter from "../CookingTimeCounter/CookingTimeCounter";
 
 const IngredientSelector = ({
   register,
@@ -13,6 +14,9 @@ const IngredientSelector = ({
   selectedIngredients,
   setSelectedIngredients,
   errors,
+  categories,
+  cookingTime,
+  setCookingTime,
 }) => {
   const addIngredient = () => {
     const ingredient = watch("ingredient");
@@ -30,6 +34,32 @@ const IngredientSelector = ({
 
   return (
     <div className={styles.container}>
+      <div className={styles.textareaWrapper}>
+        <textarea
+          {...register("description")}
+          maxLength="200"
+          placeholder="Enter the description of the dish"
+          className={styles.textarea}
+        />
+        <span className={styles.symbolCounter}>{watch("description")?.length || 0}/200</span>
+        {errors.description && <p>{errors.description.message}</p>}
+      </div>
+      <div className={styles.categoryAndTime}>
+        <div>
+          <label>Category</label>
+          <SelectShared
+            options={categories}
+            placeholder="Select a category"
+            {...register("category")}
+            onChange={(selectedOption) => setValue("category", selectedOption.value)}
+          />
+          {errors.category && <p>{errors.category.message}</p>}
+        </div>
+      </div>
+      <div>
+        <CookingTimeCounter cookingTime={cookingTime} setCookingTime={setCookingTime} />
+        {errors.cookingTime && <p>{errors.cookingTime.message}</p>}
+      </div>
       <div className={styles.ingredientAndQuantity}>
         <div>
           <label>Ingredient</label>
@@ -53,6 +83,25 @@ const IngredientSelector = ({
           />
           {errors.quantity && <p>{errors.quantity.message}</p>}
         </div>
+        <ul className={styles.list}>
+          {selectedIngredients.map((ingredient, index) => (
+            <li key={index} className={styles.listItem}>
+              <div className={styles.imageWrapper}>
+                <img href="" alt="" width="55px" height="55px" className={styles.image} />
+              </div>
+              <div className={styles.textWrapper}>
+                <p>{ingredient.name}</p>
+                <p>{ingredient.quantity}</p>
+              </div>
+              <IconButton
+                iconId="icon-close-btn"
+                type="button"
+                onClick={() => removeIngredient(index)}
+                style={styles.iconBtn}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
       <Button
         text="Add ingridient +"
@@ -61,26 +110,6 @@ const IngredientSelector = ({
         iconId="icon-plus"
         classname={styles.buttonAdd}
       />
-
-      <ul className={styles.list}>
-        {selectedIngredients.map((ingredient, index) => (
-          <li key={index} className={styles.listItem}>
-            <div className={styles.imageWrapper}>
-              <img href="" alt="" width="55px" height="55px" className={styles.image} />
-            </div>
-            <div className={styles.textWrapper}>
-              <p>{ingredient.name}</p>
-              <p>{ingredient.quantity}</p>
-            </div>
-            <IconButton
-              iconId="icon-close-btn"
-              type="button"
-              onClick={() => removeIngredient(index)}
-              style={styles.iconBtn}
-            />
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
