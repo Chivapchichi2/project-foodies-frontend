@@ -7,7 +7,6 @@ import {
   selectFollowers,
   selectFollowing,
   selectIsAuthorizedUser,
-  selectRecipes,
 } from "../../store/selectors/profileSelectors.js";
 import SmallRecipeCardList from "../SmallRecipeCard/SmallRecipeCardList.jsx";
 import FollowerCardList from "../FollowerCard/FollowerCardList.jsx";
@@ -70,7 +69,7 @@ const TabContent = () => {
   const userFavoriteRecipes = useSelector(selectFavoritesRecipes);
 
   const [activeTab, setActiveTab] = useState(
-    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id
+    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id,
   );
 
   useEffect(() => {
@@ -84,21 +83,21 @@ const TabContent = () => {
     { userId: id },
     {
       skip: activeTab !== "my-favorites",
-    }
+    },
   );
 
   const { data: followersData, isLoading: loadFollowers } = useFetchUserFollowersQuery(
     { userId: id },
     {
       skip: activeTab !== "followers",
-    }
+    },
   );
 
   const { data: followingData, isLoading: loadFollowing } = useFetchUserFollowingQuery(
     { userId: id },
     {
       skip: activeTab !== "following",
-    }
+    },
   );
   const isDataLoading = loadRecipes || loadFavorite || loadFollowers || loadFollowing;
 
