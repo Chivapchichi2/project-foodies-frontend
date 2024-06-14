@@ -22,6 +22,7 @@ import {
   setUserFollowers,
   setUserFollowing,
 } from "../../store/features/profileSlice.js";
+import { Loader } from "../shared/Loader/Loader.jsx";
 
 const myProfileTabs = [
   {
@@ -68,35 +69,37 @@ const TabContent = () => {
   const userFavoriteRecipes = useSelector(selectFavoritesRecipes);
 
   const [activeTab, setActiveTab] = useState(
-    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id
+    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id,
   );
 
   useEffect(() => {
     setActiveTab(isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id);
   }, [isAuthorizedUser]);
 
-  const { data: myRecipes } = useFetchUserRecipesQuery(id);
+  const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery(id);
+  // add checks for tab, as in the function bellow
 
-  const { data: favoriteRecipes } = useFetchUserFavoritesRecipesQuery(
+  const { data: favoriteRecipes, isLoading: loadFavorite } = useFetchUserFavoritesRecipesQuery(
     { userId: id },
     {
       skip: activeTab !== "my-favorites",
-    }
+    },
   );
 
-  const { data: followersData } = useFetchUserFollowersQuery(
+  const { data: followersData, isLoading: loadFollowers } = useFetchUserFollowersQuery(
     { userId: id },
     {
       skip: activeTab !== "followers",
-    }
+    },
   );
 
-  const { data: followingData } = useFetchUserFollowingQuery(
+  const { data: followingData, isLoading: loadFollowing } = useFetchUserFollowingQuery(
     { userId: id },
     {
       skip: activeTab !== "following",
-    }
+    },
   );
+  const isDataLoading = loadRecipes || loadFavorite || loadFollowers || loadFollowing;
 
   useEffect(() => {
     if (activeTab === "followers" && followersData) {
@@ -110,6 +113,10 @@ const TabContent = () => {
       dispatch(setUserFavoritesRecipes({ data: favoriteRecipesProccessed }));
     }
   }, [activeTab, dispatch, followersData, followingData, favoriteRecipes]);
+
+  // useEffect(() => {
+  // add logic for update if data in store was changed (added/deleted)
+  // }, [selectRecipes, userFavoriteRecipes, userFollowers, userFollowing]);
 
   const getMessage = (profile, tab) => {
     const profileSetup = profile.find(({ id }) => id === tab);
@@ -136,7 +143,7 @@ const TabContent = () => {
 
         case "following":
           if (userFollowing?.length > 0) {
-            return <FollowerCardList data={userFollowing} btnText="following" />;
+            return <FollowerCardList data={userFollowing} btnText="unfollow" />;
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
         default:
           return null;
@@ -144,12 +151,12 @@ const TabContent = () => {
     } else {
       switch (activeTab) {
         case "recipes":
-          if (myRecipes?.length > 0) {
-            return <SmallRecipeCardList data={myRecipes} />;
+          if (myRecipes?.total > 0) {
+            return <SmallRecipeCardList data={myRecipes.data} />;
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         case "followers":
           if (userFollowers?.length > 0) {
-            return <FollowerCardList data={userFollowers} />;
+            return <FollowerCardList data={userFollowers} btnText="follow" />;
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         default:
           return null;
@@ -161,7 +168,7 @@ const TabContent = () => {
   return (
     <div className={styles.container}>
       <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className={styles.content}>{renderContent()}</div>
+      {isDataLoading ? <Loader /> : <div className={styles.content}>{renderContent()}</div>}
     </div>
   );
 };

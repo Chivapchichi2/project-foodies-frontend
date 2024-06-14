@@ -12,6 +12,7 @@ import { recipeApi } from "./services/recipeService.js";
 import { persistedFavoritesReducer } from "./features/favoriteRecipesSlice.js";
 import { categoryApi } from "./services/categoryService.js";
 import { ingredientApi } from "./services/ingredientService.js";
+import { areaApi } from "./services/areaService.js";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     [recipeApi.reducerPath]: recipeApi.reducer,
     [ingredientApi.reducerPath]: ingredientApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
+    [areaApi.reducerPath]: areaApi.reducer,
     favoriteRecipes: persistedFavoritesReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -37,7 +39,8 @@ export const store = configureStore({
       .concat(recipeApi.middleware)
       .concat(rtkQueryCatchError)
       .concat(ingredientApi.middleware)
-      .concat(categoryApi.middleware),
+      .concat(categoryApi.middleware)
+      .concat(areaApi.middleware),
 });
 
 export const persistor = persistStore(store);

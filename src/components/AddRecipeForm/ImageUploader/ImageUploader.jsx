@@ -6,8 +6,8 @@ import styles from "./ImageUploader.module.css";
 const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, errors, watch }) => {
   useEffect(() => {
     const subscription = watch((value) => {
-      if (value.image[0]) {
-        setImagePreview(URL.createObjectURL(value.image[0])) && setValue("image", value.image[0]);
+      if (value.thumb[0]) {
+        setImagePreview(URL.createObjectURL(value.thumb[0])) && setValue("image", value.thumb[0]);
       }
     });
     return () => subscription.unsubscribe();
@@ -17,8 +17,8 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
     <div className={styles.wrapper}>
       <div className={styles.uploadBox}>
         <label className={styles.customUploadBtn}>
-          <Input type="file" name="image" register={register} setValue={setValue} errors={errors} />
-          {errors.image && <p>{errors.image.message}</p>}
+          <Input type="file" name="thumb" register={register} setValue={setValue} errors={errors} />
+          {errors.thumb && <p>{errors.thumb.message}</p>}
           {imagePreview && (
             <img src={imagePreview} alt="Recipe Preview" className={styles.imagePreview} />
           )}

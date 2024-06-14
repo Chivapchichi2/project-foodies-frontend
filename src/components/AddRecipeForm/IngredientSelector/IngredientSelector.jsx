@@ -15,25 +15,31 @@ const IngredientSelector = ({
   setSelectedIngredients,
   errors,
   categories,
+  areas,
   cookingTime,
   setCookingTime,
   isIngredientsLoading,
   isCategoriesLoading,
+  isAreasLoading,
 }) => {
   const [isIngredientListVisible, setIsIngredientListVisible] = useState(false);
-
+  const ingredient = watch("ingredient");
+  const measure = watch("measure");
   const addIngredient = () => {
-    const ingredient = watch("ingredient");
-    const quantity = watch("quantity");
-    if (ingredient && quantity) {
+    if (ingredient && measure) {
       const selectedIngredient = ingredients.find((item) => item._id === ingredient.value);
 
       setSelectedIngredients([
         ...selectedIngredients,
-        { name: ingredient.label, quantity, imageUrl: selectedIngredient.img },
+        {
+          id: ingredient.value,
+          measure,
+          imageUrl: selectedIngredient.img,
+          label: ingredient.label,
+        },
       ]);
       setValue("ingredient", null);
-      setValue("quantity", "");
+      setValue("measure", "");
       setIsIngredientListVisible(true);
     }
   };
@@ -67,7 +73,23 @@ const IngredientSelector = ({
               options={categories}
               placeholder="Select a category"
               {...register("category")}
-              onChange={(selectedOption) => setValue("category", selectedOption.value)}
+              onChange={(selectedOption) => setValue("category", selectedOption.label)}
+            />
+            {errors.category && <p>{errors.category.message}</p>}
+          </div>
+        )}
+      </div>
+      <div className={styles.categoryAndTime}>
+        {isAreasLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <label>Area</label>
+            <SelectShared
+              options={areas}
+              placeholder="Select area"
+              {...register("area")}
+              onChange={(selectedOption) => setValue("area", selectedOption.label)}
             />
             {errors.category && <p>{errors.category.message}</p>}
           </div>
@@ -97,12 +119,12 @@ const IngredientSelector = ({
         <div>
           <Input
             type="text"
-            name="quantity"
+            name="measure"
             register={register}
             placeholder="Enter quantity"
             classname={styles.inputQuantity}
           />
-          {errors.quantity && <p>{errors.quantity.message}</p>}
+          {errors.measure && <p>{errors.measure.message}</p>}
         </div>
       </div>
       {isIngredientListVisible && (
@@ -112,15 +134,15 @@ const IngredientSelector = ({
               <div className={styles.imageWrapper}>
                 <img
                   src={ingredient.imageUrl}
-                  alt={ingredient.name}
+                  alt={ingredient.label}
                   width="55px"
                   height="55px"
                   className={styles.image}
                 />
               </div>
               <div className={styles.textWrapper}>
-                <p>{ingredient.name}</p>
-                <p>{ingredient.quantity}</p>
+                <p>{ingredient.label}</p>
+                <p>{ingredient.measure}</p>
               </div>
               <IconButton
                 iconId="icon-close-btn"

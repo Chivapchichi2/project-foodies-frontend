@@ -4,6 +4,7 @@ import { useGetTestimonialsQuery } from "../../store/services/testimonialService
 import { TestimonialsSwiper } from "src/components";
 import Hero from "../../components/Hero";
 import { Loader } from "../../components/shared/Loader/Loader.jsx";
+import { Recipes } from "../../components/Recipes/Recipes.jsx";
 
 const Home = () => {
   const [getTestimanials, setGetTestimanials] = useState([]);
@@ -22,15 +23,9 @@ const Home = () => {
   return (
     <>
       <Hero />
-      {/*<div*/}
-      {/*  style={{*/}
-      {/*    width: 1440,*/}
-      {/*    padding: 80,*/}
-      {/*    margin: "0 auto",*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  <RecipeNavigation />*/}
-      {/*</div>*/}
+      {/* <Categories /> */}
+      <Recipes category={"beef"} />
+
       {isLoading ? <Loader /> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
     </>
   );
