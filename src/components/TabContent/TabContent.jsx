@@ -72,22 +72,22 @@ const TabContent = () => {
   const userFavoriteRecipes = useSelector(selectFavoritesRecipes);
 
   const [currentPage, setCurrentPage] = useState(1);
-  // const [nextPage, setNextPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [activeTab, setActiveTab] = useState(
     isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id
   );
-  console.log("activeTab", activeTab);
 
   const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery({
     userId: id,
-    // skip: currentPage === nextPage,
     page: currentPage,
   });
+
   // add checks for tab, as in the function bellow
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
 
   const handlePageChange = ({ selected }) => {
-    // setNextPage(selected + 1);
     setCurrentPage(selected + 1);
   };
 
@@ -96,17 +96,19 @@ const TabContent = () => {
   }, [isAuthorizedUser]);
 
   const { data: favoriteRecipes, isLoading: loadFavorite } = useFetchUserFavoritesRecipesQuery({
-    skip: activeTab !== "my-favorites",
     page: currentPage,
+    skip: activeTab !== "my-favorites",
   });
 
   const { data: followersData, isLoading: loadFollowers } = useFetchUserFollowersQuery({
     userId: id,
+    page: currentPage,
     skip: activeTab !== "followers",
   });
 
   const { data: followingData, isLoading: loadFollowing } = useFetchUserFollowingQuery({
     skip: activeTab !== "following",
+    page: currentPage,
   });
   const isDataLoading = loadRecipes || loadFavorite || loadFollowers || loadFollowing;
 
@@ -121,9 +123,7 @@ const TabContent = () => {
       setTotalPages(followingData.totalPages);
       dispatch(setUserFollowing(followingData.followingWithRecipes));
     } else if (activeTab === "my-favorites" && favoriteRecipes) {
-      console.log("in favorite");
       setTotalPages(favoriteRecipes.totalPages);
-      setCurrentPage(1);
       const favoriteRecipesProccessed = favoriteRecipes?.data.map((item) => {
         return item.recipe;
       });
@@ -192,18 +192,17 @@ const TabContent = () => {
   const menuItems = isAuthorizedUser ? myProfileTabs : userProfileTabs;
 
   return (
-    <>
-      <div className={styles.container}>
-        <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
-        {isDataLoading ? <Loader /> : <div className={styles.content}>{renderContent()}</div>}
-      </div>
+    <div className={styles.container}>
+      <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
+      {isDataLoading ? <Loader /> : <div className={styles.content}>{renderContent()}</div>}
       {totalPages > 1 && (
         <Pagination
           pageCount={totalPages}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
       )}
-    </>
+    </div>
   );
 };
 

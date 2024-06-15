@@ -2,9 +2,8 @@ import ReactPaginate from "react-paginate";
 import styles from "./Pagination.module.css";
 import { useEffect, useState } from "react";
 
-const Pagination = ({ pageCount, onPageChange }) => {
+const Pagination = ({ pageCount, onPageChange, currentPage }) => {
   const [, setPageRangeDisplayed] = useState(getPageRangeDisplayed());
-
   useEffect(() => {
     const handleResize = () => {
       setPageRangeDisplayed(getPageRangeDisplayed());
@@ -43,7 +42,7 @@ const Pagination = ({ pageCount, onPageChange }) => {
       nextLinkClassName={styles.nextItem}
       disabledClassName={styles.disabled}
       pageClassName={styles.pageItem}
-      forcePage={0}
+      forcePage={currentPage - 1}
       renderOnZeroPageCount={null}
     />
   );

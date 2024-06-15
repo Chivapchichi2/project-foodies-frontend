@@ -68,7 +68,11 @@ export const Recipes = ({ category }) => {
         <div className={styles.recipes_list_wrapp}>
           {recipes && <RecipeCardList recipes={recipes} />}
           {recipes?.totalPages > 1 && (
-            <Pagination pageCount={recipes.totalPages} onPageChange={handlePageChange} currentPage={currentPage}/>
+            <Pagination
+              pageCount={recipes.totalPages}
+              onPageChange={handlePageChange}
+              currentPage={currentPage}
+            />
           )}
         </div>
       </div>

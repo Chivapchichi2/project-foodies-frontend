@@ -26,12 +26,13 @@
   border: 1px solid var(--black-10);
   text-decoration: none;
   cursor: pointer;
-  transition: transform var(--transition);
+  transition: baground-color var(--transition), color var(--transition);
 }
 
 .previousItem:hover,
 .nextItem:hover {
-  transform: scale(1.2);
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .pageLink {
@@ -42,16 +43,15 @@
   border: 1px solid #ddd;
   border-radius: 50px;
   cursor: pointer;
-  transition: transform var(--transition);
+  transition: baground-color var(--transition), color var(--transition);
 }
 
 .pageLink:hover {
-  transform: scale(1.2);
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .active .pageLink {
-  background-color: var(--black);
-  color: var(--white);
   border: 1px solid var(--black);
 }
 
