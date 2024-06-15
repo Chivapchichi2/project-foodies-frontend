@@ -23,6 +23,9 @@ const yupSchema = yup.object().shape({
         "image/tiff",
       ];
       return supportedFormats.includes(value[0]?.type);
+    })
+    .test("fileSize", "The file is too large", (file) => {
+      return file && file.size <= 2000000;
     }),
   title: yup.string().required("Title is required"),
   description: yup
