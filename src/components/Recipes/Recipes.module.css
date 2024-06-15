@@ -30,17 +30,13 @@
 .category_section {
   max-width: 343px;
   margin: 0 auto;
+  margin-bottom: 64px;
 }
 
 .category_selects {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-bottom: 32px;
-}
-
-.recipes_list_wrapp {
-  margin-bottom: 32px;
 }
 
 .recipes_search_wrapp {
@@ -48,6 +44,7 @@
   flex-direction: column;
   align-items: center;
   gap: 32px;
+  margin-bottom: 32px;
 }
 
 @media screen and (min-width: 768px) {
@@ -57,6 +54,7 @@
 
   .category_section {
     max-width: 704px;
+    margin-bottom: 100px;
   }
 
   .recipes_search_wrapp {
@@ -64,6 +62,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 18px;
+    margin-bottom: 60px;
   }
 }
 
@@ -79,5 +78,6 @@
 
   .category_section {
     max-width: 1280px;
+    margin-bottom: 120px;
   }
 }

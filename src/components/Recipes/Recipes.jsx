@@ -7,16 +7,19 @@ import SelectShared from "../shared/SelectShared/SelectShared";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
 import { useEffect, useState } from "react";
+import Pagination from "../Pagination";
 
 export const Recipes = ({ category }) => {
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
   const { data: areaData, isLoading: isAreaLoading } = useGetAreasQuery();
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const { data: recipes, refetch } = useGetRecipesQuery({
     category,
     ingredient: selectedIngredient,
     area: selectedArea,
+    page: currentPage,
   });
 
   useEffect(() => {
@@ -25,6 +28,9 @@ export const Recipes = ({ category }) => {
 
   const handleSelectChange = (funcOption, selectedOption) => {
     funcOption(selectedOption);
+  };
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected + 1);
   };
 
   return (
@@ -61,6 +67,9 @@ export const Recipes = ({ category }) => {
         </div>
         <div className={styles.recipes_list_wrapp}>
           {recipes && <RecipeCardList recipes={recipes} />}
+          {recipes?.totalPages > 1 && (
+            <Pagination pageCount={recipes.totalPages} onPageChange={handlePageChange} currentPage={currentPage}/>
+          )}
         </div>
       </div>
     </section>

@@ -10,7 +10,7 @@ import {SectionTitle} from "../shared/index.js";
 
 export default function TestimonialsSwiper({getTestimanials}) {
     return (
-        <section>
+        <section className={styles.wrap_testimonial}>
             <p className={styles.text_first}>What our customer say</p>
             <SectionTitle text={"Testimonials"} addStyle={styles.section_title}/>
             <Swiper
