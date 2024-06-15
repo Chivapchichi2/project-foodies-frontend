@@ -6,10 +6,8 @@ import styles from "./ImageUploader.module.css";
 const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, errors, watch }) => {
   useEffect(() => {
     const subscription = watch((value) => {
-      if (value.thumb && value.thumb[0]) {
-        const objectUrl = URL.createObjectURL(value.thumb[0]);
-        setImagePreview(objectUrl);
-        setValue("image", value.thumb[0]);
+      if (value.thumb[0]) {
+        setImagePreview(URL.createObjectURL(value.thumb[0])) && setValue("image", value.thumb[0]);
       }
     });
     return () => subscription.unsubscribe();
