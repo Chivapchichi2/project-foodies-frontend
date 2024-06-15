@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 16px;
   width: 343px;
-  margin: 64px 0 16px 16px;
+  margin: 64px 0 32px;
 }
 
 .categories_title {
@@ -22,7 +22,7 @@
 @media screen and (min-width: 768px) {
   .categories_info_wrapp {
     width: 531px;
-    margin: 100px 0 20px 32px;
+    margin: 100px 0 32px 10px;
   }
   .categories_title {
     font-size: 40px;
@@ -34,6 +34,6 @@
 
 @media screen and (min-width: 1440px) {
   .categories_info_wrapp {
-    margin: 120px 0 20px 80px;
+    margin: 120px 0 40px 8px;
   }
 }

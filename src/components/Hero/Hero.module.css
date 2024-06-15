@@ -1,7 +1,8 @@
 .wrap_hero {
   background-color: var(--black);
-  margin: 0 8px;
   border-radius: 0 0 20px 20px;
+  width: 359px;
+  margin: 0 auto;
 
   display: flex;
   flex-direction: column;
@@ -85,7 +86,7 @@
 
 @media screen and (min-width: 768px) {
   .wrap_hero {
-    margin: 0 16px;
+    min-width: 736px;
   }
 
   .title {
@@ -138,7 +139,7 @@
 
 @media screen and (min-width: 1440px) {
   .wrap_hero {
-    margin: 0 20px;
+    min-width: 1400px;
   }
 
   .title {
