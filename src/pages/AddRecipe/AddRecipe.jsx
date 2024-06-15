@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
-
+import { toast } from "react-toastify";
 import styles from "./AddRecipe.module.css";
 
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
@@ -55,7 +55,7 @@ const AddRecipe = () => {
   const areas = areasData;
 
   const navigate = useNavigate(); //
-
+  const customId = "toastId";
   const onSubmit = async (data) => {
     const formData = new FormData();
 
@@ -73,10 +73,22 @@ const AddRecipe = () => {
     formData.append("ingredients", JSON.stringify(ingredients));
 
     try {
-      await createRecipe(formData);
-      navigate(`/user/${userData.id}`);
+      const result = await createRecipe(formData);
+      if (result.error) {
+        toast.error(result.error.data.message, {
+          toastId: customId,
+        });
+      } else {
+        navigate(`/user/${userData.id}`);
+        toast.success("Sign In successful", {
+          toastId: customId,
+        });
+        reset();
+      }
     } catch (error) {
-      alert("Error: " + error.response.data.message);
+      toast.error(error.message, {
+        toastId: customId,
+      });
     }
   };
 
