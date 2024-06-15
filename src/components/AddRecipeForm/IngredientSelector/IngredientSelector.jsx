@@ -92,7 +92,7 @@ const IngredientSelector = ({
               {...register("area")}
               onChange={(selectedOption) => setValue("area", selectedOption.label)}
             />
-            {errors.category && <p>{errors.category.message}</p>}
+            {errors.area && <p>{errors.area.message}</p>}
           </div>
         )}
       </div>

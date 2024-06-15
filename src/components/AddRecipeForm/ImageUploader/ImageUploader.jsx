@@ -7,18 +7,18 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
   useEffect(() => {
     const subscription = watch((value) => {
       if (value.thumb[0]) {
-        setImagePreview(URL.createObjectURL(value.thumb[0])) && setValue("image", value.thumb[0]);
+        setImagePreview(URL.createObjectURL(value.thumb[0])) && setValue("thumb", value.thumb[0]);
       }
     });
     return () => subscription.unsubscribe();
   }, [watch, setImagePreview, setValue]);
-
+  console.log(errors);
   return (
     <div className={styles.wrapper}>
       <div className={styles.uploadBox}>
         <label className={styles.customUploadBtn}>
           <Input type="file" name="thumb" register={register} setValue={setValue} errors={errors} />
-          {errors.thumb && <p>{errors.thumb.message}</p>}
+
           {imagePreview && (
             <img src={imagePreview} alt="Recipe Preview" className={styles.imagePreview} />
           )}
@@ -34,6 +34,8 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
                 <span>Upload a photo</span>
               </>
             )}
+
+            {errors.thumb && <p>{errors.thumb.message}</p>}
           </div>
         </label>
       </div>
