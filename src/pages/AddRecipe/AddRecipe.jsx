@@ -146,6 +146,7 @@ const AddRecipe = () => {
               <div className={styles.textareaWrapper}>
                 <textarea
                   {...register("instructions")}
+                  name="instructions"
                   placeholder="Enter recipe"
                   maxLength="200"
                   className={styles.textarea}

@@ -12,7 +12,7 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
     });
     return () => subscription.unsubscribe();
   }, [watch, setImagePreview, setValue]);
-  console.log(errors);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.uploadBox}>

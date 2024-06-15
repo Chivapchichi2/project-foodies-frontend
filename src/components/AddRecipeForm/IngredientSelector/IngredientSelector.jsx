@@ -61,6 +61,7 @@ const IngredientSelector = ({
       <div className={styles.textareaWrapper}>
         <textarea
           {...register("description")}
+          name="description"
           maxLength="200"
           placeholder="Enter the description of the dish"
           className={styles.textarea}
