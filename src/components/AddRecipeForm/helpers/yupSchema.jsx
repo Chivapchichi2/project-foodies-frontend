@@ -11,18 +11,22 @@ const SUPPORTED_FORMATS = [
 const yupSchema = yup.object().shape({
   thumb: yup
     .mixed()
-    .required("Image is required")
+    .test("file", "You need to provide a file", (value) => {
+      if (value.length > 0) {
+        return true;
+      }
+      return false;
+    })
+    .test("file", "You need to provide a file", (value) => {
+      if (value.length > 0) {
+        return true;
+      }
+      return false;
+    })
     .test("fileType", "Invalid file format", (value) => {
       if (!value || typeof value === "string") return true;
-      const supportedFormats = [
-        "image/jpg",
-        "image/jpeg",
-        "image/png",
-        "image/gif",
-        "image/bmp",
-        "image/tiff",
-      ];
-      return supportedFormats.includes(value[0]?.type);
+
+      return SUPPORTED_FORMATS.includes(value[0]?.type);
     })
     .test("fileSize", "The file is too large", (file) => {
       return file && file.size <= 2000000;
@@ -49,7 +53,6 @@ const yupSchema = yup.object().shape({
     .max(200, "Instructions must be at most 200 characters")
     .required("Instructions are required"),
 });
-
 export default yupSchema;
 
 // const yupSchema = yup.object().shape({
