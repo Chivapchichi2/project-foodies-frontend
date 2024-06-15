@@ -1,7 +1,29 @@
 import * as yup from "yup";
 
+const SUPPORTED_FORMATS = [
+  "image/jpg",
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/bmp",
+  "image/tiff",
+];
 const yupSchema = yup.object().shape({
-  thumb: yup.mixed().required("Image is required"),
+  thumb: yup
+    .mixed()
+    .required("Image is required")
+    .test("fileType", "Invalid file format", (value) => {
+      if (!value || typeof value === "string") return true;
+      const supportedFormats = [
+        "image/jpg",
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/bmp",
+        "image/tiff",
+      ];
+      return supportedFormats.includes(value[0]?.type);
+    }),
   title: yup.string().required("Title is required"),
   description: yup
     .string()
