@@ -135,6 +135,9 @@ const AddRecipe = () => {
                     isIngredientsLoading={isIngredientsLoading}
                     isAreasLoading={isAreasLoading}
                   />
+                  {errors.selectedIngredients && (
+                    <p className={styles.error}>{errors.selectedIngredients.message}</p>
+                  )}
                 </div>
               </div>
             </div>
