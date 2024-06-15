@@ -12,14 +12,6 @@ export const authApi = createApi({
   }),
   tagTypes: ["Auth"],
   endpoints: (builder) => ({
-    register: builder.mutation({
-      query: (option) => ({
-        url: "api/users/signup",
-        method: "POST",
-        body: option,
-      }),
-      invalidatesTags: ["Auth"],
-    }),
     login: builder.mutation({
       query: (option) => ({
         url: "api/users/signin",
@@ -38,4 +30,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useLogoutMutation } = authApi;
+export const { useLoginMutation, useLogoutMutation } = authApi;

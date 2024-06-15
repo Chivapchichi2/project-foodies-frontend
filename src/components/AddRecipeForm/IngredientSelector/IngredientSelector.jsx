@@ -1,10 +1,11 @@
+import { useState } from "react";
 import styles from "./IngredientSelector.module.css";
 import SelectShared from "../../shared/SelectShared/SelectShared";
 import { Input } from "../../shared/Input/Input";
 import Button from "../../shared/Button/Button";
-
 import IconButton from "../../shared/IconButton/IconButton";
 import CookingTimeCounter from "../CookingTimeCounter/CookingTimeCounter";
+import { Loader } from "../../shared/Loader/Loader";
 
 const IngredientSelector = ({
   register,
@@ -15,21 +16,44 @@ const IngredientSelector = ({
   setSelectedIngredients,
   errors,
   categories,
+  areas,
   cookingTime,
   setCookingTime,
+  isIngredientsLoading,
+  isCategoriesLoading,
+  isAreasLoading,
 }) => {
+  const [isIngredientListVisible, setIsIngredientListVisible] = useState(false);
+  const ingredient = watch("ingredient");
+  const measure = watch("measure");
   const addIngredient = () => {
-    const ingredient = watch("ingredient");
-    const quantity = watch("quantity");
-    if (ingredient && quantity) {
-      setSelectedIngredients([...selectedIngredients, { name: ingredient.label, quantity }]);
+    if (ingredient && measure) {
+      const selectedIngredient = ingredients.find((item) => item._id === ingredient.value);
+
+      setSelectedIngredients([
+        ...selectedIngredients,
+        {
+          id: ingredient.value,
+          measure,
+          imageUrl: selectedIngredient.img,
+          label: ingredient.label,
+        },
+      ]);
       setValue("ingredient", null);
-      setValue("quantity", "");
+      setValue("measure", "");
+      setIsIngredientListVisible(true);
     }
   };
 
   const removeIngredient = (index) => {
     setSelectedIngredients(selectedIngredients.filter((_, i) => i !== index));
+    if (selectedIngredients.length <= 1) {
+      setIsIngredientListVisible(false);
+    }
+  };
+
+  const renderLoader = (isLoading) => {
+    return isLoading ? <Loader /> : null;
   };
 
   return (
@@ -37,6 +61,7 @@ const IngredientSelector = ({
       <div className={styles.textareaWrapper}>
         <textarea
           {...register("description")}
+          name="description"
           maxLength="200"
           placeholder="Enter the description of the dish"
           className={styles.textarea}
@@ -45,53 +70,81 @@ const IngredientSelector = ({
         {errors.description && <p>{errors.description.message}</p>}
       </div>
       <div className={styles.categoryAndTime}>
-        <div>
-          <label>Category</label>
-          <SelectShared
-            options={categories}
-            placeholder="Select a category"
-            {...register("category")}
-            onChange={(selectedOption) => setValue("category", selectedOption.value)}
-          />
-          {errors.category && <p>{errors.category.message}</p>}
-        </div>
+        {renderLoader(isCategoriesLoading) || (
+          <div>
+            <label>Category</label>
+            <SelectShared
+              options={categories}
+              placeholder="Select a category"
+              {...register("category")}
+              onChange={(selectedOption) => setValue("category", selectedOption.label)}
+            />
+            {errors.category && <p>{errors.category.message}</p>}
+          </div>
+        )}
+      </div>
+      <div className={styles.categoryAndTime}>
+        {renderLoader(isAreasLoading) || (
+          <div>
+            <label>Area</label>
+            <SelectShared
+              options={areas}
+              placeholder="Select area"
+              {...register("area")}
+              onChange={(selectedOption) => setValue("area", selectedOption.label)}
+            />
+            {errors.area && <p>{errors.area.message}</p>}
+          </div>
+        )}
       </div>
       <div>
         <CookingTimeCounter cookingTime={cookingTime} setCookingTime={setCookingTime} />
         {errors.cookingTime && <p>{errors.cookingTime.message}</p>}
       </div>
       <div className={styles.ingredientAndQuantity}>
-        <div>
-          <label>Ingredient</label>
-          <SelectShared
-            options={ingredients}
-            placeholder="Select an ingredient"
-            className={styles.select}
-            {...register("ingredient")}
-            onChange={(selectedOption) => setValue("ingredient", selectedOption)}
-          />
-          {errors.ingredient && <p>{errors.ingredient.message}</p>}
-        </div>
+        {isIngredientsLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <label>Ingredient</label>
+            <SelectShared
+              options={ingredients}
+              placeholder="Select an ingredient"
+              className={styles.select}
+              {...register("ingredient")}
+              onChange={(selectedOption) => setValue("ingredient", selectedOption)}
+            />
+            {errors.ingredient && <p>{errors.ingredient.message}</p>}
+          </div>
+        )}
 
         <div>
           <Input
             type="text"
-            name="quantity"
+            name="measure"
             register={register}
             placeholder="Enter quantity"
             classname={styles.inputQuantity}
           />
-          {errors.quantity && <p>{errors.quantity.message}</p>}
+          {errors.measure && <p>{errors.measure.message}</p>}
         </div>
+      </div>
+      {isIngredientListVisible && (
         <ul className={styles.list}>
           {selectedIngredients.map((ingredient, index) => (
             <li key={index} className={styles.listItem}>
               <div className={styles.imageWrapper}>
-                <img href="" alt="" width="55px" height="55px" className={styles.image} />
+                <img
+                  src={ingredient.imageUrl}
+                  alt={ingredient.label}
+                  width="55px"
+                  height="55px"
+                  className={styles.image}
+                />
               </div>
               <div className={styles.textWrapper}>
-                <p>{ingredient.name}</p>
-                <p>{ingredient.quantity}</p>
+                <p>{ingredient.label}</p>
+                <p>{ingredient.measure}</p>
               </div>
               <IconButton
                 iconId="icon-close-btn"
@@ -102,9 +155,9 @@ const IngredientSelector = ({
             </li>
           ))}
         </ul>
-      </div>
+      )}
       <Button
-        text="Add ingridient +"
+        text="Add ingredient +"
         type="button"
         onClick={addIngredient}
         iconId="icon-plus"

@@ -16,6 +16,10 @@ export const profileApi = createApi({
       query: (userId) => `api/users/details/${userId}`,
       providesTags: ["Profile"],
     }),
+    fetchCurrentUserProfile: builder.query({
+      query: () => `api/users/current`,
+      providesTags: ["Profile"],
+    }),
     fetchUserFollowers: builder.query({
       query: ({ userId, page = 1, limit = 10 }) =>
         `api/users/followers/${userId}?page=${page}&limit=${limit}`,
@@ -47,6 +51,7 @@ export const profileApi = createApi({
 
 export const {
   useFetchUserProfileQuery,
+  useFetchCurrentUserProfileQuery,
   useFetchUserFollowersQuery,
   useFetchUserFollowingQuery,
   useUpdateUserAvatarMutation,

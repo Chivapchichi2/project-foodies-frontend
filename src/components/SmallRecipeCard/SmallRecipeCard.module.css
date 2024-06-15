@@ -37,14 +37,29 @@
   gap: 4px;
 }
 
+.recipeCardList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.iconBtn {
+  background-color: white;
+  transition: background-color var(--transition);
+}
+
+.icon {
+  stroke: var(--black);
+  transition: stroke var(--transition);
+}
+
+.iconBtn:hover .icon {
+  stroke: var(--white);
+}
 
 @media screen and (min-width: 768px) {
   .flexPhotoWrapper {
     gap: 16px;
-  }
-
-  .buttonWrapper {
-    gap: 0px;
   }
 
   .recipeTextWrapper {
@@ -60,6 +75,10 @@
   .recipeInstructions {
     font-size: 14px;
     line-height: 24x;
+  }
+
+  .recipeCardList {
+    gap: 40px
   }
 }
 

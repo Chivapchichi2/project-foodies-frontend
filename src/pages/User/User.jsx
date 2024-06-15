@@ -25,6 +25,10 @@ const User = () => {
     }
   }, [profileData, dispatch]);
 
+  // if (profileLoading) {
+  //   return <Loader />;
+  // }
+
   if (profileError) {
     toast.error(profileError.data.message, {
       position: "top-right",

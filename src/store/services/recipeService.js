@@ -12,6 +12,22 @@ export const recipeApi = createApi({
   }),
   tagTypes: ["Recipe"],
   endpoints: (builder) => ({
+    getRecipes: builder.query({
+      query: ({ category, ingredients, area } = {}) => {
+        const params = new URLSearchParams();
+        if (category) {
+          params.append("category", category);
+        }
+        if (ingredients) {
+          params.append("ingredients", ingredients);
+        }
+        if (area) {
+          params.append("area", area);
+        }
+        return `api/recipes/?${params.toString()}`;
+      },
+      providesTags: ["Recipe"],
+    }),
     getRecipyById: builder.query({
       query: (id) => `api/recipes/${id}`,
       providesTags: ["Recipe"],
@@ -40,13 +56,31 @@ export const recipeApi = createApi({
       }),
       invalidatesTags: ["Recipe"],
     }),
+    removeRecipe: builder.mutation({
+      query: (id) => ({
+        url: `api/recipes/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Recipe"],
+    }),
+    createRecipe: builder.mutation({
+      query: (newRecipe) => ({
+        url: "api/recipes",
+        method: "POST",
+        body: newRecipe,
+        invalidatesTags: ["Recipe"],
+      }),
+    }),
   }),
 });
 
 export const {
+  useGetRecipesQuery,
   useGetRecipyByIdQuery,
   useGetPopularRecipeQuery,
   useGetFavoriteRecipesQuery,
   useAddFavoriteRecipeMutation,
   useRemoveFavoriteRecipeMutation,
+  useRemoveRecipeMutation,
+  useCreateRecipeMutation,
 } = recipeApi;

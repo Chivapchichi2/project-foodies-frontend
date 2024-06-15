@@ -6,6 +6,22 @@
   object-fit: cover;
 }
 
+.style_button_favorit {
+  background-color: black;
+}
+
+.style_button_favorit:hover {
+  background-color: var(--white);
+}
+
+.style_button_favorit:hover svg {
+  stroke: var(--black);
+}
+
+.style_button_notFavorit:hover svg {
+  stroke: var(--white);
+}
+
 .textWrap {
   margin-bottom: 8px;
 }
@@ -24,6 +40,12 @@
   display: flex;
   align-items: center;
 }
+
+.avatarBtnswrap a {
+  color: var(--black);
+  font-weight: 700;
+}
+
 .avatarWrapper {
   display: flex;
   align-items: center;
@@ -50,9 +72,15 @@
   align-items: center;
   justify-content: center;
 }
+
 .iconWrapper:hover {
   background-color: rgba(5, 5, 5, 1);
 }
+
+.iconWrapper:hover svg {
+  stroke: var(--white);
+}
+
 .iconList {
   list-style: none;
   display: flex;
@@ -62,6 +90,13 @@
 
 .recipeCard {
   min-width: 343px;
+}
+
+.header_card {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {

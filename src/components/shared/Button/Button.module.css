@@ -278,3 +278,33 @@
     letter-spacing: -0.32px;
   }
 }
+/* ---------------------PROFILE LOGOUT ---------------- */
+.logOutBtn {
+  margin-top: 20px;
+  padding: 14px 0;
+  background-color: var(--black-85);
+  width: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.28px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.logOutBtn:hover,
+.logOutBtn:focus {
+  box-shadow: none;
+  color: var(--white);
+  background-color: var(--black);
+  transition: color var(--transition), background-color var(--transition);
+}
+
+@media screen and (min-width: 768px) {
+  .logOutBtn {
+    padding: 16px 0;
+    width: 394px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.32px;
+  }
+}

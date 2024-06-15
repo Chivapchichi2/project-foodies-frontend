@@ -1,11 +1,12 @@
 import styles from "./OwnerCard.module.css";
 import withoutAvatar from "../../../../images/user_without_avatar.jpg";
+import { Link } from "react-router-dom";
 
 export const OwnerCard = ({ owner }) => {
-  const { avatar, name } = owner;
+  const { avatar, name, _id } = owner;
 
   return (
-    <div className={styles.owner_card}>
+    <Link to={`/user/${_id}`} className={styles.owner_card}>
       <img
         className={styles.owner_photo}
         src={avatar ? avatar : withoutAvatar}
@@ -15,6 +16,6 @@ export const OwnerCard = ({ owner }) => {
         <span className={styles.owner_sign}>Created by:</span>
         <h4>{name}</h4>
       </div>
-    </div>
+    </Link>
   );
 };

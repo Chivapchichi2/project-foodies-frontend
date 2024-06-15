@@ -21,14 +21,14 @@ const profileSlice = createSlice({
       state.recipes = [...state.recipes, ...payload.data];
     },
     setUserFavoritesRecipes(state, { payload }) {
-      state.favoritesRecipes = [...state.favoritesRecipes, ...payload.data];
+      state.favoritesRecipes = [...payload.data];
     },
 
     setUserFollowers(state, { payload }) {
-      state.followers = [...state.followers, ...payload.followers];
+      state.followers = [...payload];
     },
     setUserFollowing(state, { payload }) {
-      state.following = [...state.following, ...payload.following];
+      state.following = [...payload];
     },
   },
 });
