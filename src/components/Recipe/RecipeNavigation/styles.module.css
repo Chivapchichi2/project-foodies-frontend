@@ -4,8 +4,8 @@
 }
 
 .navigation > * {
-  flex: 1 0 calc(30% - 10px);
-  margin: 16px;
+  flex: 1 0 calc(28% - 10px);
+  margin: 0.5%;
 }
 
 .navigation > *:nth-child(9n + 3),
@@ -20,11 +20,11 @@
 
 .navigation::after {
   content: "";
-  flex: 1 0 calc(30% - 10px);
+  flex: 1 0 calc(28% - 10px);
   max-width: calc(30% - 10px);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .navigation > * {
     flex: 1;
     min-width: calc(50% - 10px);

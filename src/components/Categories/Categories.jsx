@@ -1,4 +1,4 @@
-import { RecipeNavigation } from "../Recipe/RecipeNavigation/RecipeNavigation";
+import { RecipeNavigation } from "src/components/Recipe";
 import styles from "./Categories.module.css";
 
 export const Categories = () => {
