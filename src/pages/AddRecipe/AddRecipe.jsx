@@ -54,7 +54,7 @@ const AddRecipe = () => {
 
   const areas = areasData;
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //
 
   const onSubmit = async (data) => {
     const formData = new FormData();
@@ -135,6 +135,9 @@ const AddRecipe = () => {
                     isIngredientsLoading={isIngredientsLoading}
                     isAreasLoading={isAreasLoading}
                   />
+                  {errors.selectedIngredients && (
+                    <p className={styles.error}>{errors.selectedIngredients.message}</p>
+                  )}
                 </div>
               </div>
             </div>

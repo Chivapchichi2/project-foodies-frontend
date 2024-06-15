@@ -1,6 +1,7 @@
 input[type="file"] {
   display: none;
 }
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -9,8 +10,10 @@ input[type="file"] {
   position: relative;
   gap: 16px;
 }
+
 .uploadBox {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 343px;
@@ -20,11 +23,15 @@ input[type="file"] {
   border-radius: 30px;
 }
 
-.uplodAnotherSpan {
+.uploadAnotherSpan {
   font-size: 14px;
+  font-weight: 500;
   line-height: calc(20 / 14);
   letter-spacing: -0.28px;
   text-decoration-line: underline;
+  cursor: pointer;
+  text-transform: none;
+  margin: 0;
 }
 
 .customUploadBtn {
@@ -70,6 +77,12 @@ input[type="file"] {
     width: 704px;
     height: 400px;
     margin: 0;
+  }
+
+  .uploadAnotherSpan {
+    font-size: 16px;
+    line-height: calc(24 / 16);
+    letter-spacing: -0.32px;
   }
 
   .wrapper {

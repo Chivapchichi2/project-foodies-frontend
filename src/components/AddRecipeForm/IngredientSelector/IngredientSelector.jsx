@@ -5,6 +5,7 @@ import { Input } from "../../shared/Input/Input";
 import Button from "../../shared/Button/Button";
 import IconButton from "../../shared/IconButton/IconButton";
 import CookingTimeCounter from "../CookingTimeCounter/CookingTimeCounter";
+import { Loader } from "../../shared/Loader/Loader";
 
 const IngredientSelector = ({
   register,
@@ -51,6 +52,10 @@ const IngredientSelector = ({
     }
   };
 
+  const renderLoader = (isLoading) => {
+    return isLoading ? <Loader /> : null;
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.textareaWrapper}>
@@ -64,9 +69,7 @@ const IngredientSelector = ({
         {errors.description && <p>{errors.description.message}</p>}
       </div>
       <div className={styles.categoryAndTime}>
-        {isCategoriesLoading ? (
-          <p>Loading...</p>
-        ) : (
+        {renderLoader(isCategoriesLoading) || (
           <div>
             <label>Category</label>
             <SelectShared
@@ -80,9 +83,7 @@ const IngredientSelector = ({
         )}
       </div>
       <div className={styles.categoryAndTime}>
-        {isAreasLoading ? (
-          <p>Loading...</p>
-        ) : (
+        {renderLoader(isAreasLoading) || (
           <div>
             <label>Area</label>
             <SelectShared
@@ -91,7 +92,7 @@ const IngredientSelector = ({
               {...register("area")}
               onChange={(selectedOption) => setValue("area", selectedOption.label)}
             />
-            {errors.category && <p>{errors.category.message}</p>}
+            {errors.area && <p>{errors.area.message}</p>}
           </div>
         )}
       </div>
