@@ -35,7 +35,7 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
               </>
             )}
 
-            {errors.thumb && <p>{errors.thumb.message}</p>}
+            {errors.thumb && <p className={styles.errorMsg}>{errors.thumb.message}</p>}
           </div>
         </label>
       </div>

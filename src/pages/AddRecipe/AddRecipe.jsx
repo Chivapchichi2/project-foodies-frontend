@@ -104,7 +104,7 @@ const AddRecipe = () => {
           />
 
           <div>
-            <div>
+            <div className={styles.nameInputWrapper}>
               <Input
                 type="text"
                 name="title"
@@ -112,7 +112,7 @@ const AddRecipe = () => {
                 placeholder="The name of the recipe"
                 classname={styles.nameInput}
               />
-              {errors.title && <p>{errors.title.message}</p>}
+              {errors.title && <p className={styles.errorTitle}>{errors.title.message}</p>}
             </div>
 
             <div className={styles.recipeData}>
@@ -136,7 +136,7 @@ const AddRecipe = () => {
                     isAreasLoading={isAreasLoading}
                   />
                   {errors.selectedIngredients && (
-                    <p className={styles.error}>{errors.selectedIngredients.message}</p>
+                    <p className={styles.errorMsg}>{errors.selectedIngredients.message}</p>
                   )}
                 </div>
               </div>
@@ -154,7 +154,9 @@ const AddRecipe = () => {
                 <span className={styles.symbolCounter}>
                   {watch("instructions")?.length || 0}/200
                 </span>
-                {errors.instructions && <p>{errors.instructions.message}</p>}
+                {errors.instructions && (
+                  <p className={styles.errorMsg}>{errors.instructions.message}</p>
+                )}
               </div>
             </div>
             <div className={styles.buttonWrapper}>

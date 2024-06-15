@@ -46,6 +46,9 @@ const customStyles = {
     lineHeight: "calc(20 / 14)",
     letterSpacing: "-0.28px",
     color: "var(--black-60)",
+    "@media (min-width: 1440px)": {
+      fontSize: "16px",
+    },
   }),
   indicatorSeparator: (styles) => ({
     ...styles,
