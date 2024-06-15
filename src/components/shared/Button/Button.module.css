@@ -248,8 +248,8 @@
     line-height: 1.5;
   }
 }
-/* ---------------------PROFILE LOGOUT ---------------- */
-.logOutBtn {
+/* ---------------------PROFILE MAIN ACTION BTN LOGOUT/FOLLOW ---------------- */
+.logoutOrFollowBtn {
   margin-top: 20px;
   padding: 14px 0;
   background-color: var(--black-85);
@@ -261,8 +261,8 @@
   color: var(--white);
 }
 
-.logOutBtn:hover,
-.logOutBtn:focus {
+.logoutOrFollowBtn:hover,
+.logoutOrFollowBtn:focus {
   box-shadow: none;
   color: var(--white);
   background-color: var(--black);
@@ -270,7 +270,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .logOutBtn {
+  .logoutOrFollowBtn {
     padding: 16px 0;
     width: 394px;
     font-size: 16px;
