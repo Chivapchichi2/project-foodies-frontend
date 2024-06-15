@@ -17,12 +17,6 @@ const yupSchema = yup.object().shape({
       }
       return false;
     })
-    .test("file", "You need to provide a file", (value) => {
-      if (value.length > 0) {
-        return true;
-      }
-      return false;
-    })
     .test("fileType", "Invalid file format", (value) => {
       if (!value || typeof value === "string") return true;
 
