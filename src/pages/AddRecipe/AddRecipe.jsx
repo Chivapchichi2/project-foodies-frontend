@@ -54,7 +54,7 @@ const AddRecipe = () => {
 
   const areas = areasData;
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //
 
   const onSubmit = async (data) => {
     const formData = new FormData();
