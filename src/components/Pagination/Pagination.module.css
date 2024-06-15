@@ -1,0 +1,64 @@
+.itemList {
+  list-style: none;
+  padding: 0;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.pageItem {
+  margin: 0 5px;
+}
+
+.previousItem,
+.nextItem {
+  font-weight: bold;
+  color: var(--black);
+  padding: 10px 15px;
+  border-radius: 100px;
+  border: 1px solid var(--black-10);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.previousItem:hover,
+.nextItem:hover {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.pageLink {
+  text-decoration: none;
+  color: var(--black);
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.pageLink:hover {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.active .pageLink {
+  background-color: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+}
+
+.breakMe {
+  cursor: default;
+  text-decoration: none;
+  color: var(--black); /* або будь-який інший стиль, який ви хочете застосувати */
+}
+
+.disabled .pageLink {
+  color: #ccc;
+  pointer-events: none;
+}

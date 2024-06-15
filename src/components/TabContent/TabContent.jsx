@@ -22,7 +22,10 @@ import {
   setUserFollowers,
   setUserFollowing,
 } from "../../store/features/profileSlice.js";
+
 import { Loader } from "../shared/Loader/Loader.jsx";
+
+import Pagination from "../Pagination/Pagination.jsx";
 
 const myProfileTabs = [
   {
@@ -68,51 +71,74 @@ const TabContent = () => {
   const userFollowing = useSelector(selectFollowing);
   const userFavoriteRecipes = useSelector(selectFavoritesRecipes);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [nextPage, setNextPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [activeTab, setActiveTab] = useState(
-    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id,
+    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id
   );
+  console.log("activeTab", activeTab);
+
+  const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery({
+    userId: id,
+    // skip: currentPage === nextPage,
+    page: currentPage,
+  });
+  // add checks for tab, as in the function bellow
+
+  const handlePageChange = ({ selected }) => {
+    // setNextPage(selected + 1);
+    setCurrentPage(selected + 1);
+  };
 
   useEffect(() => {
     setActiveTab(isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id);
   }, [isAuthorizedUser]);
 
-  const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery(id);
-  // add checks for tab, as in the function bellow
+  const { data: favoriteRecipes, isLoading: loadFavorite } = useFetchUserFavoritesRecipesQuery({
+    skip: activeTab !== "my-favorites",
+    page: currentPage,
+  });
 
-  const { data: favoriteRecipes, isLoading: loadFavorite } = useFetchUserFavoritesRecipesQuery(
-    { userId: id },
-    {
-      skip: activeTab !== "my-favorites",
-    },
-  );
+  const { data: followersData, isLoading: loadFollowers } = useFetchUserFollowersQuery({
+    userId: id,
+    skip: activeTab !== "followers",
+  });
 
-  const { data: followersData, isLoading: loadFollowers } = useFetchUserFollowersQuery(
-    { userId: id },
-    {
-      skip: activeTab !== "followers",
-    },
-  );
-
-  const { data: followingData, isLoading: loadFollowing } = useFetchUserFollowingQuery(
-    { userId: id },
-    {
-      skip: activeTab !== "following",
-    },
-  );
+  const { data: followingData, isLoading: loadFollowing } = useFetchUserFollowingQuery({
+    skip: activeTab !== "following",
+  });
   const isDataLoading = loadRecipes || loadFavorite || loadFollowers || loadFollowing;
 
   useEffect(() => {
+    if (!loadRecipes) {
+      setTotalPages(myRecipes.totalPages);
+    }
     if (activeTab === "followers" && followersData) {
+      setTotalPages(followersData.totalPages);
       dispatch(setUserFollowers(followersData.followersWithRecipes));
     } else if (activeTab === "following" && followingData) {
+      setTotalPages(followingData.totalPages);
       dispatch(setUserFollowing(followingData.followingWithRecipes));
     } else if (activeTab === "my-favorites" && favoriteRecipes) {
+      console.log("in favorite");
+      setTotalPages(favoriteRecipes.totalPages);
+      setCurrentPage(1);
       const favoriteRecipesProccessed = favoriteRecipes?.data.map((item) => {
         return item.recipe;
       });
       dispatch(setUserFavoritesRecipes({ data: favoriteRecipesProccessed }));
     }
-  }, [activeTab, dispatch, followersData, followingData, favoriteRecipes]);
+  }, [
+    activeTab,
+    dispatch,
+    followersData,
+    followingData,
+    favoriteRecipes,
+    loadRecipes,
+    myRecipes,
+    currentPage,
+  ]);
 
   // useEffect(() => {
   // add logic for update if data in store was changed (added/deleted)
@@ -166,10 +192,18 @@ const TabContent = () => {
   const menuItems = isAuthorizedUser ? myProfileTabs : userProfileTabs;
 
   return (
-    <div className={styles.container}>
-      <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
-      {isDataLoading ? <Loader /> : <div className={styles.content}>{renderContent()}</div>}
-    </div>
+    <>
+      <div className={styles.container}>
+        <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
+        {isDataLoading ? <Loader /> : <div className={styles.content}>{renderContent()}</div>}
+      </div>
+      {totalPages > 1 && (
+        <Pagination
+          pageCount={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
+    </>
   );
 };
 
