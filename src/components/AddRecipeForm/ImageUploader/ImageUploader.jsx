@@ -7,7 +7,8 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
   useEffect(() => {
     const subscription = watch((value) => {
       if (value.thumb[0]) {
-        setImagePreview(URL.createObjectURL(value.thumb[0])) && setValue("thumb", value.thumb[0]);
+        setImagePreview(URL.createObjectURL(value.thumb[0]));
+        setValue("thumb", value.thumb[0]);
       }
     });
     return () => subscription.unsubscribe();

@@ -58,8 +58,7 @@ const AddRecipe = () => {
   const customId = "toastId";
   const onSubmit = async (data) => {
     const formData = new FormData();
-
-    formData.append("thumb", data.thumb[0]);
+    formData.append("thumb", data.thumb);
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("category", data.category);
