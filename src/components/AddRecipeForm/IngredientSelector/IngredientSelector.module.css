@@ -22,7 +22,7 @@
 
 .symbolCounter {
   position: absolute;
-  top: 0;
+  top: -5px;
   right: 0;
   font-size: 14px;
 }

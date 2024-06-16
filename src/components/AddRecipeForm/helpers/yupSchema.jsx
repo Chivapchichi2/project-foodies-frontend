@@ -50,6 +50,9 @@ const yupSchema = yup.object().shape({
   //     })
   // )
   // ,
-  instructions: yup.string().required("Instructions are required"),
+  instructions: yup
+    .string()
+    .max(2000, "Description must be at most 200 characters")
+    .required("Instructions are required"),
 });
 export default yupSchema;

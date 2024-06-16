@@ -16,7 +16,7 @@
   background: transparent;
   transition: border-color 0.2s;
   resize: vertical;
-  max-height: 80px;
+  max-height: 216px;
   overflow: scroll;
   scrollbar-width: none;
 }
@@ -34,7 +34,7 @@
 .form__label {
   position: absolute;
   left: 0;
-  top: 0;
+  top: -10px;
   display: block;
   transition: 0.2s;
   font-size: 12px;

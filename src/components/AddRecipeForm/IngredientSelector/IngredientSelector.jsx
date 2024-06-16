@@ -9,7 +9,6 @@ import { Loader } from "../../shared/Loader/Loader";
 import stylesInput from "../CustomInput.module.css";
 import useAutoResizeTextarea from "../../../utilities/hooks/useAutoResizeTextarea";
 
-
 const IngredientSelector = ({
   register,
   setValue,
@@ -70,7 +69,7 @@ const IngredientSelector = ({
           maxLength="200"
           placeholder="Enter the description of the dish"
           id="description"
-          className={stylesInput.form__field}
+          className={`${stylesInput.form__field} ${styles.textarea}`}
           required
         />
         <label htmlFor="description" className={stylesInput.form__label}>
