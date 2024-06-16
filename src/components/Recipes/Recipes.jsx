@@ -12,7 +12,6 @@ import { Loader } from "../shared/Loader/Loader.jsx";
 export const Recipes = () => {
   const { id: category } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
 
   const ingredientQuery = searchParams.get("ingredient") || "";
   const areaQuery = searchParams.get("area") || "";
