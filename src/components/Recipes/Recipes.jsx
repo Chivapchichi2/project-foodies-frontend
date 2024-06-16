@@ -1,6 +1,6 @@
 import styles from "./Recipes.module.css";
 import { Icon } from "../shared";
-import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { RecipeCardList } from "./RecipeCardList";
 import { useGetRecipesQuery } from "../../store/services/recipeService";
 import SelectShared from "../shared/SelectShared/SelectShared";
