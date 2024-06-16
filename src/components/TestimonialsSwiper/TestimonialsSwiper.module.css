@@ -1,5 +1,5 @@
 .wrap_testimonial {
-  margin-bottom: 80px;
+  margin: 64px 0 80px;
 }
 
 .container {
@@ -21,7 +21,7 @@
 
 @media screen and (min-width: 768px) {
   .wrap_testimonial {
-    margin-bottom: 100px;
+    margin: 100px 0;
   }
   .testimonial_container {
     margin: 46px 0 80px;
@@ -30,6 +30,6 @@
 
 @media screen and (min-width: 1440px) {
   .wrap_testimonial {
-    margin-bottom: 120px;
+    margin: 120px 0;
   }
 }
