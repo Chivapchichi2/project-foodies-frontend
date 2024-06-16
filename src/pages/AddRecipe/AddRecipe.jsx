@@ -121,7 +121,7 @@ const AddRecipe = () => {
       });
     }
   };
-  //
+
   const handleReset = () => {
     reset();
     setImagePreview(null);

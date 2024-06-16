@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 
 import styles from "./TabContent.module.css";
@@ -78,11 +77,10 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
   const userAddedRecipes = useSelector(selectRecipes);
   const userFavoriteRecipes = useSelector(selectFavoriteRecipes);
 
-
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [activeTab, setActiveTab] = useState(
-    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id
+    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id,
   );
 
   const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery(
@@ -92,8 +90,7 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
     },
     {
       skip: activeTab !== "my-recipes" && activeTab !== "recipes",
-      // refetchOnMountOrArgChange: true,
-    }
+    },
   );
 
   useEffect(() => {
@@ -155,10 +152,6 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
     currentPage,
     userFavoriteRecipes,
   ]);
-
-  // useEffect(() => {
-  // add logic for update if data in store was changed (added/deleted)
-  // }, [selectRecipes, userFavoriteRecipes, userFollowers, userFollowing]);
 
   const getMessage = (profile, tab) => {
     const profileSetup = profile.find(({ id }) => id === tab);

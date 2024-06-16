@@ -33,9 +33,3 @@ const SelectDropDown = ({ placeholder, variant = "categories" }) => {
 };
 
 export default SelectDropDown;
-
-//Use example
-{
-  /* <SelectDropDown placeholder="Select a category..." variant="categories" />
-<SelectDropDown placeholder="Add the ingridient..." variant="ingridients" /> */
-}

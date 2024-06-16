@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useGetTestimonialsQuery } from "../../store/services/testimonialService.js";
-// import { loadSvgSprite } from "../../utilities/loadSvgSprite.js";
 import { TestimonialsSwiper } from "src/components";
 import Hero from "../../components/Hero";
 import { Loader } from "../../components/shared/Loader/Loader.jsx";

@@ -1,9 +1,6 @@
 import styles from "./IconButton.module.css";
 import cx from "classnames";
 
-// Змінив компонент для передачі stroke в глибину. Додав пропс stroke до IconButton
-// Намагався не ламати компонент Icon, якщо щось не так, то дзони, буду розбиратись
-
 import Icon from "../Icon/Icon";
 
 const IconButton = ({

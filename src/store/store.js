@@ -7,7 +7,6 @@ import { authApi } from "./services/authService.js";
 import { profileApi } from "./services/profileService.js";
 import profileReducer from "./features/profileSlice.js";
 import { persistedAuthReducer } from "./features/authSlice.js";
-// import favoriteRecipesReducer from "./features/favoriteRecipesSlice.js";
 import { recipeApi } from "./services/recipeService.js";
 import { persistedFavoritesReducer } from "./features/favoriteRecipesSlice.js";
 import { categoryApi } from "./services/categoryService.js";
