@@ -1,13 +1,10 @@
 .container {
+  width: 343px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding-bottom: 64 0 64px;
-  padding: 64px 0 120px;
 
-  margin-left: auto;
-  margin-right: auto;
+  margin: 64px auto;
 }
 
 .breaCrumbs {
@@ -171,22 +168,12 @@ label {
   transition: fill var(--transition);
 }
 
-@media (min-width: 375px) {
-  .container {
-    width: 343px;
-  }
-
-  .textareaWrapper {
-    width: 343px;
-  }
-}
 
 @media (min-width: 765px) {
   .container {
-    padding: 64px 0 100px;
     width: 704px;
+    margin: 64px auto 100px;
   }
-
   .breaCrumbs {
     margin: 0 0 40px;
   }
@@ -224,9 +211,7 @@ label {
 @media (min-width: 1440px) {
   .container {
     width: 1280px;
-    padding: 80px 0 120px;
-    flex-direction: row;
-    flex-direction: column;
+    margin: 64px auto 100px;
   }
 
   .formWrapper {
