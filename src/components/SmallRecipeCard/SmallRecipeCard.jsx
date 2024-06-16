@@ -1,24 +1,32 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SmallRecipePhoto from "../SmallRecipePhoto/SmallRecipePhoto";
 import IconButton from "../shared/IconButton/IconButton";
 import styles from "./SmallRecipeCard.module.css";
-import { selectIsAuthorizedUser } from "../../store/selectors/profileSelectors.js";
+import { selectIsAuthorizedUser, selectRecipes } from "../../store/selectors/profileSelectors.js";
 import { NavLink } from "react-router-dom";
 import handleFavorite from "../../utilities/handleFavorite.js";
 import {
   useRemoveFavoriteRecipeMutation,
   useRemoveRecipeMutation,
 } from "../../store/services/recipeService.js";
+import { selectFavoriteRecipes } from "../../store/selectors/selectors.js";
+import { setFavoriteRecipes } from "../../store/features/favoriteRecipesSlice.js";
+import { setUserAddedRecipes } from "../../store/features/profileSlice.js";
 
 const SmallRecipeCard = ({ data, tab }) => {
+  const dispatch = useDispatch();
+  const favoritesRecipe = useSelector(selectFavoriteRecipes);
+  const recipes = useSelector(selectRecipes);
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
   const [removeFavoriteRecipe] = useRemoveFavoriteRecipeMutation();
   const [removeRecipe] = useRemoveRecipeMutation();
 
   const deleteRecipe = () => {
     if (tab === "recipe") {
+      dispatch(setUserAddedRecipes(recipes.filter((el) => el._id !== data._id)));
       removeRecipe(data._id);
     } else {
+      dispatch(setFavoriteRecipes(favoritesRecipe.filter((el) => el !== data._id)));
       handleFavorite(removeFavoriteRecipe, data._id, "delete");
     }
   };

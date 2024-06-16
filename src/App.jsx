@@ -40,8 +40,8 @@ export const App = () => {
           <Route path="" element={<Home />}>
             <Route path="category/:id" element={<Recipes />} />
           </Route>
-          <Route path="/recipe/:id" element={<Recipe />} />
           <Route path="/recipe/add" element={<PrivateRoute component={AddRecipe} />} />
+          <Route path="/recipe/:id" element={<Recipe />} />
           <Route path="/recipe/:id" element={<Recipe />} />
           <Route path="/user/:id" element={<PrivateRoute component={User} />} />
           <Route path="/error500" element={<ServerError />} />

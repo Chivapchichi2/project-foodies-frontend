@@ -3,11 +3,24 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   margin: 64px auto;
+}
+
+.breaCrumbs {
+  margin: 0 0 32px;
 }
 
 .titleWrapper {
   margin-bottom: 32px;
+}
+
+.titleAndCrumpsWraper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .formWrapper {
@@ -155,10 +168,14 @@ label {
   transition: fill var(--transition);
 }
 
+
 @media (min-width: 765px) {
   .container {
     width: 704px;
     margin: 64px auto 100px;
+  }
+  .breaCrumbs {
+    margin: 0 0 40px;
   }
 
   .titleWrapper {
