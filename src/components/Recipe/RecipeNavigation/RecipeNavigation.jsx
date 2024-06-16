@@ -46,7 +46,7 @@ const CATEGORIES = [
   },
   {
     category: "Desserts",
-    url: "/category/desserts",
+    url: "/category/dessert",
     imgUrl: desserts,
     imgUrl2x: desserts2x,
   },

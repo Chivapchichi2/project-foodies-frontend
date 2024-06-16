@@ -1,30 +1,50 @@
 import styles from "./Recipes.module.css";
 import { Icon } from "../shared";
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { RecipeCardList } from "./RecipeCardList";
 import { useGetRecipesQuery } from "../../store/services/recipeService";
 import SelectShared from "../shared/SelectShared/SelectShared";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
-import { useEffect, useState } from "react";
+import SectionSubtitle from "../shared/SectionSubtitle/SectionSubtitle.jsx";
+import { Loader } from "../shared/Loader/Loader.jsx";
 
-export const Recipes = ({ category }) => {
+export const Recipes = () => {
+  const { id: category } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const ingredientQuery = searchParams.get("ingredient") || "";
+  const areaQuery = searchParams.get("area") || "";
+
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
   const { data: areaData, isLoading: isAreaLoading } = useGetAreasQuery();
-  const [selectedIngredient, setSelectedIngredient] = useState(null);
-  const [selectedArea, setSelectedArea] = useState(null);
-  const { data: recipes, refetch } = useGetRecipesQuery({
+  const { data: recipes, isLoading } = useGetRecipesQuery({
     category,
-    ingredient: selectedIngredient,
-    area: selectedArea,
+    ingredients: ingredientQuery,
+    area: areaQuery,
+    page: 1,
+    limit: 12,
   });
 
-  useEffect(() => {
-    refetch();
-  }, [selectedIngredient, selectedArea, refetch]);
+  const handleSelectChange = (paramName, selectedOption) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (selectedOption && selectedOption.value !== null) {
+      newParams.set(paramName, selectedOption.label);
+    } else {
+      newParams.delete(paramName);
+    }
+    setSearchParams(newParams);
+  };
 
-  const handleSelectChange = (funcOption, selectedOption) => {
-    funcOption(selectedOption);
+  const getInputValue = (collections, query) => {
+    const data = collections.find((option) => option.name === query);
+
+    return data
+      ? {
+          value: data?._id || null,
+          label: data?.name || null,
+        }
+      : null;
   };
 
   return (
@@ -44,23 +64,30 @@ export const Recipes = ({ category }) => {
         <div className={styles.category_selects}>
           {!isIngredientsLoading && (
             <SelectShared
-              options={ingredientsData}
+              options={[{ _id: null, name: "Clear" }, ...ingredientsData]}
               placeholder="Ingredients"
-              onChange={(selectedOption) =>
-                handleSelectChange(setSelectedIngredient, selectedOption)
-              }
+              value={getInputValue(ingredientsData, ingredientQuery)}
+              onChange={(selectedOption) => handleSelectChange("ingredient", selectedOption)}
             />
           )}
           {!isAreaLoading && (
             <SelectShared
-              options={areaData}
+              options={[{ _id: null, name: "Clear" }, ...areaData]}
               placeholder="Area"
-              onChange={(selectedOption) => handleSelectChange(setSelectedArea, selectedOption)}
+              value={getInputValue(areaData, areaQuery)}
+              onChange={(selectedOption) => handleSelectChange("area", selectedOption)}
             />
           )}
         </div>
         <div className={styles.recipes_list_wrapp}>
-          {recipes && <RecipeCardList recipes={recipes} />}
+          {isLoading && <Loader />}
+          {!!recipes?.data.length && <RecipeCardList recipes={recipes} />}
+          {!recipes?.data.length && !isLoading && (
+            <SectionSubtitle
+              text={"No recipes were found with the selected parameters."}
+              customStyle={styles.no_recipes}
+            />
+          )}
         </div>
       </div>
     </section>
