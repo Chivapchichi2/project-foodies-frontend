@@ -6,7 +6,8 @@
   border-radius: 20px 20px 0 0;
   background-color: var(--black);
   margin: 0 auto;
-  width: 359px;
+  max-width: 359px;
+  margin-top: 8px;
 }
 
 .header_wrap_bgc {
@@ -32,13 +33,15 @@
 @media screen and (min-width: 768px) {
   .header_wrap {
     padding: 36px 48px 0 48px;
-    width: 736px;
+    max-width: 736px;
+    margin-top: 16px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .header_wrap {
     padding: 40px 80px 0 80px;
-    width: 1400px;
+    max-width: 1400px;
+    margin-top: 20px;
   }
 }

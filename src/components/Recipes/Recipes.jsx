@@ -6,7 +6,7 @@ import { useGetRecipesQuery } from "../../store/services/recipeService";
 import SelectShared from "../shared/SelectShared/SelectShared";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
-import {useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Pagination from "../Pagination";
 import SectionSubtitle from "../shared/SectionSubtitle/SectionSubtitle.jsx";
 import { Loader } from "../shared/Loader/Loader.jsx";
@@ -14,11 +14,12 @@ import { Loader } from "../shared/Loader/Loader.jsx";
 export const Recipes = () => {
   const { id: category } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const categoryRef = useRef(null);
   const ingredientQuery = searchParams.get("ingredient") || "";
   const areaQuery = searchParams.get("area") || "";
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [, setPageRangeDisplayed] = useState(getLimit());
   const {
     data: ingredientsData,
     isLoading: isIngredientsLoading,
@@ -34,7 +35,7 @@ export const Recipes = () => {
     ingredient: ingredientQuery,
     area: areaQuery,
     page: currentPage,
-    limit: 12,
+    limit: getLimit(),
   });
   const isError = ingredientsError || areaError || recipesError;
 
@@ -58,12 +59,33 @@ export const Recipes = () => {
         }
       : null;
   };
+
+  function getLimit() {
+    const width = window.innerWidth;
+    return width < 768 ? 8 : 12;
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setPageRangeDisplayed(getLimit());
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (categoryRef.current) {
+      categoryRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [currentPage]);
+
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected + 1);
   };
 
   return (
-    <section className={styles.category_section}>
+    <section className={styles.category_section} ref={categoryRef}>
       {isError && <Navigate to="/error500" replace={true} />}
       {!isError && (
         <>
@@ -106,13 +128,13 @@ export const Recipes = () => {
                   customStyle={styles.no_recipes}
                 />
               )}
-          {recipes?.totalPages > 1 && (
-            <Pagination
-              pageCount={recipes.totalPages}
-              onPageChange={handlePageChange}
-              currentPage={currentPage}
-            />
-          )}
+              {recipes?.totalPages > 1 && (
+                <Pagination
+                  pageCount={recipes.totalPages}
+                  onPageChange={handlePageChange}
+                  currentPage={currentPage}
+                />
+              )}
             </div>
           </div>
         </>

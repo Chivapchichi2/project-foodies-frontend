@@ -15,11 +15,7 @@ const Pagination = ({ pageCount, onPageChange, currentPage }) => {
 
   function getPageRangeDisplayed() {
     const width = window.innerWidth;
-    if (width < 768) {
-      return 1;
-    } else {
-      return 3;
-    }
+    return width < 768 ? 1 : 3;
   }
 
   return (

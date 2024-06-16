@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./TabContent.module.css";
 import TabMenu from "../TabMenu/TabMenu";
 import { useDispatch, useSelector } from "react-redux";
@@ -70,6 +70,7 @@ const TabContent = () => {
   const userFollowers = useSelector(selectFollowers);
   const userFollowing = useSelector(selectFollowing);
   const userFavoriteRecipes = useSelector(selectFavoritesRecipes);
+  const categoryRef = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -89,6 +90,9 @@ const TabContent = () => {
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected + 1);
+    if (categoryRef.current) {
+      categoryRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -192,7 +196,7 @@ const TabContent = () => {
   const menuItems = isAuthorizedUser ? myProfileTabs : userProfileTabs;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={categoryRef}>
       <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
       {isDataLoading ? <Loader /> : <div className={styles.content}>{renderContent()}</div>}
       {totalPages > 1 && (

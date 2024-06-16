@@ -24,6 +24,7 @@
 
 .textWrap {
   margin-bottom: 8px;
+  height: 72px;
 }
 
 .recipeDescription {
@@ -89,7 +90,7 @@
 }
 
 .recipeCard {
-  min-width: 343px;
+  width: 343px;
 }
 
 .header_card {
@@ -117,15 +118,9 @@
     width: 42px;
     height: 42px;
   }
-
-  .recipeCard {
-    min-width: 0px;
-    max-width: 343px;
-  }
 }
 @media screen and (min-width: 1440px) {
   .recipeCard {
-    min-width: 0px;
-    width: 305px;
+    width: 290px;
   }
 }
