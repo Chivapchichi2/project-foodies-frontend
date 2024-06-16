@@ -13,7 +13,8 @@ export const recipeApi = createApi({
   tagTypes: ["Recipe"],
   endpoints: (builder) => ({
     getRecipes: builder.query({
-      query: ({ category, ingredients, area, limit, page } = {}) => {
+      query: ({ category, ingredients, area, page, limit } = {}) => {
+
         const params = new URLSearchParams();
         if (category) {
           params.append("category", category);
@@ -24,11 +25,11 @@ export const recipeApi = createApi({
         if (area) {
           params.append("area", area);
         }
+        if (page) {
+          params.append("page", page);
+        }
         if (limit) {
           params.append("limit", limit);
-        }
-        if (area) {
-          params.append("page", page);
         }
         return `api/recipes/?${params.toString()}`;
       },

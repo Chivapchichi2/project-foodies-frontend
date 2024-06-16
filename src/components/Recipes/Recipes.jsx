@@ -6,6 +6,8 @@ import { useGetRecipesQuery } from "../../store/services/recipeService";
 import SelectShared from "../shared/SelectShared/SelectShared";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
+import {useState } from "react";
+import Pagination from "../Pagination";
 import SectionSubtitle from "../shared/SectionSubtitle/SectionSubtitle.jsx";
 import { Loader } from "../shared/Loader/Loader.jsx";
 
@@ -16,6 +18,7 @@ export const Recipes = () => {
   const ingredientQuery = searchParams.get("ingredient") || "";
   const areaQuery = searchParams.get("area") || "";
 
+  const [currentPage, setCurrentPage] = useState(1);
   const {
     data: ingredientsData,
     isLoading: isIngredientsLoading,
@@ -28,9 +31,9 @@ export const Recipes = () => {
     error: recipesError,
   } = useGetRecipesQuery({
     category,
-    ingredients: ingredientQuery,
+    ingredient: ingredientQuery,
     area: areaQuery,
-    page: 1,
+    page: currentPage,
     limit: 12,
   });
   const isError = ingredientsError || areaError || recipesError;
@@ -54,6 +57,9 @@ export const Recipes = () => {
           label: data?.name || null,
         }
       : null;
+  };
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected + 1);
   };
 
   return (
@@ -100,6 +106,13 @@ export const Recipes = () => {
                   customStyle={styles.no_recipes}
                 />
               )}
+          {recipes?.totalPages > 1 && (
+            <Pagination
+              pageCount={recipes.totalPages}
+              onPageChange={handlePageChange}
+              currentPage={currentPage}
+            />
+          )}
             </div>
           </div>
         </>

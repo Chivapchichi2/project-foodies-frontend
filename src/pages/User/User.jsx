@@ -12,6 +12,8 @@ import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import { LogOut } from "../../components";
 // import { Loader } from "../../components/shared/Loader/Loader";
 
+const customId = "toastId";
+
 const User = () => {
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const { id } = useParams();
@@ -31,6 +33,7 @@ const User = () => {
   if (profileError) {
     toast.error(profileError.data.message, {
       position: "top-right",
+      toastId: customId,
     });
     return;
   }
