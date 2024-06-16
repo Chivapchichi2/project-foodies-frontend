@@ -23,6 +23,7 @@ import { useFetchCurrentUserProfileQuery } from "../../store/services/profileSer
 import { setUserAddedRecipes } from "../../store/features/profileSlice";
 import { selectRecipes } from "../../store/selectors/profileSelectors";
 import { useDispatch, useSelector } from "react-redux";
+import useAutoResizeTextarea from "../../utilities/hooks/useAutoResizeTextarea";
 
 const AddRecipe = () => {
   const {
@@ -103,12 +104,17 @@ const AddRecipe = () => {
     setImagePreview(null);
     setSelectedIngredients([]);
   };
+
+  useAutoResizeTextarea(styles.textarea);
+
   return (
     <div className={styles.container}>
-      <BreadCrumbs currentPage="Add Recipe" />
-      <div className={styles.titleWrapper}>
-        <SectionTitle text="add recipe" />
-        <FormTitleText />
+      <div className={styles.titleAndCrumpsWraper}>
+        <BreadCrumbs currentPage="Add Recipe" />
+        <div className={styles.titleWrapper}>
+          <SectionTitle text="add recipe" />
+          <FormTitleText />
+        </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.formWrapper}>
