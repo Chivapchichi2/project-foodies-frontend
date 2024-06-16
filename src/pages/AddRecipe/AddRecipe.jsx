@@ -63,6 +63,7 @@ const AddRecipe = () => {
     }
   };
 
+  const addRecipeToastId = "addRecipeToastId";
   const { data: categoriesData, isLoading: isCategoriesLoading } = useGetCategoriesQuery();
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
   const { data: areasData, isLoading: isAreasLoading } = useGetAreasQuery();
@@ -86,7 +87,7 @@ const AddRecipe = () => {
   const areas = areasData;
 
   const navigate = useNavigate(); //
-  const customId = "toastId";
+
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("thumb", data.thumb);
@@ -106,19 +107,19 @@ const AddRecipe = () => {
       const result = await createRecipe(formData);
       if (result.error) {
         toast.error(result.error.data.message, {
-          toastId: customId,
+          toastId: addRecipeToastId,
         });
       } else {
         dispatch(setUserAddedRecipes([...userRecepies, result.data]));
         navigate(`/user/${userData.id}`);
-        toast.success("Sign In successful", {
-          toastId: customId,
+        toast.success("Recipe added", {
+          toastId: addRecipeToastId,
         });
         reset();
       }
     } catch (error) {
       toast.error(error.message, {
-        toastId: customId,
+        toastId: addRecipeToastId,
       });
     }
   };
