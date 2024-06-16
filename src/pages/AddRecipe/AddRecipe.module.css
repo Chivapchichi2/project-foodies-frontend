@@ -1,13 +1,33 @@
 .container {
+  width: 343px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 64px;
-  padding: 30px;
+
+  margin: 64px auto;
+}
+
+.subheadear {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.breaCrumbs {
+  margin: 0 0 32px;
 }
 
 .titleWrapper {
   margin-bottom: 32px;
+}
+
+.titleAndCrumpsWraper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .formWrapper {
@@ -155,15 +175,17 @@ label {
   transition: fill var(--transition);
 }
 
-@media (min-width: 375px) {
-  .textareaWrapper {
-    width: 343px;
-  }
-}
-
 @media (min-width: 765px) {
+  .subheadear {
+    font-size: 20px;
+  }
+
   .container {
-    padding-bottom: 100px;
+    width: 704px;
+    margin: 64px auto 100px;
+  }
+  .breaCrumbs {
+    margin: 0 0 40px;
   }
 
   .titleWrapper {
@@ -198,10 +220,10 @@ label {
 
 @media (min-width: 1440px) {
   .container {
-    flex-direction: row;
-    padding-bottom: 120px;
-    flex-direction: column;
+    width: 1280px;
+    margin: 64px auto 100px;
   }
+
   .formWrapper {
     display: flex;
     flex-direction: row;

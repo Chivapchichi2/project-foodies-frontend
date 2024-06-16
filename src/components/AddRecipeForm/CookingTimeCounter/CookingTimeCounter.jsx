@@ -3,11 +3,11 @@ import styles from "./CookingTimeCounter.module.css";
 
 const CookingTimeCounter = ({ cookingTime, setCookingTime }) => {
   const incrementCookingTime = () => {
-    setCookingTime((prevTime) => prevTime + 1);
+    setCookingTime((prevTime) => prevTime + 10);
   };
 
   const decrementCookingTime = () => {
-    setCookingTime((prevTime) => (prevTime > 1 ? prevTime - 1 : 1));
+    setCookingTime((prevTime) => (prevTime > 10 ? prevTime - 10 : 10));
   };
 
   return (

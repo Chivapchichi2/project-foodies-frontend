@@ -7,6 +7,7 @@ import SelectShared from "../shared/SelectShared/SelectShared";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
 import { useEffect, useRef, useState } from "react";
+
 import Pagination from "../Pagination";
 import SectionSubtitle from "../shared/SectionSubtitle/SectionSubtitle.jsx";
 import { Loader } from "../shared/Loader/Loader.jsx";

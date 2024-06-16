@@ -1,5 +1,12 @@
 import * as yup from "yup";
 
+// const maxWords = (max) => {
+//   return yup.string().test("maxWords", `Must be at most ${max} words`, function (value) {
+//     const words = value ? value.trim().split(/\s+/) : [];
+//     return words.length <= max;
+//   });
+// };
+
 // const SUPPORTED_FORMATS = [
 //   "image/jpg",
 //   "image/jpeg",
@@ -45,7 +52,7 @@ const yupSchema = yup.object().shape({
   // ,
   instructions: yup
     .string()
-    .max(200, "Instructions must be at most 200 characters")
+    .max(2000, "Description must be at most 200 characters")
     .required("Instructions are required"),
 });
 export default yupSchema;

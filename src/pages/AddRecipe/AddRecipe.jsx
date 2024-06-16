@@ -20,6 +20,11 @@ import { useGetIngredientsQuery } from "../../store/services/ingredientService";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useCreateRecipeMutation } from "../../store/services/recipeService";
 import { useFetchCurrentUserProfileQuery } from "../../store/services/profileService";
+import stylesInput from "../../components/AddRecipeForm/CustomInput.module.css";
+import { setUserAddedRecipes } from "../../store/features/profileSlice";
+import { selectRecipes } from "../../store/selectors/profileSelectors";
+import { useDispatch, useSelector } from "react-redux";
+import useAutoResizeTextarea from "../../utilities/hooks/useAutoResizeTextarea";
 
 const AddRecipe = () => {
   const {
@@ -37,6 +42,27 @@ const AddRecipe = () => {
     },
   });
 
+  const [wordCount, setWordCount] = useState(0);
+
+  const maxWords = 200;
+
+  const handleWordCount = (event) => {
+    const value = event.target.value;
+    const words = value
+      .trim()
+      .split(/\s+/)
+      .filter((word) => word.length > 0);
+    if (words.length <= maxWords) {
+      setWordCount(words.length);
+    } else {
+      const limitedText = words.slice(0, maxWords).join(" ");
+      event.target.value = limitedText;
+      setWordCount(maxWords);
+      toast.error(`max length ${maxWords} words`);
+    }
+  };
+
+  const addRecipeToastId = "addRecipeToastId";
   const { data: categoriesData, isLoading: isCategoriesLoading } = useGetCategoriesQuery();
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
   const { data: areasData, isLoading: isAreasLoading } = useGetAreasQuery();
@@ -46,7 +72,11 @@ const AddRecipe = () => {
 
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
-  const [cookingTime, setCookingTime] = useState(1);
+
+  const [cookingTime, setCookingTime] = useState(10);
+  const userRecepies = useSelector(selectRecipes);
+
+  const dispatch = useDispatch();
 
   const categories = categoriesData;
 
@@ -55,7 +85,7 @@ const AddRecipe = () => {
   const areas = areasData;
 
   const navigate = useNavigate(); //
-  const customId = "toastId";
+
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("thumb", data.thumb);
@@ -75,18 +105,19 @@ const AddRecipe = () => {
       const result = await createRecipe(formData);
       if (result.error) {
         toast.error(result.error.data.message, {
-          toastId: customId,
+          toastId: addRecipeToastId,
         });
       } else {
+        dispatch(setUserAddedRecipes([...userRecepies, result.data]));
         navigate(`/user/${userData.id}`);
-        toast.success("Sign In successful", {
-          toastId: customId,
+        toast.success("Recipe added", {
+          toastId: addRecipeToastId,
         });
         reset();
       }
     } catch (error) {
       toast.error(error.message, {
-        toastId: customId,
+        toastId: addRecipeToastId,
       });
     }
   };
@@ -96,12 +127,20 @@ const AddRecipe = () => {
     setImagePreview(null);
     setSelectedIngredients([]);
   };
+
+  useAutoResizeTextarea(styles.textarea);
+
   return (
     <div className={styles.container}>
-      <BreadCrumbs currentPage="Add Recipe" />
-      <div className={styles.titleWrapper}>
-        <SectionTitle text="add recipe" />
-        <FormTitleText />
+      <div className={styles.titleAndCrumpsWraper}>
+        <div className={styles.breaCrumbs}>
+          <BreadCrumbs currentPage="Add Recipe" />
+        </div>
+
+        <div className={styles.titleWrapper}>
+          <SectionTitle text="add recipe" />
+          <FormTitleText />
+        </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.formWrapper}>
@@ -153,17 +192,24 @@ const AddRecipe = () => {
               </div>
             </div>
             <div className={styles.recipeIncstructions}>
-              <label className={styles.labelPrep}>Recipe preparation</label>
-              <div className={styles.textareaWrapper}>
+              <h2 className={styles.subheadear}>Recipe preparation</h2>
+              <div
+                className={`${styles.textareaWrapper} ${stylesInput.form__group} ${stylesInput.field}`}
+              >
                 <textarea
                   {...register("instructions")}
+                  onInput={handleWordCount}
+                  id="instructions"
                   name="instructions"
                   placeholder="Enter recipe"
-                  maxLength="200"
-                  className={styles.textarea}
+                  maxLength="none"
+                  className={`${styles.textarea} ${stylesInput.form__field}`}
                 />
+                <label className={`${styles.labelPrep} ${stylesInput.form__label}`}>
+                  Enter recipe
+                </label>
                 <span className={styles.symbolCounter}>
-                  {watch("instructions")?.length || 0}/200
+                  {wordCount}/{maxWords}
                 </span>
                 {errors.instructions && (
                   <p className={styles.errorMsg}>{errors.instructions.message}</p>

@@ -49,7 +49,7 @@ export const SignInForm = ({ handleClickSignUp }) => {
         });
       } else {
         dispatch(getUser(result.data));
-        toast.success("Sign In successful", {
+        toast.success("Sign in successful", {
           toastId: customId,
         });
         reset();

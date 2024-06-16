@@ -35,7 +35,7 @@
 
 @media (min-width: 768px) {
     .container {
-        width: 704px;
+        max-width: 704px;
     }
 
     .text_first {
