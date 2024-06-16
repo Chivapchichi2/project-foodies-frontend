@@ -19,12 +19,7 @@ import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { Button, CustomModal, SectionTitle } from "../../components/shared";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import { LogOut } from "../../components";
-import {
-  selectIsAuthorizedUser,
-  selectFavoritesRecipes,
-  selectFollowers,
-  selectFollowing,
-} from "../../store/selectors/profileSelectors";
+import { selectIsAuthorizedUser, selectFollowers } from "../../store/selectors/profileSelectors";
 import { selectId } from "../../store/features/authSlice";
 
 const customId = "toastId";
