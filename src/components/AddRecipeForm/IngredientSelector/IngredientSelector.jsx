@@ -6,6 +6,7 @@ import Button from "../../shared/Button/Button";
 import IconButton from "../../shared/IconButton/IconButton";
 import CookingTimeCounter from "../CookingTimeCounter/CookingTimeCounter";
 import { Loader } from "../../shared/Loader/Loader";
+import useAutoResizeTextarea from "../../../utilities/hooks/useAutoResizeTextarea";
 
 const IngredientSelector = ({
   register,
@@ -55,6 +56,8 @@ const IngredientSelector = ({
   const renderLoader = (isLoading) => {
     return isLoading ? <Loader /> : null;
   };
+
+  useAutoResizeTextarea(styles.textarea);
 
   return (
     <div className={styles.container}>
