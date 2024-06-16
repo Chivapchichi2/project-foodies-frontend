@@ -102,10 +102,12 @@ const AddRecipe = () => {
 
   return (
     <div className={styles.container}>
-      <BreadCrumbs currentPage="Add Recipe" />
-      <div className={styles.titleWrapper}>
-        <SectionTitle text="add recipe" />
-        <FormTitleText />
+      <div className={styles.titleAndCrumpsWraper}>
+        <BreadCrumbs currentPage="Add Recipe" />
+        <div className={styles.titleWrapper}>
+          <SectionTitle text="add recipe" />
+          <FormTitleText />
+        </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.formWrapper}>
