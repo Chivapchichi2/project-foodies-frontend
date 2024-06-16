@@ -11,7 +11,7 @@ import styles from "./styles.module.css";
 const Home = () => {
   const location = useLocation();
   const [getTestimanials, setGetTestimanials] = useState([]);
-  const { data: testimonials, isLoading } = useGetTestimonialsQuery();
+  const { data: testimonials, isLoading, error: isError } = useGetTestimonialsQuery();
 
   useEffect(() => {
     if (testimonials && testimonials.length > 0) {
@@ -19,16 +19,18 @@ const Home = () => {
     }
   }, [testimonials]);
 
-  // useEffect(() => {
-  //   loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
-  // }, []);
-
   return (
     <>
       <Hero />
       <div className={styles.hero_container}>
         {location.pathname === "/" ? <Categories /> : <Outlet />}
-        {isLoading ? <Loader /> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+        {isLoading ? (
+          <Loader />
+        ) : !isError ? (
+          <TestimonialsSwiper getTestimanials={getTestimanials} />
+        ) : (
+          <p>Oops! Testimonials doesnt work now </p>
+        )}
       </div>
     </>
   );
