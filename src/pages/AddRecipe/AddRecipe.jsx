@@ -110,7 +110,10 @@ const AddRecipe = () => {
   return (
     <div className={styles.container}>
       <div className={styles.titleAndCrumpsWraper}>
-        <BreadCrumbs currentPage="Add Recipe" />
+        <div className={styles.breaCrumbs}>
+          <BreadCrumbs currentPage="Add Recipe" />
+        </div>
+
         <div className={styles.titleWrapper}>
           <SectionTitle text="add recipe" />
           <FormTitleText />
