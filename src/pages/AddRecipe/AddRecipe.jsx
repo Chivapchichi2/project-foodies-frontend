@@ -26,7 +26,6 @@ import { selectRecipes } from "../../store/selectors/profileSelectors";
 import { useDispatch, useSelector } from "react-redux";
 import useAutoResizeTextarea from "../../utilities/hooks/useAutoResizeTextarea";
 
-
 const AddRecipe = () => {
   const {
     register,
@@ -78,7 +77,6 @@ const AddRecipe = () => {
   const userRecepies = useSelector(selectRecipes);
 
   const dispatch = useDispatch();
-
 
   const categories = categoriesData;
 
@@ -194,6 +192,7 @@ const AddRecipe = () => {
               </div>
             </div>
             <div className={styles.recipeIncstructions}>
+              <h2 className={styles.subheadear}>Recipe preparation</h2>
               <div
                 className={`${styles.textareaWrapper} ${stylesInput.form__group} ${stylesInput.field}`}
               >
@@ -207,10 +206,10 @@ const AddRecipe = () => {
                   className={`${styles.textarea} ${stylesInput.form__field}`}
                 />
                 <label className={`${styles.labelPrep} ${stylesInput.form__label}`}>
-                  Recipe preparation
+                  Enter recipe
                 </label>
                 <span className={styles.symbolCounter}>
-                  {wordCount}/{maxWords} words
+                  {wordCount}/{maxWords}
                 </span>
                 {errors.instructions && (
                   <p className={styles.errorMsg}>{errors.instructions.message}</p>
