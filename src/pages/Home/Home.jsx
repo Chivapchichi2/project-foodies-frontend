@@ -6,11 +6,12 @@ import { TestimonialsSwiper } from "src/components";
 import Hero from "../../components/Hero";
 import { Loader } from "../../components/shared/Loader/Loader.jsx";
 import { Categories } from "src/components/Categories/Categories.jsx";
+import styles from "./styles.module.css";
 
 const Home = () => {
   const location = useLocation();
   const [getTestimanials, setGetTestimanials] = useState([]);
-  const { data: testimonials, isLoading } = useGetTestimonialsQuery();
+  const { data: testimonials, isLoading, error: isError } = useGetTestimonialsQuery();
 
   useEffect(() => {
     if (testimonials && testimonials.length > 0) {
@@ -18,15 +19,19 @@ const Home = () => {
     }
   }, [testimonials]);
 
-  // useEffect(() => {
-  //   loadSvgSprite("/project-foodies-frontend/symbol-defs.svg");
-  // }, []);
-
   return (
     <>
       <Hero />
-      {location.pathname === "/" ? <Categories /> : <Outlet />}
-      {isLoading ? <Loader /> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+      <div className={styles.hero_container}>
+        {location.pathname === "/" ? <Categories /> : <Outlet />}
+        {isLoading ? (
+          <Loader />
+        ) : !isError ? (
+          <TestimonialsSwiper getTestimanials={getTestimanials} />
+        ) : (
+          <p>Oops! Testimonials doesnt work now </p>
+        )}
+      </div>
     </>
   );
 };

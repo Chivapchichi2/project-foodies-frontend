@@ -18,6 +18,8 @@ import { LogOut } from "../../components";
 import { selectIsAuthorizedUser } from "../../store/selectors/profileSelectors";
 import { selectId } from "../../store/features/authSlice";
 
+const customId = "toastId";
+
 const User = () => {
   const myId = useSelector(selectId);
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
@@ -77,6 +79,7 @@ const User = () => {
   if (profileError) {
     toast.error(profileError.data.message, {
       position: "top-right",
+      toastId: customId,
     });
     return;
   }

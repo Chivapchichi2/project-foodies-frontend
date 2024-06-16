@@ -7,8 +7,9 @@
   display: flex;
   list-style: none;
   padding: 0;
-  margin-top: 20px;
   justify-content: center;
+  height: 40px;
+  align-items: center;
 }
 
 .pageItem {
@@ -17,6 +18,7 @@
 
 .previousItem,
 .nextItem {
+  display: block;
   font-weight: bold;
   color: var(--black);
   padding: 10px 15px;
@@ -24,6 +26,7 @@
   border: 1px solid var(--black-10);
   text-decoration: none;
   cursor: pointer;
+  transition: baground-color var(--transition), color var(--transition);
 }
 
 .previousItem:hover,
@@ -33,29 +36,31 @@
 }
 
 .pageLink {
+  display: block;
   text-decoration: none;
   color: var(--black);
   padding: 10px 15px;
   border: 1px solid #ddd;
   border-radius: 50px;
   cursor: pointer;
+  transition: baground-color var(--transition), color var(--transition);
 }
 
 .pageLink:hover {
-  background-color: var(--white);
-  color: var(--black);
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .active .pageLink {
-  background-color: var(--black);
-  color: var(--white);
   border: 1px solid var(--black);
 }
 
 .breakMe {
   cursor: default;
   text-decoration: none;
-  color: var(--black); /* або будь-який інший стиль, який ви хочете застосувати */
+  color: var(--black);
+  pointer-events: none;
+  cursor: default;
 }
 
 .disabled .pageLink {

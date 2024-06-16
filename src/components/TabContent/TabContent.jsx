@@ -72,14 +72,22 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
   const userFavoriteRecipes = useSelector(selectFavoritesRecipes);
 
   const [currentPage, setCurrentPage] = useState(1);
-  // const [nextPage, setNextPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [activeTab, setActiveTab] = useState(
     isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id
   );
 
+  const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery({
+    userId: id,
+    page: currentPage,
+  });
+
+  // add checks for tab, as in the function bellow
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
+
   const handlePageChange = ({ selected }) => {
-    // setNextPage(selected + 1);
     setCurrentPage(selected + 1);
   };
 
@@ -87,13 +95,7 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
     setActiveTab(isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id);
   }, [isAuthorizedUser]);
 
-  const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery(
-    {
-      userId: id,
-      page: currentPage,
-    },
-    { skip: activeTab !== "my-favorites" && activeTab !== "recipes" }
-  );
+  // add checks for tab, as in the function bellow
 
   const { data: favoriteRecipes, isLoading: loadFavorite } = useFetchUserFavoritesRecipesQuery(
     { userId: id },
@@ -102,12 +104,11 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
     }
   );
 
-  const { data: followersData, isLoading: loadFollowers } = useFetchUserFollowersQuery(
-    { userId: id },
-    {
-      skip: activeTab !== "followers",
-    }
-  );
+  const { data: followersData, isLoading: loadFollowers } = useFetchUserFollowersQuery({
+    userId: id,
+    page: currentPage,
+    skip: activeTab !== "followers",
+  });
 
   const { data: followingData, isLoading: loadFollowing } = useFetchUserFollowingQuery(
     { userId: id },
@@ -115,14 +116,12 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
       skip: activeTab !== "following",
     }
   );
-
   const isDataLoading = loadRecipes || loadFavorite || loadFollowers || loadFollowing;
 
   useEffect(() => {
     if (!loadRecipes) {
       setTotalPages(myRecipes.totalPages);
     }
-
     if (activeTab === "followers" && followersData) {
       setTotalPages(followersData.totalPages);
       dispatch(setUserFollowers(followersData.followersWithRecipes));
@@ -130,9 +129,7 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
       setTotalPages(followingData.totalPages);
       dispatch(setUserFollowing(followingData.followingWithRecipes));
     } else if (activeTab === "my-favorites" && favoriteRecipes) {
-      console.log("in favorite");
       setTotalPages(favoriteRecipes.totalPages);
-      setCurrentPage(1);
       const favoriteRecipesProccessed = favoriteRecipes?.data.map((item) => {
         return item.recipe;
       });
@@ -223,13 +220,17 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
   const menuItems = isAuthorizedUser ? myProfileTabs : userProfileTabs;
 
   return (
-    <>
-      <div className={styles.container}>
-        <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
-        {isDataLoading ? <Loader /> : <div className={styles.content}>{renderContent()}</div>}
-      </div>
-      {totalPages > 1 && <Pagination pageCount={totalPages} onPageChange={handlePageChange} />}
-    </>
+    <div className={styles.container}>
+      <TabMenu menuItems={menuItems} activeTab={activeTab} setActiveTab={setActiveTab} />
+      {isDataLoading ? <Loader /> : <div className={styles.content}>{renderContent()}</div>}
+      {totalPages > 1 && (
+        <Pagination
+          pageCount={totalPages}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
+      )}
+    </div>
   );
 };
 

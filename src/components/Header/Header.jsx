@@ -15,7 +15,7 @@ const Header = () => {
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const token = useSelector(selectToken);
   const { pathname } = useLocation();
-  const isHome = pathname === "/";
+  const isHome = pathname === "/" || pathname.split("/")[1] === "category";
   const styleWhite = isHome && styles.color_white;
   return (
     <header className={cx(styles.header_wrap, !isHome && styles.header_wrap_bgc)}>

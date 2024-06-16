@@ -7,7 +7,8 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
   useEffect(() => {
     const subscription = watch((value) => {
       if (value.thumb[0]) {
-        setImagePreview(URL.createObjectURL(value.thumb[0])) && setValue("thumb", value.thumb[0]);
+        setImagePreview(URL.createObjectURL(value.thumb[0]));
+        setValue("thumb", value.thumb[0]);
       }
     });
     return () => subscription.unsubscribe();
@@ -35,7 +36,7 @@ const ImageUploader = ({ register, setValue, imagePreview, setImagePreview, erro
               </>
             )}
 
-            {errors.thumb && <p>{errors.thumb.message}</p>}
+            {errors.thumb && <p className={styles.errorMsg}>{errors.thumb.message}</p>}
           </div>
         </label>
       </div>
