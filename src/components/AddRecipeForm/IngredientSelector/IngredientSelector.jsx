@@ -160,10 +160,11 @@ const IngredientSelector = ({
         </ul>
       )}
       <Button
-        text="Add ingredient +"
+        text="Add ingredient"
         type="button"
         onClick={addIngredient}
         iconId="icon-plus"
+        iconStyle={styles.addBtnIcon}
         classname={styles.buttonAdd}
       />
     </div>
