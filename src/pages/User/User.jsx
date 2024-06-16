@@ -7,7 +7,11 @@ import {
   useUnfollowUserMutation,
   useFetchCurrentUserProfileQuery,
 } from "../../store/services/profileService";
-import { getUserProfile } from "../../store/features/profileSlice";
+import {
+  getUserProfile,
+  setCurrentAuthUser,
+  setUserFollowers,
+} from "../../store/features/profileSlice";
 import TabContent from "../../components/TabContent/TabContent";
 import styles from "./User.module.css";
 import { toast } from "react-toastify";
@@ -15,7 +19,12 @@ import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { Button, CustomModal, SectionTitle } from "../../components/shared";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import { LogOut } from "../../components";
-import { selectIsAuthorizedUser } from "../../store/selectors/profileSelectors";
+import {
+  selectIsAuthorizedUser,
+  selectFavoritesRecipes,
+  selectFollowers,
+  selectFollowing,
+} from "../../store/selectors/profileSelectors";
 import { selectId } from "../../store/features/authSlice";
 
 const customId = "toastId";
@@ -25,33 +34,58 @@ const User = () => {
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
+  const userFollowers = useSelector(selectFollowers);
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data: profileData, error: profileError } = useFetchUserProfileQuery(id);
+  const { data: currentUser } = useFetchCurrentUserProfileQuery();
 
-  const shouldSkip = id === myId;
+  const [followUser, { error: followError }] = useFollowUserMutation();
+  const [unfollowUser, { error: unfollowError }] = useUnfollowUserMutation();
 
-  const { data: currentUser } = useFetchCurrentUserProfileQuery(
-    {},
-    {
-      skip: shouldSkip,
+  const handleFollowUser = (userId) => {
+    followUser(userId);
+    if (followError) {
+      toast.error("Something went wrong", {
+        position: "top-right",
+      });
+      return;
     }
-  );
 
-  const [followUser] = useFollowUserMutation();
-  const [unfollowUser] = useUnfollowUserMutation();
+    dispatch(
+      setCurrentAuthUser({
+        ...currentUser,
+        following: [...currentUser.following, userId],
+      })
+    );
 
-  const handleFollowUser = async (userId) => {
-    await followUser(userId);
+    dispatch(setUserFollowers([...userFollowers]));
+
     setIsFollowing(true);
+
     toast.success("Follow successful", {
       position: "top-right",
     });
   };
 
-  const handleUnfollowUser = async (userId) => {
-    await unfollowUser(userId);
+  const handleUnfollowUser = (userId) => {
+    unfollowUser(userId);
+    if (unfollowError) {
+      toast.error("Something went wrong", {
+        position: "top-right",
+      });
+      return;
+    }
+    dispatch(
+      setCurrentAuthUser({
+        ...currentUser,
+        following: currentUser.following.filter((followingUserId) => followingUserId !== userId),
+      })
+    );
+    dispatch(setUserFollowers([...userFollowers]));
     setIsFollowing(false);
+
     toast.success("Unfollow successful", {
       position: "top-right",
     });
@@ -64,17 +98,13 @@ const User = () => {
       );
       setIsFollowing(isUserFollowing);
     }
-  }, [currentUser, id, myId, shouldSkip]);
+  }, [currentUser, id, myId]);
 
   useEffect(() => {
     if (profileData) {
       dispatch(getUserProfile(profileData));
     }
   }, [profileData, dispatch]);
-
-  // if (profileLoading) {
-  //   return <Loader />;
-  // }
 
   if (profileError) {
     toast.error(profileError.data.message, {

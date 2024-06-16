@@ -42,6 +42,7 @@ export const App = () => {
           </Route>
           <Route path="/recipe/add" element={<PrivateRoute component={AddRecipe} />} />
           <Route path="/recipe/:id" element={<Recipe />} />
+          <Route path="/recipe/:id" element={<Recipe />} />
           <Route path="/user/:id" element={<PrivateRoute component={User} />} />
           <Route path="/error500" element={<ServerError />} />
           <Route path="*" element={<PageNotFound />} />

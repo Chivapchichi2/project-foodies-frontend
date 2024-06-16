@@ -54,6 +54,13 @@
   text-align: center;
 }
 
+.no_recipes {
+  color: var(--toastify-color-error);
+  height: 300px;
+  padding-top: 100px;
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   .category_selects {
     flex-direction: row;
@@ -87,6 +94,11 @@
   .category_section {
     max-width: 1280px;
     margin-bottom: 120px;
+  }
+
+  .no_recipes {
+    padding-left: 50px;
+    padding-top: 50px;
   }
 
   .no_recipes {
