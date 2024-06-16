@@ -37,6 +37,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+  margin-bottom: 32px;
 }
 
 .recipes_search_wrapp {
@@ -64,6 +65,7 @@
 @media screen and (min-width: 768px) {
   .category_selects {
     flex-direction: row;
+    margin-bottom: 40px;
   }
 
   .category_section {
@@ -78,7 +80,6 @@
     gap: 18px;
     margin-bottom: 60px;
   }
-
 }
 
 @media screen and (min-width: 1440px) {
@@ -89,6 +90,7 @@
 
   .category_selects {
     flex-direction: column;
+    margin-bottom: 0;
   }
 
   .category_section {

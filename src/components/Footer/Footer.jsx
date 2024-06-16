@@ -4,7 +4,7 @@ import styles from "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className={styles.container}>
       <div className={styles.wrap_footer}>
         <NavLink className={styles.logo} href="/" aria-label="Logo Foodies">
           <p>Foodies</p>
