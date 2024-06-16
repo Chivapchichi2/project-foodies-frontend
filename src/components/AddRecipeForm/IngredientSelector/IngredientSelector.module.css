@@ -10,6 +10,12 @@
   color: red;
 }
 
+.selectors_time_wrapp {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .textareaWrapper {
   position: relative;
 }
@@ -158,6 +164,10 @@
 @media (min-width: 765px) {
   .container {
     gap: 60px;
+  }
+
+  .selectors_time_wrapp {
+    flex-direction: row;
   }
 
   .inputQuantity {

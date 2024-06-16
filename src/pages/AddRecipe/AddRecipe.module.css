@@ -1,9 +1,9 @@
 .container {
+  width: 343px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 64px;
-  padding: 30px;
+  margin: 64px auto;
 }
 
 .titleWrapper {
@@ -155,15 +155,10 @@ label {
   transition: fill var(--transition);
 }
 
-@media (min-width: 375px) {
-  .textareaWrapper {
-    width: 343px;
-  }
-}
-
 @media (min-width: 765px) {
   .container {
-    padding-bottom: 100px;
+    width: 704px;
+    margin: 64px auto 100px;
   }
 
   .titleWrapper {
@@ -198,10 +193,10 @@ label {
 
 @media (min-width: 1440px) {
   .container {
-    flex-direction: row;
-    padding-bottom: 120px;
-    flex-direction: column;
+    width: 1280px;
+    margin: 64px auto 100px;
   }
+
   .formWrapper {
     display: flex;
     flex-direction: row;
