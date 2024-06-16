@@ -4,6 +4,12 @@
   gap: 20px;
 }
 
+.errorMsg {
+  font-size: 12px;
+  line-height: calc(18 / 12);
+  color: red;
+}
+
 .textareaWrapper {
   position: relative;
 }
@@ -27,6 +33,7 @@
   resize: none;
   overflow: hidden;
   position: relative;
+  transition: border-color var(--transition);
 }
 
 .textarea::placeholder {
@@ -35,13 +42,17 @@
   left: 0;
   font-size: 14px;
 }
+.textarea:focus {
+  border-bottom: 1px solid var(--black-20);
+}
 
 .inputQuantity {
   border: none;
-  border-bottom: 1px solid rgba(5, 5, 5, 0.12);
+  border-bottom: 1px solid var(--black-12);
   padding: 16px 0;
   height: 36px;
   border-radius: 0;
+  transition: border-color var(--transition);
 }
 
 .inputQuantity::placeholder {
@@ -54,6 +65,10 @@
   letter-spacing: -0.28px;
 }
 
+.inputQuantity:focus {
+  outline: none;
+  border-bottom: 1px solid var(--black-20);
+}
 .buttonAdd {
   width: 168px;
   padding: 14px 20px;
@@ -162,5 +177,22 @@
     line-height: calc(24 / 16);
     letter-spacing: -0.32px;
     margin: 0 0 80px 0;
+  }
+}
+@media (min-width: 1440px) {
+  .inputQuantity {
+    height: 40px;
+    font-size: 16px;
+  }
+  .inputQuantity::placeholder {
+    font-size: 16px;
+    line-height: calc(24 / 16);
+    letter-spacing: -0.32px;
+  }
+  .textarea {
+    font-size: 16px;
+  }
+  .textarea::placeholder {
+    font-size: 16px;
   }
 }
