@@ -46,19 +46,19 @@
 
 - Перегляд рецептів: Користувачі можуть переглядати всі доступні рецепти.
 
-  <img src="https://github.com/Chivapchichi2/project-foodies-frontend/tree/main/src/assets/readme/recipe-view.png" />
+<img alt="image" src="/src/assets/readme/recipe-view.png" />
 
 - Пошук рецептів: Можливість пошуку рецептів за категоріями, інгредієнтами або областю.
 
-  <img src="https://github.com/Chivapchichi2/project-foodies-frontend/tree/main/src/assets/readme/ingredient-area-search.png" />
+  <img alt="image" src="/src/assets/readme/ingredient-area-search.png" />
 
 - Додавання рецептів: Зареєстровані користувачі можуть додавати нові рецепти.
 
-  <img src="https://github.com/Chivapchichi2/project-foodies-frontend/tree/main/src/assets/readme/add-recipe.png" />
+  <img alt=""image""" src="/src/assets/readme/add-recipe.png" />
 
 - Улюблені рецепти: Користувачі можуть додавати рецепти в улюблені та переглядати їх у відповідному розділі.
 
-  <img src="https://github.com/Chivapchichi2/project-foodies-frontend/tree/main/src/assets/readme/favorite-recipe.png" />
+  <img alt="image" src="/src/assets/readme/favorite-recipe.png" />
 
 ## Контрибуція
 
