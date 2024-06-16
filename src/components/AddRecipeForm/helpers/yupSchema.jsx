@@ -1,11 +1,11 @@
 import * as yup from "yup";
 
-const maxWords = (max) => {
-  return yup.string().test("maxWords", `Must be at most ${max} words`, function (value) {
-    const words = value ? value.trim().split(/\s+/) : [];
-    return words.length <= max;
-  });
-};
+// const maxWords = (max) => {
+//   return yup.string().test("maxWords", `Must be at most ${max} words`, function (value) {
+//     const words = value ? value.trim().split(/\s+/) : [];
+//     return words.length <= max;
+//   });
+// };
 
 // const SUPPORTED_FORMATS = [
 //   "image/jpg",
