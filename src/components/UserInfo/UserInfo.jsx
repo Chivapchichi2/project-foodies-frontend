@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import IconButton from "../shared/IconButton/IconButton";
 import styles from "./UserInfo.module.css";
 import { nanoid } from "@reduxjs/toolkit";
@@ -7,11 +7,13 @@ import { UserInfoItem } from "./UserInfoItem";
 import withoutAvatar from "../../images/user_without_avatar.jpg";
 import { selectIsAuthorizedUser, selectUserProfile } from "../../store/selectors/profileSelectors";
 import { useUpdateUserAvatarMutation } from "../../store/services/profileService";
+import {getAvatarURL} from "../../store/features/authSlice.js";
 
 export const UserInfo = () => {
   const isOwnProfile = useSelector(selectIsAuthorizedUser);
   const [updateUserAvatar] = useUpdateUserAvatarMutation();
   const data = useSelector(selectUserProfile);
+  const dispatch = useDispatch();
 
   const dataKeys = data ? Object.keys(data) : [];
 
@@ -24,6 +26,7 @@ export const UserInfo = () => {
     try {
       const response = await updateUserAvatar(formData).unwrap();
       setAvatar(response.avatarURL);
+      dispatch(getAvatarURL(response.avatarURL));
     } catch (error) {
       console.error("Error updating avatar:", error);
     }

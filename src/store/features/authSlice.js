@@ -13,14 +13,17 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        getUser(state, action) {
-            state.token = action.payload.token;
-            state.name = action.payload.user.name;
-            state.id = action.payload.user.id;
-            state.avatarURL = action.payload.user.avatarURL;
+        getUser(state, {payload}) {
+            state.token = payload.token;
+            state.name = payload.user.name;
+            state.id = payload.user.id;
+            state.avatarURL = payload.user.avatarURL;
         },
         clearToken(state) {
             state.token = null;
+        },
+        getAvatarURL(state, {payload}) {
+            state.avatarURL = payload;
         },
     },
 });
@@ -33,7 +36,11 @@ export const persistedAuthReducer = persistReducer(
     authSlice.reducer
     );
 
-export const { getUser, clearToken } = authSlice.actions
+export const {
+    getUser,
+    clearToken,
+    getAvatarURL
+} = authSlice.actions
 
 export const selectToken = (state) => state.auth.token;
 export const selectName = (state) => state.auth.name;
