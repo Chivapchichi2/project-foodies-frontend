@@ -20,6 +20,9 @@ import { useGetIngredientsQuery } from "../../store/services/ingredientService";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useCreateRecipeMutation } from "../../store/services/recipeService";
 import { useFetchCurrentUserProfileQuery } from "../../store/services/profileService";
+import { setUserAddedRecipes } from "../../store/features/profileSlice";
+import { selectRecipes } from "../../store/selectors/profileSelectors";
+import { useDispatch, useSelector } from "react-redux";
 import useAutoResizeTextarea from "../../utilities/hooks/useAutoResizeTextarea";
 
 const AddRecipe = () => {
@@ -48,6 +51,9 @@ const AddRecipe = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
   const [cookingTime, setCookingTime] = useState(1);
+  const userRecepies = useSelector(selectRecipes);
+
+  const dispatch = useDispatch();
 
   const categories = categoriesData;
 
@@ -79,6 +85,7 @@ const AddRecipe = () => {
           toastId: customId,
         });
       } else {
+        dispatch(setUserAddedRecipes([...userRecepies, result.data]));
         navigate(`/user/${userData.id}`);
         toast.success("Sign In successful", {
           toastId: customId,
