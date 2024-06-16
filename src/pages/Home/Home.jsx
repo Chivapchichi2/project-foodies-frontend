@@ -6,6 +6,7 @@ import { TestimonialsSwiper } from "src/components";
 import Hero from "../../components/Hero";
 import { Loader } from "../../components/shared/Loader/Loader.jsx";
 import { Categories } from "src/components/Categories/Categories.jsx";
+import styles from "./styles.module.css";
 
 const Home = () => {
   const location = useLocation();
@@ -25,8 +26,10 @@ const Home = () => {
   return (
     <>
       <Hero />
-      {location.pathname === "/" ? <Categories /> : <Outlet />}
-      {isLoading ? <Loader /> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+      <div className={styles.hero_container}>
+        {location.pathname === "/" ? <Categories /> : <Outlet />}
+        {isLoading ? <Loader /> : <TestimonialsSwiper getTestimanials={getTestimanials} />}
+      </div>
     </>
   );
 };

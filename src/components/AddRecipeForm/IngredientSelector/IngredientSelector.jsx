@@ -61,12 +61,13 @@ const IngredientSelector = ({
       <div className={styles.textareaWrapper}>
         <textarea
           {...register("description")}
+          name="description"
           maxLength="200"
           placeholder="Enter the description of the dish"
           className={styles.textarea}
         />
         <span className={styles.symbolCounter}>{watch("description")?.length || 0}/200</span>
-        {errors.description && <p>{errors.description.message}</p>}
+        {errors.description && <p className={styles.errorMsg}>{errors.description.message}</p>}
       </div>
       <div className={styles.categoryAndTime}>
         {renderLoader(isCategoriesLoading) || (
@@ -78,7 +79,7 @@ const IngredientSelector = ({
               {...register("category")}
               onChange={(selectedOption) => setValue("category", selectedOption.label)}
             />
-            {errors.category && <p>{errors.category.message}</p>}
+            {errors.category && <p className={styles.errorMsg}>{errors.category.message}</p>}
           </div>
         )}
       </div>
@@ -92,13 +93,13 @@ const IngredientSelector = ({
               {...register("area")}
               onChange={(selectedOption) => setValue("area", selectedOption.label)}
             />
-            {errors.area && <p>{errors.area.message}</p>}
+            {errors.area && <p className={styles.errorMsg}>{errors.area.message}</p>}
           </div>
         )}
       </div>
       <div>
         <CookingTimeCounter cookingTime={cookingTime} setCookingTime={setCookingTime} />
-        {errors.cookingTime && <p>{errors.cookingTime.message}</p>}
+        {errors.cookingTime && <p className={styles.errorMsg}>{errors.cookingTime.message}</p>}
       </div>
       <div className={styles.ingredientAndQuantity}>
         {isIngredientsLoading ? (
@@ -113,7 +114,7 @@ const IngredientSelector = ({
               {...register("ingredient")}
               onChange={(selectedOption) => setValue("ingredient", selectedOption)}
             />
-            {errors.ingredient && <p>{errors.ingredient.message}</p>}
+            {errors.ingredient && <p className={styles.errorMsg}>{errors.ingredient.message}</p>}
           </div>
         )}
 
@@ -125,7 +126,7 @@ const IngredientSelector = ({
             placeholder="Enter quantity"
             classname={styles.inputQuantity}
           />
-          {errors.measure && <p>{errors.measure.message}</p>}
+          {errors.measure && <p className={styles.errorMsg}>{errors.measure.message}</p>}
         </div>
       </div>
       {isIngredientListVisible && (

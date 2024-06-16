@@ -14,6 +14,7 @@ export const recipeApi = createApi({
   endpoints: (builder) => ({
     getRecipes: builder.query({
       query: ({ category, ingredients, area, page, limit } = {}) => {
+
         const params = new URLSearchParams();
         if (category) {
           params.append("category", category);

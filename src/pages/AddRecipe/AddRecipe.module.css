@@ -34,6 +34,7 @@ label {
 
 .nameInput {
   border: none;
+  border-color: var(--black-12);
   border-radius: 0;
   padding: 0;
   margin: 32px 0 32px;
@@ -42,12 +43,30 @@ label {
   line-height: calc(24 / 18);
   letter-spacing: -0.36px;
   text-transform: uppercase;
+  transition: border-color var(--transition), border-bottom var(--transition);
+}
+
+.nameInputWrapper {
+  position: relative;
+}
+.errorTitle {
+  position: absolute;
+  font-size: 12px;
+  line-height: calc(18 / 12);
+  color: red;
+  left: 0;
+  top: 60px;
+}
+
+.errorMsg {
+  font-size: 12px;
+  line-height: calc(18 / 12);
+  color: red;
 }
 
 .nameInput:focus {
-  /* border-color: var(--black-20); */
   outline: none;
-  border-bottom: 1px solid rgba(5, 5, 5, 0.12);
+  border-bottom: 1px solid var(--black-20);
 }
 
 .nameInput::placeholder {
@@ -67,15 +86,19 @@ label {
   height: 36px;
   padding: 16px 0;
   border: none;
-  border-bottom: 1px solid rgba(5, 5, 5, 0.12);
+  border-bottom: 1px solid var(--black-12);
   box-sizing: border-box;
   font-size: 14px;
   outline: none;
   resize: none;
   overflow: hidden;
   position: relative;
+  transition: border-color var(--transition);
 }
 
+.textarea:focus {
+  border-color: var(--black-20);
+}
 .labelPrep {
   margin-bottom: 32px;
 }
@@ -187,5 +210,14 @@ label {
   }
   .nameInput {
     margin: 0 0 40px 0;
+  }
+  .textarea {
+    font-size: 16px;
+  }
+  .textarea::placeholder {
+    font-size: 16px;
+  }
+  .errorTitle {
+    top: 28px;
   }
 }

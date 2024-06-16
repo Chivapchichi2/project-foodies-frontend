@@ -23,6 +23,9 @@
   .wrap_testimonial {
     margin-bottom: 100px;
   }
+  .testimonial_container {
+    margin: 46px 0 80px;
+  }
 }
 
 @media screen and (min-width: 1440px) {

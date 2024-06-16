@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import yupSchema from "../../components/AddRecipeForm/helpers/yupSchema";
-
+import { toast } from "react-toastify";
 import styles from "./AddRecipe.module.css";
 
 import ImageUploader from "../../components/AddRecipeForm/ImageUploader/ImageUploader";
@@ -55,11 +55,10 @@ const AddRecipe = () => {
   const areas = areasData;
 
   const navigate = useNavigate(); //
-
+  const customId = "toastId";
   const onSubmit = async (data) => {
     const formData = new FormData();
-
-    formData.append("thumb", data.thumb[0]);
+    formData.append("thumb", data.thumb);
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("category", data.category);
@@ -73,13 +72,25 @@ const AddRecipe = () => {
     formData.append("ingredients", JSON.stringify(ingredients));
 
     try {
-      await createRecipe(formData);
-      navigate(`/user/${userData.id}`);
+      const result = await createRecipe(formData);
+      if (result.error) {
+        toast.error(result.error.data.message, {
+          toastId: customId,
+        });
+      } else {
+        navigate(`/user/${userData.id}`);
+        toast.success("Sign In successful", {
+          toastId: customId,
+        });
+        reset();
+      }
     } catch (error) {
-      alert("Error: " + error.response.data.message);
+      toast.error(error.message, {
+        toastId: customId,
+      });
     }
   };
-
+  //
   const handleReset = () => {
     reset();
     setImagePreview(null);
@@ -104,7 +115,7 @@ const AddRecipe = () => {
           />
 
           <div>
-            <div>
+            <div className={styles.nameInputWrapper}>
               <Input
                 type="text"
                 name="title"
@@ -112,7 +123,7 @@ const AddRecipe = () => {
                 placeholder="The name of the recipe"
                 classname={styles.nameInput}
               />
-              {errors.title && <p>{errors.title.message}</p>}
+              {errors.title && <p className={styles.errorTitle}>{errors.title.message}</p>}
             </div>
 
             <div className={styles.recipeData}>
@@ -136,7 +147,7 @@ const AddRecipe = () => {
                     isAreasLoading={isAreasLoading}
                   />
                   {errors.selectedIngredients && (
-                    <p className={styles.error}>{errors.selectedIngredients.message}</p>
+                    <p className={styles.errorMsg}>{errors.selectedIngredients.message}</p>
                   )}
                 </div>
               </div>
@@ -146,6 +157,7 @@ const AddRecipe = () => {
               <div className={styles.textareaWrapper}>
                 <textarea
                   {...register("instructions")}
+                  name="instructions"
                   placeholder="Enter recipe"
                   maxLength="200"
                   className={styles.textarea}
@@ -153,7 +165,9 @@ const AddRecipe = () => {
                 <span className={styles.symbolCounter}>
                   {watch("instructions")?.length || 0}/200
                 </span>
-                {errors.instructions && <p>{errors.instructions.message}</p>}
+                {errors.instructions && (
+                  <p className={styles.errorMsg}>{errors.instructions.message}</p>
+                )}
               </div>
             </div>
             <div className={styles.buttonWrapper}>

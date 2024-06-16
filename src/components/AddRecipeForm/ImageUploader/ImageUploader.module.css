@@ -2,6 +2,12 @@ input[type="file"] {
   display: none;
 }
 
+.errorMsg {
+  font-size: 12px;
+  line-height: calc(18 / 12);
+  color: red;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
