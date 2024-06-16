@@ -7,6 +7,7 @@ const initialState = {
   favoritesRecipes: [],
   followers: [],
   following: [],
+  current: null,
 };
 
 const profileSlice = createSlice({
@@ -18,7 +19,7 @@ const profileSlice = createSlice({
       state.isAuthorizedUser = "followingCount" in payload ? true : false;
     },
     setUserAddedRecipes(state, { payload }) {
-      state.recipes = [...state.recipes, ...payload.data];
+      state.recipes = [...payload.data];
     },
     setUserFavoritesRecipes(state, { payload }) {
       state.favoritesRecipes = [...payload.data];

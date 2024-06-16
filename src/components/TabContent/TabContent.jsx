@@ -63,7 +63,7 @@ const userProfileTabs = [
   },
 ];
 
-const TabContent = () => {
+const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
@@ -87,11 +87,13 @@ const TabContent = () => {
     setActiveTab(isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id);
   }, [isAuthorizedUser]);
 
-  const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery({
-    userId: id,
-    skip: activeTab !== "my-favorites" || activeTab !== "recipes",
-    page: currentPage,
-  });
+  const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery(
+    {
+      userId: id,
+      page: currentPage,
+    },
+    { skip: activeTab !== "my-favorites" && activeTab !== "recipes" }
+  );
 
   const { data: favoriteRecipes, isLoading: loadFavorite } = useFetchUserFavoritesRecipesQuery(
     { userId: id },
@@ -113,12 +115,14 @@ const TabContent = () => {
       skip: activeTab !== "following",
     }
   );
+
   const isDataLoading = loadRecipes || loadFavorite || loadFollowers || loadFollowing;
 
   useEffect(() => {
     if (!loadRecipes) {
       setTotalPages(myRecipes.totalPages);
     }
+
     if (activeTab === "followers" && followersData) {
       setTotalPages(followersData.totalPages);
       dispatch(setUserFollowers(followersData.followersWithRecipes));
@@ -169,12 +173,26 @@ const TabContent = () => {
 
         case "followers":
           if (userFollowers?.length > 0) {
-            return <FollowerCardList data={userFollowers} btnText="follow" />;
+            return (
+              <FollowerCardList
+                handleFollowUser={handleFollowUser}
+                handleUnfollowUser={handleUnfollowUser}
+                data={userFollowers}
+                btnText="follow"
+              />
+            );
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
 
         case "following":
           if (userFollowing?.length > 0) {
-            return <FollowerCardList data={userFollowing} btnText="unfollow" />;
+            return (
+              <FollowerCardList
+                handleFollowUser={handleFollowUser}
+                handleUnfollowUser={handleUnfollowUser}
+                data={userFollowing}
+                btnText="unfollow"
+              />
+            );
           } else return <p className={styles.message}>{getMessage(myProfileTabs, activeTab)}</p>;
         default:
           return null;
@@ -187,13 +205,21 @@ const TabContent = () => {
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         case "followers":
           if (userFollowers?.length > 0) {
-            return <FollowerCardList data={userFollowers} btnText="follow" />;
+            return (
+              <FollowerCardList
+                handleFollowUser={handleFollowUser}
+                handleUnfollowUser={handleUnfollowUser}
+                data={userFollowers}
+                btnText="follow"
+              />
+            );
           } else return <p className={styles.message}>{getMessage(userProfileTabs, activeTab)}</p>;
         default:
           return null;
       }
     }
   };
+
   const menuItems = isAuthorizedUser ? myProfileTabs : userProfileTabs;
 
   return (

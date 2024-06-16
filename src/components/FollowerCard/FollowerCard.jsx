@@ -5,7 +5,7 @@ import SmallRecipePhoto from "../SmallRecipePhoto/SmallRecipePhoto.jsx";
 import { useResponsiveValue } from "../../utilities/index.js";
 import { NavLink } from "react-router-dom";
 
-const FollowerCard = ({ data, btnText }) => {
+const FollowerCard = ({ data, btnText, handleFollowUser, handleUnfollowUser }) => {
   const recipeCardsVisability = useResponsiveValue(768, false, 3);
   const recipeCardsQuantity = useResponsiveValue(1440, 3, 4);
 
