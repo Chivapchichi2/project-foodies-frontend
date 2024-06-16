@@ -1,6 +1,7 @@
 import styles from "./Button.module.css";
 import cx from "classnames";
-import {useEffect} from "react";
+import { useEffect } from "react";
+import Icon from "../Icon/Icon";
 
 const Button = ({
   text = "Button",
@@ -8,7 +9,12 @@ const Button = ({
   variant = "button",
   type = "button",
   classname,
-                  id,
+  id,
+  iconId,
+  iconWidth = "20",
+  iconHeight = "20",
+  stroke = "var(--black)",
+  iconStyle,
 }) => {
   useEffect(() => {
     if (id) {
@@ -33,20 +39,34 @@ const Button = ({
           }
         };
 
-        btn.addEventListener('mousemove', onMouseMove);
-        btn.addEventListener('touchmove', onTouchMove);
+        btn.addEventListener("mousemove", onMouseMove);
+        btn.addEventListener("touchmove", onTouchMove);
 
         return () => {
-          btn.removeEventListener('mousemove', onMouseMove);
-          btn.removeEventListener('touchmove', onTouchMove);
+          btn.removeEventListener("mousemove", onMouseMove);
+          btn.removeEventListener("touchmove", onTouchMove);
         };
       }
     }
   }, [id]);
 
   return (
-    <button type={type} className={cx(styles.button, styles[variant], classname)} onClick={onClick} id={id}>
+    <button
+      type={type}
+      className={cx(styles.button, styles[variant], classname)}
+      onClick={onClick}
+      id={id}
+    >
       {text}
+      {iconId && (
+        <Icon
+          iconId={iconId}
+          width={iconWidth}
+          height={iconHeight}
+          stroke={stroke}
+          customStyle={iconStyle}
+        />
+      )}
     </button>
   );
 };

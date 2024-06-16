@@ -20,6 +20,7 @@ import { useGetIngredientsQuery } from "../../store/services/ingredientService";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useCreateRecipeMutation } from "../../store/services/recipeService";
 import { useFetchCurrentUserProfileQuery } from "../../store/services/profileService";
+import useAutoResizeTextarea from "../../utilities/hooks/useAutoResizeTextarea";
 
 const AddRecipe = () => {
   const {
@@ -96,12 +97,17 @@ const AddRecipe = () => {
     setImagePreview(null);
     setSelectedIngredients([]);
   };
+
+  useAutoResizeTextarea(styles.textarea);
+
   return (
     <div className={styles.container}>
-      <BreadCrumbs currentPage="Add Recipe" />
-      <div className={styles.titleWrapper}>
-        <SectionTitle text="add recipe" />
-        <FormTitleText />
+      <div className={styles.titleAndCrumpsWraper}>
+        <BreadCrumbs currentPage="Add Recipe" />
+        <div className={styles.titleWrapper}>
+          <SectionTitle text="add recipe" />
+          <FormTitleText />
+        </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.formWrapper}>
