@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useFetchUserProfileQuery } from "../../store/services/profileService";
-import { getUserProfile } from "../../store/features/profileSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  useFetchUserProfileQuery,
+  useFollowUserMutation,
+  useUnfollowUserMutation,
+  useFetchCurrentUserProfileQuery,
+} from "../../store/services/profileService";
+import {
+  getUserProfile,
+  setCurrentAuthUser,
+  setUserFollowers,
+} from "../../store/features/profileSlice";
 import TabContent from "../../components/TabContent/TabContent";
 import styles from "./User.module.css";
 import { toast } from "react-toastify";
@@ -10,25 +19,87 @@ import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { Button, CustomModal, SectionTitle } from "../../components/shared";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import { LogOut } from "../../components";
-// import { Loader } from "../../components/shared/Loader/Loader";
+import { selectIsAuthorizedUser, selectFollowers } from "../../store/selectors/profileSelectors";
+import { selectId } from "../../store/features/authSlice";
 
 const customId = "toastId";
 
 const User = () => {
+  const myId = useSelector(selectId);
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
+  const userFollowers = useSelector(selectFollowers);
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data: profileData, error: profileError } = useFetchUserProfileQuery(id);
+  const { data: currentUser } = useFetchCurrentUserProfileQuery();
+
+  const [followUser, { error: followError }] = useFollowUserMutation();
+  const [unfollowUser, { error: unfollowError }] = useUnfollowUserMutation();
+
+  const handleFollowUser = (userId) => {
+    followUser(userId);
+    if (followError) {
+      toast.error("Something went wrong", {
+        position: "top-right",
+      });
+      return;
+    }
+
+    dispatch(
+      setCurrentAuthUser({
+        ...currentUser,
+        following: [...currentUser.following, userId],
+      })
+    );
+
+    dispatch(setUserFollowers([...userFollowers]));
+
+    setIsFollowing(true);
+
+    toast.success("Follow successful", {
+      position: "top-right",
+    });
+  };
+
+  const handleUnfollowUser = (userId) => {
+    unfollowUser(userId);
+    if (unfollowError) {
+      toast.error("Something went wrong", {
+        position: "top-right",
+      });
+      return;
+    }
+    dispatch(
+      setCurrentAuthUser({
+        ...currentUser,
+        following: currentUser.following.filter((followingUserId) => followingUserId !== userId),
+      })
+    );
+    dispatch(setUserFollowers([...userFollowers]));
+    setIsFollowing(false);
+
+    toast.success("Unfollow successful", {
+      position: "top-right",
+    });
+  };
+
+  useEffect(() => {
+    if (id !== myId && currentUser && currentUser.following) {
+      const isUserFollowing = currentUser.following.some(
+        (followingUserId) => followingUserId === id
+      );
+      setIsFollowing(isUserFollowing);
+    }
+  }, [currentUser, id, myId]);
 
   useEffect(() => {
     if (profileData) {
       dispatch(getUserProfile(profileData));
     }
   }, [profileData, dispatch]);
-
-  // if (profileLoading) {
-  //   return <Loader />;
-  // }
 
   if (profileError) {
     toast.error(profileError.data.message, {
@@ -54,15 +125,24 @@ const User = () => {
         <div className={styles.userInfoAndTabContentWerapper}>
           <div className={styles.userInfoAndBtnWrapper}>
             <UserInfo />
-            <Button
-              type={"button"}
-              variant={"logOutBtn"}
-              text={"Log Out"}
-              onClick={() => setModalLogOutOpen(true)}
-            />
+            {isAuthorizedUser ? (
+              <Button
+                type={"button"}
+                variant={"logoutOrFollowBtn"}
+                text={"Log Out"}
+                onClick={() => setModalLogOutOpen(true)}
+              />
+            ) : (
+              <Button
+                type={"button"}
+                variant={"logoutOrFollowBtn"}
+                text={isFollowing ? "Unfollow" : "Follow"}
+                onClick={isFollowing ? () => handleUnfollowUser(id) : () => handleFollowUser(id)}
+              />
+            )}
           </div>
 
-          <TabContent />
+          <TabContent handleFollowUser={handleFollowUser} handleUnfollowUser={handleUnfollowUser} />
         </div>
       </div>
 

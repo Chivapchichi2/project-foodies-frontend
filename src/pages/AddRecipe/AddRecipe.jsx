@@ -21,6 +21,11 @@ import { useGetAreasQuery } from "../../store/services/areaService";
 import { useCreateRecipeMutation } from "../../store/services/recipeService";
 import { useFetchCurrentUserProfileQuery } from "../../store/services/profileService";
 import stylesInput from "../../components/AddRecipeForm/CustomInput.module.css";
+import { setUserAddedRecipes } from "../../store/features/profileSlice";
+import { selectRecipes } from "../../store/selectors/profileSelectors";
+import { useDispatch, useSelector } from "react-redux";
+import useAutoResizeTextarea from "../../utilities/hooks/useAutoResizeTextarea";
+
 
 const AddRecipe = () => {
   const {
@@ -67,7 +72,12 @@ const AddRecipe = () => {
 
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
+
   const [cookingTime, setCookingTime] = useState(10);
+  const userRecepies = useSelector(selectRecipes);
+
+  const dispatch = useDispatch();
+
 
   const categories = categoriesData;
 
@@ -99,6 +109,7 @@ const AddRecipe = () => {
           toastId: customId,
         });
       } else {
+        dispatch(setUserAddedRecipes([...userRecepies, result.data]));
         navigate(`/user/${userData.id}`);
         toast.success("Sign In successful", {
           toastId: customId,
@@ -117,12 +128,20 @@ const AddRecipe = () => {
     setImagePreview(null);
     setSelectedIngredients([]);
   };
+
+  useAutoResizeTextarea(styles.textarea);
+
   return (
     <div className={styles.container}>
-      <BreadCrumbs currentPage="Add Recipe" />
-      <div className={styles.titleWrapper}>
-        <SectionTitle text="add recipe" />
-        <FormTitleText />
+      <div className={styles.titleAndCrumpsWraper}>
+        <div className={styles.breaCrumbs}>
+          <BreadCrumbs currentPage="Add Recipe" />
+        </div>
+
+        <div className={styles.titleWrapper}>
+          <SectionTitle text="add recipe" />
+          <FormTitleText />
+        </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.formWrapper}>

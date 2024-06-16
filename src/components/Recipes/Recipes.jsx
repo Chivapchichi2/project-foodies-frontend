@@ -6,7 +6,7 @@ import { useGetRecipesQuery } from "../../store/services/recipeService";
 import SelectShared from "../shared/SelectShared/SelectShared";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
-import {useState } from "react";
+import { useState } from "react";
 import Pagination from "../Pagination";
 import SectionSubtitle from "../shared/SectionSubtitle/SectionSubtitle.jsx";
 import { Loader } from "../shared/Loader/Loader.jsx";
@@ -106,13 +106,13 @@ export const Recipes = () => {
                   customStyle={styles.no_recipes}
                 />
               )}
-          {recipes?.totalPages > 1 && (
-            <Pagination
-              pageCount={recipes.totalPages}
-              onPageChange={handlePageChange}
-              currentPage={currentPage}
-            />
-          )}
+              {recipes?.totalPages > 1 && (
+                <Pagination
+                  pageCount={recipes.totalPages}
+                  onPageChange={handlePageChange}
+                  currentPage={currentPage}
+                />
+              )}
             </div>
           </div>
         </>

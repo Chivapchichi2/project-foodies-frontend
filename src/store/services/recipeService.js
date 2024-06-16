@@ -13,8 +13,7 @@ export const recipeApi = createApi({
   tagTypes: ["Recipe"],
   endpoints: (builder) => ({
     getRecipes: builder.query({
-      query: ({ category, ingredients, area, page, limit } = {}) => {
-
+      query: ({ category, ingredients, area, limit, page } = {}) => {
         const params = new URLSearchParams();
         if (category) {
           params.append("category", category);
@@ -25,11 +24,11 @@ export const recipeApi = createApi({
         if (area) {
           params.append("area", area);
         }
-        if (page) {
-          params.append("page", page);
-        }
         if (limit) {
           params.append("limit", limit);
+        }
+        if (page) {
+          params.append("page", page);
         }
         return `api/recipes/?${params.toString()}`;
       },
@@ -44,7 +43,17 @@ export const recipeApi = createApi({
       providesTags: ["Recipe"],
     }),
     getFavoriteRecipes: builder.query({
-      query: () => "api/recipes/myrecipes/favorites",
+      query: ({ page, limit } = {}) => {
+        const params = new URLSearchParams();
+        if (page) {
+          params.append("page", page);
+        }
+        if (limit) {
+          params.append("limit", limit);
+        }
+
+        return `api/recipes/myrecipes/favorites?${params.toString()}`;
+      },
       providesTags: ["Recipe"],
     }),
     addFavoriteRecipe: builder.mutation({

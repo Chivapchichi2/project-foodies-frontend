@@ -47,6 +47,20 @@ export const profileApi = createApi({
       }),
       invalidatesTags: ["Profile"],
     }),
+    followUser: builder.mutation({
+      query: (userId) => ({
+        url: `api/users/follow/${userId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Profile"],
+    }),
+    unfollowUser: builder.mutation({
+      query: (userId) => ({
+        url: `api/users/unfollow/${userId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Profile"],
+    }),
   }),
 });
 
@@ -58,4 +72,6 @@ export const {
   useUpdateUserAvatarMutation,
   useFetchUserRecipesQuery,
   useFetchUserFavoritesRecipesQuery,
+  useFollowUserMutation,
+  useUnfollowUserMutation,
 } = profileApi;

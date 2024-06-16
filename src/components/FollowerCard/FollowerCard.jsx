@@ -5,9 +5,19 @@ import SmallRecipePhoto from "../SmallRecipePhoto/SmallRecipePhoto.jsx";
 import { useResponsiveValue } from "../../utilities/index.js";
 import { NavLink } from "react-router-dom";
 
-const FollowerCard = ({ data, btnText }) => {
+const FollowerCard = ({ data, tab, handleFollowUser, handleUnfollowUser }) => {
   const recipeCardsVisability = useResponsiveValue(768, false, 3);
   const recipeCardsQuantity = useResponsiveValue(1440, 3, 4);
+
+  const btnText = () => {
+    if (tab === "followers") {
+      return data.isFollowing ? "unfollow" : "follow";
+    }
+
+    if (tab === "following") {
+      return "unfollow";
+    }
+  };
 
   return (
     <li className={styles.cardWrapper}>
@@ -25,7 +35,13 @@ const FollowerCard = ({ data, btnText }) => {
         <div>
           <h5 className={styles.name}> {data.name}</h5>
           <p className={styles.descr}>Own recipes: {data.totalRecipes}</p>
-          <Button text={btnText} variant="follow_user" />
+          <Button
+            text={btnText()}
+            variant="follow_user"
+            onClick={() =>
+              btnText() === "follow" ? handleFollowUser(data._id) : handleUnfollowUser(data._id)
+            }
+          />
         </div>
       </div>
       {recipeCardsVisability && (

@@ -7,6 +7,7 @@ const initialState = {
   favoritesRecipes: [],
   followers: [],
   following: [],
+  currentAuthUser: null,
 };
 
 const profileSlice = createSlice({
@@ -18,17 +19,30 @@ const profileSlice = createSlice({
       state.isAuthorizedUser = "followingCount" in payload ? true : false;
     },
     setUserAddedRecipes(state, { payload }) {
-      state.recipes = [...state.recipes, ...payload.data];
+      state.recipes = [...payload];
     },
     setUserFavoritesRecipes(state, { payload }) {
       state.favoritesRecipes = [...payload.data];
     },
 
     setUserFollowers(state, { payload }) {
-      state.followers = [...payload];
+      state.followers = payload
+        .filter((user) => user._id !== state.currentAuthUser?.id)
+        .map((user) => {
+          return {
+            ...user,
+            isFollowing:
+              state.currentAuthUser?.following?.some(
+                (followingUserId) => followingUserId === user._id
+              ) || false,
+          };
+        });
     },
     setUserFollowing(state, { payload }) {
       state.following = [...payload];
+    },
+    setCurrentAuthUser(state, { payload }) {
+      state.currentAuthUser = payload;
     },
   },
 });
@@ -41,4 +55,5 @@ export const {
   setUserFollowing,
   setUserAddedRecipes,
   setUserFavoritesRecipes,
+  setCurrentAuthUser,
 } = profileSlice.actions;
