@@ -49,7 +49,7 @@ export const SignInForm = ({ handleClickSignUp }) => {
         });
       } else {
         dispatch(getUser(result.data));
-        toast.success("Recipe added", {
+        toast.success("Sign in successful", {
           toastId: customId,
         });
         reset();
