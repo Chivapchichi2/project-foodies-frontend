@@ -30,7 +30,7 @@ export const profileApi = createApi({
       providesTags: ["Profile"],
     }),
     fetchUserRecipes: builder.query({
-      query: (userId, page = 1, limit = 10) =>
+      query: ({ userId, page = 1, limit = 10 }) =>
         `api/recipes/myrecipes/${userId}?page=${page}&limit=${limit}`,
       providesTags: ["Profile"],
     }),

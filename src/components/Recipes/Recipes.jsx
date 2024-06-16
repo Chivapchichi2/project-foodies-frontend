@@ -6,6 +6,8 @@ import { useGetRecipesQuery } from "../../store/services/recipeService";
 import SelectShared from "../shared/SelectShared/SelectShared";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
+import {useState } from "react";
+import Pagination from "../Pagination";
 import SectionSubtitle from "../shared/SectionSubtitle/SectionSubtitle.jsx";
 import { Loader } from "../shared/Loader/Loader.jsx";
 
@@ -18,11 +20,15 @@ export const Recipes = () => {
 
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
   const { data: areaData, isLoading: isAreaLoading } = useGetAreasQuery();
-  const { data: recipes, isLoading } = useGetRecipesQuery({
+  const [currentPage, setCurrentPage] = useState(1);
+  const {
+    data: recipes,
+    isLoading,
+  } = useGetRecipesQuery({
     category,
-    ingredients: ingredientQuery,
+    ingredient: ingredientQuery,
     area: areaQuery,
-    page: 1,
+    page: currentPage,
     limit: 12,
   });
 
@@ -45,6 +51,9 @@ export const Recipes = () => {
           label: data?.name || null,
         }
       : null;
+  };
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected + 1);
   };
 
   return (
@@ -79,13 +88,20 @@ export const Recipes = () => {
             />
           )}
         </div>
-        <div className={styles.recipes_list_wrapp}>
+        <div className={styles.recipes_list_wrapp}>          
           {isLoading && <Loader />}
           {!!recipes?.data.length && <RecipeCardList recipes={recipes} />}
           {!recipes?.data.length && !isLoading && (
             <SectionSubtitle
               text={"No recipes were found with the selected parameters."}
               customStyle={styles.no_recipes}
+            />
+          )}
+          {recipes?.totalPages > 1 && (
+            <Pagination
+              pageCount={recipes.totalPages}
+              onPageChange={handlePageChange}
+              currentPage={currentPage}
             />
           )}
         </div>

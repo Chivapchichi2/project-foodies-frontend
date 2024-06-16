@@ -1,3 +1,7 @@
+.wrap_testimonial {
+  margin-bottom: 80px;
+}
+
 .container {
   width: 100%;
 }
@@ -15,18 +19,17 @@
   margin-bottom: 12px;
 }
 
-.testimonial_container {
-  margin: 46px 0 80px;
-}
-
 @media screen and (min-width: 768px) {
+  .wrap_testimonial {
+    margin-bottom: 100px;
+  }
   .testimonial_container {
-    margin: 100px 0;
+    margin: 46px 0 80px;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .testimonial_container {
-    margin: 120px 0;
+  .wrap_testimonial {
+    margin-bottom: 120px;
   }
 }
