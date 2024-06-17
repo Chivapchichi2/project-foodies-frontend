@@ -1,6 +1,6 @@
 .container {
-  margin-top: 64px;
-  padding: 0px 16px;
+  margin: 64px auto 0;
+  max-width: 343px;
 }
 .breadscrumbs {
   margin-bottom: 32px;
@@ -25,6 +25,7 @@
 @media screen and (min-width: 768px) {
   .container {
     padding: 0px 32px;
+    max-width: 704px;
   }
   .breadscrumbs {
     margin-bottom: 40px;
@@ -47,8 +48,9 @@
 
 @media (min-width: 1440px) {
   .container {
-    margin-top: 80px;
     padding: 0px 80px;
+    max-width: 1280px;
+    margin: 80px auto 0;
   }
   .userInfoAndBtnWrapper {
     margin: 0 40px 80px 0;
@@ -56,5 +58,7 @@
   .userInfoAndTabContentWerapper {
     display: flex;
     justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
   }
 }
