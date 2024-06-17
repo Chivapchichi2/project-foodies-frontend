@@ -4,10 +4,13 @@ import styles from "./FollowerCard.module.css";
 import SmallRecipePhoto from "../SmallRecipePhoto/SmallRecipePhoto.jsx";
 import { useResponsiveValue } from "../../utilities/index.js";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectId } from "../../store/features/authSlice.js";
 
 const FollowerCard = ({ data, tab, handleFollowUser, handleUnfollowUser }) => {
   const recipeCardsVisability = useResponsiveValue(768, false, 3);
   const recipeCardsQuantity = useResponsiveValue(1440, 3, 4);
+  const authUserId = useSelector(selectId);
 
   const btnText = () => {
     if (tab === "followers") {
@@ -36,6 +39,7 @@ const FollowerCard = ({ data, tab, handleFollowUser, handleUnfollowUser }) => {
           <h5 className={styles.name}> {data.name}</h5>
           <p className={styles.descr}>Own recipes: {data.totalRecipes}</p>
           <Button
+            disabled={data._id === authUserId}
             text={btnText()}
             variant="follow_user"
             onClick={() =>

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Icon from "../Icon/Icon";
 
 const Button = ({
+  disabled = false,
   text = "Button",
   onClick = () => {},
   variant = "button",
@@ -56,6 +57,7 @@ const Button = ({
       className={cx(styles.button, styles[variant], classname)}
       onClick={onClick}
       id={id}
+      disabled={disabled}
     >
       {text}
       {iconId && (

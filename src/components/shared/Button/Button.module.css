@@ -233,12 +233,16 @@
   box-shadow: inset 0 0 0 1px var(--black-12);
 }
 
-.follow_user:hover,
+.follow_user:not(:disabled):hover,
 .follow_user:focus {
   box-shadow: none;
   color: var(--white);
   background-color: var(--black);
   transition: color var(--transition), background-color var(--transition);
+}
+
+.follow_user:disabled {
+  cursor: not-allowed;
 }
 
 @media screen and (min-width: 768px) {

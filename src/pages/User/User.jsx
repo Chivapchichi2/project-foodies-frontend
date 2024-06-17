@@ -7,11 +7,7 @@ import {
   useUnfollowUserMutation,
   useFetchCurrentUserProfileQuery,
 } from "../../store/services/profileService";
-import {
-  getUserProfile,
-  setCurrentAuthUser,
-  setUserFollowers,
-} from "../../store/features/profileSlice";
+import { getUserProfile, setCurrentAuthUser } from "../../store/features/profileSlice";
 import TabContent from "../../components/TabContent/TabContent";
 import styles from "./User.module.css";
 import { toast } from "react-toastify";
@@ -19,7 +15,7 @@ import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { Button, CustomModal, SectionTitle } from "../../components/shared";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import { LogOut } from "../../components";
-import { selectIsAuthorizedUser, selectFollowers } from "../../store/selectors/profileSelectors";
+import { selectIsAuthorizedUser } from "../../store/selectors/profileSelectors";
 import { selectId } from "../../store/features/authSlice";
 
 const customId = "toastId";
@@ -29,7 +25,6 @@ const User = () => {
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
-  const userFollowers = useSelector(selectFollowers);
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -43,7 +38,7 @@ const User = () => {
     followUser(userId);
     if (followError) {
       toast.error("Something went wrong", {
-        position: "top-right",
+        toastId: customId,
       });
       return;
     }
@@ -55,12 +50,8 @@ const User = () => {
       })
     );
 
-    dispatch(setUserFollowers([...userFollowers]));
-
-    setIsFollowing(true);
-
     toast.success("Follow successful", {
-      position: "top-right",
+      toastId: customId,
     });
   };
 
@@ -68,21 +59,20 @@ const User = () => {
     unfollowUser(userId);
     if (unfollowError) {
       toast.error("Something went wrong", {
-        position: "top-right",
+        toastId: customId,
       });
       return;
     }
+
     dispatch(
       setCurrentAuthUser({
         ...currentUser,
         following: currentUser.following.filter((followingUserId) => followingUserId !== userId),
       })
     );
-    dispatch(setUserFollowers([...userFollowers]));
-    setIsFollowing(false);
 
     toast.success("Unfollow successful", {
-      position: "top-right",
+      toastId: customId,
     });
   };
 
@@ -96,14 +86,16 @@ const User = () => {
   }, [currentUser, id, myId]);
 
   useEffect(() => {
+    if (currentUser) {
+      dispatch(setCurrentAuthUser(currentUser));
+    }
     if (profileData) {
       dispatch(getUserProfile(profileData));
     }
-  }, [profileData, dispatch]);
+  }, [profileData, currentUser, dispatch]);
 
   if (profileError) {
     toast.error(profileError.data.message, {
-      position: "top-right",
       toastId: customId,
     });
     return;
