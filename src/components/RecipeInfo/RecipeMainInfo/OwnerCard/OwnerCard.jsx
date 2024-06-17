@@ -3,13 +3,13 @@ import withoutAvatar from "../../../../images/user_without_avatar.jpg";
 import { Link } from "react-router-dom";
 
 export const OwnerCard = ({ owner }) => {
-  const { avatar, name, _id } = owner;
+  const { avatarURL, name, _id } = owner;
 
   return (
     <Link to={`/user/${_id}`} className={styles.owner_card}>
       <img
         className={styles.owner_photo}
-        src={avatar ? avatar : withoutAvatar}
+        src={avatarURL ? avatarURL : withoutAvatar}
         alt={`${name} photo`}
       />
       <div className={styles.owner_primary_info_wrapper}>
