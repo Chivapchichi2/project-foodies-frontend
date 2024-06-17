@@ -7,7 +7,7 @@
 
 .photoWrapper {
   border-radius: 100px;
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
   width: 60px;
   height: 60px;
   text-align: center;
@@ -19,13 +19,15 @@
 }
 
 .smallProfilePhoto {
-  width: 85px;
-  max-width: inherit;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
 }
 
 .followerData {
   display: flex;
   gap: 16px;
+  min-width: 224px;
 }
 
 .name {
@@ -62,6 +64,11 @@
 }
 
 @media screen and (min-width: 768px) {
+  .smallProfilePhoto {
+    width: 85px;
+    height: 85px;
+  }
+
   .photoWrapper {
     width: 85px;
     height: 85px;
@@ -79,13 +86,28 @@
   .recipesList {
     display: flex;
     gap: 12px;
+    margin-right: auto;
+    margin-left: 28px;
   }
 
   .recipeCard {
     width: 100px;
     height: 100px;
     border-radius: 15px;
-    background-color: #E0E0E0;
+    background-color: #e0e0e0;
     text-align: center;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .recipesList {
+    display: flex;
+    gap: 12px;
+    margin-right: auto;
+    margin-left: 40px;
+  }
+
+  .link_wrapper {
+    margin-left: 40px;
   }
 }

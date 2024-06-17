@@ -39,7 +39,11 @@ export const RecipeInfo = ({ recipe }) => {
 
   return (
     <section className={style.recipe_info_container}>
-      <img className={style.recipe_img} src={thumb ? thumb : recipe_without_img} alt={title} />
+      <img
+        className={style.recipe_img}
+        src={thumb !== "[object FileList]" ? thumb : recipe_without_img}
+        alt={title}
+      />
       <div className={style.recipe_info_wrapper}>
         <RecipeMainInfo data={recipe} />
         <RecipeIngredients ingredients={ingredients} />

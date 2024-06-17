@@ -22,18 +22,17 @@ const FollowerCard = ({ data, tab, handleFollowUser, handleUnfollowUser }) => {
   return (
     <li className={styles.cardWrapper}>
       <div className={styles.followerData}>
-        <div className={styles.photoWrapper}>
-          <img
-            src={
-              data.avatarURL ||
-              "https://gravatar.com/avatar/000000000000000000000000000000000000000000000000000000?d=mp"
-            }
-            className={styles.smallProfilePhoto}
-            alt="User avatar"
-          />
-        </div>
+        <img
+          src={
+            data.avatarURL ||
+            "https://gravatar.com/avatar/000000000000000000000000000000000000000000000000000000?d=mp"
+          }
+          className={styles.smallProfilePhoto}
+          alt="User avatar"
+        />
+
         <div>
-          <h5 className={styles.name}> {data.name}</h5>
+          <h5 className={styles.name}> {data.name.split(" ")[0]}</h5>
           <p className={styles.descr}>Own recipes: {data.totalRecipes}</p>
           <Button
             text={btnText()}
@@ -57,7 +56,7 @@ const FollowerCard = ({ data, tab, handleFollowUser, handleUnfollowUser }) => {
           })}
         </ul>
       )}
-      <NavLink to={`/user/${data._id}`}>
+      <NavLink to={`/user/${data._id}`} className={styles.link_wrapper}>
         <IconButton
           iconId="icon-arrow-up-right"
           style={styles.iconBtn}
