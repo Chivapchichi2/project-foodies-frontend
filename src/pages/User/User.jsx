@@ -15,7 +15,7 @@ import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { Button, CustomModal, SectionTitle } from "../../components/shared";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import { LogOut } from "../../components";
-import { selectIsAuthorizedUser, selectFollowers } from "../../store/selectors/profileSelectors";
+import { selectIsAuthorizedUser } from "../../store/selectors/profileSelectors";
 import { selectId } from "../../store/features/authSlice";
 
 const customId = "toastId";
@@ -25,9 +25,6 @@ const User = () => {
   const [modalLogOutOpen, setModalLogOutOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
-  const userFollowers = useSelector(selectFollowers);
-
-  console.log(userFollowers);
 
   const { id } = useParams();
   const dispatch = useDispatch();
