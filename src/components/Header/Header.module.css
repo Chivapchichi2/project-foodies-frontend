@@ -13,6 +13,7 @@
 .header_wrap_bgc {
   background-color: inherit;
   margin: 0 auto;
+  padding: 16px 0 0 0;
 }
 
 .header_wrap .color_white {
@@ -36,6 +37,9 @@
     max-width: 736px;
     margin-top: 16px;
   }
+  .header_wrap_bgc {
+    padding: 20px 16px 0 16px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -43,5 +47,9 @@
     padding: 40px 80px 0 80px;
     max-width: 1400px;
     margin-top: 20px;
+  }
+
+  .header_wrap_bgc {
+    padding: 20px 60px 0 60px;
   }
 }
