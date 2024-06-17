@@ -26,17 +26,15 @@ const profileSlice = createSlice({
     },
 
     setUserFollowers(state, { payload }) {
-      state.followers = payload
-        .filter((user) => user._id !== state.currentAuthUser?.id)
-        .map((user) => {
-          return {
-            ...user,
-            isFollowing:
-              state.currentAuthUser?.following?.some(
-                (followingUserId) => followingUserId === user._id
-              ) || false,
-          };
-        });
+      state.followers = payload.map((user) => {
+        return {
+          ...user,
+          isFollowing:
+            state.currentAuthUser?.following?.some(
+              (followingUserId) => followingUserId === user._id
+            ) || false,
+        };
+      });
     },
     setUserFollowing(state, { payload }) {
       state.following = [...payload];

@@ -7,11 +7,7 @@ import {
   useUnfollowUserMutation,
   useFetchCurrentUserProfileQuery,
 } from "../../store/services/profileService";
-import {
-  getUserProfile,
-  setCurrentAuthUser,
-  setUserFollowers,
-} from "../../store/features/profileSlice";
+import { getUserProfile, setCurrentAuthUser } from "../../store/features/profileSlice";
 import TabContent from "../../components/TabContent/TabContent";
 import styles from "./User.module.css";
 import { toast } from "react-toastify";
@@ -31,6 +27,8 @@ const User = () => {
   const isAuthorizedUser = useSelector(selectIsAuthorizedUser);
   const userFollowers = useSelector(selectFollowers);
 
+  console.log(userFollowers);
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data: profileData, error: profileError } = useFetchUserProfileQuery(id);
@@ -43,7 +41,7 @@ const User = () => {
     followUser(userId);
     if (followError) {
       toast.error("Something went wrong", {
-        position: "top-right",
+        toastId: customId,
       });
       return;
     }
@@ -55,12 +53,8 @@ const User = () => {
       })
     );
 
-    dispatch(setUserFollowers([...userFollowers]));
-
-    setIsFollowing(true);
-
     toast.success("Follow successful", {
-      position: "top-right",
+      toastId: customId,
     });
   };
 
@@ -68,21 +62,20 @@ const User = () => {
     unfollowUser(userId);
     if (unfollowError) {
       toast.error("Something went wrong", {
-        position: "top-right",
+        toastId: customId,
       });
       return;
     }
+
     dispatch(
       setCurrentAuthUser({
         ...currentUser,
         following: currentUser.following.filter((followingUserId) => followingUserId !== userId),
       })
     );
-    dispatch(setUserFollowers([...userFollowers]));
-    setIsFollowing(false);
 
     toast.success("Unfollow successful", {
-      position: "top-right",
+      toastId: customId,
     });
   };
 
@@ -96,14 +89,16 @@ const User = () => {
   }, [currentUser, id, myId]);
 
   useEffect(() => {
+    if (currentUser) {
+      dispatch(setCurrentAuthUser(currentUser));
+    }
     if (profileData) {
       dispatch(getUserProfile(profileData));
     }
-  }, [profileData, dispatch]);
+  }, [profileData, currentUser, dispatch]);
 
   if (profileError) {
     toast.error(profileError.data.message, {
-      position: "top-right",
       toastId: customId,
     });
     return;
