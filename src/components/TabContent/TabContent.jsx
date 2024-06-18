@@ -80,7 +80,7 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [activeTab, setActiveTab] = useState(
-    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id,
+    isAuthorizedUser ? myProfileTabs[0].id : userProfileTabs[0].id
   );
 
   const { data: myRecipes, isLoading: loadRecipes } = useFetchUserRecipesQuery(
@@ -90,7 +90,8 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
     },
     {
       skip: activeTab !== "my-recipes" && activeTab !== "recipes",
-    },
+      refetchOnMountOrArgChange: true,
+    }
   );
 
   useEffect(() => {
@@ -128,7 +129,7 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
   const isDataLoading = loadRecipes || loadFavorite || loadFollowers || loadFollowing;
 
   useEffect(() => {
-    if (myRecipes && !loadRecipes) {
+    if ((activeTab === "my-recipes" || activeTab === "recipes") && myRecipes && !loadRecipes) {
       setTotalPages(myRecipes.totalPages);
       dispatch(setUserAddedRecipes(myRecipes.data));
     }
