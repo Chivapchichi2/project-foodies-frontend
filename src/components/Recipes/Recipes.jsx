@@ -33,7 +33,7 @@ export const Recipes = () => {
     error: recipesError,
   } = useGetRecipesQuery({
     category,
-    ingredient: ingredientQuery,
+    ingredients: ingredientQuery,
     area: areaQuery,
     page: currentPage,
     limit: getLimit(),

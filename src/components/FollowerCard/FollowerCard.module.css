@@ -45,7 +45,7 @@
   line-height: 18px;
 }
 
-.followerCardList:nth-last-child() {
+.followerCardList:nth-last-child {
   border: none;
 }
 
