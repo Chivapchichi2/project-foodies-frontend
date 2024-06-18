@@ -90,6 +90,7 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
     },
     {
       skip: activeTab !== "my-recipes" && activeTab !== "recipes",
+      refetchOnMountOrArgChange: true,
     }
   );
 
@@ -128,7 +129,7 @@ const TabContent = ({ handleFollowUser, handleUnfollowUser }) => {
   const isDataLoading = loadRecipes || loadFavorite || loadFollowers || loadFollowing;
 
   useEffect(() => {
-    if (activeTab === "my-recipes" && activeTab === "recipes" && myRecipes && !loadRecipes) {
+    if ((activeTab === "my-recipes" || activeTab === "recipes") && myRecipes && !loadRecipes) {
       setTotalPages(myRecipes.totalPages);
       dispatch(setUserAddedRecipes(myRecipes.data));
     }
