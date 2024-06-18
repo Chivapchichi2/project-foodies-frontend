@@ -67,10 +67,6 @@ const AddRecipe = () => {
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
   const { data: areasData, isLoading: isAreasLoading } = useGetAreasQuery();
   const [userId] = useState(useSelector(selectId));
-  console.log(userId);
-
-  // useEffect(() => {
-  // }, []);
 
   const [createRecipe] = useCreateRecipeMutation();
 
@@ -112,7 +108,7 @@ const AddRecipe = () => {
           toastId: addRecipeToastId,
         });
       } else {
-        dispatch(setUserAddedRecipes([...userRecepies, result.data]));
+        dispatch(setUserAddedRecipes([...userRecepies, result.data.data]));
         navigate(`/user/${userId}`);
         toast.success("Recipe added", {
           toastId: addRecipeToastId,
