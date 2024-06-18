@@ -205,8 +205,6 @@
   background-color: transparent;
   color: var(--black);
   font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
   letter-spacing: -0.28px;
 }
 
@@ -251,7 +249,7 @@
 
 @media screen and (min-width: 768px) {
   .follow_user {
-    padding: 10px 24px;
+    padding: 10px 0;
     font-size: 16px;
     line-height: 1.5;
   }
