@@ -19,12 +19,12 @@ import { useGetCategoriesQuery } from "../../store/services/categoryService";
 import { useGetIngredientsQuery } from "../../store/services/ingredientService";
 import { useGetAreasQuery } from "../../store/services/areaService";
 import { useCreateRecipeMutation } from "../../store/services/recipeService";
-import { useFetchCurrentUserProfileQuery } from "../../store/services/profileService";
 import stylesInput from "../../components/AddRecipeForm/CustomInput.module.css";
 import { setUserAddedRecipes } from "../../store/features/profileSlice";
 import { selectRecipes } from "../../store/selectors/profileSelectors";
 import { useDispatch, useSelector } from "react-redux";
 import useAutoResizeTextarea from "../../utilities/hooks/useAutoResizeTextarea";
+import { selectId } from "../../store/features/authSlice";
 
 const AddRecipe = () => {
   const {
@@ -66,7 +66,11 @@ const AddRecipe = () => {
   const { data: categoriesData, isLoading: isCategoriesLoading } = useGetCategoriesQuery();
   const { data: ingredientsData, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
   const { data: areasData, isLoading: isAreasLoading } = useGetAreasQuery();
-  const { data: userData } = useFetchCurrentUserProfileQuery();
+  const [userId] = useState(useSelector(selectId));
+  console.log(userId);
+
+  // useEffect(() => {
+  // }, []);
 
   const [createRecipe] = useCreateRecipeMutation();
 
@@ -109,7 +113,7 @@ const AddRecipe = () => {
         });
       } else {
         dispatch(setUserAddedRecipes([...userRecepies, result.data]));
-        navigate(`/user/${userData.id}`);
+        navigate(`/user/${userId}`);
         toast.success("Recipe added", {
           toastId: addRecipeToastId,
         });
